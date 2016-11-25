@@ -1,0 +1,17 @@
+{
+  "status": {
+    "statusCode": 200,
+    "statusText": "ALIVE",
+    "apiVersion": "0.1.0"
+  },
+  "users": {
+    "dungntnew": {
+      "id": 12121,
+      "displayName": "Nguyen Tri Dung"
+    },
+    "nghiemdaovan": {
+      "id": 1111,
+      "displayName": "Dao Van Nghiem"
+    }
+  }
+}
