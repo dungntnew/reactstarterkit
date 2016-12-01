@@ -47,7 +47,7 @@ class UserMenu extends Component {
          className='user-menu'
          onMouseEnter={()=> this.setState({active: true})}
       >
-        <img alt='user-avatar' src={avatarUrl}/>
+        <img className='user-avatar' alt='user-avatar' src={avatarUrl}/>
         <Link to={url}>{name}</Link>
         <div className='dropdown-menu-anchor' >
         {this.renderDropdownMenu()}

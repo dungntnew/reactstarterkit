@@ -1,8 +1,10 @@
 .user-menu {
-
+  display: inline;
 }
 
-
+.user-menu .user-avatar {
+  width: 30px;
+}
 
 .user-menu .dropdown-menu-anchor {
     position: relative;
