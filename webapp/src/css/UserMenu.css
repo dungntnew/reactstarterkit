@@ -1,3 +1,11 @@
 .user-menu {
-  
+
+}
+
+.user-menu .dropdown-menu {
+  display: none
+}
+
+.user-menu .dropdown-menu.active {
+  display: block;
 }

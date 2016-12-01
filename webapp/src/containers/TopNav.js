@@ -8,7 +8,13 @@ import UserMenu from '../components/UserMenu';
 
 class TopNav extends Component {
   static propTypes = {
-    authenticated:  PropTypes.bool.isRequired
+    authenticated:  PropTypes.bool.isRequired,
+    user: PropTypes.shape({
+      avatarUrl: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired
+    })
   }
 
   renderMenuItems() {
@@ -17,7 +23,7 @@ class TopNav extends Component {
       <Link to='/search'>Search </Link>,
       <Link to='/create'>Create </Link>,
       <Link to='/help'>Help </Link>,
-      <UserMenu key='link-4' />
+      <UserMenu user={this.props.user}/>
     ]
     :
     [
@@ -42,7 +48,8 @@ class TopNav extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  authenticated: true
+  authenticated: true,
+  user: null
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

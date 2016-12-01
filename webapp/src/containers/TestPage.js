@@ -5,6 +5,7 @@ import '../css/TestPage.css';
 import Logo from '../components/PageLogo';
 import LPHeader from '../components/LPHeader';
 import TopNav from '../containers/TopNav';
+import UserMenu from '../components/UserMenu';
 
 /* example component */
 const TestComponent = (props) => (
@@ -17,6 +18,13 @@ const TestComponent = (props) => (
   </div>
 )
 
+const user = {
+  avatarUrl: '/img/avatar.png',
+  name: 'Nguyen Tri Dung',
+  id: '1',
+  url: '/user/dungntnew'
+}
+
 /* Put your component to here to view */
 export default (props) => (
   <div>
@@ -26,7 +34,7 @@ export default (props) => (
      </pre>
      <hr/>
      <div className='test-page-wrapper'>
-      <TopNav />
+      <UserMenu user={user}/>
      </div>
   </div>
 )
