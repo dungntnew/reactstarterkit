@@ -1,5 +1,11 @@
 import React from 'react';
 
+import '../css/TestPage.css';
+
+import Logo from '../components/PageLogo';
+import LPHeader from '../components/LPHeader';
+import TopNav from '../containers/TopNav';
+
 /* example component */
 const TestComponent = (props) => (
   <div className='test-wrapper'>
@@ -11,15 +17,6 @@ const TestComponent = (props) => (
   </div>
 )
 
-/* test page wrapper style default is full page with red border */
-const style = {
-  width: '100%',
-  height: '80%',
-  padding: 0,
-  margin: 0,
-  border: '1px solid red',
-}
-
 /* Put your component to here to view */
 export default (props) => (
   <div>
@@ -28,8 +25,8 @@ export default (props) => (
           "TestComponent"  => "YourComponent"
      </pre>
      <hr/>
-     <div className='test-page-wrapper' style={style}>
-        <TestComponent />
+     <div className='test-page-wrapper'>
+      <TopNav />
      </div>
   </div>
 )
