@@ -3,6 +3,8 @@ import React, { Component,
 
 import { connect } from 'react-redux'
 
+import DevNav from './DevNav'
+
 class App extends Component {
   static propTypes = {
 
@@ -15,6 +17,7 @@ class App extends Component {
 
     return (
       <div className='wrapper'>
+          <DevNav />
           {children}
       </div>
     )

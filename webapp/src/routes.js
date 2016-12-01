@@ -1,17 +1,19 @@
 import React from 'react'
-import {Route} from 'react-router'
+import {Route, IndexRoute} from 'react-router'
 
 import App from './containers/App'
+import TestPage from './containers/TestPage'
 import AboutPage from './containers/AboutPage'
-import LoginPage from './containers/LoginPage'
+import TopLandingPage from './containers/TopLandingPage'
 
 const routes = (
   <Route path='/' component={App}>
+    <IndexRoute component={TopLandingPage}/>
+    <Route path='/test'
+           component={TestPage}/>
     <Route path='/about'
            component={AboutPage}/>
 
-    <Route path='/login'
-           component={LoginPage}/>
   </Route>
 )
 
