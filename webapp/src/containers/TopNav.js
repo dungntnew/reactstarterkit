@@ -49,7 +49,12 @@ class TopNav extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   authenticated: true,
-  user: null
+  user: {
+    avatarUrl: '/img/avatar.png',
+    name: 'Nguyen Tri Dung',
+    id: '1',
+    url: '/user/dungntnew'
+  }
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

@@ -2,8 +2,19 @@
 
 }
 
+
+
+.user-menu .dropdown-menu-anchor {
+    position: relative;
+}
+
 .user-menu .dropdown-menu {
-  display: none
+  display: none;
+  position: absolute;
+  left: 0;
+  z-index: 1000;
+  background-color: black;
+  color: white;
 }
 
 .user-menu .dropdown-menu.active {

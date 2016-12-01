@@ -25,7 +25,11 @@ class UserMenu extends Component {
     })
 
     return (
-      <ul className={subMenuClasses}>
+      <ul
+
+         className={subMenuClasses}
+         onMouseLeave={()=> this.setState({active: false})}
+         >
       {
         links.map((link, index) => (
           <li key={index}>{link}</li>
@@ -42,11 +46,12 @@ class UserMenu extends Component {
       <div
          className='user-menu'
          onMouseEnter={()=> this.setState({active: true})}
-         onMouseLeave={()=> this.setState({active: false})}
       >
         <img alt='user-avatar' src={avatarUrl}/>
         <Link to={url}>{name}</Link>
+        <div className='dropdown-menu-anchor' >
         {this.renderDropdownMenu()}
+        </div>
       </div>
     )
   }
