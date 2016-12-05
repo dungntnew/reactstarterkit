@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react';
 import '../css/LPHeader.css';
 
 const style = {
-  backgroundImage: 'url("' + process.env.PUBLIC_URL + '/img/cover.jpg' + '")'
+  backgroundImage: `url("${process.env.PUBLIC_URL}/img/cover.jpg")`
 }
 
 console.log(process.env.PUBLIC_URL + '/img/cover.png');

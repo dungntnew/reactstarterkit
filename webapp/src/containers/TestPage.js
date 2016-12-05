@@ -2,29 +2,19 @@ import React from 'react';
 
 import '../css/TestPage.css';
 
-import Logo from '../components/PageLogo';
-import LPHeader from '../components/LPHeader';
-import TopNav from '../containers/TopNav';
-import UserMenu from '../components/UserMenu';
+// import Logo from '../components/PageLogo';
+// import LPHeader from '../components/LPHeader';
+// import TopNav from '../containers/TopNav';
+// import UserMenu from '../components/UserMenu';
 import Exploder from '../containers/Exploder';
 
-/* example component */
-const TestComponent = (props) => (
-  <div className='test-wrapper'>
-    <form>
-        UserName: <input /><br/>
-        Password: <input /><br/>
-        <input type='submit' value='Submit'/>
-    </form>
-  </div>
-)
 
-const user = {
-  avatarUrl: '/img/avatar.png',
-  name: 'Nguyen Tri Dung',
-  id: '1',
-  url: '/user/dungntnew'
-}
+// const user = {
+//   avatarUrl: '/img/avatar.png',
+//   name: 'Nguyen Tri Dung',
+//   id: '1',
+//   url: '/user/dungntnew'
+// }
 
 /* Put your component to here to view */
 export default (props) => (

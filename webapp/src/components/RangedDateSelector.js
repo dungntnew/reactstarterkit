@@ -6,8 +6,6 @@ import '../css/RangedDateSelector.css';
 
 const RangedDateSelector = (props) => (
   <div className='ranged-date-selector'>
-  <div>
-  From Date:
   <DatePicker
     inline
     locale='ja'
@@ -19,10 +17,7 @@ const RangedDateSelector = (props) => (
     endDate={props.endDate}
     onChange={props.handleChangeStart}
   />
-  </div>
 
-  <div>
-  To Date:
   <DatePicker
     inline
     locale='ja'
@@ -34,7 +29,6 @@ const RangedDateSelector = (props) => (
     endDate={props.endDate}
     onChange={props.handleChangeEnd}
   />
-  </div>
   </div>
 )
 

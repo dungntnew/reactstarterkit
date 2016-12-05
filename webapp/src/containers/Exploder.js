@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import moment from 'moment';
 import '../css/Exploder.css';
@@ -8,6 +7,8 @@ import '../css/Exploder.css';
 import RangedDateSelector from '../components/RangedDateSelector';
 import KeywordInput from '../components/KeywordInput';
 import TargetSelector from '../containers/TargetSelector';
+
+import * as ActionTypes from '../actions';
 
 class Exploder extends Component {
   constructor() {
@@ -63,6 +64,9 @@ class Exploder extends Component {
       return (
         <TargetSelector
           selectedTargets={this.props.targets}
+          onClose={()=>{
+            this.activeOne()
+          }}
           onChange={(targets) => {
             this.props.onChange({targets})
             this.activeOne()
@@ -129,32 +133,21 @@ class Exploder extends Component {
   }
 }
 
-/* TODO: binding value and dispatch functions */
-// fetch store
-const store = {
-  startDate: moment(),
-  endDate: moment(),
-  keyword: 'keyword..',
-  targets: [{
-    id: 1,
-    name: 'Niku'
-  }, {
-    id: 2,
-    name: 'Sashimi'
-  }]
-};
-
-const mapStateToProps = (state, ownProps) => ({
-  startDate: store['startDate'],
-  endDate: store['endDate'],
-  keyword: store['keyword'],
-  targets: store['targets']
-})
+const mapStateToProps = (state, ownProps) => {
+  const {searchParams} = state;
+  const {filters} = searchParams;
+  return {
+    startDate: filters['startDate'] || moment(),
+    endDate: filters['endDate'] || moment(),
+    keyword: filters['keyword'] || '',
+    targets: filters['targets'] || []
+  }
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onChange: (data) => {
     data = _.pickBy(data, v => !_.isNull(v))
-    console.log(data);
+    dispatch(ActionTypes.updateEventFilters(data))
   },
   onSearch: () => {
     console.log('start search');

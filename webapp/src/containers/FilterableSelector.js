@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
 import classNames from 'classnames'
 import '../css/FilterableSelector.css';
 
@@ -71,8 +70,12 @@ class FilterableSelector extends Component {
         </div>
       )
     }
+    const filter = this.state.filter || ''
+    const filtedItems = !_.isEmpty(filter) ?
+                _.filter(this.props.items, (item) => item.label.includes(filter))
+                : this.props.items
 
-    return this.props.items.map(item => {
+    return filtedItems.map(item => {
       const selected = _.findIndex(this.props.selectedItems, (e) => item.id === e.id) >= 0
 
       return <FilterableItem
@@ -82,9 +85,7 @@ class FilterableSelector extends Component {
         selected={selected}
         onClick={() => this.onItemClick(item.id)}
       />
-    }
-
-    )
+    })
   }
 
   render() {

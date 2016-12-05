@@ -9,7 +9,6 @@ import configureStore from './store/configureStore'
 import 'semantic-ui-css/semantic.min.css'
 import './index.css'
 
-
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
 
