@@ -6,6 +6,7 @@ import Logo from '../components/PageLogo';
 import LPHeader from '../components/LPHeader';
 import TopNav from '../containers/TopNav';
 import UserMenu from '../components/UserMenu';
+import Exploder from '../containers/Exploder';
 
 /* example component */
 const TestComponent = (props) => (
@@ -34,7 +35,7 @@ export default (props) => (
      </pre>
      <hr/>
      <div className='test-page-wrapper'>
-      <UserMenu user={user}/>
+      <Exploder />
      </div>
   </div>
 )

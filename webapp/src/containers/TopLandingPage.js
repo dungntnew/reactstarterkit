@@ -6,10 +6,10 @@ import '../css/TopLandingPage.css'
 import Logo from '../components/PageLogo';
 import LPHeader from '../components/LPHeader';
 import TopNav from '../containers/TopNav';
+import Exploder from '../containers/Exploder';
 
 class TopLandingPage extends Component {
   static propTypes = {
-    authenticated:  PropTypes.bool.isRequired
   }
 
   render() {
@@ -18,6 +18,8 @@ class TopLandingPage extends Component {
         <LPHeader>
            <Logo style={{marginTop: 10, marginLeft: 10}}/>
            <TopNav />
+           <Exploder />
+
         </LPHeader>
 
       </div>
