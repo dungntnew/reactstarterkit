@@ -7,17 +7,18 @@ import '../css/FilterableSelector.css';
 class FilterableItem extends Component {
     render() {
       const cssClasses = classNames({
-        active: this.props.selected,
+        'ui orange label': this.props.selected,
+        'ui grey label': !this.props.selected,
         'fiterable-list-item': true
       })
 
       return (
-        <li
+        <a
           key={this.props.id}
           className={cssClasses}
           onClick={this.props.onClick}>
         {this.props.label}
-        </li>
+        </a>
       )
     }
 }
@@ -51,7 +52,6 @@ class FilterableSelector extends Component {
     this.setState({
       filter: value
     })
-    console.log('filter with value: ', value);
   }
 
   onItemClick(id) {
@@ -74,7 +74,6 @@ class FilterableSelector extends Component {
 
     return this.props.items.map(item => {
       const selected = _.findIndex(this.props.selectedItems, (e) => item.id === e.id) >= 0
-      console.log('matching: ', item.id, 'matched: ', selected)
 
       return <FilterableItem
         key={item.id}
@@ -91,17 +90,20 @@ class FilterableSelector extends Component {
   render() {
     return (
       <div className='fiterable-selector'>
-        <input
-           type='text'
-           placeholder={this.props.placeHolderText}
-           value={this.state.filter}
-           onChange={(e) => {this.onFilter(e.target.value)}}
-        />
+        <div className='ui fluid input'>
+          <input
+             type='text'
+             placeholder={this.props.placeHolderText}
+             value={this.state.filter}
+             onChange={(e) => {this.onFilter(e.target.value)}}
+          />
+        </div>
         <ul>
           {this.renderItems()}
         </ul>
         <div>
-          <button onClick={(e) => this.props.onClose()}>Close</button>
+          <button className='ui button'
+                  onClick={(e) => this.props.onClose()}>Close</button>
         </div>
       </div>
     )
