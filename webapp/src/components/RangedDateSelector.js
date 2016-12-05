@@ -38,4 +38,11 @@ const RangedDateSelector = (props) => (
   </div>
 )
 
+RangedDateSelector.propTypes = {
+  startDate: PropTypes.object,
+  endDate: PropTypes.object,
+  handleChangeStart: PropTypes.func,
+  handleChangeEnd: PropTypes.func
+}
+
 export default RangedDateSelector

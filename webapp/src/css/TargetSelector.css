@@ -1,0 +1,15 @@
+.fiterable-selector {
+
+}
+
+.fiterable-selector .fiterable-list-item {
+  display: inline-block;
+  margin: 5px;
+  background-color: black;
+  color: white;
+}
+
+.fiterable-selector .active {
+  background-color: red;
+  color: green;
+}

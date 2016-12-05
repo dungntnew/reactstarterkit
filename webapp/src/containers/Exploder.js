@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
@@ -5,6 +6,8 @@ import moment from 'moment';
 import '../css/Exploder.css';
 
 import RangedDateSelector from '../components/RangedDateSelector';
+import KeywordInput from '../components/KeywordInput';
+import TargetSelector from '../containers/TargetSelector';
 
 class Exploder extends Component {
   constructor() {
@@ -16,10 +19,12 @@ class Exploder extends Component {
   }
 
   static propTypes = {
-  }
-
-  onSubmit() {
-    console.log('form submit.');
+    fromDate: PropTypes.object,
+    toDate: PropTypes.object,
+    keyword: PropTypes.string,
+    targets: PropTypes.arrayOf(PropTypes.object),
+    onSearch: PropTypes.func,
+    onChange: PropTypes.func,
   }
 
   formatedDateRange() {
@@ -37,13 +42,13 @@ class Exploder extends Component {
          handleChangeStart={
            (startDate) => {
              this.setState({dateSelecting: false});
-             this.props.handleChangeStart(startDate)}
+             this.props.onChange({startDate})}
            }
 
          handleChangeEnd={
            (endDate) => {
              this.setState({dateSelecting: false});
-             this.props.handleChangeEnd(endDate)}
+             this.props.onChange({endDate})}
            }
       />
     ): null;
@@ -56,13 +61,19 @@ class Exploder extends Component {
   renderTargetSelectors() {
     if (this.state.targetSelecting) {
       return (
-        <div> Target Selector </div>
+        <TargetSelector
+          selectedTargets={this.props.targets}
+          onChange={(targets) => {
+            this.props.onChange({targets})
+            this.activeOne()
+          }}
+        />
       )
     }
   }
 
   formatedTarget() {
-    return 'a, b, c';
+    return this.props.targets.map(target => target.name).join(',')
   }
 
   activeOne(key=undefined) {
@@ -80,7 +91,7 @@ class Exploder extends Component {
       <div className='exploder'>
       <form onSubmit={(e) => {
         e.preventDefault()
-        this.onSubmit()
+        this.props.onSearch()
       }}>
 
       <div className='form-elements'>
@@ -101,7 +112,11 @@ class Exploder extends Component {
                   }}
                   >{this.formatedTarget()}
           </button>
-
+          <KeywordInput onChange={(keyword) => {this.props.onChange({keyword})}}
+                        value={this.props.keyword}
+                        onClick={(e)=> {
+                          this.activeOne()
+                        }}/>
           <button type='submit' value='Search'>Search</button>
       </div>
 
@@ -118,20 +133,31 @@ class Exploder extends Component {
 // fetch store
 const store = {
   startDate: moment(),
-  endDate: moment()
+  endDate: moment(),
+  keyword: 'keyword..',
+  targets: [{
+    id: 1,
+    name: 'Niku'
+  }, {
+    id: 2,
+    name: 'Sashimi'
+  }]
 };
 
 const mapStateToProps = (state, ownProps) => ({
   startDate: store['startDate'],
-  endDate: store['endDate']
+  endDate: store['endDate'],
+  keyword: store['keyword'],
+  targets: store['targets']
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  handleChangeStart: (startDate) => {
-    console.log(`selected start date=${startDate}`);
+  onChange: (data) => {
+    data = _.pickBy(data, v => !_.isNull(v))
+    console.log(data);
   },
-  handleChangeEnd: (endDate) => {
-    console.log(`selected end date=${endDate}`);
+  onSearch: () => {
+    console.log('start search');
   }
 })
 
