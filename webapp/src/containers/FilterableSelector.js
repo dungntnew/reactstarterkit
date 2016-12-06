@@ -4,6 +4,12 @@ import classNames from 'classnames'
 import '../css/FilterableSelector.css';
 
 class FilterableItem extends Component {
+    static propTypes = {
+      id: PropTypes.number.isRequired,
+      label: PropTypes.string.isRequired,
+      selected: PropTypes.bool.isRequired
+    }
+
     render() {
       const cssClasses = classNames({
         'ui orange label': this.props.selected,
@@ -23,10 +29,20 @@ class FilterableItem extends Component {
 }
 
 class FilterableSelector extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+
+    const {multiple} = props
+    let {selectedIds} = props
+
+    if (!multiple) {
+      const first = _.first(selectedIds)
+      selectedIds = first ? [first]: []
+    }
+    
     this.state = {
-      filter: ''
+      filter: '',
+      selectedIds: selectedIds
     }
   }
 
@@ -35,16 +51,20 @@ class FilterableSelector extends Component {
       id: PropTypes.number,
       label: PropTypes.string
     })),
-    selectedItems: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      label: PropTypes.string
-    })),
+    selectedIds: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     fetching: PropTypes.bool,
-    onSelect: PropTypes.func,
-    onDeselect: PropTypes.func,
+    multiple: PropTypes.bool,
+    onChange: PropTypes.func.isRequired,
     placeHolderText: PropTypes.string,
     loadingText: PropTypes.string,
     onClose: PropTypes.func,
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {selectedIds} = nextProps
+    this.setState({
+      selectedIds
+    })
   }
 
   onFilter(value) {
@@ -54,12 +74,27 @@ class FilterableSelector extends Component {
   }
 
   onItemClick(id) {
-    const selected = _.findIndex(this.props.selectedItems, (e) => id === e.id) >= 0
-    if (selected) {
-      this.props.onDeselect(id)
-    }else {
-      this.props.onSelect(id)
+    let {selectedIds} = this.state
+    const {multiple} = this.props
+    const indexOf = _.indexOf(selectedIds, id)
+
+    if (multiple) {
+      if (indexOf === -1) {
+        selectedIds = [...selectedIds, id]
+      } else {
+        selectedIds = [...selectedIds.slice(0, indexOf),
+                       ...selectedIds.slice(indexOf + 1, selectedIds.length)]
+      }
     }
+    else {
+      selectedIds = [id]
+    }
+
+    this.setState({
+      selectedIds
+    })
+
+    this.props.onChange(selectedIds)
   }
 
   renderItems() {
@@ -76,7 +111,7 @@ class FilterableSelector extends Component {
                 : this.props.items
 
     return filtedItems.map(item => {
-      const selected = _.findIndex(this.props.selectedItems, (e) => item.id === e.id) >= 0
+      const selected = _.includes(this.state.selectedIds, item.id)
 
       return <FilterableItem
         key={item.id}
