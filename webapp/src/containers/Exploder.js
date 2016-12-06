@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import moment from 'moment';
@@ -33,6 +33,12 @@ class Exploder extends Component {
       keyword,
       targets
     }
+  }
+
+  static propTypes = {
+    location: PropTypes.shape({
+      query: PropTypes.object.isRequired
+    }).isRequired
   }
 
   onChange(data) {
