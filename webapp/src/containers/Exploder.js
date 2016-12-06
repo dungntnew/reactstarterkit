@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import moment from 'moment';
@@ -19,7 +19,12 @@ class Exploder extends Component {
     let startDate = query.startDate ? moment(query.startDate, 'YYYYMMDD') : moment()
     let endDate = query.endDate ? moment(query.endDate, 'YYYYMMDD') : moment()
     let keyword = query.keyword || ''
-    let targets = query.targets || []
+    let targets = query.targets || ''
+
+    if (! (targets instanceof Array)) {
+      targets = targets.split(',')
+    }
+    targets = targets.map(t=> parseInt(t, 10))
 
     if (keyword instanceof Array) {
       keyword = keyword.join(' ')
@@ -33,6 +38,12 @@ class Exploder extends Component {
       keyword,
       targets
     }
+  }
+
+  static propTypes = {
+    location: PropTypes.shape({
+      query: PropTypes.object.isRequired
+    }).isRequired
   }
 
   onChange(data) {
@@ -78,7 +89,11 @@ class Exploder extends Component {
     if (this.state.targetSelecting) {
       return (
         <TargetSelector
-          selectedTargets={this.state.targets}
+          items={this.props.targetItems}
+          selectedIds={this.state.targets}
+          fetching={this.props.fetching}
+          placeHolderText='Type to filter'
+          loadingText='loading target'
           onClose={()=>{
             this.activeOne()
           }}
@@ -92,7 +107,10 @@ class Exploder extends Component {
   }
 
   formatedTarget() {
-    return this.state.targets.map(target => target.name).join(',')
+    const {targetItems} = this.props
+    const {targets} = this.state
+
+    return _.filter(targetItems, item => _.includes(targets, item.id)).map(t => t.label).join(',')
   }
 
   activeOne(key=undefined) {
@@ -167,8 +185,15 @@ class Exploder extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-})
+const mapStateToProps = (state, ownProps) => {
+  const {target} = state
+  const {fetching, items} = target;
+
+  return {
+    fetching: fetching,
+    targetItems: items
+  }
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 })
