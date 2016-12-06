@@ -1,5 +1,3 @@
-import merge from 'lodash/merge'
-
 import { combineReducers } from 'redux'
 import { routerReducer as routing } from 'react-router-redux'
 
@@ -39,20 +37,12 @@ const auth = (state = {authenticated: true, user: dummyUser}, action) => {
   return state;
 }
 
-const searchParams = (state = {filters: {}}, action) => {
-  if (action.payload) {
-    return merge({}, state, action.payload)
-  }
-  return state;
-}
-
 const target = (state = {items: initTargets, fetching: false}, action) => {
   return state;
 }
 
 const rootReducer = combineReducers({
   auth,
-  searchParams,
   target,
   routing
 })

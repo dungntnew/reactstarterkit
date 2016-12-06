@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import moment from 'moment';
@@ -9,48 +9,62 @@ import RangedDateSelector from '../components/RangedDateSelector';
 import KeywordInput from '../components/KeywordInput';
 import TargetSelector from '../containers/TargetSelector';
 
-import * as ActionTypes from '../actions';
-
 class Exploder extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+
+    const {location} = props;
+    const {query} = location;
+
+    let startDate = query.startDate ? moment(query.startDate, 'YYYYMMDD') : moment()
+    let endDate = query.endDate ? moment(query.endDate, 'YYYYMMDD') : moment()
+    let keyword = query.keyword || ''
+    let targets = query.targets || []
+
+    if (keyword instanceof Array) {
+      keyword = keyword.join(' ')
+    }
+
     this.state = {
       dateSelecting: false,
-      targetSelecting: false
+      targetSelecting: false,
+      startDate,
+      endDate,
+      keyword,
+      targets
     }
   }
 
-  static propTypes = {
-    fromDate: PropTypes.object,
-    toDate: PropTypes.object,
-    keyword: PropTypes.string,
-    targets: PropTypes.arrayOf(PropTypes.object),
-    onSearch: PropTypes.func,
-    onChange: PropTypes.func,
+  onChange(data) {
+    data = _.pickBy(data, v => !_.isNull(v))
+    this.setState({
+      ...data
+    })
   }
 
   formatedDateRange() {
-    const start = this.props.startDate ? this.props.startDate.locale('ja').format('MMMDo'): ''
-    const end = this.props.endDate ? this.props.endDate.locale('ja').format('MMMDo'): ''
+    const {startDate, endDate} = this.state
+    const start = startDate.locale('ja').format('MMMDo')
+    const end = endDate.locale('ja').format('MMMDo')
     return `${start}~${end}`
   }
 
   renderDateSelectors() {
     const datePicker = this.state.dateSelecting ? (
       <RangedDateSelector
-         startDate={this.props.startDate}
-         endDate={this.props.endDate}
+         startDate={this.state.startDate}
+         endDate={this.state.endDate}
 
          handleChangeStart={
            (startDate) => {
              this.setState({dateSelecting: false});
-             this.props.onChange({startDate})}
+             this.onChange({startDate})}
            }
 
          handleChangeEnd={
            (endDate) => {
              this.setState({dateSelecting: false});
-             this.props.onChange({endDate})}
+             this.onChange({endDate})}
            }
       />
     ): null;
@@ -64,12 +78,12 @@ class Exploder extends Component {
     if (this.state.targetSelecting) {
       return (
         <TargetSelector
-          selectedTargets={this.props.targets}
+          selectedTargets={this.state.targets}
           onClose={()=>{
             this.activeOne()
           }}
           onChange={(targets) => {
-            this.props.onChange({targets})
+            this.onChange({targets})
             this.activeOne()
           }}
         />
@@ -78,7 +92,7 @@ class Exploder extends Component {
   }
 
   formatedTarget() {
-    return this.props.targets.map(target => target.name).join(',')
+    return this.state.targets.map(target => target.name).join(',')
   }
 
   activeOne(key=undefined) {
@@ -88,21 +102,24 @@ class Exploder extends Component {
     })
   }
 
-  
-  // TODO: normalize query params
   buildSearchLink() {
+    const {location} = this.props
+    const {query} = location
+
+    const mergedQuery = Object.assign({}, query, {
+      startDate: this.state.startDate.format('YYYYMMDD'),
+      endDate: this.state.endDate.format('YYYYMMDD'),
+      keyword: this.state.keyword,
+      targets: this.state.targets,
+    })
+
     return {
       pathname: '/search',
-      query: {
-        startDate: this.props.startDate,
-        endDate: this.props.endDate,
-        keyword: this.props.keyword,
-        targets: this.props.targets
-      }
+      query: mergedQuery
     }
   }
 
-  render() {
+  render() {;
     const dateSelectors = this.renderDateSelectors();
     const targetSelectors = this.renderTargetSelectors();
 
@@ -110,7 +127,6 @@ class Exploder extends Component {
       <div className='exploder'>
       <form onSubmit={(e) => {
         e.preventDefault()
-        this.props.onSearch()
       }}>
 
       <div className='form-elements'>
@@ -131,8 +147,8 @@ class Exploder extends Component {
                   }}
                   >{this.formatedTarget()}
           </button>
-          <KeywordInput onChange={(keyword) => {this.props.onChange({keyword})}}
-                        value={this.props.keyword}
+          <KeywordInput onChange={(keyword) => {this.onChange({keyword})}}
+                        value={this.state.keyword}
                         onClick={(e)=> {
                           this.activeOne()
                         }}/>
@@ -151,25 +167,10 @@ class Exploder extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const {searchParams} = state;
-  const {filters} = searchParams;
-  return {
-    startDate: filters['startDate'] || moment(),
-    endDate: filters['endDate'] || moment(),
-    keyword: filters['keyword'] || '',
-    targets: filters['targets'] || []
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+})
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (data) => {
-    data = _.pickBy(data, v => !_.isNull(v))
-    dispatch(ActionTypes.updateEventFilters(data))
-  },
-  onSearch: () => {
-    console.log('start search');
-  }
 })
 
 export default connect(mapStateToProps,

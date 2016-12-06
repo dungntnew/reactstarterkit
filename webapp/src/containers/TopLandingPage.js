@@ -18,7 +18,7 @@ class TopLandingPage extends Component {
         <LPHeader>
            <Logo style={{marginTop: 10, marginLeft: 10}}/>
            <TopNav />
-           <Exploder />
+           <Exploder location={this.props.location} params={this.props.params}/>
 
         </LPHeader>
 
