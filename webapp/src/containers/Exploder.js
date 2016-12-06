@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 import moment from 'moment';
 import '../css/Exploder.css';
 
@@ -87,6 +88,20 @@ class Exploder extends Component {
     })
   }
 
+  
+  // TODO: normalize query params
+  buildSearchLink() {
+    return {
+      pathname: '/search',
+      query: {
+        startDate: this.props.startDate,
+        endDate: this.props.endDate,
+        keyword: this.props.keyword,
+        targets: this.props.targets
+      }
+    }
+  }
+
   render() {
     const dateSelectors = this.renderDateSelectors();
     const targetSelectors = this.renderTargetSelectors();
@@ -121,7 +136,10 @@ class Exploder extends Component {
                         onClick={(e)=> {
                           this.activeOne()
                         }}/>
-          <button type='submit' value='Search'>Search</button>
+          <Link
+            to={this.buildSearchLink()}
+            className='ui button'
+          >Search</Link>
       </div>
 
       {dateSelectors}

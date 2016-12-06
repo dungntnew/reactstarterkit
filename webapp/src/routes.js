@@ -5,10 +5,13 @@ import App from './containers/App'
 import TestPage from './containers/TestPage'
 import AboutPage from './containers/AboutPage'
 import TopLandingPage from './containers/TopLandingPage'
+import SearchPage from './containers/SearchPage'
 
 const routes = (
   <Route path='/' component={App}>
     <IndexRoute component={TopLandingPage}/>
+    <Route path='/search'
+           component={SearchPage}/>
     <Route path='/test'
            component={TestPage}/>
     <Route path='/about'
