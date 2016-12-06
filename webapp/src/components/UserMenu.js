@@ -32,7 +32,7 @@ class UserMenu extends Component {
          >
       {
         links.map((link, index) => (
-          <li key={index}>{link}</li>
+          <li className="dropdown-item" key={index}>{link}</li>
         ))
       }
       </ul>

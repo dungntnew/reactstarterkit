@@ -32,14 +32,14 @@ class TopNav extends Component {
       <Link to='/register'>Register </Link>
     ]
     return links.map((link, index) => (
-      <li key={index}>{link}</li>
+      <li className="nav-item" key={index}>{link}</li>
     ))
   }
 
   render() {
     return (
       <div className='top-nav'>
-         <ul>
+         <ul className="top-nav-list">
          {this.renderMenuItems()}
          </ul>
       </div>

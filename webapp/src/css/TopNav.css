@@ -1,15 +1,18 @@
 .top-nav {
   display: inline-block;
-  border: 1px solid red;
 }
 
-.top-nav ul {
+.top-nav .top-nav-list {
   margin: 0;
   padding: 0;
 }
 
-.top-nav ul > li {
+.top-nav .top-nav-list .nav-item {
   display: inline;
   padding: 5px;
-  text-decoration: underline;
+}
+
+.top-nav .top-nav-list .nav-item a {
+  font-size: 14px;
+  color: #fff;
 }

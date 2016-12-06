@@ -16,9 +16,13 @@ class TopLandingPage extends Component {
     return (
       <div className='top-lp'>
         <LPHeader>
-           <Logo style={{marginTop: 10, marginLeft: 10}}/>
-           <TopNav />
-           <Exploder location={this.props.location} params={this.props.params}/>
+          <div className="ui secondary menu lp-header-nav">
+             <Logo/>
+             <div className="right menu">
+              <TopNav />
+             </div>
+          </div>
+          <Exploder location={this.props.location} params={this.props.params}/>
 
         </LPHeader>
 
