@@ -4,3 +4,17 @@
 .top-lp .lp-header .lp-header-nav {
   padding: 22px 27px 0;
 }
+
+.top-lp .lp-header .title-introduce {
+  text-align: center;
+  color: #fff;
+  margin-top: 110px;
+}
+
+.top-lp .lp-header .title-introduce h1 {
+  font-weight: 500px;
+}
+
+.top-lp .lp-header .title-introduce p {
+  font-size: 1.5rem;
+}

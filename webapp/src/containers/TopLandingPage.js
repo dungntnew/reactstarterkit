@@ -22,6 +22,10 @@ class TopLandingPage extends Component {
               <TopNav />
              </div>
           </div>
+          <div className="title-introduce">
+            <h1 className="title-header">食べる作る集まる。きっと何かはじまる。</h1>
+            <p className="title-des">グルメのためのフードイベントサービス</p>
+          </div>
           <Exploder location={this.props.location} params={this.props.params}/>
 
         </LPHeader>

@@ -1,7 +1,9 @@
-.exploder {
-  background-color: white;
+.ui.column.grid.exploder {
+  margin-top: 43px;
 }
 
 .exploder .formated-date-range {
 
 }
+
+

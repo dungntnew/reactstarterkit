@@ -133,7 +133,7 @@ class Exploder extends Component {
     const targetSelectors = this.renderTargetSelectors();
 
     return (
-      <div className='exploder ui column grid'>
+      <div className='ui column grid exploder '>
       <form className="ten wide column centered" onSubmit={(e) => {
         e.preventDefault()
       }}>
