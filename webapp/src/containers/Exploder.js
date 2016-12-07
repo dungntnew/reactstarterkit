@@ -9,26 +9,16 @@ import RangedDateSelector from '../components/RangedDateSelector';
 import KeywordInput from '../components/KeywordInput';
 import TargetSelector from '../containers/TargetSelector';
 
+import * as helpers from '../helpers';
+
 class Exploder extends Component {
   constructor(props) {
     super(props)
 
     const {location} = props;
     const {query} = location;
-
-    let startDate = query.startDate ? moment(query.startDate, 'YYYYMMDD') : moment()
-    let endDate = query.endDate ? moment(query.endDate, 'YYYYMMDD') : moment()
-    let keyword = query.keyword || ''
-    let targets = query.targets || ''
-
-    if (! (targets instanceof Array)) {
-      targets = targets.split(',')
-    }
-    targets = targets.map(t=> parseInt(t, 10))
-
-    if (keyword instanceof Array) {
-      keyword = keyword.join(' ')
-    }
+    const params = helpers.normalizeSearchParams(query)
+    const {startDate, endDate, keyword, target} = params
 
     this.state = {
       dateSelecting: false,
@@ -36,7 +26,7 @@ class Exploder extends Component {
       startDate,
       endDate,
       keyword,
-      targets
+      target
     }
   }
 
@@ -55,28 +45,28 @@ class Exploder extends Component {
 
   formatedDateRange() {
     const {startDate, endDate} = this.state
-    const start = startDate.locale('ja').format('MMMDo')
-    const end = endDate.locale('ja').format('MMMDo')
-    return `${start}~${end}`
+    return helpers.displayDatePair(startDate, endDate, '~', '時間')
   }
 
   renderDateSelectors() {
     const datePicker = this.state.dateSelecting ? (
       <RangedDateSelector
-         startDate={this.state.startDate}
-         endDate={this.state.endDate}
+         startDate={this.state.startDate　|| null}
+         endDate={this.state.endDate || null}
 
          handleChangeStart={
            (startDate) => {
-             this.setState({dateSelecting: false});
              this.onChange({startDate})}
            }
 
          handleChangeEnd={
            (endDate) => {
-             this.setState({dateSelecting: false});
              this.onChange({endDate})}
            }
+
+           onClose={()=>{
+             this.activeOne()
+           }}
       />
     ): null;
 
@@ -90,7 +80,7 @@ class Exploder extends Component {
       return (
         <TargetSelector
           items={this.props.targetItems}
-          selectedIds={this.state.targets}
+          selectedIds={[this.state.target]}
           fetching={this.props.fetching}
           placeHolderText='Type to filter'
           loadingText='loading target'
@@ -98,8 +88,8 @@ class Exploder extends Component {
             this.activeOne()
           }}
           onChange={(targets) => {
-            this.onChange({targets})
-            this.activeOne()
+            const target = _.first(targets)
+            this.onChange({target})
           }}
         />
       )
@@ -108,9 +98,14 @@ class Exploder extends Component {
 
   formatedTarget() {
     const {targetItems} = this.props
-    const {targets} = this.state
+    const {target} = this.state
 
-    return _.filter(targetItems, item => _.includes(targets, item.id)).map(t => t.label).join(',')
+    const targets =  _.filter(targetItems, item => _.includes([target], item.id)).map(t => t.label).join(',')
+    if (_.isEmpty(targets)) {
+      return 'ジャンル'
+    }else {
+      return targets
+    }
   }
 
   activeOne(key=undefined) {
@@ -123,13 +118,9 @@ class Exploder extends Component {
   buildSearchLink() {
     const {location} = this.props
     const {query} = location
+    const normalizedQuery = helpers.paramsToQueryObject(this.state)
 
-    const mergedQuery = Object.assign({}, query, {
-      startDate: this.state.startDate.format('YYYYMMDD'),
-      endDate: this.state.endDate.format('YYYYMMDD'),
-      keyword: this.state.keyword,
-      targets: this.state.targets,
-    })
+    const mergedQuery = Object.assign({}, query, normalizedQuery)
 
     return {
       pathname: '/search',
@@ -173,7 +164,7 @@ class Exploder extends Component {
           <Link
             to={this.buildSearchLink()}
             className='ui button'
-          >Search</Link>
+          >検索</Link>
       </div>
 
       {dateSelectors}
