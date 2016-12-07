@@ -8,6 +8,7 @@ import '../css/TestPage.css';
 // import UserMenu from '../components/UserMenu';
 import EventItem from '../components/EventItem';
 import EventTags from '../components/EventTags';
+import RangedDateSelector from '../components/RangedDateSelector';
 
 
 // const user = {
@@ -40,13 +41,7 @@ export default (props) => (
      </pre>
      <hr/>
      <div className='test-page-wrapper'>
-         <div className="ui link cards">
-          <EventItem {...event} />
-          <EventItem {...event} />
-          <EventItem {...event} />
-          <EventItem {...event} />
-          </div>
-
+         <EventItem {...event}/>
      </div>
   </div>
 )

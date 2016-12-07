@@ -6,34 +6,34 @@ import '../css/RangedDateSelector.css';
 
 const RangedDateSelector = (props) => (
   <div className='ranged-date-selector'>
-  <DatePicker
-    inline
-    locale='ja'
-    todayButton='本日'
-    className='date-selector'
-    selected={props.startDate}
-    selectsStart
-    startDate={props.startDate}
-    endDate={props.endDate}
-    onChange={props.handleChangeStart}
-  />
+        <DatePicker
+          inline
+          locale='ja'
+          todayButton='本日'
+          className='date-selector'
+          selected={props.startDate}
+          selectsStart
+          startDate={props.startDate}
+          endDate={props.endDate}
+          onChange={props.handleChangeStart}
+        />
 
-  <DatePicker
-    inline
-    locale='ja'
-    todayButton='本日'
-    className='date-selector'
-    selected={props.endDate}
-    selectsEnd
-    startDate={props.startDate}
-    endDate={props.endDate}
-    onChange={props.handleChangeEnd}
-  />
+        <DatePicker
+          inline
+          locale='ja'
+          todayButton='本日'
+          className='date-selector'
+          selected={props.endDate}
+          selectsEnd
+          startDate={props.startDate}
+          endDate={props.endDate}
+          onChange={props.handleChangeEnd}
+        />
 
-  <div>
-    <button className='ui button'
-            onClick={(e) => props.onClose()}>Close</button>
-  </div>
+        <div className="ui hidden divider"></div>
+        <button className='ui button'
+              onClick={(e) => props.onClose()}>Close
+        </button>
   </div>
 )
 
