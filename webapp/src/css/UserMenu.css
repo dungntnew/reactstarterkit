@@ -9,25 +9,10 @@
   position: absolute;
 }
 
-.user-menu a{
+.user-menu > a {
   margin-left: 30px;
 }
 
-.user-menu .dropdown-menu-anchor {
-    position: relative;
-}
-
-.user-menu .dropdown-menu {
-  display: none;
-  position: absolute;
-  left: 115px;
-  z-index: 1000;
-  color: white;
-}
-
-.user-menu .dropdown-menu .dropdown-item {
-  display: block;
-}
-.user-menu .dropdown-menu.active {
-  display: block;
+.submenu-anchor {
+  position: relative;
 }

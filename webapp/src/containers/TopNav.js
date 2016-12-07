@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import '../css/TopNav.css';
 
 import UserMenu from '../components/UserMenu';
+import HelpMenu from '../components/HelpMenu';
 
 class TopNav extends Component {
   static propTypes = {
@@ -20,17 +21,18 @@ class TopNav extends Component {
   renderMenuItems() {
     const links = this.props.authenticated ?
     [
-      <Link to='/search'>Search </Link>,
-      <Link to='/create'>Create </Link>,
-      <Link to='/help'>Help </Link>,
+      <Link to='/search'>イベントをさがす</Link>,
+      <Link to='/create'>イベントをつくる</Link>,
+      <HelpMenu />,
       <UserMenu user={this.props.user}/>
     ]
     :
     [
-      <Link to='/help'>Help </Link>,
-      <Link to='/login'>Login </Link>,
-      <Link to='/register'>Register </Link>
+      <HelpMenu />,
+      <Link to='/login' className='ui button'>ログイン </Link>,
+      <Link to='/register' className='ui button'>新規登録</Link>
     ]
+
     return links.map((link, index) => (
       <li className="nav-item" key={index}>{link}</li>
     ))

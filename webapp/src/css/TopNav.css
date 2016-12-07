@@ -16,3 +16,7 @@
   font-size: 14px;
   color: #fff;
 }
+
+.top-nav .nav-menu-item {
+  display: inline;
+}

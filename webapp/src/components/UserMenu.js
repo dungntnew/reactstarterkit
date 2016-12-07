@@ -1,60 +1,31 @@
-import React, {Component} from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
-import classNames from 'classnames';
 
 import '../css/UserMenu.css';
 
-class UserMenu extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      active: false
-    }
-  }
+import DropDownMenu from './DropDownMenu';
 
-  renderDropdownMenu(){
-    const links =
-    [
-      <Link to='/mypage'>Help </Link>,
-      <Link to='/logout'>Logout </Link>
-    ]
+const userMenuLinks = [
+  <Link to='/mypage'>マイーペジ </Link>,
+  <Link to='/mypage/hosted'>ホストページ </Link>,
+  <Link to='/account/settings'>アカウント設定 </Link>,
+  <Link to='/logout'>ログアウト </Link>
+]
 
-    const subMenuClasses = classNames({
-      'dropdown-menu': true,
-      'active': this.state.active
-    })
+const UserMenu = (props) => (
+  <div className='user-menu nav-menu-item submenu-anchor'>
+    <img className='user-avatar' alt='user-avatar' src={props.user.avatarUrl}/>
+    <Link to={props.user.url}>{props.user.name}</Link>
+    <DropDownMenu links={userMenuLinks}/>
+  </div>
+)
 
-    return (
-      <ul
-
-         className={subMenuClasses}
-         onMouseLeave={()=> this.setState({active: false})}
-         >
-      {
-        links.map((link, index) => (
-          <li className="dropdown-item" key={index}>{link}</li>
-        ))
-      }
-      </ul>
-    )
-  }
-
-  render() {
-    const {user} = this.props
-    const {avatarUrl, name, url} = user
-    return (
-      <div
-         className='user-menu'
-         onMouseEnter={()=> this.setState({active: true})}
-      >
-        <img className='user-avatar' alt='user-avatar' src={avatarUrl}/>
-        <Link to={url}>{name}</Link>
-        <div className='dropdown-menu-anchor' >
-        {this.renderDropdownMenu()}
-        </div>
-      </div>
-    )
-  }
+UserMenu.propTypes = {
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  })
 }
 
 export default UserMenu
