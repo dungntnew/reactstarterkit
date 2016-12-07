@@ -13,13 +13,13 @@ const LPBaner01 = (props) => (
   <div className='lp-baner-01'>
     <h1 className='center header-text'>YourTable</h1>
     <p className='center text'>全国で開催される ”食” に関するイベントをお客様にプロモーションし集客ができるサービスです。</p>
-
-    <div className='ui three column grid'>
+    <div className="ui grid container">
+      <div className='ui three column grid doubling stackable grid'>
         {/* block 1 */}
         <div className='column'>
           <div className='ui segment art-block'>
               <img alt='art-img-1' className='ui image art-img art-img-1' src={props.artImgUrl}/>
-              <p className='art-title'>
+              <p className='ui header art-title'>
               食の担い手を成長
               </p>
               <p className='art-text'>
@@ -27,7 +27,6 @@ const LPBaner01 = (props) => (
               </p>
             </div>
         </div>
-
 
         {/* block 2 */}
         <div className='column'>
@@ -42,26 +41,23 @@ const LPBaner01 = (props) => (
             </div>
         </div>
 
-
-          {/* block 3 */}
-          <div className='column'>
-            <div className='ui segment art-block'>
-                <img alt='art-img-3' className='ui image art-img art-img-3' src={props.artImgUrl}/>
-                <p className='art-title'>
-                人と人を繋げ新しい仲間を
-                </p>
-                <p className='art-text'>
-                安心安全なイベントのみをご紹介！人のつながりを創り食のコミュニティを通じた経済効果を生み出す！
-                </p>
-              </div>
-          </div>
-
+        {/* block 3 */}
+        <div className='column'>
+          <div className='ui segment art-block'>
+              <img alt='art-img-3' className='ui image art-img art-img-3' src={props.artImgUrl}/>
+              <p className='ui header art-title'>
+              人と人を繋げ新しい仲間を
+              </p>
+              <p className='art-text'>
+              安心安全なイベントのみをご紹介！人のつながりを創り食のコミュニティを通じた経済効果を生み出す！
+              </p>
+            </div>
+        </div>
       </div>
-
-      <div>
-      <Link className='ui orange button art-button' to='/about'>もっと詳しく</Link>
+    </div>
+    <div className='ui grid container btn-reset'>
+        <Link className='ui orange button art-button' to='/about'>もっと詳しく</Link>
       </div>
-
   </div>
 )
 

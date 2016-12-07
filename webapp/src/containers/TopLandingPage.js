@@ -38,7 +38,7 @@ class TopLandingPage extends Component {
 
         <LPBaner01/>
 
-        <div className='lp-main'>
+        <div className='lp-main ui container'>
            <TopNEvents title='スペシャル'
                        linkTitle='ALL'
                        filter={EventFilterTypes.SPECIAL}
