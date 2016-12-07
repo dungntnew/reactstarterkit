@@ -1,0 +1,41 @@
+.lp-baner-01 {
+
+}
+
+.lp-baner-01 .art-block {
+}
+
+.lp-baner-01 .art-block  .art-img {
+  width: 136.4px;
+  height: 150.3px;
+  background-color: #f98f4f;
+}
+
+.lp-baner-01 .art-block .art-img-1 {
+  background-image: url('/img/art-img-1.jpg');
+}
+
+.lp-baner-01 .art-block .art-img-2 {
+  background-image: url('/img/art-img-2.jpg');
+}
+.lp-baner-01 .art-block .art-img-3 {
+  background-image: url('/img/art-img-3.jpg');
+}
+
+.lp-baner-01 .art-block .art-title {
+  font-family: NotoSansCJKjp;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1;
+  text-align: center;
+  color: #f68452;
+}
+
+.lp-baner-01 .art-block .art-text {
+
+}
+.lp-baner-01 .art-button {
+
+}

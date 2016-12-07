@@ -7,6 +7,8 @@ import Logo from '../components/PageLogo';
 import LPHeader from '../components/LPHeader';
 import TopNav from '../containers/TopNav';
 import Exploder from '../containers/Exploder';
+import LPBaner01 from '../components/LPBaner01';
+import LPBaner02 from '../components/LPBaner02';
 
 class TopLandingPage extends Component {
   static propTypes = {
@@ -26,6 +28,8 @@ class TopLandingPage extends Component {
 
         </LPHeader>
 
+        <LPBaner01/>
+        <LPBaner02/>
       </div>
     )
   }
