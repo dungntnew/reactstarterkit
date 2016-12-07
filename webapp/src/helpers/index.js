@@ -6,7 +6,7 @@ function strToDate(str) {
 }
 
 function strToInt(str) {
-  return parseInt(str)
+  return parseInt(str, 10)
 }
 
 
@@ -127,7 +127,7 @@ function paramsToQueryObject(params) {
     startDate: dateToQueryStr(startDate),
     endDate: dateToQueryStr(endDate),
     keyword: normaizeKeyParam(keyword),
-    target: normaizeKeyParam(keyword),
+    target: normaizeKeyParam(target),
   }
 }
 

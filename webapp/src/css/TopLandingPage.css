@@ -17,4 +17,11 @@
 
 .top-lp .lp-header .title-introduce p {
   font-size: 1.5rem;
-}
+
+
+.top-lp .lp-main {
+  min-height: 400px;
+  display: block;
+  background-color: green;
+  border: 1px solid blue;
+

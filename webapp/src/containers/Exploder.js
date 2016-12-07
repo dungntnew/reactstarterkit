@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import moment from 'moment';
 import '../css/Exploder.css';
 
 import RangedDateSelector from '../components/RangedDateSelector';
