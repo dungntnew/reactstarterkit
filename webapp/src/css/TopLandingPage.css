@@ -4,3 +4,9 @@
 .top-lp .lp-header .lp-header-nav {
   padding: 22px 27px 0;
 }
+
+
+.top-lp .lp-main {
+  min-height: 400px;
+  display: block;
+}

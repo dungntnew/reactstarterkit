@@ -6,7 +6,7 @@ import '../css/TestPage.css';
 // import LPHeader from '../components/LPHeader';
 // import TopNav from '../containers/TopNav';
 // import UserMenu from '../components/UserMenu';
-import LPBaner02 from '../components/LPBaner02';
+import PageFooter from '../components/PageFooter';
 
 
 // const user = {
@@ -25,7 +25,7 @@ export default (props) => (
      </pre>
      <hr/>
      <div className='test-page-wrapper'>
-      <LPBaner02 />
+      <PageFooter />
      </div>
   </div>
 )

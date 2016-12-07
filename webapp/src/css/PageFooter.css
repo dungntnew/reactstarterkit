@@ -1,0 +1,20 @@
+.page-footer {
+  background-color: black;
+  color: white;
+}
+
+.page-footer .link-block {
+  border: 1px solid red;
+}
+
+.page-footer .link-block .link-block-content {
+
+}
+
+.page-footer .link-block .link-block-header {
+  font-size: 14px;
+}
+
+.page-footer .link-block .link-item {
+  font-size: 10px;
+}
