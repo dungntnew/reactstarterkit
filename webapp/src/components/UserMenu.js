@@ -15,7 +15,7 @@ const userMenuLinks = [
 const UserMenu = (props) => (
   <div className='user-menu nav-menu-item submenu-anchor'>
     <img className='user-avatar' alt='user-avatar' src={props.user.avatarUrl}/>
-    <Link to={props.user.url}>{props.user.name}</Link>
+    <Link to={props.user.url}>{props.user.name}<i className="angle down icon"></i></Link>
     <DropDownMenu links={userMenuLinks}/>
   </div>
 )

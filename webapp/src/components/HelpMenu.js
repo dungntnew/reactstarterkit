@@ -13,7 +13,7 @@ const helpLinks = [
 
 const HelpMenu = (props) => (
   <div className='help-menu nav-menu-item submenu-anchor'>
-    <Link to='/help'>ヘルプ</Link>
+    <Link to='/help'>ヘルプ<i className="angle down icon"></i></Link>
     <DropDownMenu links={helpLinks}/>
   </div>
 )
