@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Link} from 'react-router';
 
 import '../css/HelpMenu.css';
@@ -17,8 +17,5 @@ const HelpMenu = (props) => (
     <DropDownMenu links={helpLinks}/>
   </div>
 )
-
-HelpMenu.propTypes = {
-}
 
 export default HelpMenu
