@@ -4,6 +4,7 @@ import {
   normalizeSearchParams,
   displayDate,
   displayDatePair,
+  paramsToQueryObject,
 } from './index'
 
 import moment from 'moment'
@@ -179,4 +180,15 @@ test('displayDatePair one left', ()=> {
 test('displayDatePair miss', ()=> {
   expect(displayDatePair('', '', '~', '時間'))
         .toBe('時間')
+})
+test('paramsToQueryObject', ()=> {
+  expect(paramsToQueryObject({
+    startDate: moment('20161224')
+  }))
+  .toEqual({
+    startDate: '20161224',
+    endDate: '',
+    keyword: '',
+    target: ''
+  })
 })

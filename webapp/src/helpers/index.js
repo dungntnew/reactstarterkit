@@ -9,19 +9,10 @@ function strToInt(str) {
   return parseInt(str)
 }
 
-/*
-  input: query object
-  output: param object with shape:
-  {
-     startDate
-     endDate
-     keyword
-     target
-  }
-  if any key is incorrect, value should be Empty string
-*/
+
 const EMPTY = ''
 const DISPLAY_DATE_FMT = 'YYYYMMDD'
+const QUERYSTR_DATE_FMT = 'YYYYMMDD'
 
 function normaizeDateParam(param) {
   if (!_.isString(param) || _.isEmpty(param)){
@@ -42,6 +33,17 @@ function normalizeArrayParam(param) {
   return _.toString(param)
 }
 
+/*
+  input: query object
+  output: param object with shape:
+  {
+     startDate
+     endDate
+     keyword
+     target
+  }
+  if any key is incorrect, value should be Empty string
+*/
 function normalizeSearchParams(query) {
   if (!query) return {}
 
@@ -97,10 +99,44 @@ function displayDatePair(date1, date2, sepText, emptyText) {
   }
 }
 
+function dateToQueryStr(date) {
+    if (date instanceof moment) {
+      return date.format(QUERYSTR_DATE_FMT)
+    }
+    if (!_.isEmpty(date)) {
+      const dt = moment(date)
+      if (dt) {
+        return dt.format(QUERYSTR_DATE_FMT)
+      }
+      else {
+        return EMPTY
+      }
+    }
+    return EMPTY
+}
+
+function paramsToQueryObject(params) {
+  const {
+    startDate,
+    endDate,
+    keyword,
+    target
+  } = params
+
+  return {
+    startDate: dateToQueryStr(startDate),
+    endDate: dateToQueryStr(endDate),
+    keyword: normaizeKeyParam(keyword),
+    target: normaizeKeyParam(keyword),
+  }
+}
+
 module.exports = {
   strToInt,
   normalizeArrayParam,
   normalizeSearchParams,
+  paramsToQueryObject,
   displayDate,
-  displayDatePair
+  displayDatePair,
+  dateToQueryStr,
 }
