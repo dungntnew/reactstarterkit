@@ -37,7 +37,7 @@ class DropDownMenu extends Component {
           className={subMenuClasses}
           onMouseLeave={()=> this.setState({active: false})}
         >
-          <ul>
+          <ul className="dropdown-menu-list">
            {menuItems}
           </ul>
         </div>
