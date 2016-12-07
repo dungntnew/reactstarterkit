@@ -2,6 +2,18 @@
 
 }
 
+.lp-baner-01 .header-text {
+  margin-top: 68px;
+  line-height: 1;
+  color: #383838;
+}
+
+.lp-baner-01 .text {
+  line-height: 1;
+  font-size: 1rem;
+  color: #666666;
+}
+
 .lp-baner-01 .art-block {
 }
 

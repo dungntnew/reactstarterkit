@@ -11,8 +11,8 @@ Please check in smartphone also
 
 const LPBaner01 = (props) => (
   <div className='lp-baner-01'>
-    <h4>YourTable</h4>
-    <p>全国で開催される ”食” に関するイベントをお客様にプロモーションし集客ができるサービスです。</p>
+    <h1 className='center header-text'>YourTable</h1>
+    <p className='center text'>全国で開催される ”食” に関するイベントをお客様にプロモーションし集客ができるサービスです。</p>
 
     <div className='ui three column grid'>
         {/* block 1 */}
