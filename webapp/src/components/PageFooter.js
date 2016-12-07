@@ -113,7 +113,7 @@ const linkBlockContent = (blockName) => {
 }
 
 const linkBlocks = (blockName) => (
-  <div className='link-block'>
+  <div className='link-block column'>
     <div className='link-block-header'>
     {blockName}
     </div>
@@ -127,11 +127,13 @@ const linkBlocks = (blockName) => (
 console.log(linkBlocks('FIND'))
 
 const PageFooter = (props) => (
-  <div className='page-footer'>
-    {linkBlocks('FIND')}
-    {linkBlocks('HELP')}
-    {linkBlocks('OTHERS')}
-    {linkBlocks('SOCIAL')}
+  <div className='page-footer ui container'>
+    <div className='ui four column grid'>
+      {linkBlocks('FIND')}
+      {linkBlocks('HELP')}
+      {linkBlocks('OTHERS')}
+      {linkBlocks('SOCIAL')}
+    </div>
   </div>
 )
 export default PageFooter;

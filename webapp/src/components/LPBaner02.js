@@ -11,7 +11,7 @@ Please check in smartphone also
 
 const LPBaner02 = (props) => (
   <div className='ui fluid lp-baner-02'>
-      <div className='ui center aligned segment basic'>
+      <div className='ui center aligned segment basic banner-02'>
          <div className='art-title'>イベント主催者のみなさま</div>
          <p className='art-text'>
          フード関連のイベント管理に YourTable を使ってみませんか？

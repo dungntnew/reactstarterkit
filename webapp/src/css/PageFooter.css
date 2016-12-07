@@ -1,20 +1,29 @@
 .page-footer {
-  background-color: black;
-  color: white;
+  background-color: #fff;
+  color: #444;
+  padding-top: 60px;
 }
 
 .page-footer .link-block {
-  border: 1px solid red;
 }
 
 .page-footer .link-block .link-block-content {
 
 }
 
+.page-footer .link-block .link-block-content .link-item {
+  list-style: none;
+}
+
+.page-footer .link-block .link-block-content .link-item a {
+  color: #444;
+}
 .page-footer .link-block .link-block-header {
   font-size: 14px;
+  padding-left: 42px;
 }
 
 .page-footer .link-block .link-item {
-  font-size: 10px;
+  font-size: 14px;
+  line-height: 1.71;
 }

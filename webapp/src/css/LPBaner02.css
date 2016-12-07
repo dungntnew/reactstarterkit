@@ -1,10 +1,14 @@
 .lp-baner-02 {
   width: 100%;
-  height: 200px;
+  height: 400px;
   background-image: url('/img/cover-banner-02.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
+}
+
+.ui.center.aligned.segment.basic.banner-02 {
+    padding-top: 150px;
 }
 
 .lp-baner-02 .art-title {
