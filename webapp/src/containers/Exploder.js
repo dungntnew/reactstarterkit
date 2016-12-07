@@ -142,12 +142,12 @@ class Exploder extends Component {
     const targetSelectors = this.renderTargetSelectors();
 
     return (
-      <div className='exploder'>
-      <form onSubmit={(e) => {
+      <div className='exploder ui column grid'>
+      <form className="ten wide column centered" onSubmit={(e) => {
         e.preventDefault()
       }}>
 
-      <div className='form-elements'>
+      <div className='form-elements ui segment'>
           <button type='button'
                   className='formated-date-range'
                   onClick={(e)=> {
