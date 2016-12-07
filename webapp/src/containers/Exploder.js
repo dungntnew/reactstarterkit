@@ -56,15 +56,17 @@ class Exploder extends Component {
 
          handleChangeStart={
            (startDate) => {
-             this.setState({dateSelecting: false});
              this.onChange({startDate})}
            }
 
          handleChangeEnd={
            (endDate) => {
-             this.setState({dateSelecting: false});
              this.onChange({endDate})}
            }
+
+           onClose={()=>{
+             this.activeOne()
+           }}
       />
     ): null;
 
@@ -86,8 +88,8 @@ class Exploder extends Component {
             this.activeOne()
           }}
           onChange={(targets) => {
-            this.onChange({targets})
-            this.activeOne()
+            const target = _.first(targets)
+            this.onChange({target})
           }}
         />
       )
@@ -98,7 +100,12 @@ class Exploder extends Component {
     const {targetItems} = this.props
     const {target} = this.state
 
-    return _.filter(targetItems, item => _.includes([target], item.id)).map(t => t.label).join(',')
+    const targets =  _.filter(targetItems, item => _.includes([target], item.id)).map(t => t.label).join(',')
+    if (_.isEmpty(targets)) {
+      return 'ジャンル'
+    }else {
+      return targets
+    }
   }
 
   activeOne(key=undefined) {
@@ -157,7 +164,7 @@ class Exploder extends Component {
           <Link
             to={this.buildSearchLink()}
             className='ui button'
-          >Search</Link>
+          >検索</Link>
       </div>
 
       {dateSelectors}

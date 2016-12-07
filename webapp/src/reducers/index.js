@@ -10,25 +10,25 @@ const dummyUser = {
 
 // that list should fetch from server
 const initTargets = [{
-  id: 0,
+  id: '0',
   label: 'niku',
 },
 {
-  id: 1,
+  id: '1',
   label: 'sashimi',
 },{
-  id: 2,
+  id: '2',
   label: 'obento',
 },{
-  id: 3,
+  id: '3',
   label: 'chahan',
 },
 {
-  id: 4,
+  id: '4',
   label: 'onigiri',
 },
 {
-  id: 5,
+  id: '5',
   label: 'osushi',
 }];
 

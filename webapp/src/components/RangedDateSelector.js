@@ -29,6 +29,11 @@ const RangedDateSelector = (props) => (
     endDate={props.endDate}
     onChange={props.handleChangeEnd}
   />
+
+  <div>
+    <button className='ui button'
+            onClick={(e) => props.onClose()}>Close</button>
+  </div>
   </div>
 )
 
@@ -36,7 +41,8 @@ RangedDateSelector.propTypes = {
   startDate: PropTypes.object,
   endDate: PropTypes.object,
   handleChangeStart: PropTypes.func,
-  handleChangeEnd: PropTypes.func
+  handleChangeEnd: PropTypes.func,
+  onClose: PropTypes.func.isRequired
 }
 
 export default RangedDateSelector

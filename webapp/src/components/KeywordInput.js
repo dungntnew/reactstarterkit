@@ -4,7 +4,7 @@ import '../css/KeywordInput.css';
 
 const KeywordInput = (props) => (
   <input className='keyword-input'
-       placeholder='keyword, etc..'
+       placeholder='場所・キーワード'
        type='text'
        value={props.value}
        onChange={(e) => {

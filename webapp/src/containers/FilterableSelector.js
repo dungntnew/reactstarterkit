@@ -5,7 +5,7 @@ import '../css/FilterableSelector.css';
 
 class FilterableItem extends Component {
     static propTypes = {
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
       selected: PropTypes.bool.isRequired
     }
@@ -39,7 +39,7 @@ class FilterableSelector extends Component {
       const first = _.first(selectedIds)
       selectedIds = first ? [first]: []
     }
-    
+
     this.state = {
       filter: '',
       selectedIds: selectedIds
@@ -48,10 +48,10 @@ class FilterableSelector extends Component {
 
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
       label: PropTypes.string
     })),
-    selectedIds: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    selectedIds: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     fetching: PropTypes.bool,
     multiple: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
