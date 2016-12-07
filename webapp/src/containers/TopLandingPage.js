@@ -29,10 +29,12 @@ class TopLandingPage extends Component {
 
         </LPHeader>
 
+        <LPBaner01/>
+        
         <div className='lp-main'>
         CONTENT HERE
         </div>
-        <LPBaner01/>
+
         <LPBaner02/>
         <PageFooter/>
       </div>
