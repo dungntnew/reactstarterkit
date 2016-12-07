@@ -1,0 +1,23 @@
+.top-n-events {
+  background-color: pink;
+  border: 1px solid blue;
+  min-height: 200px;
+}
+
+.top-n-events .block-events-header {
+  background-color: black;
+  color: red;
+  font-size: 20px;
+}
+
+.top-n-events .block-events-header .block-events-title {
+
+}
+
+.top-n-events .block-events-header .block-events-link {
+
+}
+
+.top-n-events .block-events-content {
+  background-color: white;
+}

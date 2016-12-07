@@ -1,0 +1,45 @@
+.event-item {
+  min-width: 100px;
+  min-height: 100px;
+  display: block;
+  background-color: red;
+  padding: 2px;
+  margin: 2px;
+}
+
+.event-item .event-cover-img {
+
+}
+
+.event-item .price {
+
+}
+.event-item .address {
+
+}
+
+.event-item .joiner-info {
+
+}
+
+
+.event-item .joiner-count {
+
+}
+
+.event-item .joiner-limit {
+
+}
+.event-item .open-date {
+
+}
+
+.event-item .registration-info {
+
+}
+.event-item .registration-info .registration-start {
+
+}
+.event-item .registration-info .registration-end {
+  
+}

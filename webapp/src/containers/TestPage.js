@@ -6,7 +6,8 @@ import '../css/TestPage.css';
 // import LPHeader from '../components/LPHeader';
 // import TopNav from '../containers/TopNav';
 // import UserMenu from '../components/UserMenu';
-import PageFooter from '../components/PageFooter';
+import EventItem from '../components/EventItem';
+import EventTags from '../components/EventTags';
 
 
 // const user = {
@@ -15,6 +16,20 @@ import PageFooter from '../components/PageFooter';
 //   id: '1',
 //   url: '/user/dungntnew'
 // }
+
+const event = {
+    coverImageUrl: '/img/avatar.png',
+    price: 100,
+    title: 'Test Event',
+    address: 'Yokohama Tokyo',
+    tags: ['A', 'B', 'C'],
+    joinerCount: 5,
+    joinerLimit:　10,
+    openDate: '20160112',
+    registrationDateStart: '20160112',
+    registrationDateEnd:'20160112',
+    url: '/events/1',
+}
 
 /* Put your component to here to view */
 export default (props) => (
@@ -25,7 +40,13 @@ export default (props) => (
      </pre>
      <hr/>
      <div className='test-page-wrapper'>
-      <PageFooter />
+         <div className="ui link cards">
+          <EventItem {...event} />
+          <EventItem {...event} />
+          <EventItem {...event} />
+          <EventItem {...event} />
+          </div>
+
      </div>
   </div>
 )
