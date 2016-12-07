@@ -1,5 +1,5 @@
-.fiterable-selector {
-
+.fiterable-selector ul{
+  padding-left: 0;
 }
 
 .fiterable-selector .fiterable-list-item {

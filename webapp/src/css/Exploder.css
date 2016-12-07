@@ -1,7 +1,21 @@
-.exploder {
-  background-color: white;
+.ui.column.grid.exploder {
+  margin-top: 43px;
 }
 
-.exploder .formated-date-range {
-
+.exploder .form-elements {
+  width: 100%;
 }
+
+.exploder .formated-btn {
+  background-color: #fff !important;
+}
+
+.exploder .formated-btn i{
+  float: right;
+}
+
+.ui.button.formated-btn {
+    border: 1px solid #E0E1E2;
+}
+
+

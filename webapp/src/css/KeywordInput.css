@@ -1,3 +1,14 @@
-.keyword-input {
-  
+.ui .form .field .keyword-input {
+  border-radius: 0;
+  line-height: 1.4;
+}
+
+.ui .form .field .keyword-input:hover {
+  border-radius: 0;
+}
+
+a.ui.button.search-btn {
+  padding-top: 14px;
+  background-color: #ff8a46;
+  color: #fff;
 }
