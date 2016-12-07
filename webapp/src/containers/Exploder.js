@@ -137,32 +137,39 @@ class Exploder extends Component {
         e.preventDefault()
       }}>
 
-      <div className='form-elements ui segment'>
+      <div className='form-elements ui buttons'>
           <button type='button'
-                  className='formated-date-range'
+                  className='formated-date-range ui button formated-btn '
                   onClick={(e)=> {
                     e.preventDefault();
                     this.activeOne('dateSelecting')
                   }}
                   >{this.formatedDateRange()}
+                  <i className="angle down icon"></i>
           </button>
 
           <button type='button'
-                  className='formated-target-name'
+                  className='formated-target-name ui button formated-btn '
                   onClick={(e)=> {
                     e.preventDefault();
                     this.activeOne('targetSelecting')
                   }}
                   >{this.formatedTarget()}
+                  <i className="angle down icon"></i>
           </button>
-          <KeywordInput onChange={(keyword) => {this.onChange({keyword})}}
+          <div className="ui form">
+            <div className="field">
+              <KeywordInput onChange={(keyword) => {this.onChange({keyword})}}
                         value={this.state.keyword}
                         onClick={(e)=> {
                           this.activeOne()
                         }}/>
+            </div>
+          </div>
+
           <Link
             to={this.buildSearchLink()}
-            className='ui button'
+            className='ui button search-btn'
           >検索</Link>
       </div>
 
