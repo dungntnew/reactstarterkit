@@ -3,6 +3,8 @@ import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import '../css/EventItem.css';
 
+import EventTags from '../components/EventTags';
+
 import {
   formatPrice,
   formatOpenDate,
@@ -38,7 +40,10 @@ class EventItem extends Component {
       joinerLimit,
       openDate,
       registrationDateStart,
-      registrationDateEnd
+      registrationDateEnd,
+      tags,
+      target,
+      targetName
     }
     = this.props
 
@@ -62,6 +67,7 @@ class EventItem extends Component {
            <div className="meta address">
              {address}
            </div>
+           <EventTags tags={tags} target={target} targetName={targetName} limit={4}/>
            <div className="meta joiner-info">
              参加人数:
              <span className='joiner-count'>{joinerCount}</span>

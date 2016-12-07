@@ -13,6 +13,8 @@ const event = {
     title: 'Test Event',
     address: 'Yokohama Tokyo',
     tags: ['A', 'B', 'C'],
+    target: 'niku',
+    targetName: '肉',
     joinerCount: 5,
     joinerLimit:　10,
     openDate: '20160112',
