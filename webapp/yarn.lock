@@ -5093,6 +5093,10 @@ semantic-ui-css:
   dependencies:
     jquery x.*
 
+semantic-ui-progress:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-progress/-/semantic-ui-progress-2.2.3.tgz#b533570e7d52f8d6b35bb177a55b9ae9c002d574"
+
 semver-diff@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/semver-diff/-/semver-diff-2.1.0.tgz#4bbb8437c8d37e4b0cf1a68fd726ec6d645d6d36"

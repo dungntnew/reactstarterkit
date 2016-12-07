@@ -41,7 +41,7 @@ export default (props) => (
      </pre>
      <hr/>
      <div className='test-page-wrapper'>
-         <RangedDateSelector onClose={(e) => {}}/>
+         <EventItem {...event}/>
      </div>
   </div>
 )

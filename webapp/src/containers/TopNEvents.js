@@ -23,6 +23,15 @@ const event = {
     url: '/events/1',
 }
 
+const dummyEventIds = [1, 2, 3, 4]
+const dummyEvents = dummyEventIds.map((id, index) =>
+    Object.assign({}, event, {
+      joinerCount: Math.round(Math.random() * 10),
+      title: 'Test Event ' + id,
+      url: '/events/' + id,
+    })
+)
+
 class TopNEvents extends Component {
   static propTypes = {
   }
@@ -34,9 +43,8 @@ class TopNEvents extends Component {
   }
 
   renderEventItems(filter, limit) {
-    const events = [1, 2, 3, 4]
-    return events.map((e, index) => (
-      <EventItem key={index} {...event}/>
+    return dummyEvents.map((e, index) => (
+      <EventItem key={index} {...e}/>
     ))
   }
 

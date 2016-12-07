@@ -1,9 +1,13 @@
 import $ from 'jquery';
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
+import classNames from 'classnames';
+import EventTags from '../components/EventTags';
+
+import 'semantic-ui-progress/progress.min.css'
 import '../css/EventItem.css';
 
-import EventTags from '../components/EventTags';
+$.fn.progress = require('semantic-ui-progress')
 
 import {
   formatPrice,
@@ -27,6 +31,17 @@ class EventItem extends Component {
   }
 
   componentDidMount() {
+    const {joinerCount, joinerLimit} = this.props
+    // fade animation progress
+    // total = join limit
+    // current = join count
+    const total = joinerLimit > 1 ? joinerLimit : 1
+    const percent = joinerCount / total;
+    $(this.refs.joinProgress).progress({
+      percent: percent * 100,
+      showActivity: false,
+    })
+    console.log(percent)
   }
 
   render() {
@@ -46,6 +61,15 @@ class EventItem extends Component {
       targetName
     }
     = this.props
+
+    const total = joinerLimit > 1 ? joinerLimit : 1
+    const percent = joinerCount / total;
+
+    const progressClasses = classNames({
+      'ui bottom attached green progress': percent < 0.5,
+      'ui bottom attached orange progress': (percent >= 0.5 && percent < 0.7),
+      'ui bottom attached red progress': percent >= 0.7,
+    })
 
     return (
       <div className='card event-item'>
@@ -92,13 +116,8 @@ class EventItem extends Component {
            </div>
         </div>
 
-        <div ref='joinProgress'
-             className="ui bottom attached violet progress"
-             data-value="50" data-total="200"
-          >
-          <div className="bar">
-             <div className="progress"></div>
-          </div>
+        <div ref='joinProgress' className={progressClasses}>
+          <div className="bar"></div>
         </div>
       </div>
     )
