@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
 import classNames from 'classnames';
 import EventTags from '../components/EventTags';
 
@@ -31,17 +30,17 @@ class EventItem extends Component {
   }
 
   componentDidMount() {
-    const {joinerCount, joinerLimit} = this.props
-    // fade animation progress
-    // total = join limit
-    // current = join count
-    const total = joinerLimit > 1 ? joinerLimit : 1
-    const percent = joinerCount / total;
+    const percent = this.joinPercent()
     $(this.refs.joinProgress).progress({
       percent: percent * 100,
       showActivity: false,
     })
-    console.log(percent)
+  }
+
+  joinPercent() {
+    const {joinerCount, joinerLimit} = this.props
+    const total = joinerLimit > 1 ? joinerLimit : 1
+    return joinerCount / total;
   }
 
   render() {
@@ -62,8 +61,7 @@ class EventItem extends Component {
     }
     = this.props
 
-    const total = joinerLimit > 1 ? joinerLimit : 1
-    const percent = joinerCount / total;
+    const percent = this.joinPercent()
 
     const progressClasses = classNames({
       'ui bottom attached green progress': percent < 0.5,

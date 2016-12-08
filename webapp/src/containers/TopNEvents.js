@@ -34,6 +34,10 @@ const dummyEvents = dummyEventIds.map((id, index) =>
 
 class TopNEvents extends Component {
   static propTypes = {
+    title: PropTypes.string.isRequired,
+    filter: PropTypes.string.isRequired,
+    linkTitle: PropTypes.string.isRequired,
+    limit: PropTypes.number.isRequired
   }
 
   renderLink(filter, linkTitle) {
