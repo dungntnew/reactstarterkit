@@ -18,7 +18,7 @@ const LPBaner01 = (props) => (
         {/* block 1 */}
         <div className='column'>
           <div className='ui segment art-block'>
-              <img alt='art-img-1' className='ui image art-img art-img-1' src={props.artImgUrl}/>
+              <div className='ui image art-img art-img-1'></div>
               <p className='ui header art-title'>
               食の担い手を成長
               </p>
@@ -31,7 +31,7 @@ const LPBaner01 = (props) => (
         {/* block 2 */}
         <div className='column'>
           <div className='ui segment art-block'>
-              <img alt='art-img-2' className='ui image art-img art-img-2' src={props.artImgUrl}/>
+              <div className='ui image art-img art-img-2'></div>
               <p className='ui header art-title'>
               地域の食の魅力を広く発信
               </p>
@@ -44,7 +44,7 @@ const LPBaner01 = (props) => (
         {/* block 3 */}
         <div className='column'>
           <div className='ui segment art-block'>
-              <img alt='art-img-3' className='ui image art-img art-img-3' src={props.artImgUrl}/>
+              <div className='ui image art-img art-img-3'></div>
               <p className='ui header art-title'>
               人と人を繋げ新しい仲間を
               </p>

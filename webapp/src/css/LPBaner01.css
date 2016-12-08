@@ -19,11 +19,11 @@
 }
 
 .lp-baner-01 .art-block  .art-img {
-  width: 136.4px;
   height: 150.3px;
   background-position: center;
   background-repeat: no-repeat;
   margin: auto;
+  display: block;
 }
 
 .lp-baner-01 .art-block .art-img-1 {
@@ -52,3 +52,7 @@
   height: 60px;
 }
 
+.lp-baner-01 .ui.grid.container.btn-reset {
+  text-align: center;
+  display: block;
+}
