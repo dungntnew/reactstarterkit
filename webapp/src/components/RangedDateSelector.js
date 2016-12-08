@@ -31,7 +31,7 @@ const RangedDateSelector = (props) => (
         />
 
         <div className="ui hidden divider"></div>
-        <button className='ui button'
+        <button className='ui button btn-orange'
               onClick={(e) => props.onClose()}>Close
         </button>
   </div>

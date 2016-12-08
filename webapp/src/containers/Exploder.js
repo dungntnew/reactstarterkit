@@ -132,8 +132,8 @@ class Exploder extends Component {
     const targetSelectors = this.renderTargetSelectors();
 
     return (
-      <div className='ui column grid exploder '>
-      <form className="ten wide column centered" onSubmit={(e) => {
+      <div className='ui text container exploder '>
+      <form className="centered" onSubmit={(e) => {
         e.preventDefault()
       }}>
 
@@ -169,7 +169,7 @@ class Exploder extends Component {
 
           <Link
             to={this.buildSearchLink()}
-            className='ui button search-btn'
+            className='ui button search-btn btn-orange'
           >検索</Link>
       </div>
 

@@ -128,7 +128,7 @@ console.log(linkBlocks('FIND'))
 
 const PageFooter = (props) => (
   <div className='page-footer ui container'>
-    <div className='ui four column grid'>
+    <div className='ui four column stackable grid'>
       {linkBlocks('FIND')}
       {linkBlocks('HELP')}
       {linkBlocks('OTHERS')}

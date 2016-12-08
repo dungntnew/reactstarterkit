@@ -10,17 +10,42 @@
 
 }
 
-.event-item .price {
+.event-item .ui.top.right.attached.label.price {
+ top: 165px;
+  right: 8px;
+  border-radius: 2px;
+  padding: 5px 15px;
+  background-color: #fff;
+}
 
+.event-item .content .header-item {
+  font-size: 1.125em;
+  line-height: 1;
+  color: #333333 ;
+  font-weight: bold;
+}
+
+.event-item .content .header-item:hover {
+  color: #333333;
 }
 .event-item .address {
-
+  color: #333333;
+  font-size: 0.875em;
 }
 
-.event-item .joiner-info {
-
+.event-item .meta {
+  color: #333333;
+}
+.event-item .title {
+  padding-right: 10px;
+  color: #878787;
+  font-size: 0.875em;
 }
 
+.event-item .title.date {
+  padding-right: 23px;
+  color: #878787;
+}
 
 .event-item .joiner-count {
 

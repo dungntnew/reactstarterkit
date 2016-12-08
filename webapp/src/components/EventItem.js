@@ -79,31 +79,31 @@ class EventItem extends Component {
              src={coverImageUrl}
           />
         </a>
-        <div className="ui top right attached white label price">
+        <div className="ui top right attached label price text-orange">
            {formatPrice(price)}
         </div>
 
         <div className="content">
-           <a className="header" href={url}>{title}</a>
+           <a className="header-item" href={url}>{title}</a>
 
-           <div className="meta address">
+           <div className="address">
              {address}
            </div>
            <EventTags tags={tags} target={target} targetName={targetName} limit={4}/>
            <div className="meta joiner-info">
-             参加人数:
+             <span className='title'>参加人数:</span>
              <span className='joiner-count'>{joinerCount}</span>
               /
               <span className='joiner-limit'>{joinerLimit}</span>
            </div>
 
            <div className="meta open-date">
-             開催日:
+             <span className='title date'>開催日:</span>
              <span>{formatOpenDate(openDate)}</span>
            </div>
 
            <div className="meta registration-info">
-             参加期限:
+             <span className='title'>参加期限:</span>
              <span className='registration-start'>
                 {formatRegistrationDateTime(registrationDateStart)}
              </span>

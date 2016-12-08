@@ -1,0 +1,27 @@
+.fiterable-selector .ui {
+  margin-top: 10px;
+}
+
+.fiterable-selector .ui.input input {
+ border-radius: 4px 4px 0 0;
+}
+
+.fiterable-selector .item-list {
+  background-color: #fff;
+  margin-top: 0;
+}
+
+.fiterable-selector .item-list .item {
+  border-radius: 0;
+  width: 25%;
+  margin: 0;
+  background-color: #fff;
+}
+
+.fiterable-selector .item-list .item:hover {
+  background-color: #ececec;
+}
+
+.fiterable-selector .item-list .item a {
+  color: #a9a9a9;
+}

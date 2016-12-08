@@ -1,4 +1,4 @@
-.ui.column.grid.exploder {
+.ui.text.container.exploder {
   margin-top: 43px;
 }
 
@@ -16,6 +16,8 @@
 
 .ui.button.formated-btn {
     border: 1px solid #E0E1E2;
+    color: #a9a9a9;
+    font-weight: normal;
 }
 
 

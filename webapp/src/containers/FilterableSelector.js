@@ -12,18 +12,21 @@ class FilterableItem extends Component {
 
     render() {
       const cssClasses = classNames({
-        'ui orange label': this.props.selected,
-        'ui grey label': !this.props.selected,
+        'ui': this.props.selected,
+        'ui': !this.props.selected,
         'fiterable-list-item': true
       })
 
       return (
-        <a
-          key={this.props.id}
-          className={cssClasses}
-          onClick={this.props.onClick}>
-        {this.props.label}
-        </a>
+        <li className='ui button item'>
+          <a
+            key={this.props.id}
+            className={cssClasses}
+            onClick={this.props.onClick}>
+            {this.props.label}
+          </a>
+        </li>
+
       )
     }
 }
@@ -134,11 +137,11 @@ class FilterableSelector extends Component {
              onChange={(e) => {this.onFilter(e.target.value)}}
           />
         </div>
-        <ul>
+        <ul className='item-list'>
           {this.renderItems()}
         </ul>
-        <div>
-          <button className='ui button'
+        <div className='btn-close'>
+          <button className='ui button btn-orange'
                   onClick={(e) => this.props.onClose()}>Close</button>
         </div>
       </div>

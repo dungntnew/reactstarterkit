@@ -19,7 +19,7 @@ const LPBaner02 = (props) => (
          </p>
 
          <div>
-         <Link className='ui orange button art-button' to='/create'>はじめる</Link>
+         <Link className='ui btn-orange button art-button' to='/create'>はじめる</Link>
          </div>
 
       </div>

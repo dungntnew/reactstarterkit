@@ -10,10 +10,14 @@
 
 .lp-baner-01 .text {
   line-height: 1;
-  font-size: 1rem;
+  font-size: 1em;
   color: #666666;
 }
 
+
+.lp-baner-01 .intro-table {
+  padding-top: 30px;
+}
 .lp-baner-01 .art-block {
   background-color: #fbfbfb;
 }
@@ -52,7 +56,8 @@
   height: 60px;
 }
 
-.lp-baner-01 .ui.grid.container.btn-reset {
+.lp-baner-01 .ui.container.btn-reset {
   text-align: center;
   display: block;
+  margin-top: 39px;
 }

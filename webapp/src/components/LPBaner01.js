@@ -13,8 +13,8 @@ const LPBaner01 = (props) => (
   <div className='lp-baner-01'>
     <h1 className='center header-text'>YourTable</h1>
     <p className='center text'>全国で開催される ”食” に関するイベントをお客様にプロモーションし集客ができるサービスです。</p>
-    <div className="ui grid container">
-      <div className='ui three column grid doubling stackable grid'>
+    <div className="ui container intro-table">
+      <div className='ui three column stackable grid '>
         {/* block 1 */}
         <div className='column'>
           <div className='ui segment art-block'>
@@ -55,8 +55,8 @@ const LPBaner01 = (props) => (
         </div>
       </div>
     </div>
-    <div className='ui grid container btn-reset'>
-        <Link className='ui orange button art-button' to='/about'>もっと詳しく</Link>
+    <div className='ui container btn-reset'>
+        <Link className='ui button art-button btn-orange' to='/about'>もっと詳しく</Link>
       </div>
   </div>
 )
