@@ -47,23 +47,6 @@
   color: #878787;
 }
 
-.event-item .joiner-count {
-
-}
-
-.event-item .joiner-limit {
-
-}
-.event-item .open-date {
-
-}
-
-.event-item .registration-info {
-
-}
-.event-item .registration-info .registration-start {
-
-}
-.event-item .registration-info .registration-end {
-
+.event-item .event-tags {
+  padding-top: 8px;
 }
