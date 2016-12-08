@@ -1,0 +1,20 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/Cellar/node/0.10.35_2/bin/node /usr/local/bin/firebase deploy
+[debug] CLI Version:  3.1.0
+[debug] Platform:     darwin
+[debug] Node Version: v6.9.1
+[debug] Time:         Thu Dec 08 2016 11:51:14 GMT+0900 (JST)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/ean-promotion 
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/ean-promotion/tokens 
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'ean-promotion'...
+[info] 
+[info] i  deploying database, hosting
+[info] ✔  database: rules ready to deploy.
+[info] i  hosting: preparing build directory for upload...
+[debug] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/ean-promotion/uploads/-KYRKtrzIHHr7QfD08jf?fileCount=29&message= 

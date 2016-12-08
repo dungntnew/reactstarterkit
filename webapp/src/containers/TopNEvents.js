@@ -29,6 +29,7 @@ const dummyEvents = dummyEventIds.map((id, index) =>
       joinerCount: Math.round(Math.random() * 10),
       title: 'Test Event ' + id,
       url: '/events/' + id,
+      coverImageUrl: '/img/event-' + id + '.jpg'
     })
 )
 
