@@ -22,6 +22,5 @@
 .top-lp .lp-main {
   min-height: 400px;
   display: block;
-  background-color: green;
-  border: 1px solid blue;
+  background-color: #f0efef;
 }

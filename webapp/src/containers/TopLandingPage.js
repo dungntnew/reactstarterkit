@@ -38,22 +38,24 @@ class TopLandingPage extends Component {
 
         <LPBaner01/>
 
-        <div className='lp-main ui container'>
-           <TopNEvents title='スペシャル'
-                       linkTitle='ALL'
-                       filter={EventFilterTypes.SPECIAL}
-                       limit={4}
-           />
-           <TopNEvents title='トレンドテーブル'
-                       linkTitle='ALL'
-                       filter={EventFilterTypes.TREND}
-                       limit={4}
-           />
-           <TopNEvents title='最新テーブル'
-                       linkTitle='ALL'
-                       filter={EventFilterTypes.LATEST}
-                       limit={4}
-           />
+        <div className='lp-main'>
+          <div className='ui container'>
+            <TopNEvents title='スペシャル'
+                         linkTitle='ALL'
+                         filter={EventFilterTypes.SPECIAL}
+                         limit={4}
+             />
+             <TopNEvents title='トレンドテーブル'
+                         linkTitle='ALL'
+                         filter={EventFilterTypes.TREND}
+                         limit={4}
+             />
+             <TopNEvents title='最新テーブル'
+                         linkTitle='ALL'
+                         filter={EventFilterTypes.LATEST}
+                         limit={4}
+             />
+          </div>
         </div>
 
         <LPBaner02/>

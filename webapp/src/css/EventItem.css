@@ -2,7 +2,6 @@
   min-width: 100px;
   min-height: 100px;
   display: block;
-  background-color: red;
   padding: 2px;
   margin: 2px;
 }
@@ -41,5 +40,5 @@
 
 }
 .event-item .registration-info .registration-end {
-  
+
 }

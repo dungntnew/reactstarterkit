@@ -1,23 +1,29 @@
 .top-n-events {
-  background-color: pink;
-  border: 1px solid blue;
   min-height: 200px;
+  padding-top: 72px;
 }
 
 .top-n-events .block-events-header {
-  background-color: black;
-  color: red;
   font-size: 20px;
 }
 
 .top-n-events .block-events-header .block-events-title {
-
+  display: inline-block;
 }
 
 .top-n-events .block-events-header .block-events-link {
-
+  display: inline-block;
+  float: right;
 }
 
 .top-n-events .block-events-content {
-  background-color: white;
+  padding-top: 32px;
+}
+
+.ui.link.cards.block-events-content {
+  margin: 0;
+}
+
+.ui.link.cards.block-events-content >.event-item {
+  margin: 10px;
 }
