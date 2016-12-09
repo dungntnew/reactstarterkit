@@ -22,7 +22,7 @@ class TopLandingPage extends Component {
     return (
       <div className='top-lp'>
         <LPHeader>
-          <div className="ui secondary menu lp-header-nav">
+          <div className="ui secondary menu stackable lp-header-nav">
              <Logo/>
              <div className="right menu">
               <TopNav />

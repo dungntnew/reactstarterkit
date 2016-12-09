@@ -7,9 +7,15 @@
   padding: 0;
 }
 
+ul.ui.stackable.menu.top-nav-list {
+  background: none !important;
+  border: 0;
+  box-shadow: none;
+}
+
 .top-nav .top-nav-list .nav-item {
   display: inline;
-  padding: 5px;
+  padding: 8px 10px;
 }
 
 .top-nav .top-nav-list .nav-item a {

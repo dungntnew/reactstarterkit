@@ -33,8 +33,8 @@
   font-size: 0.875em;
 }
 
-.event-item .meta {
-  color: #333333;
+.event-item  .content .meta {
+  color: #333333 !important ;
 }
 .event-item .title {
   padding-right: 10px;
