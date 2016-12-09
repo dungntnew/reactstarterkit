@@ -1,6 +1,6 @@
 .top-n-events {
   min-height: 200px;
-  padding-top: 72px;
+  padding-top: 30px;
   padding-bottom: 15px;
 }
 
@@ -57,5 +57,5 @@
 }
 
 .ui.link.cards.block-events-content >.event-item {
-  margin: 10px;
+  margin-bottom: 20px !important;
 }

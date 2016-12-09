@@ -1,8 +1,11 @@
-.top-lp {
-
+.top-lp .lp-header .ui.secondary.menu.stackable.lp-header-nav {
+  margin-left: 0;
+  margin-right: 0;
 }
 .top-lp .lp-header .lp-header-nav {
   padding: 14px 27px 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .top-lp .lp-header .title-introduce {

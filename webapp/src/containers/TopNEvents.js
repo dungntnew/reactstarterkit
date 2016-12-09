@@ -64,7 +64,7 @@ class TopNEvents extends Component {
            <div className='block-events-title'>{title} </div>
            <div className='block-events-link'>{link} <i className="angle right icon"></i></div>
         </div>
-         <div className="ui link cards block-events-content">
+         <div className="ui link three stackable cards block-events-content">
              {blockContent}
          </div>
       </div>

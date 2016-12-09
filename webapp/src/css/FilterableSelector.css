@@ -9,6 +9,7 @@
 .fiterable-selector .item-list {
   background-color: #fff;
   margin-top: 0;
+  padding-bottom: 1px;
 }
 
 .fiterable-selector .item-list .item {
@@ -24,4 +25,10 @@
 
 .fiterable-selector .item-list .item a {
   color: #a9a9a9;
+}
+
+@media only screen and (max-width: 667px) and (min-width: 320px) {
+  .fiterable-selector .item-list .item {
+    width: 50%;
+  }
 }
