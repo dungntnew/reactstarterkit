@@ -137,7 +137,7 @@ class Exploder extends Component {
         e.preventDefault()
       }}>
 
-      <div className='form-elements ui buttons'>
+      <div className='ui stackable menu form-elements buttons'>
           <button type='button'
                   className='formated-date-range ui button formated-btn '
                   onClick={(e)=> {

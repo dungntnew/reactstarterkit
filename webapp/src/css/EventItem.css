@@ -6,8 +6,8 @@
   margin: 2px;
 }
 
-.event-item .event-cover-img {
-
+.block-events-content .event-item .event-cover-img img {
+  height: 194px !important;
 }
 
 .event-item .ui.top.right.attached.label.price {

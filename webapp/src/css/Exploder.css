@@ -2,6 +2,10 @@
   margin-top: 43px;
 }
 
+.ui.stackable.menu.form-elements.buttons {
+  border: 0;
+}
+
 .exploder .form-elements {
   width: 100%;
 }
@@ -15,9 +19,7 @@
 }
 
 .ui.button.formated-btn {
-    border: 1px solid #E0E1E2;
-    color: #a9a9a9;
-    font-weight: normal;
+  border: 1px solid #E0E1E2;
+  color: #a9a9a9;
+  font-weight: normal;
 }
-
-
