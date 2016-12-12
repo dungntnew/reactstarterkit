@@ -5,6 +5,7 @@ import { target } from './target'
 import {auth } from './auth'
 import { topTrendEvent, topSpecialEvent, topLatestEvent } from './event'
 
+import todoReducer from '../flux/modules/todo'
 
 const rootReducer = combineReducers({
   auth,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   topTrendEvent,
   topLatestEvent,
   topSpecialEvent,
+  todo: todoReducer,
   routing
 })
 

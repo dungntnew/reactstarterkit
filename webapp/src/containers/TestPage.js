@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import '../css/TestPage.css';
 
 // import Logo from '../components/PageLogo';
@@ -32,6 +32,63 @@ const event = {
     url: '/events/1',
 }
 
+import {addTodo, getTodos, isFetching} from '../flux/modules/todo';
+import {requestTodos, receiveTodos, fetchLatestTodos, fetchLatestTodosIfNeed} from '../flux/modules/todo';
+
+class TodoApp extends Component {
+
+  componentDidMount() {
+    this.props.refreshTodos();
+  }
+
+  render() {
+    return (
+      <div className='ui segment'>
+         <input type='text' ref='text'/>
+         <button type='submit' onClick={(e)=>{
+           e.preventDefault()
+           this.props.addTodo({
+             text: this.refs.text.value
+           })
+         }}>Add Todo</button>
+
+        <button type='submit' onClick={(e)=>{
+          e.preventDefault()
+          this.props.refreshTodos()
+        }}>Refresh</button>
+
+         <hr />
+         {this.props.loading && (<h4>'Fetching...'</h4>)}
+         <ul className='list'>
+         {
+            this.props.todos.map((t, i)=>(
+              <li key={i} className='item'>
+              {t.text}
+              </li>
+            ))
+         }
+         </ul>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({
+  todos: getTodos(state),
+  loading: isFetching(state),
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  addTodo: (payload) => {
+    dispatch(addTodo(payload))
+  },
+  refreshTodos: () => {
+    dispatch(fetchLatestTodosIfNeed(100))
+  }
+})
+
+const TodoAppX = connect(mapStateToProps, mapDispatchToProps)(TodoApp)
+
 /* Put your component to here to view */
 export default (props) => (
   <div>
@@ -41,7 +98,7 @@ export default (props) => (
      </pre>
      <hr/>
      <div className='test-page-wrapper'>
-         <EventItem {...event}/>
+         <TodoAppX />
      </div>
   </div>
 )
