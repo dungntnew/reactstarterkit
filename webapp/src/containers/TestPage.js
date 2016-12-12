@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import '../css/TestPage.css';
 
 import TopNEvents from '../containers/TopNEvents';
-import {EventFilterTypes} from '../actions';
 
 import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
 
