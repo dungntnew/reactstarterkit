@@ -3,6 +3,7 @@ import React from 'react';
 import '../css/TestPage.css';
 
 // import Logo from '../components/PageLogo';
+// import UserAvatar from '../components/UserAvatar';
 // import LPHeader from '../components/LPHeader';
 // import TopNav from '../containers/TopNav';
 // import UserMenu from '../components/UserMenu';
@@ -11,12 +12,11 @@ import EventTags from '../components/EventTags';
 import RangedDateSelector from '../components/RangedDateSelector';
 
 
-// const user = {
-//   avatarUrl: '/img/avatar.png',
-//   name: 'Nguyen Tri Dung',
-//   id: '1',
-//   url: '/user/dungntnew'
-// }
+const user = {
+  avatarUrl: '/img/avatar.png',
+  displayName: 'Nguyen Tri Dung',
+  url: '/user/dungntnew'
+}
 
 const event = {
     coverImageUrl: '/img/avatar.png',
@@ -32,6 +32,8 @@ const event = {
     url: '/events/1',
 }
 
+
+
 /* Put your component to here to view */
 export default (props) => (
   <div>
@@ -41,7 +43,11 @@ export default (props) => (
      </pre>
      <hr/>
      <div className='test-page-wrapper'>
-         <EventItem {...event}/>
+        <EventItem {...event}/>
+
+     </div>
+     <div className='test'>
+
      </div>
   </div>
 )
