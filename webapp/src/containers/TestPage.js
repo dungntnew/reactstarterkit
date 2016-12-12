@@ -16,6 +16,7 @@ const user = {
   avatarUrl: '/img/avatar.png',
   displayName: 'Duong Thi Ngoc Tien',
   url: '/user/ngoctien',
+  rank:'3'
 }
 
 

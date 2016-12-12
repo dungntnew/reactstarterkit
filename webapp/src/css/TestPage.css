@@ -6,3 +6,15 @@
   display: block;
   border: 1px solid green;
 }
+.user-avatar .circle-image {
+  width: 72px;
+  height: 72px;
+  border-radius: 100px;
+}
+.test .user-avatar .user-description h3.avatar-name {
+  margin: 7px 0;
+  font-weight: 500;
+  line-height: 1.2;
+  font-family: NotoSansCJKjp;
+  font-size: 1.250em;
+}
