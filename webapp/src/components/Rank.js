@@ -1,5 +1,7 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
+import classNames from 'classnames';
 
+import '../css/Rank.css';
 
 const Rank =(props) => {
 
@@ -12,10 +14,10 @@ const Rank =(props) => {
   const ranks=[1,2,3,4,5]
 
   const stars=ranks.map(val,index)=>{
-    const className=val>props.rank ? 'icon-star':'icon-star-emtry';
+
     return(
       <li onClick={()=>props.onRate(val)}>
-        <i className={className} />
+        <i className={cssClasses} />
       </li>
     )
   }
