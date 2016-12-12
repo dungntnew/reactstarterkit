@@ -3,17 +3,13 @@ import { routerReducer as routing } from 'react-router-redux'
 
 import { target } from './target'
 import {auth } from './auth'
-import { topTrendEvent, topSpecialEvent, topLatestEvent } from './event'
 
-import todoReducer from '../flux/modules/todo'
+import topEventReducer from '../flux/modules/top_event'
 
 const rootReducer = combineReducers({
   auth,
   target,
-  topTrendEvent,
-  topLatestEvent,
-  topSpecialEvent,
-  todo: todoReducer,
+  topEvent: topEventReducer,
   routing
 })
 
