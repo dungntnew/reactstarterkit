@@ -3,20 +3,21 @@ import React from 'react';
 import '../css/TestPage.css';
 
 // import Logo from '../components/PageLogo';
-// import UserAvatar from '../components/UserAvatar';
+import UserAvatar from '../components/UserAvatar';
 // import LPHeader from '../components/LPHeader';
 // import TopNav from '../containers/TopNav';
 // import UserMenu from '../components/UserMenu';
 import EventItem from '../components/EventItem';
-import EventTags from '../components/EventTags';
-import RangedDateSelector from '../components/RangedDateSelector';
+// import EventTags from '../components/EventTags';
+// import RangedDateSelector from '../components/RangedDateSelector';
 
 
 const user = {
   avatarUrl: '/img/avatar.png',
-  displayName: 'Nguyen Tri Dung',
-  url: '/user/dungntnew'
+  displayName: 'Duong Thi Ngoc Tien',
+  url: '/user/ngoctien',
 }
+
 
 const event = {
     coverImageUrl: '/img/avatar.png',
@@ -47,7 +48,7 @@ export default (props) => (
 
      </div>
      <div className='test'>
-
+        <UserAvatar {...user}/>
      </div>
   </div>
 )
