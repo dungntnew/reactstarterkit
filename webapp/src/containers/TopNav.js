@@ -1,11 +1,17 @@
+import $ from 'jquery';
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+
+import 'semantic-ui-sidebar/sidebar.min.css'
 
 import '../css/TopNav.css';
 
 import UserMenu from '../components/UserMenu';
 import HelpMenu from '../components/HelpMenu';
+
+$.fn.sidebar = require('semantic-ui-sidebar')
+
 
 class TopNav extends Component {
   static propTypes = {
@@ -16,6 +22,11 @@ class TopNav extends Component {
       id: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired
     })
+  }
+
+  componentDidMount() {
+    //$('.ui.sidebar').sidebar('attach events', '.toc.item')
+    // TODO Attach sidebar menu to page content
   }
 
   renderMenuItems() {
