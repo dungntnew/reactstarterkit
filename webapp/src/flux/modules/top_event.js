@@ -1,5 +1,7 @@
 import ApiClient from '../../helpers/client';
 
+import {initTopEvent as initialState} from './initialState';
+
 // - Actions
 export const TOPN_EVENTS_FETCH = 'TOPN_EVENTS_FETCH'
 export const TOPN_EVENTS_RECEIVE = 'TOPN_EVENTS_RECEIVE'
@@ -78,11 +80,6 @@ export const fetchTopNEventsIfNeed = (orderBy, limit) => {
 }
 
 // - State
-const initialState = {
-  latest: {isFetching: false, errorMessage: null, events: {}},
-  trend: {isFetching: false, errorMessage: null, events: {}},
-  special: {isFetching: false, errorMessage: null, events: {}}
-}
 
 // - Reducers
 const events = (state = {isFetching: false, errorMessage: null, events: {}}, action) => {

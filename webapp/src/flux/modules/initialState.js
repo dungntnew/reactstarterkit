@@ -1,16 +1,25 @@
-export const initTrendEvents = []
-export const initSpecialEvents = []
-export const initLatestEvents = []
+export const initTopEvent = {
+  latest: {isFetching: false, errorMessage: null, events: {}},
+  trend: {isFetching: false, errorMessage: null, events: {}},
+  special: {isFetching: false, errorMessage: null, events: {}}
+}
 
-export const dummyUser = {
+export const guest = {
   avatarUrl: '/img/avatar.png',
-  name: 'Nguyen Tri Dung',
+  name: 'Guest',
   id: '1',
-  url: '/user/dungntnew'
+  url: '/user/gust',
+  anonymous: true,
+}
+
+export const initAuth = {
+  authenticated: true,
+  user: guest,
+  anonymous: true
 }
 
 export const initTargets = [
-   {
+ {
    id: '0',
    label: 'niku',
  },

@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import Root from './containers/Root'
-import configureStore from './store/configureStore'
+import configureStore from './flux'
 
 import 'semantic-ui-css/semantic.min.css'
 import './index.css'
