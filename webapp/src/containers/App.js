@@ -11,7 +11,7 @@ class App extends Component {
     // Injected by ReactRouter
     children: PropTypes.node
   }
-
+  
   render() {
     const {children} = this.props
 
