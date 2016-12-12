@@ -34,10 +34,6 @@ export const initTargets = [
  },
  {
    id: '6',
-   label: 'ramen',
- },
- {
-   id: '6',
    label: 'norikoshi soba',
  },
  {

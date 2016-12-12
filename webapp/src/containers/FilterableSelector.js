@@ -12,16 +12,15 @@ class FilterableItem extends Component {
 
     render() {
       const cssClasses = classNames({
-        'ui': this.props.selected,
-        'ui': !this.props.selected,
+        'ui button active item': this.props.selected,
+        'ui button item': !this.props.selected,
         'fiterable-list-item': true
       })
 
       return (
-        <li className='ui button item'>
+        <li className={cssClasses}>
           <a
             key={this.props.id}
-            className={cssClasses}
             onClick={this.props.onClick}>
             {this.props.label}
           </a>
