@@ -4,7 +4,7 @@ import { composeWithDevTools} from 'redux-devtools-extension'
 
 import createLogger from 'redux-logger'
 import api from '../middleware/api'
-import rootReducer from '../reducers'
+import rootReducer from '../reducer'
 
 const middleware = [
   thunk,
@@ -23,8 +23,8 @@ const configureStore = preloadedState => {
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers').default
+    module.hot.accept('../reducer', () => {
+      const nextRootReducer = require('../reducer').default
       store.replaceReducer(nextRootReducer)
     })
   }

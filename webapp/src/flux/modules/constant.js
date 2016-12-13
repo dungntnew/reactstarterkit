@@ -1,4 +1,3 @@
-
 export const EventFilterTypes = {
   SPECIAL: 'special',
   LATEST: 'latest',

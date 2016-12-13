@@ -1,41 +1,28 @@
-import React from 'react';
-
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import '../css/TestPage.css';
 
-// import Logo from '../components/PageLogo';
-import UserAvatar from '../components/UserAvatar';
-// import LPHeader from '../components/LPHeader';
-// import TopNav from '../containers/TopNav';
-// import UserMenu from '../components/UserMenu';
-import EventItem from '../components/EventItem';
-// import EventTags from '../components/EventTags';
-// import RangedDateSelector from '../components/RangedDateSelector';
+import TopNEvents from '../containers/TopNEvents';
 
+import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
 
-const user = {
-  avatarUrl: '/img/avatar.png',
-  displayName: 'Duong Thi Ngoc Tien',
-  url: '/user/ngoctien',
-  rank:'3',
-  createdEventCount: 2,
-}
+const loadButton = (props) => (
+  <button onClick={(e) => {
+    e.preventDefault()
+    props.exec()
+  }}>
+  Load
+  </button>
+);
 
-
-const event = {
-    coverImageUrl: '/img/avatar.png',
-    price: 100,
-    title: 'Test Event',
-    address: 'Yokohama Tokyo',
-    tags: ['A', 'B', 'C'],
-    joinerCount: 5,
-    joinerLimit:　10,
-    openDate: '20160112',
-    registrationDateStart: '20160112',
-    registrationDateEnd:'20160112',
-    url: '/events/1',
-}
-
-
+const BTN = connect((state)=>({}), (dispatch) => ({
+  'exec': ()=> {
+    console.log("running: ", dispatch)
+    dispatch(fetchTopNEventsIfNeed('latest', 10))
+    dispatch(fetchTopNEventsIfNeed('trend', 10))
+    dispatch(fetchTopNEventsIfNeed('special', 10))
+  }
+}))(loadButton)
 
 /* Put your component to here to view */
 export default (props) => (
@@ -46,11 +33,7 @@ export default (props) => (
      </pre>
      <hr/>
      <div className='test-page-wrapper'>
-        <EventItem {...event}/>
-
-     </div>
-     <div className='test'>
-        <UserAvatar {...user}/>
+     <BTN />
      </div>
   </div>
 )

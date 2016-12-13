@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component,
                 PropTypes } from 'react'
 
@@ -7,31 +8,7 @@ import {Link} from 'react-router';
 import EventItem from '../components/EventItem';
 import '../css/TopNEvents.css';
 
-const event = {
-    coverImageUrl: '/img/event.png',
-    price: 100,
-    title: 'Test Event',
-    address: 'Yokohama Tokyo',
-    tags: ['A', 'B', 'C'],
-    target: 'niku',
-    targetName: '肉',
-    joinerCount: 5,
-    joinerLimit:　10,
-    openDate: '20160112',
-    registrationDateStart: '20160112',
-    registrationDateEnd:'20160112',
-    url: '/events/1',
-}
-
-const dummyEventIds = [1, 2, 3, 4]
-const dummyEvents = dummyEventIds.map((id, index) =>
-    Object.assign({}, event, {
-      joinerCount: Math.round(Math.random() * 10),
-      title: 'Test Event ' + id,
-      url: '/events/' + id,
-      coverImageUrl: '/img/event-' + id + '.jpg'
-    })
-)
+import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
 
 class TopNEvents extends Component {
   static propTypes = {
@@ -41,16 +18,42 @@ class TopNEvents extends Component {
     limit: PropTypes.number.isRequired
   }
 
+  componentDidMount() {
+    this.props.refresh()
+  }
+
   renderLink(filter, linkTitle) {
     return  (
       <Link to={`/events/${filter}`}>{linkTitle}</Link>
     )
   }
 
+  renderLoading() {
+    return (
+      <h4>Loading...</h4>
+    )
+  }
+
+  renderEmpty() {
+    return (
+      <h4>Empty</h4>
+    )
+  }
+
   renderEventItems(filter, limit) {
-    return dummyEvents.map((e, index) => (
-      <EventItem key={index} {...e}/>
-    ))
+    const {isFetching, events} = this.props
+
+    if (isFetching) {
+      return this.renderLoading()
+    } else if (!events || events.length === 0){
+      return this.renderEmpty()
+    }
+    else {
+      const keys = _.keys(events)
+      return keys.map((key, index) => (
+        <EventItem key={key} {...events[key]}/>
+      ))
+    }
   }
 
   render() {
@@ -72,12 +75,20 @@ class TopNEvents extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-
-})
+const mapStateToProps = (state, ownProps) => {
+  const {filter} = ownProps
+  const block = state.topEvent[filter]
+  return {
+    isFetching: block.isFetching,
+    events: block.events
+  }
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+  refresh: ()=> {
+    const {filter, limit} = ownProps
+    dispatch(fetchTopNEventsIfNeed(filter, limit))
+  }
 })
 
 export default connect(mapStateToProps,

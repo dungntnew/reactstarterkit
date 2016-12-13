@@ -12,7 +12,7 @@ import LPBaner02 from '../components/LPBaner02';
 import PageFooter from '../components/PageFooter';
 import TopNEvents from '../containers/TopNEvents';
 
-import {EventFilterTypes} from '../actions';
+import {EventFilterTypes} from '../flux/modules/constant';
 
 class TopLandingPage extends Component {
   static propTypes = {
