@@ -13,22 +13,27 @@ class UserAvatar extends Component {
     avatarUrl: PropTypes.string.isRequired,
     displayName: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-    rank: PropTypes.number.isRequired
+    rank: PropTypes.number.isRequired,
+    createdEventCount: PropTypes.number.isRequired,
   }
 
   componentDidMount() {
-    const ratingRef = this.refs.ratingRef
+    const {ratingRef} = this.refs
+    const {rank} = this.props
+
     $(ratingRef).rating({
-      initialRating: this.props.rank,
+      initialRating: rank,
       maxRating: 5
     })
+    .rating('disable', true)
   }
 
   render() {
     const {
       url,
       avatarUrl,
-      displayName
+      displayName,
+      createdEventCount
     }
     = this.props
 
@@ -40,9 +45,8 @@ class UserAvatar extends Component {
         <div className='user-description'>
           <h3 className='avatar-name'>{displayName}</h3>
           <div className="ui star rating" ref="ratingRef"></div>
-          <div className='createdEventCount'>テーブル数</div>
+          <div className='createdEventCount'>テーブル数 {createdEventCount}</div>
         </div>
-
       </div>
     )
   }
