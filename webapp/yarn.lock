@@ -5215,6 +5215,10 @@ semantic-ui-progress:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/semantic-ui-progress/-/semantic-ui-progress-2.2.3.tgz#b533570e7d52f8d6b35bb177a55b9ae9c002d574"
 
+semantic-ui-rating:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-rating/-/semantic-ui-rating-2.2.3.tgz#ff034e410ef996fd07fbd6f268743345c70d5a5c"
+
 semantic-ui-sidebar:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/semantic-ui-sidebar/-/semantic-ui-sidebar-2.2.3.tgz#2c1720421a310712265fd49799ddbba5378b5fff"
