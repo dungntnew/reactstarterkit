@@ -1,11 +1,38 @@
 .quick-search-bar {
-  width: 50%;
+  width: 40%;
   display: inline;
-  background: green;
-  border: 1px solid black;
+  margin-left: 30px;
+  margin-top: 2px;
+}
+
+@media only screen and (max-width: 900px) and (min-width: 768px) {
+  .quick-search-bar {
+    margin-left: 10px;
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 667px) and (min-width: 320px) {
+  .quick-search-bar {
+    margin-left: 10px;
+    width: 100%;
+    margin-top: 10px;
+  }
 }
 
 .quick-search-bar form {
   display: inline;
-  background-color: pink;
+  position: absolute;
+}
+
+.quick-search-bar form  input.keyword-input {
+  padding: 8px 16px 8px 30px !important;
+}
+
+.quick-search-bar form a {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  color: #beb9b9;
+  margin: 0 5px;
 }
