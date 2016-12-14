@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+
+import CreditCard from '../components/CreditCard';
 import '../css/TestPage.css';
 
 
@@ -14,7 +16,7 @@ export default (props) => (
      <hr/>
      <div className='test-page-wrapper'>
 
-        <h3> put your code here </h3>
+        <CreditCard />
      </div>
   </div>
 )

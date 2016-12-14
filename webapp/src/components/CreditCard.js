@@ -5,10 +5,10 @@ import 'semantic-ui-form/form.min.css'
 import '../css/CreditCard.css';
 
 
-$.fn.form = require('semantic-ui-form')
 
 
 class CreditCard extends Component {
+
   static propTypes = {
     number: PropTypes.number.isRequired,
     password: PropTypes.number.isRequired,
@@ -16,74 +16,69 @@ class CreditCard extends Component {
     exprYear: PropTypes.object.isRequired
   }
 
-  createCard(event) {
-    event.preventDefault();
-    const card = {
-      number: this.number.value,
-      exprMonth: this.exprMonth.value,
-      exprYear: this.exprYear.value,
-      password: this.password.value,
-    }
-    this.props.addCard(card);
-    this.cardForm.reset();
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  rennder() {
+  handleSubmit(e) {
+    e.preventDefault();
+  }
 
-    return(
-      <div className='credit-card'>
-        <h2>お支払い方法</h2>
-        <form className='ui form segment' onSubmit={(e) => this.createCard(e)} ref={(input => this.cardForm = input)}>
+  render() {
+    return (
+      <div className='ui text container credit-card' >
+        <div className='ui segments centered'>
+          <h2>お支払い方法</h2>
+          <form className='ui form segment form-create' onSubmit={this.handleSubmit}>
+            <div className='field'>
+              <label>カード番号<span>※必須</span></label>
+              <input
+                  onChange={this.handleChange}
+                  placeholder='半角数字のみ'
+                  type='text'
+                  ref={(input => this.number = input)}
+                  />
+            </div>
 
-          <div className='field'>
-            <label>カード番号<span>※必須</span></label>
-            <input
-                placeholder='半角数字のみ'
-                type='number'
-                ref={(input => this.number = input)}/>
-          </div>
+            <div className='list-card'>
+            </div>
 
-          <div className='list-card'>
-            <Listcard/>
-          </div>
-
-          <div className='two fields'>
             <label>有効期限<span>※必須</span></label>
-            <div className='field'>
+            <div className='two fields'>
+              <div className='field'>
+                <input
+                    type="text"
+                    ref={(input => this.exprMonth = input)}/>
+              </div>
               <label>月</label>
-              <input
-                  type="text"
-                  ref={(input => this.exprMonth = input)}/>
+
+              <div className='field'>
+                <input
+                    type="text"
+                    ref={(input => this.exprYear = input)}/>
+              </div>
+              <label>日</label>
             </div>
 
             <div className='field'>
-              <label>日</label>
+              <label>セキュリティコード<span>※必須</span></label>
               <input
-                  type="text"
-                  ref={(input => this.exprYear = input)}/>
+                placeholder='カード背面4桁もしくは3桁の番号'
+                type='password'
+                ref={(input => this.password = input)}/>
             </div>
-          </div>
 
-          <div className='field'>
-            <label>セキュリティコード<span>※必須</span></label>
-            <input
-              placeholder='カード背面4桁もしくは3桁の番号'
-              type='password'
-              ref={(input => this.password = input)}/>
-          </div>
-
-          <p className='not-text'>セキュリティコードとは</p>
-
-          <button className='ui button btn-orange'>次へ進む</button>
-
-        </form>
-
+            <p className='not-text'>セキュリティコードとは</p>
+            <button className='ui button btn-orange'>次へ進む</button>
+          </form>
+        </div>
       </div>
-
-    )
+    );
   }
 }
-
 
 
 
