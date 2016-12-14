@@ -4,7 +4,7 @@ import '../css/PageHeader.css';
 
 
 const PageHeader = (props) => (
-  <div className='page-header'>
+  <div className='ui secondary menu stackable page-header'>
      {props.children}
   </div>
 )

@@ -57,24 +57,17 @@ class QuickSearchBar extends Component {
 
     return (
       <div className='quick-search-bar'>
-
-      <form className="centered" onSubmit={(e) => {
-        e.preventDefault()
-      }}>
-
-      <KeywordInput onChange={(keyword) => {this.onChange({keyword})}}
-           value={this.state.keyword}
-           />
-
-       <Link
-         to={this.buildSearchLink()}
-         className='ui button search-btn btn-orange'
-       >
-       検索
-       </Link>
-
-      </form>
-
+        <form className='ui form' onSubmit={(e) => {
+          e.preventDefault()
+        }}>
+          <KeywordInput onChange={(keyword) => {this.onChange({keyword})}}
+                        value={this.state.keyword}
+          />
+          <Link
+              to={this.buildSearchLink()}>
+              <i className='search icon'></i>
+          </Link>
+        </form>
       </div>
     )
   }
