@@ -35,6 +35,7 @@
     "semantic-ui-progress": "^2.2.3",
     "semantic-ui-rating": "^2.2.3",
     "semantic-ui-sidebar": "^2.2.3",
+    "semantic-ui-transition": "^2.2.3",
     "whatwg-fetch": "^2.0.1"
   },
   "scripts": {

@@ -5231,6 +5231,10 @@ semantic-ui-sidebar:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/semantic-ui-sidebar/-/semantic-ui-sidebar-2.2.3.tgz#2c1720421a310712265fd49799ddbba5378b5fff"
 
+semantic-ui-transition:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-transition/-/semantic-ui-transition-2.2.3.tgz#4bf150aacf91227ac460f4622be34146baf8d04c"
+
 semver-diff@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/semver-diff/-/semver-diff-2.1.0.tgz#4bbb8437c8d37e4b0cf1a68fd726ec6d645d6d36"
