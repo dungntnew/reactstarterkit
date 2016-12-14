@@ -5,7 +5,7 @@ import '../css/TopLandingPage.css'
 
 import Logo from '../components/PageLogo';
 import LPHeader from '../components/LPHeader';
-import TopNav from '../containers/TopNav';
+import TopLPNav from '../containers/TopLPNav';
 import Exploder from '../containers/Exploder';
 import LPBaner01 from '../components/LPBaner01';
 import LPBaner02 from '../components/LPBaner02';
@@ -25,7 +25,7 @@ class TopLandingPage extends Component {
           <div className="ui secondary menu stackable lp-header-nav">
              <Logo/>
              <div className="right menu">
-              <TopNav />
+              <TopLPNav />
              </div>
           </div>
           <div className="title-introduce">

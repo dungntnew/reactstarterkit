@@ -1,10 +1,8 @@
-.top-nav {
+.top-lp-nav {
   display: inline-block;
-  background-color: white;
-  border: 1px solid red;
 }
 
-.top-nav .top-nav-list {
+.top-lp-nav  .top-nav-list {
   margin: 0;
   padding: 0;
 }
@@ -15,16 +13,16 @@ ul.ui.stackable.menu.top-nav-list {
   box-shadow: none;
 }
 
-.top-nav .top-nav-list .nav-item {
+.top-lp-nav  .top-nav-list .nav-item {
   display: inline;
   padding: 8px 10px;
 }
 
-.top-nav .top-nav-list .nav-item a {
+.top-lp-nav  .top-nav-list .nav-item a {
   font-size: 14px;
-  color: black;
+  color: #fff;
 }
 
-.top-nav .nav-menu-item {
+.top-lp-nav  .nav-menu-item {
   display: inline;
 }

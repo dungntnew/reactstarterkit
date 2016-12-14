@@ -1,0 +1,11 @@
+.quick-search-bar {
+  width: 50%;
+  display: inline;
+  background: green;
+  border: 1px solid black;
+}
+
+.quick-search-bar form {
+  display: inline;
+  background-color: pink;
+}

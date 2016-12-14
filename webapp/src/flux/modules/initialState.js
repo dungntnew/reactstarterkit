@@ -4,6 +4,10 @@ export const initTopEvent = {
   special: {isFetching: false, errorMessage: null, events: {}}
 }
 
+export const initCreateEvent = {
+  event: {}
+}
+
 export const guest = {
   avatarUrl: '/img/avatar.png',
   name: 'Guest',
