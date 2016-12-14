@@ -5211,6 +5211,10 @@ semantic-ui-css:
   dependencies:
     jquery x.*
 
+semantic-ui-form:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-form/-/semantic-ui-form-2.2.3.tgz#1acca6f885afbdb0a845a7b8b23d086e6cd14edf"
+
 semantic-ui-progress:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/semantic-ui-progress/-/semantic-ui-progress-2.2.3.tgz#b533570e7d52f8d6b35bb177a55b9ae9c002d574"
