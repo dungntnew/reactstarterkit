@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 
-import '../css/EventEditSteps.css';
+import '../../css/event-edit-forms/EventEditSteps.css';
 
 const EventEditSteps = (props) => (
   <div className="ui ordered steps event-edit-steps">

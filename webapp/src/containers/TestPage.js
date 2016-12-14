@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../css/TestPage.css';
 
-import EventEditSteps from '../components/EventEditSteps';
 
 import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
 
@@ -44,6 +43,30 @@ const steps = [
     active: true
   }
 ]
+
+
+const event = {
+  "title": "event-2",
+  "price": 312,
+  "address": "Tokyo 123",
+  "tags": ["Tabehodai", "Dinner"],
+  "target": "Onokomiyaki",
+  "targetName": "Onokomiyaki",
+  "joinerCount": 15,
+  "joinerLimit": 20,
+  "joinerIds": ["user-1", "user-2", "user-3"],
+  "openDate": "20160112",
+  "registrationDateStart": "20160102",
+  "registrationDateEnd": "20160102",
+  "url": "/events/event-2",
+  "coverImageUrl": "/img/event-2.jpg",
+  "eventImageUrls": ["img/event/event2-1.png", "img/event/event2-2.png"],
+  "ownerId": "user-2",
+  "ownerUserName": "user-2",
+  "ownerFullName": "User-2",
+  "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
+}
+
 /* Put your component to here to view */
 export default (props) => (
   <div>
@@ -53,7 +76,8 @@ export default (props) => (
      </pre>
      <hr/>
      <div className='test-page-wrapper'>
-     <EventEditSteps steps={steps}/>
+
+
      </div>
   </div>
 )

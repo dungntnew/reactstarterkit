@@ -3,7 +3,12 @@ import classNames from 'classnames';
 
 import '../css/EventEditForm.css';
 
-import EventEditSteps from './EventEditSteps'
+import EventEditSteps from './event-edit-forms/EventEditSteps'
+import EventBasicInfoForm from './event-edit-forms/EventBasicInfoForm'
+import EventAddressForm from './event-edit-forms/EventAddressForm'
+import EventNoteTextForm from './event-edit-forms/EventNoteTextForm'
+import EventTermForm from './event-edit-forms/EventTermForm'
+import EventConfirmForm from './event-edit-forms/EventConfirmForm'
 
 class EventEditForm extends Component {
   constructor(props) {
@@ -41,17 +46,11 @@ class EventEditForm extends Component {
     return true
   }
 
-  validateStep(step) {
-    // validate step i
-    return true
-  }
+  nextStep(cleanedData) {
 
-  nextStep() {
     const {step} = this.state
+    console.log('submit data: ', cleanedData, 'at step: ', step)
 
-    if (!this.validateStep(step)) {
-      return;
-    }
     if (step < EventEditForm.STEP_COUNT - 1) {
       this.setState({
         step: step + 1
@@ -65,46 +64,59 @@ class EventEditForm extends Component {
   }
 
   execSubmit() {
-    console.log("do submit!")
-
     this.props.onSave({})
   }
 
-  renderNextButton() {
+  renderFormPerStep() {
+    const {event} = this.props
     const {step} = this.state
+
+    const data = {}
+
     const btnTitle = step < EventEditForm.STEP_COUNT - 1? '次へ': '公開'
 
-    return (
-      <button className="ui button" type="button"
-        onClick={(e)=>{this.nextStep()}}
-      >{btnTitle}</button>
-    )
+    if (step === 0) {
+      return <EventBasicInfoForm
+                 btnTitle={btnTitle}
+                 data={data}
+                 onSubmit={(cleaned) => this.nextStep(cleaned)}
+      />
+    }
+    if (step === 1) {
+      return <EventAddressForm
+                       btnTitle={btnTitle}
+                       data={data}
+                       onSubmit={(cleaned) => this.nextStep(cleaned)}
+      />
+    }
+    if (step === 2) {
+      return <EventNoteTextForm
+                             btnTitle={btnTitle}
+                             data={data}
+                             onSubmit={(cleaned) => this.nextStep(cleaned)}
+      />
+    }
+    if (step === 3) {
+      return <EventTermForm
+                            btnTitle={btnTitle}
+                            data={data}
+                            onSubmit={(cleaned) => this.nextStep(cleaned)}
+      />
+    }
+    if (step > 3) {
+      return <EventConfirmForm
+                            btnTitle={btnTitle}
+                            data={data}
+                            onSubmit={(cleaned) => this.nextStep(cleaned)}
+      />
+    }
   }
 
   render() {
-    const {event} = this.props
-
     return (
       <div className='event-edit-form'>
-            <form className="ui form">
-              <div className="field">
-                <label>First Name</label>
-                <input type="text" name="first-name" placeholder="First Name"/>
-              </div>
-              <div className="field">
-                <label>Last Name</label>
-                <input type="text" name="last-name" placeholder="Last Name"/>
-              </div>
-              <div className="field">
-                <div className="ui checkbox">
-                  <input type="checkbox" tabIndex="0" className="hidden"/>
-                  <label>I agree to the Terms and Conditions</label>
-                </div>
-              </div>
-              <button className="ui button" type="submit">Submit</button>
-              {this.renderNextButton()}
-            </form>
-            {this.renderSteps()}
+        {this.renderFormPerStep()}
+        {this.renderSteps()}
       </div>
     )
   }
