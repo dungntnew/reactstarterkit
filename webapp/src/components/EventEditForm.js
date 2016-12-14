@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import classNames from 'classnames';
+import {connect} from 'react-redux';
 
 import '../css/EventEditForm.css';
 
@@ -71,7 +72,16 @@ class EventEditForm extends Component {
     const {event} = this.props
     const {step} = this.state
 
-    const data = {}
+    console.log(this.props.targetItems)
+    const data = {
+      title: '',
+      target: '',
+      coverImage: null,
+      eventItems: [],
+      category: '',
+      tags: [],
+      detail: ''
+    }
 
     const btnTitle = step < EventEditForm.STEP_COUNT - 1? '次へ': '公開'
 
@@ -79,6 +89,8 @@ class EventEditForm extends Component {
       return <EventBasicInfoForm
                  btnTitle={btnTitle}
                  data={data}
+                 targetItems={this.props.targetItems}
+                 targetFetching={this.props.targetFetching}
                  onSubmit={(cleaned) => this.nextStep(cleaned)}
       />
     }
@@ -122,4 +134,18 @@ class EventEditForm extends Component {
   }
 }
 
-export default EventEditForm
+const mapStateToProps = (state, ownProps) => {
+  const {target} = state
+  const {fetching, items} = target;
+
+  return {
+    targetFetching: fetching,
+    targetItems: items
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+})
+
+export default connect(mapStateToProps,
+                       mapDispatchToProps)(EventEditForm)
