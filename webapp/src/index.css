@@ -10,4 +10,8 @@
 .text-orange {
   color: #ff8a46 !important;
 }
+
+.btn-link {
+  width: 100%;
+}
 @media only screen and (max-width: 667px) and (min-width: 320px)
