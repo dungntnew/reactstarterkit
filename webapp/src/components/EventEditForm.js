@@ -90,7 +90,10 @@ class EventEditForm extends Component {
                  btnTitle={btnTitle}
                  data={data}
                  targetItems={this.props.targetItems}
-                 targetFetching={this.props.targetFetching}
+                 genreItems={this.props.genreItems}
+                 supplementItems={this.props.supplementItems}
+                 placeTypeItems={this.props.placeTypeItems}
+                 dressCodeItems={this.props.dressCodeItems}
                  onSubmit={(cleaned) => this.nextStep(cleaned)}
       />
     }
@@ -135,12 +138,14 @@ class EventEditForm extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {target} = state
-  const {fetching, items} = target;
+  const {target, genre, placeType, dressCode, supplement} = state
 
   return {
-    targetFetching: fetching,
-    targetItems: items
+    targetItems: target.items,
+    genreItems: genre.items,
+    placeTypeItems: placeType.items,
+    dressCodeItems: dressCode.items,
+    supplementItems: supplement.items,
   }
 }
 

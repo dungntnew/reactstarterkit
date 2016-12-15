@@ -73,3 +73,152 @@ export const initTargets = [
    id: '12',
    label: 'example3',
  }];
+
+ export const initGenres = [
+  {
+    id: '0',
+    label: 'gener1',
+  },
+  {
+    id: '1',
+    label: 'gener2',
+  },{
+    id: '2',
+    label: 'gener3',
+  },{
+    id: '3',
+    label: 'gener4',
+  },
+  {
+    id: '4',
+    label: 'gener5',
+  },
+  {
+    id: '5',
+    label: 'gener6',
+  }
+];
+
+export const initSupplements = [
+  {
+    id: '0',
+    label: 'テーブル椅子',
+  },
+  {
+    id: '1',
+    label: '駐車場',
+  },{
+    id: '2',
+    label: 'WiFi',
+  },
+  {
+    id: '3',
+    label: 'ロッカー',
+  },
+  {
+    id: '4',
+    label: 'バリアフリー',
+  },
+  {
+    id: '5',
+    label: 'ペット可',
+  },
+  {
+    id: '6',
+    label: '子連れ可',
+  },
+  {
+    id: '7',
+    label: '喫煙可',
+  },
+  {
+    id: '8',
+    label: '飲酒可',
+  },
+  {
+    id: '9',
+    label: 'トイレ',
+  }
+]
+
+export const initDressCodes = [
+  {
+    id: '0',
+    label: 'コード１',
+  },
+  {
+    id: '1',
+    label: 'コード２',
+  }
+]
+
+export const initPlaceTypes = [
+  {
+    id: '0',
+    label: 'イベントスペース',
+  },
+  {
+    id: '1',
+    label: '結婚式場',
+  },
+  {
+    id: '2',
+    label: 'オフィススペース',
+  },
+  {
+    id: '3',
+    label: 'カフェ',
+  },
+  {
+    id: '4',
+    label: 'ホール',
+  },
+  {
+    id: '5',
+    label: '会議室',
+  },
+  {
+    id: '6',
+    label: 'スタジオ',
+  },
+  {
+    id: '7',
+    label: 'レストラン',
+  },
+  {
+    id: '8',
+    label: 'バー',
+  },
+  {
+    id: '9',
+    label: 'スポーツ施設',
+  },
+  {
+    id: '10',
+    label: 'ホテル',
+  },
+  {
+    id: '11',
+    label: '住宅',
+  },
+  {
+    id: '12',
+    label: '倉庫',
+  },
+  {
+    id: '13',
+    label: 'ワイナリー・蔵'
+  },
+  {
+    id: '14',
+    label: 'ギャラリー'
+  },
+  {
+    id: '15',
+    label: '映画館'
+  },
+  {
+    id: '16',
+    label: 'その他'
+  }
+]

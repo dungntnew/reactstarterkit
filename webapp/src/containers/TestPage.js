@@ -89,21 +89,30 @@ class TestPage extends Component {
     },{
       id: 'id2',
       title: 'Target-2'
+    },
+    {
+      id: 'id3',
+      title: 'Target-3'
     }]
 
     return(
-      <div className="ui dropdown" ref='targetSelector'>
-         <input type="hidden" name="target"/>
-         <i className="dropdown icon"></i>
-         <div className="default text">目的</div>
-         <div className="menu">
-          {
-            targetList.map(t => (
-              <div key={t.id} className="item" data-value={t.id}>{t.title}</div>
-            ))
-          }
+
+     <div className="field">
+      <label>Mokuteki</label>
+
+      <div className='ui  search selection dropdown' ref='targetSelector'>
+         <input type='hidden' name='target' />
+         <i className='dropdown icon'></i>
+         <div className='default text'>目的</div>
+         <div className='menu'>
+         {
+           targetList.map(t => (
+             <div key={t.id} className="item" data-value={t.id}>{t.title}</div>
+           ))
+         }
          </div>
-       </div>
+      </div>
+      </div>
     )
   }
 
@@ -118,8 +127,10 @@ class TestPage extends Component {
          </pre>
          <hr/>
          <div className='test-page-wrapper'>
+          <div className="ui form segment">
 
-          {this.renderTargetSelector()}
+              {this.renderTargetSelector()}
+          </div>
 
          </div>
       </div>

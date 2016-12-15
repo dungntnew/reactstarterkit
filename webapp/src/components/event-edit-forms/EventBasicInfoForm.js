@@ -1,4 +1,6 @@
+import _ from 'lodash'
 import $ from 'jquery';
+import 'moment';
 import React, {PropTypes, Component} from 'react';
 import classNames from 'classnames';
 
@@ -9,18 +11,24 @@ import '../../css/event-edit-forms/EventBasicInfoForm.css';
 
 import TargetSelector from '../../containers/TargetSelector';
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 $.fn.form = require('semantic-ui-form')
 
 class EventBasicInfoForm extends Component {
   constructor(props) {
     super(props)
+
+    const {data} = props
+    const {registerStartDate, registerEndDate} = data
+    const {eventStartDate, eventEndDate} = data
+
     this.state = {
-      activeFields: {
-        'target': false
-      },
-      fieldValues: {
-        target: 'xxx'
-      }
+      registerStartDate,
+      registerEndDate,
+      eventStartDate,
+      eventEndDate,
     }
   }
 
@@ -45,7 +53,19 @@ class EventBasicInfoForm extends Component {
   }
 
   initForm() {
-    const {form} = this.refs
+    const {
+      form,
+      targetSelector,
+      genreSelector,
+      supplementSelector,
+      placeTypeSelector,
+      tagSelector,
+      dressCodeSelector,
+      registerStartTimeSelector,
+      registerEndTimeSelector,
+      eventStartTimeSelector,
+      eventEndTimeSelector} = this.refs
+
     const {data} = this.props
 
     // setup validations
@@ -53,6 +73,25 @@ class EventBasicInfoForm extends Component {
         on: 'blur',
         fields: defaultRules
     })
+    // setup dropdowns
+    const selectors = [
+      targetSelector,
+      genreSelector,
+      supplementSelector,
+      placeTypeSelector,
+      dressCodeSelector,
+      eventStartTimeSelector,
+      eventEndTimeSelector,
+      registerStartTimeSelector,
+      registerEndTimeSelector
+    ]
+    selectors.forEach((s) => $(s).dropdown())
+
+    // setup dropdowns with addtions
+    $(tagSelector).dropdown({
+      allowAdditions: true
+    })
+
 
     // init form values
     $(form).form('set values', data)
@@ -65,13 +104,55 @@ class EventBasicInfoForm extends Component {
     const valid = $(form).form('is valid')
 
     if (valid) {
+
       // get all field data to dict
       const cleaned = $(form).form('get values')
-      console.log(cleaned)
+      const formData = Object.assign({}, cleaned, {
+        registerStartDate: this.state.registerStartDate,
+        registerEndDate: this.state.registerEndDate,
+        eventStartDate: this.state.eventStartDate,
+        eventEndDate: this.state.eventEndDate,
+      })
+
+      console.log(formData)
 
       // submit data
-      this.props.onSubmit(cleaned)
+      this.props.onSubmit(formData)
     }
+  }
+
+  renderSelector({selector, name, title, hint, multiple, addition, items=[]}) {
+      const classes = classNames({
+        'ui search selection dropdown': true,
+        'multiple': multiple
+      })
+
+      return (
+        <div className="field">
+         <label>{title}</label>
+         <div className={classes} ref={selector}>
+            <input type='hidden' name={name} />
+            <i className='dropdown icon'></i>
+            <div className='default text'>{hint}</div>
+            <div className='menu'>
+            {
+              items.map(t => (
+                <div key={t.id} className="item" data-value={t.id}>{t.label}</div>
+              ))
+            }
+            </div>
+         </div>
+         </div>
+      )
+    }
+
+  renderEventTitle() {
+    return (
+      <div className="field">
+        <label>テーブル名</label>
+        <input name="title" type="text"/>
+      </div>
+    )
   }
 
   renderCoverImage() {
@@ -97,46 +178,155 @@ class EventBasicInfoForm extends Component {
     )
   }
 
-  setActiveField(field) {
-    this.setState({
-      activeFields: {
-        target: field === 'target',
-        other: field === 'other'
-      }
-    })
+  renderTags() {
+    return (
+      <div></div>
+    )
   }
 
-  renderTargetSelectors() {
-
-    const {form} = this.refs
-
-    const selectedTargetIds = this.state.fieldValues.target ?
-                              [this.state.fieldValues.target]: []
-    const {targetItems, fetching} = this.props
-
-    const targetInput = this.state.activeFields.target ? (
-      <TargetSelector
-        items={targetItems}
-        selectedIds={selectedTargetIds}
-        fetching={fetching}
-        placeHolderText='Type to filter'
-        loadingText='loading target'
-        onClose={()=>{this.setActiveField()}}
-        onChange={(targets) => {
-          $(form).form('set value', 'target', targets[0])
-        }}
-      />
+  renderEventDetail() {
+    return (
+      <div className="field">
+          <label>テーブル詳細</label>
+          <textarea name="detail" rows="5"></textarea>
+      </div>
     )
-    :
-    (<input type='text' name='target'
-            value={this.state.fieldValues.target}
-            onClick={()=>{this.setActiveField('target')}}
-     />)
+  }
+
+  renderTimeSelectorField(name, selector, hint='時間') {
+    const timeRange = _.range(1, 24, 1)
+    const timeKeys = timeRange.map(function(t){ return Math.floor(t) + ":" + _.padEnd((t * 60 % 60), 2, "0") })
+    const timeMaps = timeKeys.map(t => ({id: t, label: t}))
 
     return (
       <div className="field">
-        <label>目的</label>
-        {targetInput}
+       <div className='ui search selection dropdown' ref={selector}>
+          <input type='hidden' name={name} />
+          <i className='dropdown icon'></i>
+          <div className='default text'>{hint}</div>
+          <div className='menu'>
+          {
+            timeMaps.map(t => (
+              <div key={t.id} className="item" data-value={t.id}>{t.label}</div>
+            ))
+          }
+          </div>
+       </div>
+       </div>
+    )
+  }
+
+  renderRegisterStartDateTime() {
+    const {registerStartDate, registerEndDate} = this.state
+
+    return (
+      <div className="inline fields">
+
+          <label>申し込み開始</label>
+          <div className='field'>
+          <DatePicker
+            locale='ja'
+            todayButton='本日'
+            className='date-selector'
+            selected={registerStartDate}
+            selectsStart
+            startDate={registerStartDate}
+            endDate={registerEndDate}
+            onChange={(val) => {this.setState({registerStartDate: val})}}
+          />
+          </div>
+          {this.renderTimeSelectorField('registerStartTime', 'registerStartTimeSelector')}
+      </div>
+    )
+  }
+
+  renderRegisterEndDateTime() {
+    const {registerStartDate, registerEndDate} = this.state
+
+    return (
+      <div className="inline fields">
+
+          <label>申し込み終了</label>
+          <div className='field'>
+          <DatePicker
+            locale='ja'
+            todayButton='本日'
+            className='date-selector'
+            selected={registerEndDate}
+            selectsEnd
+            startDate={registerStartDate}
+            endDate={registerEndDate}
+            onChange={(val) => {this.setState({registerEndDate: val})}}
+          />
+          </div>
+          {this.renderTimeSelectorField('registerEndTime', 'registerEndTimeSelector')}
+      </div>
+    )
+  }
+
+
+  renderOpenStartDateTime() {
+    const {eventStartDate, eventEndDate} = this.state
+
+    return (
+      <div className="inline fields">
+
+          <label>開始</label>
+          <div className='field'>
+          <DatePicker
+            locale='ja'
+            todayButton='本日'
+            className='date-selector'
+            selected={eventStartDate}
+            selectsStart
+            startDate={eventStartDate}
+            endDate={eventEndDate}
+            onChange={(val) => {this.setState({eventStartDate: val})}}
+          />
+          </div>
+          {this.renderTimeSelectorField('eventStartTime', 'eventStartTimeSelector')}
+      </div>
+    )
+  }
+
+  renderOpenEndDateTime() {
+    const {eventStartDate, eventEndDate} = this.state
+
+    return (
+      <div className="inline fields">
+
+          <label>終了</label>
+          <div className='field'>
+          <DatePicker
+            locale='ja'
+            todayButton='本日'
+            className='date-selector'
+            selected={eventEndDate}
+            selectsEnd
+            startDate={eventStartDate}
+            endDate={eventEndDate}
+            onChange={(val) => {this.setState({eventEndDate: val})}}
+          />
+          </div>
+          {this.renderTimeSelectorField('eventEndTime', 'eventEndTimeSelector')}
+      </div>
+    )
+  }
+
+  renderEntryFee() {
+    return (
+      <div className="field">
+        <label>金額</label>
+        <input name="entryFee" type="text"/>
+      </div>
+    )
+  }
+
+  renderInstarHastag() {
+    return (
+      <div className="field">
+        <label>インスタグラ設定</label>
+        <input name="instarHashTag" type="text"/>
       </div>
     )
   }
@@ -148,6 +338,13 @@ class EventBasicInfoForm extends Component {
   }
 
   render() {
+    const {
+      targetItems,
+      genreItems,
+      dressCodeItems,
+      supplementItems,
+      placeTypeItems
+    } = this.props
 
     return (
       <form className="ui form event-basic-info-form" ref='form'
@@ -156,14 +353,65 @@ class EventBasicInfoForm extends Component {
                this.handleSubmit()
             }}>
 
-      <div className="field">
-        <label>テーブル名</label>
-        <input name="title" type="text"/>
-      </div>
-
+      {this.renderEventTitle()}
       {this.renderCoverImage()}
       {this.renderEventImageList()}
-      {this.renderTargetSelectors()}
+      {this.renderSelector({
+        'selector': 'targetSelector',
+        'name': 'target',
+        'title': '目的',
+        'hint': '目的を選択してください',
+        'items': targetItems
+      })}
+      {this.renderSelector({
+        'selector': 'genreSelector',
+        'name': 'genre',
+        'title': 'ジェンル',
+        'hint': 'ジェンルを選択してください',
+        'items': genreItems
+      })}
+      {this.renderSelector({
+        'selector': 'tagSelector',
+        'name': 'tags',
+        'title': 'タグ',
+        'hint': 'タグを入力してください',
+        'items': [],
+        'multiple': true,
+        'addition': true
+      })}
+
+      {this.renderEventDetail()}
+      {this.renderRegisterStartDateTime()}
+      {this.renderRegisterEndDateTime()}
+
+      {this.renderOpenStartDateTime()}
+      {this.renderOpenEndDateTime()}
+
+      {this.renderEntryFee()}
+      {this.renderSelector({
+        'selector': 'dressCodeSelector',
+        'name': 'dressCodes',
+        'title': 'ドレスコード',
+        'hint': 'ドレスコードを選択してください',
+        'items': dressCodeItems,
+        'addition': true
+      })}
+      {this.renderSelector({
+        'selector': 'placeTypeSelector',
+        'name': 'placeType',
+        'title': '会場の種類',
+        'hint': '会場の種類を選択してください',
+        'items': placeTypeItems,
+      })}
+      {this.renderSelector({
+        'selector': 'supplementSelector',
+        'name': 'supplements',
+        'title': '補足',
+        'hint': '補足を選択してください',
+        'items': supplementItems,
+        'multiple': true
+      })}
+      {this.renderInstarHastag()}
 
       <button className="ui button" type="submit">{this.props.btnTitle}</button>
       </form>
@@ -172,5 +420,4 @@ class EventBasicInfoForm extends Component {
 }
 
 
-// TODO: check where should use TargetSelector or ? semantic-ui selector
 export default EventBasicInfoForm
