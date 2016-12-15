@@ -1,7 +1,15 @@
+import $ from 'jquery'
+
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../css/TestPage.css';
 
+import 'semantic-ui-dropdown/dropdown.min.css'
+import 'semantic-ui-transition/transition.min.css'
+
+
+$.fn.transition = require('semantic-ui-transition')
+$.fn.dropdown = require('semantic-ui-dropdown')
 
 import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
 
@@ -68,16 +76,55 @@ const event = {
 }
 
 /* Put your component to here to view */
-export default (props) => (
-  <div>
-     <p> This is TestPage, you can quick place your component to view</p>
-     <pre>
-          "TestComponent"  => "YourComponent"
-     </pre>
-     <hr/>
-     <div className='test-page-wrapper'>
+class TestPage extends Component {
+
+  componentDidMount() {
+    $(this.refs.targetSelector).dropdown()
+  }
+
+  renderTargetSelector() {
+    const targetList = [{
+      id: 'id1',
+      title: 'Target-1'
+    },{
+      id: 'id2',
+      title: 'Target-2'
+    }]
+
+    return(
+      <div className="ui dropdown" ref='targetSelector'>
+         <input type="hidden" name="target"/>
+         <i className="dropdown icon"></i>
+         <div className="default text">目的</div>
+         <div className="menu">
+          {
+            targetList.map(t => (
+              <div key={t.id} className="item" data-value={t.id}>{t.title}</div>
+            ))
+          }
+         </div>
+       </div>
+    )
+  }
+
+  render() {
 
 
-     </div>
-  </div>
-)
+    return (
+      <div>
+         <p> This is TestPage, you can quick place your component to view</p>
+         <pre>
+              "TestComponent"  => "YourComponent"
+         </pre>
+         <hr/>
+         <div className='test-page-wrapper'>
+
+          {this.renderTargetSelector()}
+
+         </div>
+      </div>
+    )
+  }
+}
+
+export default TestPage
