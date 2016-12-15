@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import React, {PropTypes, Component} from 'react';
 import classNames from 'classnames';
+import {connect} from 'react-redux';
 
 import {defaultRules} from '../../helpers/validations'
 
@@ -28,7 +29,7 @@ class EventAddressForm extends Component {
   }
 
   initForm() {
-    const {form} = this.refs
+    const {form, address1Selector} = this.refs
     const {data} = this.props
 
     // setup validations
@@ -36,6 +37,9 @@ class EventAddressForm extends Component {
         on: 'blur',
         fields: defaultRules
     })
+
+   // setup dropdown
+   $(address1Selector).dropdown()
 
     // init form values
     $(form).form('set values', data)
@@ -57,6 +61,63 @@ class EventAddressForm extends Component {
     }
   }
 
+  renderZipCode() {
+    return (
+      <div className="field">
+        <label>郵便番号</label>
+        <input name="zipcode" type="text"/>
+      </div>
+    )
+  }
+
+  renderAddress1() {
+    const {prefectures} = this.props
+      return (
+        <div className="field">
+           <label>都道府県</label>
+           <div className='ui search selection dropdown' ref='address1Selector'>
+              <input type='hidden' name='address1' />
+              <i className='dropdown icon'></i>
+              <div className='default text'>都道府県</div>
+              <div className='menu'>
+              {
+                prefectures.map(t => (
+                  <div key={t.id} className="item" data-value={t.id}>{t.label}</div>
+                ))
+              }
+              </div>
+           </div>
+         </div>
+      )
+  }
+
+  renderAddress2() {
+    return (
+      <div className="field">
+        <label>群市区町村</label>
+        <input name="address2" type="text"/>
+      </div>
+    )
+  }
+
+  renderAddress3() {
+    return (
+      <div className="field">
+        <label>番地・建物名・部屋番号</label>
+        <input name="address3" type="text"/>
+      </div>
+    )
+  }
+
+  renderHowToAccess() {
+    return (
+      <div className="field">
+        <label>アクセス</label>
+        <textarea name="howtoAccessText" rows='4'/>
+      </div>
+    )
+  }
+
   render() {
     return (
       <form className="ui form event-address-form" ref='form'
@@ -65,18 +126,11 @@ class EventAddressForm extends Component {
                this.handleSubmit()
             }}>
 
-      <div className="fields">
-
-        <div className="field">
-          <label>Address -1</label>
-          <input name="address-1" type="text"/>
-        </div>
-
-        <div className="field">
-          <label>Address -2</label>
-          <input name="address-2" type="text" />
-        </div>
-      </div>
+      {this.renderZipCode()}
+      {this.renderAddress1()}
+      {this.renderAddress2()}
+      {this.renderAddress3()}
+      {this.renderHowToAccess()}
 
       <div className="ui error message"></div>
       <button className="ui button" type="submit">{this.props.btnTitle}</button>
@@ -85,4 +139,14 @@ class EventAddressForm extends Component {
   }
 }
 
-export default EventAddressForm
+const mapStateToProps = (state, ownProps) => {
+  return {
+    'prefectures': []
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+})
+
+export default connect(mapStateToProps,
+                       mapDispatchToProps)(EventAddressForm)
