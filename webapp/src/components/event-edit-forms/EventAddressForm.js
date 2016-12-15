@@ -63,7 +63,7 @@ class EventAddressForm extends Component {
 
   renderZipCode() {
     return (
-      <div className="field">
+      <div className="four wide field">
         <label>郵便番号</label>
         <input name="zipcode" type="text"/>
       </div>
@@ -73,7 +73,7 @@ class EventAddressForm extends Component {
   renderAddress1() {
     const {prefectures} = this.props
       return (
-        <div className="field">
+        <div className="twelve wide field">
            <label>都道府県</label>
            <div className='ui search selection dropdown' ref='address1Selector'>
               <input type='hidden' name='address1' />
@@ -125,9 +125,10 @@ class EventAddressForm extends Component {
                e.preventDefault()
                this.handleSubmit()
             }}>
-
-      {this.renderZipCode()}
-      {this.renderAddress1()}
+      <div className="two fields">
+        {this.renderZipCode()}
+        {this.renderAddress1()}
+      </div>
       {this.renderAddress2()}
       {this.renderAddress3()}
       {this.renderHowToAccess()}
@@ -139,14 +140,4 @@ class EventAddressForm extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    'prefectures': []
-  }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-})
-
-export default connect(mapStateToProps,
-                       mapDispatchToProps)(EventAddressForm)
+export default EventAddressForm

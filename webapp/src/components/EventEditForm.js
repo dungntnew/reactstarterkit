@@ -101,6 +101,7 @@ class EventEditForm extends Component {
       return <EventAddressForm
                        btnTitle={btnTitle}
                        data={data}
+                       prefectures={this.props.prefectures}
                        onSubmit={(cleaned) => this.nextStep(cleaned)}
       />
     }
@@ -138,7 +139,12 @@ class EventEditForm extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {target, genre, placeType, dressCode, supplement} = state
+  const {target,
+         genre,
+         placeType,
+         dressCode,
+         supplement,
+         place} = state
 
   return {
     targetItems: target.items,
@@ -146,6 +152,7 @@ const mapStateToProps = (state, ownProps) => {
     placeTypeItems: placeType.items,
     dressCodeItems: dressCode.items,
     supplementItems: supplement.items,
+    prefectures: place.prefectures
   }
 }
 

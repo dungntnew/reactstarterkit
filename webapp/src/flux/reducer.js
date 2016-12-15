@@ -8,6 +8,7 @@ import generReducer from './modules/gener'
 import dressCodeReducer from './modules/dressCode'
 import placeTypeReducer from './modules/placeType'
 import supplementReducer from './modules/supplement'
+import placeReducer from './modules/place'
 import authReducer from './modules/auth'
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   dressCode: dressCodeReducer,
   topEvent: topEventReducer,
   newEvent: createEventReducer,
+  place: placeReducer,
   routing
 })
 
