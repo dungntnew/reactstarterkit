@@ -1,3 +1,48 @@
 .event-edit-steps {
-  
+  height: 44px;
+  border:none;
+}
+
+.event-edit-steps .content {
+  color: #fff;
+}
+
+.event-edit-steps .active .content {
+  color: #fff;
+}
+
+.event-edit-steps .step.active .title {
+    color: #fff !important;
+}
+
+.ui.ordered.steps.event-edit-steps .step.item_step:before {
+  color: #fff;
+  font-size: 2em;
+}
+.ui.ordered.steps.event-edit-steps .ui.step.item_step:after {
+  top: .42em;
+  right: -16px;
+  border: none;
+  background-color: #e7e5e5;
+  width: 2.2em;
+  height: 2.2em;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-box-shadow: -2px -2px 0 0 #fffff inset;
+  box-shadow: -2px -2px 0 0 #ffffff inset;
+}
+
+.ui.ordered.steps.event-edit-steps .item_step {
+  background-color: #e7e5e5;
+}
+
+.ui.ordered.steps.event-edit-steps .active {
+  background-color: #b1e844;
+}
+.ui.ordered.steps.event-edit-steps .active.ui.step.item_step:after {
+  background-color: #b1e844;
+  -webkit-box-shadow: -1px -1px 0 0 #ffffff inset;
+  box-shadow: -1px -1px 0 0 #ffffff inset;
 }

@@ -11,7 +11,9 @@ const EventEditSteps = (props) => (
         classNames({
           completed: step.completed,
           active: step.active,
+          ui: true,
           step: true,
+          item_step: true,
         })
       }
       key={index}
@@ -26,6 +28,7 @@ const EventEditSteps = (props) => (
     ))
   }
   </div>
+
 )
 
 EventEditSteps.propTypes = {
