@@ -58,7 +58,7 @@ class EventTermForm extends Component {
 
   render() {
     return (
-      <form className="ui form event-term-form " ref='form'
+      <form className="ui form segments event-term-form " ref='form'
              onSubmit={(e) => {
                e.preventDefault()
                this.handleSubmit()
@@ -78,7 +78,7 @@ class EventTermForm extends Component {
       </div>
 
       <div className="ui error message"></div>
-      <button className="ui button" type="submit">{this.props.btnTitle}</button>
+      <button className="ui button btn-orange btn-left" type="submit">{this.props.btnTitle}</button>
       </form>
     )
   }

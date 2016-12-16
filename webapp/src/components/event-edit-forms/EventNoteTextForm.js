@@ -59,7 +59,7 @@ class EventNoteTextForm extends Component {
 
   render() {
     return (
-      <form className="ui form event-note-text-form " ref='form'
+      <form className="ui form segments event-note-text-form " ref='form'
              onSubmit={(e) => {
                e.preventDefault()
                this.handleSubmit()
@@ -79,7 +79,7 @@ class EventNoteTextForm extends Component {
       </div>
 
       <div className="ui error message"></div>
-      <button className="ui button" type="submit">{this.props.btnTitle}</button>
+      <button className="ui button btn-orange btn-left" type="submit">{this.props.btnTitle}</button>
       </form>
     )
   }
