@@ -129,7 +129,7 @@ class EventBasicInfoForm extends Component {
 
       return (
         <div className="field">
-         <label>{title}</label>
+         <label>{title}<p className='required'>※必須</p></label>
          <div className={classes} ref={selector}>
             <input type='hidden' name={name} />
             <i className='dropdown icon'></i>
@@ -149,7 +149,7 @@ class EventBasicInfoForm extends Component {
   renderEventTitle() {
     return (
       <div className="field">
-        <label>テーブル名</label>
+        <label>テーブル名<p className='required'>※必須</p><span className='note'>50文字以内。テーブル名を入力してください。</span></label>
         <input name="title" type="text"/>
       </div>
     )
@@ -158,7 +158,7 @@ class EventBasicInfoForm extends Component {
   renderCoverImage() {
     return (
       <div className="field">
-        <label>カバー写真</label>
+        <label>カバー写真<p className='required'>※必須</p><span className='note'>50文字以内。テーブル名を入力してください。</span></label>
         <input name="coverImage" type="file" />
       </div>
     )
@@ -167,7 +167,7 @@ class EventBasicInfoForm extends Component {
   renderEventImageList() {
     return (
       <div>
-      <label>サブー写真</label>
+      <label>サブー写真<span className='note'>複数枚掲載可能</span></label>
       <div className="fields">
           <input name="eventImages[]" type="file" />
           <input name="eventImages[]" type="file" />
@@ -187,7 +187,7 @@ class EventBasicInfoForm extends Component {
   renderEventDetail() {
     return (
       <div className="field">
-          <label>テーブル詳細</label>
+          <label>テーブル詳細<p className='required'>※必須</p><span className='note'>10文字以上800文字以内</span></label>
           <textarea name="detail" rows="5"></textarea>
       </div>
     )
@@ -347,7 +347,7 @@ class EventBasicInfoForm extends Component {
     } = this.props
 
     return (
-      <form className="ui form event-basic-info-form" ref='form'
+      <form className="ui form ui segments event-basic-info-form" ref='form'
              onSubmit={(e) => {
                e.preventDefault()
                this.handleSubmit()
