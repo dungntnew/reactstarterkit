@@ -1,3 +1,15 @@
 .event-basic-info-form {
-  padding: 20px
+  padding: 20px;
+  background-color: #fff;
+}
+
+.event-basic-info-form .field-input {
+  padding: 5px 0;
+}
+
+.event-basic-info-form .field-input .field .react-datepicker__input-container {
+  width: 100%;
+}
+.event-basic-info-form .field-input .group-event-img input[type="file"] {
+  margin: 5px 10px !important;
 }

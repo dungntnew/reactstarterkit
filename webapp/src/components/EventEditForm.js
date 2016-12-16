@@ -130,8 +130,8 @@ class EventEditForm extends Component {
   render() {
     return (
       <div className='ui text container event-edit-form'>
-        {this.renderFormPerStep()}
         {this.renderSteps()}
+        {this.renderFormPerStep()}
       </div>
     )
   }
