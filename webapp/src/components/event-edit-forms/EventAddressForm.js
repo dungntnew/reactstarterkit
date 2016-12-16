@@ -63,8 +63,8 @@ class EventAddressForm extends Component {
 
   renderZipCode() {
     return (
-      <div className="four wide field">
-        <label>郵便番号</label>
+      <div className="field">
+        <label>郵便番号<p className='required'>※必須</p><span className='note'>ハイフンなしの半角英数字。入力すると、住所が自動補完されます。</span></label>
         <input name="zipcode" type="text"/>
       </div>
     )
@@ -73,8 +73,8 @@ class EventAddressForm extends Component {
   renderAddress1() {
     const {prefectures} = this.props
       return (
-        <div className="twelve wide field">
-           <label>都道府県</label>
+        <div className="field">
+           <label>都道府県<p className='required'>※必須</p><span className='note'>外観や会場全体を表す画像をアップロードしてください。</span></label>
            <div className='ui search selection dropdown' ref='address1Selector'>
               <input type='hidden' name='address1' />
               <i className='dropdown icon'></i>
@@ -94,7 +94,7 @@ class EventAddressForm extends Component {
   renderAddress2() {
     return (
       <div className="field">
-        <label>群市区町村</label>
+        <label>群市区町村<p className='required'>※必須</p><span className='note'>外観や会場全体を表す画像をアップロードしてください。</span></label>
         <input name="address2" type="text"/>
       </div>
     )
@@ -112,7 +112,7 @@ class EventAddressForm extends Component {
   renderHowToAccess() {
     return (
       <div className="field">
-        <label>アクセス</label>
+        <label>アクセス<span className='note'>最寄り駅からの歩き方や高速道路の出口、所要時間などを入力してください。</span></label>
         <textarea name="howtoAccessText" rows='4'/>
       </div>
     )
@@ -125,10 +125,8 @@ class EventAddressForm extends Component {
                e.preventDefault()
                this.handleSubmit()
             }}>
-      <div className="two fields">
-        {this.renderZipCode()}
-        {this.renderAddress1()}
-      </div>
+      {this.renderZipCode()}
+      {this.renderAddress1()}
       {this.renderAddress2()}
       {this.renderAddress3()}
       {this.renderHowToAccess()}
