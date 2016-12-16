@@ -355,7 +355,7 @@ class EventBasicInfoForm extends Component {
     } = this.props
 
     return (
-      <form className="ui form ui segments event-basic-info-form" ref='form'
+      <form className="ui form segments event-basic-info-form" ref='form'
              onSubmit={(e) => {
                e.preventDefault()
                this.handleSubmit()
@@ -421,7 +421,7 @@ class EventBasicInfoForm extends Component {
       })}
       {this.renderInstarHastag()}
 
-      <button className="ui button btn-orange btn-right" type="submit">{this.props.btnTitle}</button>
+      <button className="ui button btn-orange btn-left" type="submit">{this.props.btnTitle}</button>
       </form>
     )
   }

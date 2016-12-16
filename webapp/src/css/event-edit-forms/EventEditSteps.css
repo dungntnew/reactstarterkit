@@ -1,8 +1,10 @@
 .event-edit-steps {
   height: 44px;
-  border:none;
 }
 
+.ui.ordered.steps.event-edit-steps {
+  border: none;
+}
 .event-edit-steps .content {
   color: #fff;
 }

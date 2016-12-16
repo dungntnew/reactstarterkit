@@ -120,7 +120,7 @@ class EventAddressForm extends Component {
 
   render() {
     return (
-      <form className="ui form event-address-form" ref='form'
+      <form className="ui form segments event-address-form" ref='form'
              onSubmit={(e) => {
                e.preventDefault()
                this.handleSubmit()
@@ -134,7 +134,7 @@ class EventAddressForm extends Component {
       {this.renderHowToAccess()}
 
       <div className="ui error message"></div>
-      <button className="ui button" type="submit">{this.props.btnTitle}</button>
+      <button className="ui button btn-orange btn-left" type="submit">{this.props.btnTitle}</button>
       </form>
     )
   }
