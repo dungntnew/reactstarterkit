@@ -128,8 +128,8 @@ class EventBasicInfoForm extends Component {
       })
 
       return (
-        <div className="field">
-         <label>{title}</label>
+        <div className="field field-input">
+         <label>{title}<p className='required'>※必須</p></label>
          <div className={classes} ref={selector}>
             <input type='hidden' name={name} />
             <i className='dropdown icon'></i>
@@ -148,8 +148,8 @@ class EventBasicInfoForm extends Component {
 
   renderEventTitle() {
     return (
-      <div className="field">
-        <label>テーブル名</label>
+      <div className="field field-input">
+        <label>テーブル名<p className='required'>※必須</p><span className='note'>50文字以内。テーブル名を入力してください。</span></label>
         <input name="title" type="text"/>
       </div>
     )
@@ -157,8 +157,8 @@ class EventBasicInfoForm extends Component {
 
   renderCoverImage() {
     return (
-      <div className="field">
-        <label>カバー写真</label>
+      <div className="field field-input">
+        <label>カバー写真<p className='required'>※必須</p><span className='note'>50文字以内。テーブル名を入力してください。</span></label>
         <input name="coverImage" type="file" />
       </div>
     )
@@ -166,14 +166,14 @@ class EventBasicInfoForm extends Component {
 
   renderEventImageList() {
     return (
-      <div>
-      <label>サブー写真</label>
-      <div className="fields">
-          <input name="eventImages[]" type="file" />
-          <input name="eventImages[]" type="file" />
-          <input name="eventImages[]" type="file" />
-          <input name="eventImages[]" type="file" />
-      </div>
+      <div className='field field-input '>
+        <label>サブー写真<span className='note'>複数枚掲載可能</span></label>
+        <div className="fields group-event-img">
+            <input name="eventImages[]" type="file" />
+            <input name="eventImages[]" type="file" />
+            <input name="eventImages[]" type="file" />
+            <input name="eventImages[]" type="file" />
+        </div>
       </div>
     )
   }
@@ -186,8 +186,8 @@ class EventBasicInfoForm extends Component {
 
   renderEventDetail() {
     return (
-      <div className="field">
-          <label>テーブル詳細</label>
+      <div className="field field-input">
+          <label>テーブル詳細<p className='required'>※必須</p><span className='note'>10文字以上800文字以内</span></label>
           <textarea name="detail" rows="5"></textarea>
       </div>
     )
@@ -212,7 +212,7 @@ class EventBasicInfoForm extends Component {
           }
           </div>
        </div>
-       </div>
+      </div>
     )
   }
 
@@ -220,22 +220,24 @@ class EventBasicInfoForm extends Component {
     const {registerStartDate, registerEndDate} = this.state
 
     return (
-      <div className="inline fields">
+      <div className="field field-input">
 
-          <label>申し込み開始</label>
+        <label>申し込み開始<p className='required'>※必須</p></label>
+        <div className='two fields'>
           <div className='field'>
-          <DatePicker
-            locale='ja'
-            todayButton='本日'
-            className='date-selector'
-            selected={registerStartDate}
-            selectsStart
-            startDate={registerStartDate}
-            endDate={registerEndDate}
-            onChange={(val) => {this.setState({registerStartDate: val})}}
-          />
+            <DatePicker
+              locale='ja'
+              todayButton='本日'
+              className='date-selector'
+              selected={registerStartDate}
+              selectsStart
+              startDate={registerStartDate}
+              endDate={registerEndDate}
+              onChange={(val) => {this.setState({registerStartDate: val})}}
+            />
           </div>
           {this.renderTimeSelectorField('registerStartTime', 'registerStartTimeSelector')}
+        </div>
       </div>
     )
   }
@@ -244,22 +246,24 @@ class EventBasicInfoForm extends Component {
     const {registerStartDate, registerEndDate} = this.state
 
     return (
-      <div className="inline fields">
+      <div className="field field-input">
 
-          <label>申し込み終了</label>
+        <label>申し込み終了<p className='required'>※必須</p></label>
+        <div className='two fields'>
           <div className='field'>
-          <DatePicker
-            locale='ja'
-            todayButton='本日'
-            className='date-selector'
-            selected={registerEndDate}
-            selectsEnd
-            startDate={registerStartDate}
-            endDate={registerEndDate}
-            onChange={(val) => {this.setState({registerEndDate: val})}}
-          />
+            <DatePicker
+              locale='ja'
+              todayButton='本日'
+              className='date-selector'
+              selected={registerEndDate}
+              selectsEnd
+              startDate={registerStartDate}
+              endDate={registerEndDate}
+              onChange={(val) => {this.setState({registerEndDate: val})}}
+            />
           </div>
           {this.renderTimeSelectorField('registerEndTime', 'registerEndTimeSelector')}
+        </div>
       </div>
     )
   }
@@ -269,22 +273,24 @@ class EventBasicInfoForm extends Component {
     const {eventStartDate, eventEndDate} = this.state
 
     return (
-      <div className="inline fields">
+      <div className="field field-input">
 
-          <label>開始</label>
-          <div className='field'>
-          <DatePicker
-            locale='ja'
-            todayButton='本日'
-            className='date-selector'
-            selected={eventStartDate}
-            selectsStart
-            startDate={eventStartDate}
-            endDate={eventEndDate}
-            onChange={(val) => {this.setState({eventStartDate: val})}}
-          />
+          <label>開始<p className='required'>※必須</p></label>
+          <div className='two fields'>
+            <div className='field'>
+              <DatePicker
+                locale='ja'
+                todayButton='本日'
+                className='date-selector'
+                selected={eventStartDate}
+                selectsStart
+                startDate={eventStartDate}
+                endDate={eventEndDate}
+                onChange={(val) => {this.setState({eventStartDate: val})}}
+              />
+            </div>
+            {this.renderTimeSelectorField('eventStartTime', 'eventStartTimeSelector')}
           </div>
-          {this.renderTimeSelectorField('eventStartTime', 'eventStartTimeSelector')}
       </div>
     )
   }
@@ -293,29 +299,31 @@ class EventBasicInfoForm extends Component {
     const {eventStartDate, eventEndDate} = this.state
 
     return (
-      <div className="inline fields">
+      <div className="field field-input">
 
-          <label>終了</label>
-          <div className='field'>
-          <DatePicker
-            locale='ja'
-            todayButton='本日'
-            className='date-selector'
-            selected={eventEndDate}
-            selectsEnd
-            startDate={eventStartDate}
-            endDate={eventEndDate}
-            onChange={(val) => {this.setState({eventEndDate: val})}}
-          />
+          <label>終了<p className='required'>※必須</p></label>
+          <div className='two fields'>
+            <div className='field'>
+              <DatePicker
+                locale='ja'
+                todayButton='本日'
+                className='date-selector'
+                selected={eventEndDate}
+                selectsEnd
+                startDate={eventStartDate}
+                endDate={eventEndDate}
+                onChange={(val) => {this.setState({eventEndDate: val})}}
+              />
+              </div>
+            {this.renderTimeSelectorField('eventEndTime', 'eventEndTimeSelector')}
           </div>
-          {this.renderTimeSelectorField('eventEndTime', 'eventEndTimeSelector')}
       </div>
     )
   }
 
   renderEntryFee() {
     return (
-      <div className="field">
+      <div className="field field-input">
         <label>金額</label>
         <input name="entryFee" type="text"/>
       </div>
@@ -324,8 +332,8 @@ class EventBasicInfoForm extends Component {
 
   renderInstarHastag() {
     return (
-      <div className="field">
-        <label>インスタグラ設定</label>
+      <div className="field field-input">
+        <label>インスタグラ設定<span className='note'>ハッシュタグを入力してください。</span></label>
         <input name="instarHashTag" type="text"/>
       </div>
     )
@@ -347,7 +355,7 @@ class EventBasicInfoForm extends Component {
     } = this.props
 
     return (
-      <form className="ui form event-basic-info-form" ref='form'
+      <form className="ui form ui segments event-basic-info-form" ref='form'
              onSubmit={(e) => {
                e.preventDefault()
                this.handleSubmit()
@@ -413,7 +421,7 @@ class EventBasicInfoForm extends Component {
       })}
       {this.renderInstarHastag()}
 
-      <button className="ui button" type="submit">{this.props.btnTitle}</button>
+      <button className="ui button btn-orange btn-right" type="submit">{this.props.btnTitle}</button>
       </form>
     )
   }

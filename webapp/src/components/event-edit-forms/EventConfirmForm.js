@@ -79,7 +79,7 @@ class EventConfirmForm extends Component {
       </div>
 
       <div className="ui error message"></div>
-      <button className="ui button" type="submit">{this.props.btnTitle}</button>
+      <button className="ui button btn-orange " type="submit">{this.props.btnTitle}</button>
       </form>
     )
   }

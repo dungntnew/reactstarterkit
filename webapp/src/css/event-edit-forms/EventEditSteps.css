@@ -13,6 +13,7 @@
 
 .event-edit-steps .step.active .title {
     color: #fff !important;
+    font-size: 1em !important;
 }
 
 .ui.ordered.steps.event-edit-steps .step.item_step:before {
@@ -36,6 +37,7 @@
 
 .ui.ordered.steps.event-edit-steps .item_step {
   background-color: #e7e5e5;
+  border: none;
 }
 
 .ui.ordered.steps.event-edit-steps .active {
