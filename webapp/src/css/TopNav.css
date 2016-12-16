@@ -1,5 +1,6 @@
 .top-nav {
   display: inline-block;
+  background-color: #fff;
 }
 
 .top-nav .top-nav-list {
@@ -18,9 +19,21 @@ ul.ui.stackable.menu.top-nav-list {
   padding: 8px 10px;
 }
 
+@media only screen and (max-width: 900px) and (min-width: 768px) {
+ .top-nav .top-nav-list .nav-item {
+  padding: 8px 5px;
+  }
+}
+
 .top-nav .top-nav-list .nav-item a {
   font-size: 14px;
-  color: #fff;
+  color: #444444;
+}
+
+@media only screen and (max-width: 900px) and (min-width: 768px) {
+  .top-nav .top-nav-list .nav-item a {
+  font-size: 10px;
+  }
 }
 
 .top-nav .nav-menu-item {

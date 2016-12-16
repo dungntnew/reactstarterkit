@@ -7,12 +7,15 @@ import TestPage2 from './containers/TestPage2'
 import AboutPage from './containers/AboutPage'
 import TopLandingPage from './containers/TopLandingPage'
 import SearchPage from './containers/SearchPage'
+import CreatePage from './containers/CreatePage'
 
 const routes = (
   <Route path='/' component={App}>
     <IndexRoute component={TopLandingPage}/>
     <Route path='/search'
            component={SearchPage}/>
+    <Route path='/create'
+           component={CreatePage}/>
     <Route path='/test'
            component={TestPage}/>
     <Route path='/test2'

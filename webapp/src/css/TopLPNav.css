@@ -1,0 +1,28 @@
+.top-lp-nav {
+  display: inline-block;
+}
+
+.top-lp-nav  .top-nav-list {
+  margin: 0;
+  padding: 0;
+}
+
+ul.ui.stackable.menu.top-nav-list {
+  background: none !important;
+  border: 0;
+  box-shadow: none;
+}
+
+.top-lp-nav  .top-nav-list .nav-item {
+  display: inline;
+  padding: 8px 10px;
+}
+
+.top-lp-nav  .top-nav-list .nav-item a {
+  font-size: 14px;
+  color: #fff;
+}
+
+.top-lp-nav  .nav-menu-item {
+  display: inline;
+}

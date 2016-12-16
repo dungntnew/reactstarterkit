@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import 'semantic-ui-sidebar/sidebar.min.css'
 
-import '../css/TopNav.css';
+import '../css/TopLPNav.css';
 
 import UserMenu from '../components/UserMenu';
 import HelpMenu from '../components/HelpMenu';
@@ -13,7 +13,7 @@ import HelpMenu from '../components/HelpMenu';
 $.fn.sidebar = require('semantic-ui-sidebar')
 
 
-class TopNav extends Component {
+class TopLPNav extends Component {
   static propTypes = {
     authenticated:  PropTypes.bool.isRequired,
     user: PropTypes.shape({
@@ -51,7 +51,7 @@ class TopNav extends Component {
 
   render() {
     return (
-      <div className='top-nav right menu'>
+      <div className='top-lp-nav'>
          <ul className="ui stackable menu top-nav-list">
          {this.renderMenuItems()}
          </ul>
@@ -70,4 +70,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 export default connect(mapStateToProps,
-                       mapDispatchToProps)(TopNav)
+                       mapDispatchToProps)(TopLPNav)

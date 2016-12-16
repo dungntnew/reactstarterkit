@@ -7,7 +7,28 @@
   color: #fff !important;
 }
 
+.btn-left {
+  padding: 10px 70px !important;
+  margin-top: 15px;
+}
+
 .text-orange {
   color: #ff8a46 !important;
 }
+
+.required {
+  font-size: 0.750em;
+  font-weight: 500;
+  color: #e84465;
+  display: inline-block;
+  padding-left: 15px;
+}
+
+.note {
+  font-size: 0.750em;
+  font-weight: 500;
+  color: #beb9b9;
+  padding-left: 15px;
+}
+
 @media only screen and (max-width: 667px) and (min-width: 320px)
