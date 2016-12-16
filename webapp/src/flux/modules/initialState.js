@@ -222,3 +222,14 @@ export const initPlaceTypes = [
     label: 'その他'
   }
 ]
+
+export const initPrefectures = [
+  {
+    id: '0',
+    label: '東京都',
+  },
+  {
+    id: '1',
+    label: '神奈川県',
+  }
+]
