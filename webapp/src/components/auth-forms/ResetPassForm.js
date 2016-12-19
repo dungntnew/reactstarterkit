@@ -62,29 +62,30 @@ class ResetPassForm extends Component {
 
   render() {
     return (
-        <form className='ui form reset-pass-form' ref='form'
+        <form className='ui large form reset-pass-form' ref='form'
               onSubmit={(e) => {
                 e.preventDefault()
                this.handleSubmit()
               }}>
+          <div className='ui segment'>
+            <h2 className='tite-form center'>新しいパスワードの設定</h2>
 
-          <h2 className='tite-form center'>新しいパスワードの設定</h2>
+            <div className="field">
+              <input
+                    type="password"
+                    name="pass1"
+                    placeholder="６文字以上"/>
+            </div>
+            <div className="field">
+              <input
+                    type="password"
+                    name="confirmpass"
+                    placeholder="６文字以上"/>
+            </div>
 
-          <div className="field">
-            <input
-                  type="password"
-                  name="pass1"
-                  placeholder="６文字以上"/>
+            <div className="ui error message"></div>
+            <button className="ui button btn-link btn-orange" type="submit">新しいパスワードを保存する</button>
           </div>
-          <div className="field">
-            <input
-                  type="password"
-                  name="confirmpass"
-                  placeholder="６文字以上"/>
-          </div>
-
-          <div className="ui error message"></div>
-          <button className="ui button btn-link btn-orange" type="submit">新しいパスワードを保存する</button>
 
         </form>
 

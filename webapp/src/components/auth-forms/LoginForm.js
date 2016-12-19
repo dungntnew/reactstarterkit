@@ -62,20 +62,26 @@ class LoginForm extends Component {
 
   render() {
     return (
-        <form className='ui form login-form' ref='form'
+        <form className='ui large form login-form' ref='form'
               onSubmit={(e) => {
                 e.preventDefault()
                this.handleSubmit()
               }}>
 
-          <h2 className='tite-form center'>ログイン</h2>
-          <div className='field'>
-            <a className='ui button btn-link' href={this.props.facebookUrl}><i className=''></i>Facebookでログイン</a>
-          </div>
+          <div className='ui segment'>
+            <h2 className='tite-form center'>ログイン</h2>
 
-          <div className='field'>
-            <a className='ui button btn-link' href={this.props.goooleUrl}><i className=''></i>Google+でログイン</a>
-          </div>
+            <div className='field'>
+              <a className='ui button btn-link link-face' href={this.props.facebookUrl}>
+                <i className="facebook f icon icon-left"></i>Facebookでログイン
+              </a>
+            </div>
+
+            <div className='field'>
+              <a className='ui button btn-link link-gle' href={this.props.goooleUrl}>
+                <i className="google icon icon-left"></i>Google+でログイン
+              </a>
+            </div>
 
           <div className="field">
             <input
@@ -94,9 +100,10 @@ class LoginForm extends Component {
           <div className="ui error message"></div>
           <button className="ui button btn-link btn-orange" type="submit">ログイン</button>
 
-          <div className='field'>
+          <div className='field field-text'>
             <a className='text-forget-pass center' href={this.props.url}>パスワードをお忘れの方はこちら</a>
           </div>
+        </div>
 
         </form>
 

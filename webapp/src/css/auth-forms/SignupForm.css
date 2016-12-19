@@ -1,3 +1,31 @@
 .signup-form {
+  padding-bottom: 40px;
+}
+.signup-form a.link-face {
+  background-color: #3a5998;
+  color: #fff;
+}
 
+.signup-form a.link-face:hover {
+  color: #fff;
+  background-color: #3a5998;
+}
+
+.signup-form a.link-gle {
+  background-color: #fff;
+  border: solid 1px #beb9b9;
+}
+
+.signup-form a.link-gle:hover {
+  background-color: #fff;
+  border: solid 1px #beb9b9;
+}
+
+.signup-form a i.icon-left {
+  float: left;
+}
+
+.signup-form .line {
+  border: 1px solid #e7e5e5;
+  margin-bottom: 1em;
 }

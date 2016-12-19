@@ -14,4 +14,25 @@
 .btn-link {
   width: 100%;
 }
+
+.tite-form {
+  font-size: 1.5rem;
+}
+
+.note-form {
+  font-size: 0.75rem;
+  color: #666666;
+  margin: 24px 0 !important;
+}
+
+.column {
+  max-width: 450px;
+}
+
+.text-comfirm {
+  color: #666666;
+  font-size: 1rem;
+}
+/*reset*/
+
 @media only screen and (max-width: 667px) and (min-width: 320px)

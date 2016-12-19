@@ -65,21 +65,23 @@ class InputMailForm extends Component {
                this.handleSubmit()
               }}>
 
-          <h2 className='tite-form center'>パスワードをお忘れの方</h2>
+          <div className='ui segment'>
+            <h2 className='tite-form center'>パスワードをお忘れの方</h2>
 
-          <div className="field">
-            <input
-                  type="email"
-                  name="email1"
-                  placeholder="メールアドレス"/>
+            <div className="field">
+              <input
+                    type="email"
+                    name="email1"
+                    placeholder="メールアドレス"/>
+            </div>
+
+            <div className="ui error message"></div>
+
+            <div className='field'>
+              <p className='note-form center'>ご登録されたメールアドレスにパスワード再設定のご案内が送信されます。</p>
+            </div>
+            <button className="ui button btn-link btn-orange" type="submit">送信する</button>
           </div>
-
-          <div className="ui error message"></div>
-
-           <div className='field'>
-            <p className='note center'>ご登録されたメールアドレスにパスワード再設定のご案内が送信されます。</p>
-          </div>
-          <button className="ui button btn-link btn-orange" type="submit">送信する</button>
 
         </form>
 

@@ -1,5 +1,37 @@
 .login-form {
+  padding-bottom: 40px;
+}
+.login-form a.link-face {
+  background-color: #3a5998;
+  color: #fff;
+}
 
+.login-form a.link-face:hover {
+  color: #fff;
+  background-color: #3a5998;
+}
+
+.login-form a.link-gle {
+  background-color: #fff;
+  border: solid 1px #beb9b9;
+}
+
+.login-form a.link-gle:hover {
+  background-color: #fff;
+  border: solid 1px #beb9b9;
+}
+
+.login-form a i.icon-left {
+  float: left;
+}
+
+.login-form .field-text {
+  padding-top: 20px;
+}
+
+.login-form .field-text .text-forget-pass {
+  font-size: 0.75rem;
+  color: #ff8a46;
 }
 
 

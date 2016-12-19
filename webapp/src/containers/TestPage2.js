@@ -5,6 +5,8 @@ import LoginForm from '../components/auth-forms/LoginForm';
 import SignupForm from '../components/auth-forms/SignupForm';
 import InputMailForm from '../components/auth-forms/InputMailForm';
 import ResetPassForm from '../components/auth-forms/ResetPassForm';
+import SendMailOk from '../components/auth-forms/SendMailOk';
+import ResetPassOk from '../components/auth-forms/ResetPassOk';
 
 
 
@@ -16,13 +18,17 @@ export default (props) => (
           "TestComponent"  => "YourComponent"
      </pre>
      <hr/>
-     <div className='test-page-wrapper'>
+    <div className='ui middle aligned center aligned grid'>
+      <div className='column'>
 
         <h3> put your code here </h3>
         <LoginForm />
         <SignupForm />
         <InputMailForm />
         <ResetPassForm />
-     </div>
+        <SendMailOk />
+        <ResetPassOk />
+      </div>
+    </div>
   </div>
 )

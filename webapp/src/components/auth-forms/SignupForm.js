@@ -25,21 +25,31 @@ class SignupForm extends Component {
 
   render() {
     return (
-        <form className='ui form signup-form'>
+        <form className='ui large form signup-form'>
 
-          <h2 className='tite-form center'>新規会員登録</h2>
-          <div className='field'>
-            <a className='ui button btn-link' href={this.props.facebookUrl}><i className=''></i>Facebookでログイン</a>
-          </div>
+          <div className='ui segment'>
 
-          <div className='field'>
-            <a className='ui button btn-link' href={this.props.goooleUrl}><i className=''></i>Google+でログイン</a>
-          </div>
+            <h2 className='tite-form center'>新規会員登録</h2>
+            <div className='field'>
+              <a className='ui button btn-link link-face' href={this.props.facebookUrl}>
+                <i className="facebook f icon icon-left"></i>Facebookでログイン
+              </a>
+            </div>
 
-          <div className="line"></div>
+            <div className='field'>
+              <a className='ui button btn-link link-gle' href={this.props.goooleUrl}>
+                <i className="google icon icon-left"></i>Google+でログイン
+              </a>
+            </div>
 
-          <div className='field'>
-            <p className='note center'>登録することをもって私は、Airbnbのサービス利用規約、決済サービス利用規約、個人情報保護ポリシー、ゲスト返金ポリシー、ホスト保証規約に同意します。</p>
+            <div className="line"></div>
+
+            <button className="ui button btn-link btn-orange" type="submit">メールアドレスで登録</button>
+
+            <div className='field'>
+              <p className='note-form center'>登録することをもって私は、Airbnbのサービス利用規約、決済サービス利用規約、個人情報保護ポリシー、ゲスト返金ポリシー、ホスト保証規約に同意します。</p>
+            </div>
+
           </div>
         </form>
     )
