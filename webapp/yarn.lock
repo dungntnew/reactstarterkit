@@ -5231,6 +5231,10 @@ semantic-ui-sidebar:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/semantic-ui-sidebar/-/semantic-ui-sidebar-2.2.3.tgz#2c1720421a310712265fd49799ddbba5378b5fff"
 
+semantic-ui-sticky:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-sticky/-/semantic-ui-sticky-2.2.3.tgz#ddced7f7dd10a21ae654904774a4ae69b9c3b3c5"
+
 semantic-ui-transition:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/semantic-ui-transition/-/semantic-ui-transition-2.2.3.tgz#4bf150aacf91227ac460f4622be34146baf8d04c"
