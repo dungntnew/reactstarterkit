@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import '../css/InviteButton.css';
 
 const InviteButton = (props) => (
-  <button className='ui button invite-button' onClick={props.onInvite}>Invite</button>
+  <button className='ui button btn-bottom invite-button' onClick={props.onInvite}>Invite</button>
 )
 
 InviteButton.propTypes = {

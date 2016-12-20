@@ -10,6 +10,8 @@ const JoinButton = (props) => {
   const buttonTitle = props.joining ? 'キャンセル': '参加'
   const buttonClasses = classNames({
     'ui button': true,
+    'btn-orange': true,
+    'btn-bottom': true,
     'join-button': !props.joining,
     'cancel-button': props.joining
   })

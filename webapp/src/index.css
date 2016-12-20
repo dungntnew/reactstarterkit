@@ -12,6 +12,10 @@
   margin-top: 15px;
 }
 
+.btn-bottom {
+  margin-bottom: 4px !important;
+}
+
 .text-orange {
   color: #ff8a46 !important;
 }

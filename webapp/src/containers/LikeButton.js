@@ -10,6 +10,7 @@ const LikeButton = (props) => {
   const buttonTitle = props.liked ? 'Unlike': 'Like'
   const buttonClasses = classNames({
     'ui button': true,
+    'btn-bottom': true,
     'like-button': !props.liked,
     'unlike-button': props.liked
   })
