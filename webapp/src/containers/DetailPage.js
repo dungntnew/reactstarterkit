@@ -43,39 +43,41 @@ class DetailPage extends Component {
 
     renderQuickAccessMenu() {
       return (
-        <div className="ui left very close rail">
-          <div className="ui sticky segment" ref='quickAccessMenu'>
-              <a href='#images'>写真</a>
-              <a href='#members'>参加者</a>
-              <a href='#info'>テーブルについて</a>
-              <a href='#maps'>会場地図</a>
-              <a href='#comments'>コメント</a>
+          <div className='two wide computer two wide tablet thirteen wide mobile column left-nav'>
+            <div className="ui" ref='quickAccessMenu'>
+                <a className='link' href='#images'>写真</a>
+                <a className='link' href='#members'>参加者</a>
+                <a className='link' href='#info'>テーブルについて</a>
+                <a className='link' href='#maps'>会場地図</a>
+                <a className='link' href='#comments'>コメント</a>
+            </div>
           </div>
-        </div>
       )
     }
 
     render() {
       return (
         <div className='detail-page'>
-        <PageHeader>
-          <Logo color={true}/>
-          <QuickSearchBar location={this.props.location} params={this.props.params}/>
-          <TopNav />
-        </PageHeader>
+          <PageHeader>
+            <Logo color={true}/>
+            <QuickSearchBar location={this.props.location} params={this.props.params}/>
+            <TopNav />
+          </PageHeader>
 
-        <EventDetailHeader />
-        <EventDetailCover />
+          <EventDetailHeader />
+          <EventDetailCover />
+          <div className='ui grid detail-content'>
+            {this.renderQuickAccessMenu()}
 
-        {this.renderQuickAccessMenu()}
-
-        <div className='ui segment' id='context'>
-          <EventDetailBlocks />
-          <EventDetailCommentForm />
-          <EventDetailRelatived limit={4}/>
-        </div>
-
-        <PageFooter />
+            <div className='thirteen wide computer thirteen wide tablet thirteen wide mobile column'>
+              <div className='ui detail-event' id='context'>
+                <EventDetailBlocks />
+                <EventDetailCommentForm />
+                <EventDetailRelatived limit={4}/>
+              </div>
+            </div>
+          </div>
+          <PageFooter />
         </div>
       )
     }

@@ -45,23 +45,31 @@ class EventCommentBox extends Component {
 
     const content = comments.map((comment, index)=>(
         <div className='item comment-item' key={index}>
-           <img className='ui avatar image' src={comment.userAvatar} alt='avatar'/>
-           {comment.text}
-           <span>
-           {comment.at}
-           </span>
-           {
-             comment.userId === user.id &&
-             <button className='ui button remove-comment-btn'
-                     onClick={()=> this.remove(comment.id)}>
-             x
-             </button>
-           }
+          <div className='inline fields'>
+
+            <div className="two wide field img-avatar">
+             <img className='ui avatar mini image' src={comment.userAvatar} alt='avatar'/>
+            </div>
+            <div className="twelve wide field content">
+              <p className='comment-text'>{comment.text}</p>
+            </div>
+            <div className="two wide field time">
+              <span>{comment.at}</span>
+            </div>
+
+             {
+               comment.userId === user.id &&
+               <button className='ui button remove-comment-btn'
+                       onClick={()=> this.remove(comment.id)}>
+               x
+               </button>
+             }
+          </div>
         </div>
       ))
 
       return (
-        <div className='ui list'>
+        <div className='ui list list-comment'>
           {content}
         </div>
       )
@@ -71,20 +79,23 @@ class EventCommentBox extends Component {
       const {user} = this.props
       return (
         <div className='comment-box-input-form'>
-              <img className='ui avatar image'
-                   src={user.userAvatar} alt='avatar'
-               />
 
               <form className='ui form' onSubmit={(e)=>{
-              e.preventDefault()
-              this.addNewComment()
-            }}>
-               <div className="fields">
-                   <input type='text' ref='commentRef'/>
-                   <button className="ui button add-comment-btn" type="submit">Submit</button>
-               </div>
-            </form>
-
+                e.preventDefault()
+                this.addNewComment()
+                }}>
+                <div className="inline fields">
+                  <div className="two wide field">
+                   <img className='ui avatar mini image'
+                    src={user.userAvatar} alt='avatar'
+                    />
+                  </div>
+                   <div className="fourteen wide field">
+                       <input type='text' ref='commentRef'/>
+                       <button className="ui button add-comment-btn btn-orange " type="submit">Submit</button>
+                   </div>
+                </div>
+              </form>
         </div>
 
       )

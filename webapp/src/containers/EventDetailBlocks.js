@@ -49,7 +49,7 @@ class EventDetailBlocks extends Component {
 
     const content = members.map((member, index)=>(
       <div className='item' key={index}>
-        <div className='ui avatar small image'>
+        <div className='ui avatar tiny image'>
         <Link to={member.url}>
            <img src={member.userAvatar} alt='avatar'/>
         </Link>
@@ -59,20 +59,18 @@ class EventDetailBlocks extends Component {
 
     const memberMenu = (
       <div className='item'>
-        <div className='ui avatar small image'>
-        <a href='#' onClick={(e)=>{ e.preventDefault(); this.showMemberList()}}>
-            <i className='ellipsis horizontal icon'></i>
-         </a>
+        <div className='ui avatar tiny image'>
+          <a href='#' onClick={(e)=>{ e.preventDefault(); this.showMemberList()}}>
+              <i className='ellipsis horizontal icon'></i>
+           </a>
         </div>
       </div>
     )
 
     return(
       <div className='block member-block'>
-        <div className='block-header'>
-          <div> 参加者 <span>{memberCount}</span></div>
-        </div>
-        <div className='ui horizontal list'>
+        <div className='block-header'>参加者 <span>{memberCount}</span></div>
+        <div className='ui horizontal list list-member'>
            {content}
            {memberMenu}
         </div>
@@ -101,7 +99,7 @@ class EventDetailBlocks extends Component {
     }]
 
       return (
-        <table className="ui celled table">
+        <table className="ui padded table">
         <tbody>
         {
           rowsData.map((kv, index)=>(

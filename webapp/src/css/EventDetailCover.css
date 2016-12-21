@@ -10,7 +10,7 @@
   bottom: 0.5rem;
 }
 
-.event-detail-cover .user-avatar :{
+.event-detail-cover>.cover-image>.user-avatar {
   position: absolute;
   bottom: 24px;
   left: 24px;
