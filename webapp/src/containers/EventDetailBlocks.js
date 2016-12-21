@@ -144,15 +144,17 @@ class EventDetailBlocks extends Component {
         <div className='address'>
            {this.address}
         </div>
-        <a href={this.addressLink}>Google Mapで見る</a>
+        <div className='map-content'>
+          <a href={this.addressLink}>Google Mapで見る</a>
 
-        <div className='google-maps'>
-            <iframe width="600"
-                    height="240"
-                    frameBorder="0"
-                    style={style}
-                    src={this.props.googleMapIframeLink}>
-            </iframe>
+          <div className='google-maps'>
+              <iframe width="100%"
+                      height="240"
+                      frameBorder="0"
+                      style={style}
+                      src={this.props.googleMapIframeLink}>
+              </iframe>
+          </div>
         </div>
       </div>
     )

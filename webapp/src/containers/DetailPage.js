@@ -44,7 +44,7 @@ class DetailPage extends Component {
     renderQuickAccessMenu() {
       return (
           <div className='two wide computer two wide tablet thirteen wide mobile column left-nav'>
-            <div className="ui" ref='quickAccessMenu'>
+            <div className="ui" ref='#'>
                 <a className='link' href='#images'>写真</a>
                 <a className='link' href='#members'>参加者</a>
                 <a className='link' href='#info'>テーブルについて</a>
@@ -69,7 +69,7 @@ class DetailPage extends Component {
           <div className='ui grid detail-content'>
             {this.renderQuickAccessMenu()}
 
-            <div className='thirteen wide computer thirteen wide tablet thirteen wide mobile column'>
+            <div className='thirteen wide computer thirteen wide tablet sixteen wide mobile column'>
               <div className='ui detail-event' id='context'>
                 <EventDetailBlocks />
                 <EventDetailCommentForm />
