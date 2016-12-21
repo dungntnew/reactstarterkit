@@ -10,8 +10,7 @@ $.fn.progress = require('semantic-ui-progress')
 
 import {
   formatPrice,
-  formatOpenDate,
-  formatRegistrationDateTime
+  formatDateAndTimeStr
 } from '../helpers/event';
 
 class EventItem extends Component {
@@ -99,17 +98,13 @@ class EventItem extends Component {
 
            <div className="meta open-date">
              <span className='title date'>開催日:</span>
-             <span>{formatOpenDate(openDate)}</span>
+             <span>{formatDateAndTimeStr(openDate)}</span>
            </div>
 
            <div className="meta registration-info">
              <span className='title'>参加期限:</span>
-             <span className='registration-start'>
-                {formatRegistrationDateTime(registrationDateStart)}
-             </span>
-             ~
              <span className='registration-end'>
-                {formatRegistrationDateTime(registrationDateEnd)}
+                {formatDateAndTimeStr(registrationDateEnd)}
              </span>
            </div>
         </div>
