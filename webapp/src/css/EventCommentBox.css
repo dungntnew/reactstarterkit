@@ -38,7 +38,10 @@
   padding-top: 10px;
 }
 
-
 .event-comment-box .list-comment .time {
   float: right;
+}
+
+.event-comment-box .list-comment .time .update {
+  display: block;
 }

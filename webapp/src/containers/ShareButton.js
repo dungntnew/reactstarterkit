@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import '../css/ShareButton.css';
 
 const ShareButton = (props) => (
-  <button className='ui button btn-bottom share-button' onClick={props.onShare}>Share</button>
+  <button className='ui button btn-bottom share-button' onClick={props.onShare}><i className="share icon"></i></button>
 )
 
 ShareButton.propTypes = {

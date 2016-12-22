@@ -37,8 +37,10 @@ class EventDetailCover extends Component {
   renderImageThumbnail() {
     const moreLink = (
       <div className='item' onClick={()=>{this.showMore()}}>
-        <i className="eye icon" aria-hidden="true"></i>
-      もっとみる
+        <div className='show-more'>
+          <i className="eye icon show" aria-hidden="true"></i>
+          <span className='text-show'>もっとみる</span>
+        </div>
       </div>
     )
 

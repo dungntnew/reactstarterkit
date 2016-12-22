@@ -54,16 +54,17 @@ class EventCommentBox extends Component {
               <p className='comment-text'>{comment.text}</p>
             </div>
             <div className="two wide field time">
-              <span>{comment.at}</span>
+              <span className='update'>{comment.at}</span>
+              {
+               comment.userId === user.id &&
+               <a className='text-orange remove-comment-btn'
+                       onClick={()=> this.remove(comment.id)}>
+               remove
+               </a>
+              }
             </div>
 
-             {
-               comment.userId === user.id &&
-               <button className='ui button remove-comment-btn'
-                       onClick={()=> this.remove(comment.id)}>
-               x
-               </button>
-             }
+
           </div>
         </div>
       ))
@@ -104,7 +105,7 @@ class EventCommentBox extends Component {
     renderLoadMore() {
       return (
         <div className='load-more-comment'>
-        <button className='ui button'
+        <button className='ui button btn-orange'
                 onClick={()=>{this.props.loadMore()}}
         >Load More</button>
         </div>
