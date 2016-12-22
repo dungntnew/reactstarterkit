@@ -11,30 +11,30 @@ import ShareButton from './ShareButton';
 import LikeButton from './LikeButton';
 
 const EventDetailHeader = (props) => (
-  <div className="ui three column grid event-detail-header">
-    <div className='row'>
+  <div className="ui stackable grid event-detail-header">
+    <div className='three column row'>
         {/* colum 1*/}
-        <div className='column'>
-           <h3> {props.title} </h3>
-           <p>{props.entryDealine}</p>
-           <p>{props.genre}</p>
+        <div className='column title-header'>
+           <h3 className='title-event'> {props.title} </h3>
+           <p className='note-event'>{props.entryDealine}</p>
+           <p className='note-event'>{props.genre}</p>
         </div>
 
         {/* colum 2*/}
-        <div className='column'>
-           <p>
-             金額 <span>{props.entryFee}</span>
+        <div className='column detail-header'>
+           <p className='des'>
+             金額 <span className='count'>{props.entryFee}</span>
            </p>
-           <p>
+           <p className='des'>
              参加人数
-             <span>{props.joinerCount}</span>
+             <span className='count'>{props.joinerCount}</span>
              /
-             <span>{props.joinerLimit}</span>
+             <span className='limit'>{props.joinerLimit}</span>
            </p>
         </div>
 
         {/* colum 3*/}
-        <div className='column'>
+        <div className='column group-like'>
           <InviteButton />
           <JoinButton />
           <ShareButton />

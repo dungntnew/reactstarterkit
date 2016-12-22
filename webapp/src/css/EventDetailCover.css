@@ -1,7 +1,24 @@
 .event-detail-cover {
-
+  position: relative;
 }
 
 .event-detail-cover .thumbnails {
-  
+  display: inline-block;
+  font-size: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0.5rem;
+}
+
+.event-detail-cover>.cover-image>.user-avatar {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+}
+
+.event-detail-cover>.cover-image> .thumbnails img {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+
 }
