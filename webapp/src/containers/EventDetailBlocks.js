@@ -1,12 +1,20 @@
+import $ from 'jquery';
 import _ from 'lodash';
 import React, {PropTypes, Component} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 
+import 'semantic-ui-dimmer/dimmer.min.css'
+import 'semantic-ui-modal/modal.min.css'
+
 import '../css/EventDetailBlocks.css';
 
 import EventTags from '../components/EventTags';
+import MemberList from '../components/MemberList';
+
+$.fn.dimmer = require('semantic-ui-dimmer')
+$.fn.modal = require('semantic-ui-modal')
 
 class EventDetailBlocks extends Component {
   constructor(props) {
@@ -20,7 +28,8 @@ class EventDetailBlocks extends Component {
     members: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
-      userAvatar: PropTypes.string.isRequired
+      userAvatar: PropTypes.string.isRequired,
+      displayName: PropTypes.string.isRequired,
     }).isRequired).isRequired,
     memberCount: PropTypes.number.isRequired,
     address: PropTypes.string.isRequired,
@@ -31,7 +40,7 @@ class EventDetailBlocks extends Component {
   }
 
   showMemberList() {
-    console.log('show member list')
+    $(this.refs.fullMemberList).modal('show')
   }
 
   renderTags() {
@@ -74,6 +83,14 @@ class EventDetailBlocks extends Component {
            {content}
            {memberMenu}
         </div>
+      </div>
+    )
+  }
+
+  renderFullMemberList() {
+    return (
+      <div className='ui modal' ref='fullMemberList'>
+         <MemberList members={this.props.members} onRemove={this.props.removeMember} />
       </div>
     )
   }
@@ -167,6 +184,7 @@ class EventDetailBlocks extends Component {
       {this.renderJoiningMembers()}
       {this.renderTableInfo()}
       {this.renderMaps()}
+      {this.renderFullMemberList()}
       </div>
     )
   }
@@ -181,16 +199,19 @@ const mapStateToProps = (state, ownProps) => {
       id: 'user-1',
       url: '/members/user-1',
       userAvatar: '/img/avatar.png',
+      displayName: 'Name 1',
     },
     {
       id: 'user-2',
       url: '/members/user-2',
       userAvatar: '/img/avatar.png',
+      displayName: 'Name 2',
     },
     {
       id: 'user-3',
       url: '/members/user-3',
       userAvatar: '/img/avatar.png',
+      displayName: 'Name 3',
     }
   ]
   const address= '東京都世田谷区太子堂3-1-21ワイズコート402';
@@ -212,6 +233,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+  removeMember: (memberId) => { console.log(memberId); }
 })
 
 export default connect(mapStateToProps,
