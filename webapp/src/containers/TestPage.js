@@ -13,6 +13,8 @@ $.fn.dropdown = require('semantic-ui-dropdown')
 
 import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
 
+import MemberList from '../components/MemberList';
+
 const loadButton = (props) => (
   <button onClick={(e) => {
     e.preventDefault()
@@ -75,6 +77,33 @@ const event = {
   "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
 }
 
+const MemberListW = connect(()=>({
+  members: [
+    {
+      id: 'user-1',
+      url: '/members/user-1',
+      userAvatar: '/img/avatar.png',
+      displayName: 'Dung 1'
+    },
+    {
+      id: 'user-2',
+      url: '/members/user-2',
+      userAvatar: '/img/avatar.png',
+        displayName: 'Dung 2'
+    },
+    {
+      id: 'user-3',
+      url: '/members/user-3',
+      userAvatar: '/img/avatar.png',
+        displayName: 'Dung 3'
+    }
+  ]
+}), ()=>({
+  onRemove: (memberId) => {
+    console.log('remove member: ', memberId)
+  }
+}))(MemberList)
+
 /* Put your component to here to view */
 class TestPage extends Component {
 
@@ -116,6 +145,10 @@ class TestPage extends Component {
     )
   }
 
+  renderMemberList() {
+    return (<MemberListW />)
+  }
+
   render() {
 
 
@@ -127,11 +160,7 @@ class TestPage extends Component {
          </pre>
          <hr/>
          <div className='test-page-wrapper'>
-          <div className="ui form segment">
-
-              {this.renderTargetSelector()}
-          </div>
-
+         {this.renderMemberList()}
          </div>
       </div>
     )
