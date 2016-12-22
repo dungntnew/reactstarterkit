@@ -35,4 +35,9 @@
   padding-left: 15px;
 }
 
+/*reset*/
+i.icon {
+  margin-right: 0px !important;
+}
+
 @media only screen and (max-width: 667px) and (min-width: 320px)

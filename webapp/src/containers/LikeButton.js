@@ -7,7 +7,12 @@ import classNames from 'classnames'
 import '../css/LikeButton.css';
 
 const LikeButton = (props) => {
-  const buttonTitle = props.liked ? 'Unlike': 'Like'
+  const buttonTitle = classNames({
+    'heart': true,
+    'icon':  true,
+    'emtry': !props.liked,
+    'like-button': props.liked
+  })
   const buttonClasses = classNames({
     'ui button': true,
     'btn-bottom': true,
@@ -16,7 +21,7 @@ const LikeButton = (props) => {
   })
   const onClickFunc = props.liked ? props.onLike: props.onUnlike
   return (
-    <button className={buttonClasses} onClick={onClickFunc}>{buttonTitle}</button>
+    <button className={buttonClasses} onClick={onClickFunc}><i className={buttonTitle}></i></button>
   )
 }
 
