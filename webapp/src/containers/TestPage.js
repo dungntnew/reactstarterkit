@@ -8,12 +8,21 @@ import 'semantic-ui-dropdown/dropdown.min.css'
 import 'semantic-ui-transition/transition.min.css'
 
 
+import 'semantic-ui-dimmer/dimmer.min.css'
+import 'semantic-ui-modal/modal.min.css'
+
+
 $.fn.transition = require('semantic-ui-transition')
 $.fn.dropdown = require('semantic-ui-dropdown')
+
+$.fn.dimmer = require('semantic-ui-dimmer')
+$.fn.modal = require('semantic-ui-modal')
 
 import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
 
 import MemberList from '../components/MemberList';
+import EventImageSlider from '../components/EventImageSlider';
+
 
 const loadButton = (props) => (
   <button onClick={(e) => {
@@ -149,6 +158,38 @@ class TestPage extends Component {
     return (<MemberListW />)
   }
 
+  renderImageSlider() {
+    const images = [
+      '/img/event-1.jpg',
+      '/img/event-2.jpg',
+      '/img/event-3.jpg',
+      '/img/event-4.jpg',
+      '/img/event-1.jpg',
+      '/img/event-2.jpg',
+      '/img/event-3.jpg',
+      '/img/event-4.jpg',
+      '/img/event-1.jpg',
+      '/img/event-2.jpg',
+      '/img/event-3.jpg',
+      '/img/event-4.jpg',
+      '/img/event-1.jpg',
+      '/img/event-2.jpg',
+      '/img/event-3.jpg',
+      '/img/event-4.jpg'
+    ]
+    return (
+      <div className='ui basic modal' ref='eventImageSlider'>
+          <div className="actions">
+            <div className="ui basic cancel inverted button">
+              <i className="remove icon"></i>
+            </div>
+          </div>
+          <div className='content'>
+            <EventImageSlider images={images}/>
+          </div>
+      </div>
+    )
+  }
   render() {
 
 
@@ -160,7 +201,14 @@ class TestPage extends Component {
          </pre>
          <hr/>
          <div className='test-page-wrapper'>
-         {this.renderMemberList()}
+         <button onClick={
+           ()=> {
+            const ref = this.refs.eventImageSlider
+            $(ref).modal('show')
+           }
+         }>SHOW</button>
+         {this.renderImageSlider()}
+
          </div>
       </div>
     )
