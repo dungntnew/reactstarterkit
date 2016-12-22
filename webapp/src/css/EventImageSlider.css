@@ -1,3 +1,17 @@
 .event-image-slider {
-  
+
+}
+
+.event-image-slider .basic .icon{
+  display: inline-block;
+  position: absolute;
+  top: 70px;
+}
+
+.event-image-slider .basic .left-icon {
+  left: 0;
+}
+
+.event-image-slider .basic .right-icon {
+  right: 33px;
 }

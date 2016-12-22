@@ -50,8 +50,8 @@ class EventDetailCover extends Component {
     return (
       <div className='ui basic modal' ref='eventImageSlider'>
           <div className="actions">
-            <div className="ui basic cancel inverted button">
-              <i className="remove icon"></i>
+            <div className="ui basic cancel inverted">
+              <i className="remove icon big"></i>
             </div>
           </div>
           <div className='content'>
