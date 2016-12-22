@@ -9,7 +9,7 @@ const MemberList = (props) => {
     <div className='item' key={index}>
       <div className='ui avatar tiny image'>
         <Link to={member.url}>
-           <img src={member.userAvatar} alt='avatar'/>
+           <img className='img-avatar' src={member.userAvatar} alt='avatar'/>
         </Link>
       </div>
       <div className="content">
@@ -28,7 +28,7 @@ const MemberList = (props) => {
 
   return (
     <div className='ui segment member-list'>
-      参加者一覧
+      <h3 className='center title-memeber-list'>参加者一覧</h3>
       <div className='ui middle aligned divided list'>
          {items}
       </div>
