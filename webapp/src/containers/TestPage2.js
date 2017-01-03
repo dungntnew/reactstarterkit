@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 import '../css/TestPage.css';
 
 
-
+import BlogHeader from '../components/BlogHeader';
 // import BlogItem from '../components/BlogItem';
 // import TopNBlogs from '../containers/TopNBlogs';
 
-// const blog = {
-//   coverImageUrl: 'ngoctien/blog1',
-//   title: 'Duong thi ngoc tien'
-// }
+const blog = {
+  update: '2016年12月10日',
+  title: '会員制限定　角煮フェスに潜入！！ 奏でろ！迸る肉汁ハーモニー♪'
+}
 // const blogitem = {
 //   filter: 'ngoc/tien',
 //   linkTitle: 'All',
@@ -26,11 +26,13 @@ export default (props) => (
           "TestComponent"  => "YourComponent"
      </pre>
      <hr/>
-     <div className='test-page-wrapper'>
+    <div className='test-page-wrapper'>
 
-        <h3> put your code here </h3>
+      <h3> put your code here </h3>
+      <div className='ui text container'>
+        <BlogHeader {...blog}/>
+      </div>
 
-
-     </div>
+    </div>
   </div>
 )

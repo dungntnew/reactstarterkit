@@ -1,0 +1,32 @@
+.blog-header {
+  position: relative;
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.blog-header .header {
+  display: inline-block;
+  width: 44%;
+}
+
+.blog-header .blog-header-right {
+  display: inline-block;
+  right: 12px;
+  position: absolute;
+}
+
+.blog-header .blog-header-right .update {
+  text-align: right;
+  padding-right: 5px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #878787;
+}
+
+.blog-header .blog-header-right .icon-list li.item-icon {
+  margin-left: 14px !important;
+}
+.blog-header .blog-header-right .icon-list li.item-icon:before {
+  content: '';
+}
+
