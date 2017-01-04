@@ -1,6 +1,8 @@
 import {
   formatPrice,
   formatDateAndTimeStr,
+  formatAddress,
+  addressToGoogleMapsLink,
 } from './event'
 
 test('format price 1', ()=>{
@@ -37,4 +39,14 @@ test('format date and time in str pair 2', ()=> {
 
 test('format date and time in str pair 3', ()=> {
   expect(formatDateAndTimeStr('20161221', '1614')).toBe('2016年12月21日午後4時14分 水曜日')
+})
+
+test('format formatAddress', () => {
+  expect(formatAddress({zipCode: '171-0032', address1:'Tokyo', address2:'Toshima', address3: '1-5-10'}))
+  .toBe('〒171-0032 TokyoToshima1-5-10')
+})
+
+test('address to link', ()=> {
+  expect(addressToGoogleMapsLink({zipCode: '171-0032', address1:'Tokyo', address2:'Toshima', address3: '1-5-10'}))
+  .toBe('http://maps.google.com/maps?q=%E3%80%92171-0032%20TokyoToshima1-5-10')
 })

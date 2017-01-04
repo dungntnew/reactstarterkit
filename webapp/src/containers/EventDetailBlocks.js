@@ -13,6 +13,11 @@ import '../css/EventDetailBlocks.css';
 import EventTags from '../components/EventTags';
 import MemberList from '../components/MemberList';
 
+import {formatAddress,
+        addressToGoogleMapsLink,
+        googleMapIFrameLink,
+        formatKeyValuePairData} from '../helpers/event';
+
 $.fn.dimmer = require('semantic-ui-dimmer')
 $.fn.modal = require('semantic-ui-modal')
 
@@ -96,33 +101,14 @@ class EventDetailBlocks extends Component {
   }
 
   renderInfoRows() {
-
-    /* TODO: matching props data to key-value pair HERE */
-    const rowsData = [{
-      key: 'Field -1',
-      value: 'Data-1'
-    },
-    {
-      key: 'Field -2',
-      value: 'Data-2'
-    },
-    {
-      key: 'Field -3',
-      value: 'Data-3'
-    },
-    {
-      key: 'Field -4',
-      value: 'Data-5'
-    }]
-
       return (
         <table className="ui padded table">
         <tbody>
         {
-          rowsData.map((kv, index)=>(
+          this.props.keyValuePairData.map((kv, index)=>(
             <tr key={index}>
-               <td>kv.key</td>
-               <td>kv.value</td>
+               <td>{kv.key}</td>
+               <td>{kv.value}</td>
             </tr>
           ))
         }
@@ -159,10 +145,10 @@ class EventDetailBlocks extends Component {
           <div> 会場地図</div>
         </div>
         <div className='address'>
-           {this.address}
+           {this.props.address}
         </div>
         <div className='map-content'>
-          <a href={this.addressLink}>Google Mapで見る</a>
+          <a href={this.props.addressLink}>Google Mapで見る</a>
 
           <div className='google-maps'>
               <iframe width="100%"
@@ -191,44 +177,20 @@ class EventDetailBlocks extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const tags = ['niku', 'tabehodai', 'yoyo']
-  const target = 'kekkonshiki'
-  const targetName = 'kekkonshiki'
-  const members = [
-    {
-      id: 'user-1',
-      url: '/members/user-1',
-      userAvatar: '/img/avatar.png',
-      displayName: 'Name 1',
-    },
-    {
-      id: 'user-2',
-      url: '/members/user-2',
-      userAvatar: '/img/avatar.png',
-      displayName: 'Name 2',
-    },
-    {
-      id: 'user-3',
-      url: '/members/user-3',
-      userAvatar: '/img/avatar.png',
-      displayName: 'Name 3',
-    }
-  ]
-  const address= '東京都世田谷区太子堂3-1-21ワイズコート402';
-  const mapIframeLink = 'https://www.google.com/maps/embed/v1/place?q=Harrods,Brompton%20Rd,%20UK&zoom=17&key=AIzaSyCVQ347kx0YIDFZmK4oz2dHt0P-KX-75r4'
-
-  const desc= 'スペインを中心に海外で9年間修行し、東京のガストロノミーの最高峰のひとつ「日本料理 龍吟」と世界的に有名なスペイン料理の「レストラン サンパウ」東京店のスーシェフを勤めた本多シェフが、2011年4月に麻布十番にオープンしたスペイン料理レストラン。'
+  const {selectedEvent} = state
+  const {isFetching, data} = selectedEvent
 
   return {
-    tags: tags,
-    target: target,
-    targetName: targetName,
-    members: members,
-    memberCount: 40,
-    address: address,
-    addressLink: 'http://',
-    googleMapIframeLink: mapIframeLink,
-    description: desc,
+    tags: data.tags,
+    target: data.target,
+    targetName: data.targetName,
+    members: data.members,
+    memberCount: data.memberCount,
+    address: formatAddress(data),
+    addressLink: addressToGoogleMapsLink(data),
+    googleMapIframeLink: googleMapIFrameLink(data),
+    description: data.description,
+    keyValuePairData: formatKeyValuePairData(data),
   }
 }
 

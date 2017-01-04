@@ -6,7 +6,7 @@ const INPUT_DATE_FMT = 'YYYYMMDD'
 const DISPLAY_DATE_FMT = 'LL'
 
 const INPUT_DATETIME_FMT = 'YYYYMMDD hh:mm:ss'
-const DISPLAY_DATETIME_FMT = 'LLLL'
+const DISPLAY_DATETIME_FMT = 'LL'
 
 function formatPrice(price) {
   if (_.isNull(price)) {
@@ -64,9 +64,112 @@ function formatDateAndTimeStr(dateStr, timeStr) {
     return formatDateTime(datetime)
 }
 
+function formatAddress({zipCode, address1, address2, address3}) {
+  if (zipCode) {
+    return `〒${zipCode} ${address1}${address2}${address3}`
+  }
+  else {
+    return `${address1}${address2}${address3}`
+  }
+}
+
+function addressToGoogleMapsLink(data) {
+  const googleMapsBaseUri = 'http://maps.google.com/maps?q='
+  const formatedAddress = formatAddress(data)
+  const params = encodeURIComponent(formatedAddress)
+  return `${googleMapsBaseUri}${params}`
+}
+
+function googleMapIFrameLink(data) {
+  const googleMapsBaseUri = 'https://www.google.com/maps/embed/v1/place'
+  const key = "AIzaSyCq2Z8HcwK5XZrPNDWAv--5KXrOpodz-UU"
+  const formatedAddress = formatAddress(data)
+  const params = encodeURIComponent(formatedAddress)
+  return `${googleMapsBaseUri}?q=${params}&key=${key}`
+}
+
+function formatListValues(values) {
+  if (_.isNull(values)) {
+    return '-'
+  }
+
+  return values.join(', ')
+}
+
+function formatKeyValuePairData(data) {
+  const {target, targetName} = data
+  const {genre, genreName} = data
+  const {memberCount, joinerLimit} = data
+  const {tags} = data
+
+  const {registrationDateStart,
+         registrationDateEnd} = data
+  const {openDate, closeDate} = data
+  const {price} = data
+  const {dressCode} = data
+  const {placeType} = data
+  const {supplements} = data
+  const {instarHashTag} = data
+
+
+  const rowsData = [{
+    key: '目的',
+    value: targetName
+  },
+  {
+    key: 'ジェンル',
+    value: genreName
+  },
+  {
+    key: 'タグ',
+    value: formatListValues(tags)
+  },
+  {
+    key: '申し込み期間',
+    value: formatDateAndTimeStr(registrationDateStart)
+           + '~' +
+           formatDateAndTimeStr(registrationDateEnd)
+  },{
+    key: '開始',
+    value: formatDateAndTimeStr(openDate)
+           + '~' +
+           formatDateAndTimeStr(closeDate)
+  },
+  {
+    key: '金額',
+    value: formatPrice(price)
+  },
+  {
+    key: '参加人数',
+    value: memberCount + ' / ' + joinerLimit
+  },
+  {
+    key: 'ドレスコード',
+    value: dressCode
+  },
+  {
+    key: '会場の種類',
+    value: placeType
+  },
+  {
+    key: '補足',
+    value: formatListValues(supplements)
+  },
+  {
+    key: 'インスタグラ',
+    value: instarHashTag
+  }
+  ]
+  return rowsData
+}
+
 module.exports = {
   formatPrice,
   formatDate,
   formatDateTime,
   formatDateAndTimeStr,
+  formatAddress,
+  addressToGoogleMapsLink,
+  googleMapIFrameLink,
+  formatKeyValuePairData,
 }
