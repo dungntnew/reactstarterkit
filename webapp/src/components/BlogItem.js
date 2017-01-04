@@ -1,8 +1,36 @@
 import React, {Component, PropTypes}from 'react'
-
+import {Link} from 'react-router';
 
 import '../css/BlogItem.css';
 
+const links = [
+
+  {
+    'url': '/category/#1',
+    'name': '角煮'
+  },
+  {
+    'url': '/category/#2',
+    'name': 'フェス'
+  },
+  {
+    'url': '/category/#2',
+    'name': '会員制'
+  },
+]
+
+  const linkCategories = links.map(link => {
+    return(
+      <Link to={link.url}>{link.name}</Link>
+    )
+  })
+
+  const linkCategoryContent = (props) => {
+    const links = linkCategories
+    return links.map((link, index) =>
+      <span key={index} className='cetegory'>{link}</span>
+    )
+  }
 
 class BlogItem extends Component {
   static propTypes = {
@@ -24,7 +52,7 @@ class BlogItem extends Component {
     = this.props
 
   return (
-    <div className='item'>
+    <div className='item blog-item'>
       <div className='image'>
         <img src={coverImageUrl} alt="blog-img"/>
       </div>
@@ -35,8 +63,7 @@ class BlogItem extends Component {
           <span className='date'>{datePosted}</span>
         </div>
         <div className='meta category-list'>
-          <span className='title'>カテゴリー： </span>
-          <span className='category'>{categories}</span>
+          <p className='title'>カテゴリー：{linkCategoryContent()} </p>
         </div>
       </div>
     </div>

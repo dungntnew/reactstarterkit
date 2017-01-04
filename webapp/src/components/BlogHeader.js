@@ -31,7 +31,7 @@ const links = [
     )
   })
 
-  const linkBlogContent = () => {
+  const linkBlogContent = (props) => {
     const links = linkIcons
     return links.map((link, index) =>
       <li key={index} className='item item-icon'>

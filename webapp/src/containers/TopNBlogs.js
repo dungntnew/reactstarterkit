@@ -36,7 +36,7 @@ class TopNBlogs extends Component {
     )
   }
 
-  renderBlogItems() {
+  renderBlogItems(filter, limit) {
     const {isFetching, blogs} = this.props
 
     if (isFetching) {

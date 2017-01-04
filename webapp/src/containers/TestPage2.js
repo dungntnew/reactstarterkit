@@ -6,24 +6,29 @@ import '../css/TestPage.css';
 import BlogHeader from '../components/BlogHeader';
 import TopBlogItem from '../components/TopBlogItem';
 import BlogItem from '../components/BlogItem';
-// import TopNBlogs from '../containers/TopNBlogs';
+import BlogDetail from '../components/BlogDetail';
+import BlogDetailNav from '../components/BlogDetailNav';
 
 const blog = {
   update: '2016年12月10日',
   title: '会員制限定　角煮フェスに潜入！！ 奏でろ！迸る肉汁ハーモニー♪'
 }
 const topblogitem = {
-  coverImagesUrl: 'ngoctien.png',
+  coverImagesUrl: '/img/event-1.jpg',
   title: 'jollydiem'
 }
 
 const blogitem = {
-  coverImageUrl: 'ngoctien.png',
+  coverImageUrl: '/img/event-1.jpg',
   title: 'ngoctien',
   url: 'ngoctien.abc',
   datePosted: 2016,
-  categories:'fish',
+  categories:'fish'
 }
+const blogdetail = {
+  content: '説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります',
+}
+
 
 
 /* Put your component to here to view */
@@ -42,6 +47,8 @@ export default (props) => (
         <TopBlogItem {...topblogitem}/>
         <div className="ui items">
           <BlogItem {...blogitem}/>
+          <BlogDetail {...blogdetail}/>
+          <BlogDetailNav />
         </div>
       </div>
 
