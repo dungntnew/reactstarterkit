@@ -121,8 +121,8 @@
       "genreName": "肉肉肉",
       "memberCount": 15,
       "joinerLimit": 20,
-      "joined": true,
-      "liked": true,
+      "joined": false,
+      "liked": false,
       "members": [
         {
           "id": "user-1",
