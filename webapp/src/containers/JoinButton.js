@@ -29,8 +29,20 @@ JoinButton.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {
-    joining: true
+  const {selectedEvent} = state
+  const {isFetching, data} = selectedEvent
+  if (!isFetching) {
+    const {joined} = data
+    return {
+      joining: joined,
+      isFetching: false
+    }
+  }
+  else {
+    return {
+      joining: false,
+      isFetching: true
+    }
   }
 }
 

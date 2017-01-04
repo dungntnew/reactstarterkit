@@ -8,10 +8,9 @@ import '../css/LikeButton.css';
 
 const LikeButton = (props) => {
   const buttonTitle = classNames({
-    'heart': true,
-    'icon':  true,
-    'emtry': !props.liked,
-    'like-button': props.liked
+    'red heart': props.liked,
+    'white heart': !props.liked,
+    'icon':  true
   })
   const buttonClasses = classNames({
     'ui button': true,
@@ -21,7 +20,9 @@ const LikeButton = (props) => {
   })
   const onClickFunc = props.liked ? props.onLike: props.onUnlike
   return (
-    <button className={buttonClasses} onClick={onClickFunc}><i className={buttonTitle}></i></button>
+    <button className={buttonClasses} onClick={onClickFunc}>
+       <i className={buttonTitle}></i>
+    </button>
   )
 }
 
@@ -32,8 +33,20 @@ LikeButton.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {
-    liked: false
+  const {selectedEvent} = state
+  const {isFetching, data} = selectedEvent
+  if (!isFetching) {
+    const {liked} = data
+    return {
+      liked: liked,
+      isFetching: false
+    }
+  }
+  else {
+    return {
+      liked: false,
+      isFetching: true
+    }
   }
 }
 

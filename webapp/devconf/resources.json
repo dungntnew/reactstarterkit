@@ -34,7 +34,6 @@
   ],
   "events": {
     "total": 100,
-
     "events": {
       "event-1": {
         "title": "event-1",
@@ -122,7 +121,8 @@
       "genreName": "肉肉肉",
       "memberCount": 15,
       "joinerLimit": 20,
-      "joined": false,
+      "joined": true,
+      "liked": true,
       "members": [
         {
           "id": "user-1",
@@ -149,17 +149,37 @@
           "displayName": "Name 4"
         }
       ],
+      "eventImageUrls": [
+        "/img/event-1.jpg",
+        "/img/event-2.jpg",
+        "/img/event-3.jpg",
+        "/img/event-1.jpg",
+        "/img/event-2.jpg",
+        "/img/event-3.jpg",
+        "/img/event-1.jpg",
+        "/img/event-2.jpg",
+        "/img/event-3.jpg",
+        "/img/event-1.jpg",
+        "/img/event-2.jpg",
+        "/img/event-3.jpg",
+        "/img/event-1.jpg",
+        "/img/event-2.jpg",
+        "/img/event-3.jpg"
+      ],
+      "coverImageUrl": "/img/event-1.jpg",
       "openDate": "20160112",
       "closeDate": "20160112",
       "registrationDateStart": "20160102",
       "registrationDateEnd": "20160102",
       "url": "/events/event-1",
-      "coverImageUrl": "/img/event-1.jpg",
-      "eventImageUrls": ["img/event/event1-1.png", "img/event/event1-2.png"],
-      "ownerId": "user-1",
-      "ownerUserName": "user-1",
-      "ownerFullName": "User-1",
-      "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100",
+      "owner": {
+        "id": "user-1",
+        "avatarUrl": "/img/avatar.png",
+        "displayName": "Kirito 2",
+        "url": "/member/kirito2",
+        "rank": 2,
+        "createdEventCount": 11
+      },
       "description": "スペインを中心に海外で9年間修行し、東京のガストロノミーの最高峰のひとつ「日本料理 龍吟」と世界的に有名なスペイン料理の「レストラン サンパウ」東京店のスーシェフを勤めた本多シェフが、2011年4月に麻布十番にオープンしたスペイン料理レストラン。"
     }
   ]

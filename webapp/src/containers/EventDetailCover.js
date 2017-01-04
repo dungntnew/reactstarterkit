@@ -31,11 +31,11 @@ class EventDetailCover extends Component {
 
   backgroundUrl() {
     const {activeIndex} = this.state
-    const {images} = this.props
+    const {images, coverImageUrl} = this.props
     if (images && images[activeIndex]) {
       return images[activeIndex]
     }else {
-      return `${process.env.PUBLIC_URL}/img/cover-01.jpg`
+      return coverImageUrl
     }
   }
 
@@ -107,47 +107,51 @@ class EventDetailCover extends Component {
     )
   }
 
-  render() {
-    const backgroundUrl = this.backgroundUrl()
-
+  renderLoading() {
     return (
-      <div className="event-detail-cover">
-        <CoverImage backgroundUrl={backgroundUrl}>
-           {this.renderUserAvar()}
-           {this.renderImageThumbnail()}
-        </CoverImage>
-        {this.renderEventImageSlider()}
-      </div>
+      <div> loading.. </div>
     )
+  }
+
+  render() {
+    const {isFetching} = this.props
+    if (!isFetching) {
+      const backgroundUrl = this.backgroundUrl()
+
+      return (
+        <div className="event-detail-cover">
+          <CoverImage backgroundUrl={backgroundUrl}>
+             {this.renderUserAvar()}
+             {this.renderImageThumbnail()}
+          </CoverImage>
+          {this.renderEventImageSlider()}
+        </div>
+      )
+    }
+    else {
+      return this.renderLoading()
+    }
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   const {selectedEvent} = state
-  return {
-    images: [
-      '/img/event-1.jpg',
-      '/img/event-2.jpg',
-      '/img/event-3.jpg',
-      '/img/event-1.jpg',
-      '/img/event-2.jpg',
-      '/img/event-3.jpg',
-      '/img/event-1.jpg',
-      '/img/event-2.jpg',
-      '/img/event-3.jpg',
-      '/img/event-1.jpg',
-      '/img/event-2.jpg',
-      '/img/event-3.jpg',
-      '/img/event-1.jpg',
-      '/img/event-2.jpg',
-      '/img/event-3.jpg',
-    ],
-    user: {
-      avatarUrl: '/img/avatar-01.png',
-      displayName: 'Kirito',
-      url: '/member/kirito',
-      rank: 4,
-      createdEventCount: 24,
+  const {isFetching, data} = selectedEvent
+
+  if (!isFetching) {
+    const {eventImageUrls, coverImageUrl} = data
+    const {owner} = data
+
+    return {
+      isFetching: false,
+      images: eventImageUrls,
+      coverImageUrl: coverImageUrl,
+      user: owner
+    }
+  }
+  else {
+    return {
+      isFetching: true
     }
   }
 }

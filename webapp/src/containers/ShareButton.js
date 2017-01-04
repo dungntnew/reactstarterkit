@@ -18,7 +18,10 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onShare: ()=> { console.log('on Share')}
+  onShare: ()=> {
+    console.log('on Share')
+    alert("not support yet!")
+  }
 })
 
 export default connect(mapStateToProps,

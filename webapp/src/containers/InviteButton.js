@@ -18,7 +18,10 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onInvite: ()=>{ console.log('on Invite')}
+  onInvite: ()=>{
+    console.log('on Invite')
+    alert('not support yet!')
+  }
 })
 
 export default connect(mapStateToProps,
