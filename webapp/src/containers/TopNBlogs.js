@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router';
 
-import BlogItem from '../components/BlogItem';
+import BlogItem from '../components/TopBlogItem';
 
 import '../css/TopNBlogs.css';
 
@@ -48,7 +48,7 @@ class TopNBlogs extends Component {
     else {
       const keys= _.keys(blogs)
       return keys.map((key, index) => (
-        <Blogitem key={key} {...blogs[key]}/>
+        <TopBlogItem key={key} {...blogs[key]}/>
       ))
     }
   }
@@ -74,4 +74,4 @@ class TopNBlogs extends Component {
   }
 }
 
-export default TopNBlogs;
+export default TopNBlogs
