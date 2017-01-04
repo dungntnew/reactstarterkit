@@ -122,6 +122,7 @@
       "genreName": "肉肉肉",
       "memberCount": 15,
       "joinerLimit": 20,
+      "joined": false,
       "members": [
         {
           "id": "user-1",

@@ -10,8 +10,12 @@ import JoinButton from './JoinButton';
 import ShareButton from './ShareButton';
 import LikeButton from './LikeButton';
 
+import {formatDateAndTimeStr,
+        formatPrice} from '../helpers/event';
+
 const EventDetailHeader = (props) => (
   <div className="ui stackable grid event-detail-header">
+    {!props.isFetching &&
     <div className='three column row'>
         {/* colum 1*/}
         <div className='column title-header'>
@@ -41,29 +45,46 @@ const EventDetailHeader = (props) => (
           <LikeButton />
         </div>
    </div>
+  }
   </div>
 )
 
 EventDetailHeader.propTypes = {
-  title: PropTypes.string.isRequired,
-  entryDealine: PropTypes.string.isRequired,
-  openDateTime: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  entryFee: PropTypes.string.isRequired,
-  joinerCount: PropTypes.number.isRequired,
-  joinerLimit: PropTypes.number.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  title: PropTypes.string,
+  entryDealine: PropTypes.string,
+  openDateTime: PropTypes.string,
+  genre: PropTypes.string,
+  entryFee: PropTypes.string,
+  joinerCount: PropTypes.number,
+  joinerLimit: PropTypes.number,
 }
 
 const mapStateToProps = (state, ownProps) => {
   const {selectedEvent} = state
-  return {
-    title: 'Test Event',
-    entryDealine: '10月5日 2:00PM',
-    openDateTime: '10月6日 2:00~8:00PM',
-    genre: '結婚記念日',
-    entryFee: '8,000円',
-    joinerCount: 25,
-    joinerLimit: 30
+  const {isFetching, data} = selectedEvent
+  if (!isFetching) {
+    const {title,
+           registrationDateStart,
+           openDate,
+           genreName,
+           price,
+           memberCount, joinerLimit} = data
+    return {
+      isFetching: false,
+      title: title,
+      entryDealine: formatDateAndTimeStr(registrationDateStart),
+      openDateTime: formatDateAndTimeStr(openDate),
+      genre: genreName,
+      entryFee: formatPrice(price),
+      joinerCount: memberCount,
+      joinerLimit: joinerLimit
+    }
+  }
+  else {
+    return {
+      isFetching: true,
+    }
   }
 }
 
