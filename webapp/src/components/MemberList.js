@@ -16,7 +16,7 @@ const MemberList = (props) => {
         {member.displayName}
       </div>
 
-      <div className='right floated content'>
+      <div className='right floated btn-remove'>
          <div className='ui button'
               onClick={()=> onRemove(member.id)}
          >

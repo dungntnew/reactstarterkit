@@ -81,34 +81,34 @@ class EventImageSlider extends Component {
     return (
         <div className="event-image-slider">
 
-        <div className='ui segment basic'>
+          <div className='ui segment basic'>
 
-          <button
-            onClick={()=>{this.onPrev()}}
-            className='ui left floated icon button'>
-            <i className="chevron left icon"></i>
-          </button>
+            <div
+              onClick={()=>{this.onPrev()}}
+              className='ui left floated icon left-icon'>
+              <i className="chevron left icon big"></i>
+            </div>
 
-          <button
-            onClick={()=>{this.onNext()}}
-            className='ui right floated icon button'>
-            <i className="chevron right icon"></i>
-          </button>
+            <div
+              onClick={()=>{this.onNext()}}
+              className='ui right floated icon right-icon'>
+              <i className="chevron right icon big"></i>
+            </div>
 
-          <img className='ui centered large image'
-                 src={activeUrl}
-                 alt='full event pic'
-            />
+            <img className='ui centered large image'
+                   src={activeUrl}
+                   alt='full event pic'
+              />
 
-        </div>
-
-
-        <div className=''>
-          <div>写真キャプション</div>
-          <div className='ui horizontal selection list'>
-             {thumbnails}
           </div>
-        </div>
+
+
+          <div className=''>
+            <div>写真キャプション</div>
+            <div className='ui horizontal selection list'>
+               {thumbnails}
+            </div>
+          </div>
         </div>
       )
     }
