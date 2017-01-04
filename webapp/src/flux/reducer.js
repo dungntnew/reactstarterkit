@@ -3,6 +3,7 @@ import { routerReducer as routing } from 'react-router-redux'
 
 import topEventReducer from './modules/top_event'
 import createEventReducer from './modules/create_event'
+import selectedEventReducer from './modules/selected_event'
 import targetReducer from './modules/target'
 import generReducer from './modules/gener'
 import dressCodeReducer from './modules/dressCode'
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   dressCode: dressCodeReducer,
   topEvent: topEventReducer,
   newEvent: createEventReducer,
+  selectedEvent: selectedEventReducer,
   place: placeReducer,
   routing
 })

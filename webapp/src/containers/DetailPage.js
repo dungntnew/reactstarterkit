@@ -20,6 +20,8 @@ import EventDetailBlocks from '../containers/EventDetailBlocks';
 import EventDetailCommentForm from '../containers/EventDetailCommentForm';
 import EventDetailRelatived from '../containers/EventDetailRelatived';
 
+import {fetchEventDetailIfNeed} from '../flux/modules/selected_event';
+
 class DetailPage extends Component {
     static propTypes = {
     }
@@ -31,10 +33,12 @@ class DetailPage extends Component {
       $(quickAccessMenu).sticky({
           context: '#context'
         });
-
+        const {eventId} = this.props.params
+        this.props.fetchEvent(eventId)
     }
 
     componentDidUpdate() {
+
     }
 
     /* TODO: fix quick access menu
@@ -55,7 +59,44 @@ class DetailPage extends Component {
       )
     }
 
+    renderEventDetail() {
+      return (
+        <div>
+        <EventDetailHeader />
+            <EventDetailCover />
+            <div className='ui grid detail-content'>
+              {this.renderQuickAccessMenu()}
+
+              <div className='thirteen wide computer thirteen wide tablet sixteen wide mobile column'>
+                <div className='ui detail-event' id='context'>
+                  <EventDetailBlocks />
+                  <EventDetailCommentForm />
+                  <EventDetailRelatived limit={4}/>
+                </div>
+              </div>
+            </div>
+        </div>
+      )
+    }
+
     render() {
+      const {isFetching, errorMessage} = this.props
+      let content
+      
+      if (isFetching) {
+        content = (
+          <div> Loading... </div>
+        )
+      }
+      else if (!isFetching && errorMessage) {
+        content = (
+          <div> System Error: {errorMessage} </div>
+        )
+      }
+      else {
+        content = this.renderEventDetail()
+      }
+
       return (
         <div className='detail-page'>
           <PageHeader>
@@ -63,19 +104,10 @@ class DetailPage extends Component {
             <QuickSearchBar location={this.props.location} params={this.props.params}/>
             <TopNav />
           </PageHeader>
-
-          <EventDetailHeader />
-          <EventDetailCover />
-          <div className='ui grid detail-content'>
-            {this.renderQuickAccessMenu()}
-
-            <div className='thirteen wide computer thirteen wide tablet sixteen wide mobile column'>
-              <div className='ui detail-event' id='context'>
-                <EventDetailBlocks />
-                <EventDetailCommentForm />
-                <EventDetailRelatived limit={4}/>
-              </div>
-            </div>
+          {content}
+          <div>
+          <button onClick={()=> {this.props.fetchEvent("event-1")}}>refresh</button
+          >
           </div>
           <PageFooter />
         </div>
@@ -84,10 +116,19 @@ class DetailPage extends Component {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
+  const {selectedEvent} = state
+  const {isFetching, errorMessage, data} = selectedEvent
+  console.log('CURRENT STATE: ', isFetching, errorMessage, data)
+  return {
+    isFetching: isFetching,
+    errorMessage: errorMessage,
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+  fetchEvent: (eventId)=> {
+    dispatch(fetchEventDetailIfNeed(eventId))
+  }
 })
 
 export default connect(mapStateToProps,
