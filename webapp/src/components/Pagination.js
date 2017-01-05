@@ -45,9 +45,9 @@ class Pagination extends Component {
       //
       else if (
            // top first n items
-           (i <= 5)
+           (i <= 4)
            // top last n items
-           || (i >= total - 5)
+           || (i >= total - 4)
            //3 items arround of active item
            || (i > current - 2 && i < current + 2)
 
@@ -81,21 +81,21 @@ class Pagination extends Component {
 
 
     return (
-      <div className="ui pagination menu">
+      <div className="pagination ui borderless menu">
         {hasPrev &&
-          <button className='ui icon button'
+          <div className='pagination-icon'
             onClick={()=> this.props.onPrevClick()}>
             <i className='chevron left icon'></i>
-          </button>
+          </div>
         }
 
         {indices}
 
         {hasNext &&
-          <button className='ui icon button'
+          <div className='pagination-icon'
             onClick={()=> this.props.onNextClick()}>
             <i className='chevron right icon'></i>
-          </button>
+          </div>
         }
       </div>
     )

@@ -127,12 +127,14 @@ const linkBlocks = (blockName) => (
 console.log(linkBlocks('FIND'))
 
 const PageFooter = (props) => (
-  <div className='page-footer ui container'>
-    <div className='ui four column stackable grid'>
-      {linkBlocks('FIND')}
-      {linkBlocks('HELP')}
-      {linkBlocks('OTHERS')}
-      {linkBlocks('SOCIAL')}
+  <div className='page-footer'>
+    <div className='ui container'>
+      <div className='ui four column stackable grid'>
+        {linkBlocks('FIND')}
+        {linkBlocks('HELP')}
+        {linkBlocks('OTHERS')}
+        {linkBlocks('SOCIAL')}
+      </div>
     </div>
   </div>
 )

@@ -1,3 +1,11 @@
 .blog-list-page {
-  
+  background-color: #f4f1f0;
+}
+
+.blog-list-page .blog-list-title {
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #444444;
+  padding-bottom: 25px;
 }
