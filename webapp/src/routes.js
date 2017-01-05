@@ -10,6 +10,7 @@ import SearchPage from './containers/SearchPage'
 import CreatePage from './containers/CreatePage'
 import DetailPage from './containers/DetailPage'
 import BlogListPage from './containers/BlogListPage'
+import BlogDetailPage from './containers/BlogDetailPage'
 
 const routes = (
   <Route path='/' component={App}>
@@ -22,6 +23,8 @@ const routes = (
           component={DetailPage}/>
     <Route path='/blogs/latest'
           component={BlogListPage}/>
+    <Route path='/blogs/:blogItemId'
+          component={BlogDetailPage}/>      
     <Route path='/test'
            component={TestPage}/>
     <Route path='/test2'

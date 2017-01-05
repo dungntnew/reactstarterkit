@@ -4,9 +4,6 @@ import BlogHeader from '../components/BlogHeader';
 
 import '../css/BlogDetail.css';
 
-
-
-
 class BlogDetail extends Component {
   constructor(props) {
     super(props)
@@ -14,43 +11,34 @@ class BlogDetail extends Component {
 
   static PropTypes = {
     content: PropTypes.string.isRequired,
-    coverImage: PropTypes.string.isRequired,
-    categories: PropTypes.arrayOf(PropTypes.string.isRequired),
+    coverImageUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    lastUpdate: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string.isRequired),
   }
 
 
   linkCategories() {
-    const links = [
-      <Link to='/category/#1'>角煮</Link>,
-      <Link to='/category/#2'>フェス</Link>,
-      <Link to='/category/#3'>会員制</Link>
-    ]
+    const {tags} = this.props
+    const links = tags.map((c) =>
+      <Link to={`/blogs/tag/${c}`} >{c}</Link>
+    )
 
     return links.map((link, index) => (
       <span key={index} className='cetegory'>{link}</span>
     ))
-
   }
 
-
   render() {
-    const {
-      content,
-      coverImage,
-      categories
-    }
-    = this.props
+    const {title, lastUpdate, content, coverImageUrl} = this.props
 
     return(
       <div className='ui text container blog-detail'>
-        <BlogHeader />
+        <BlogHeader title={title} lastUpdate={lastUpdate} />
 
         <div className='blog-content'>
           <p>{content}</p>
-          <img
-             alt='blog-cover-img'
-             src={coverImage}
-          />
+          <img alt='blog-cover-img' src={coverImageUrl} />
           <p>{content}</p>
         </div>
 

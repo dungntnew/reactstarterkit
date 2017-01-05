@@ -14,6 +14,9 @@ export const initLatestBlog = {
   isFetching: true, errorMessage: null, data: {}
 }
 
+export const initSelectedBlog = {isFetching:true, errorMessage: null, data:{}}
+
+
 export const guest = {
   avatarUrl: '/img/avatar.png',
   name: 'Guest',

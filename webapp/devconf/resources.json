@@ -52,6 +52,18 @@
       }
     }
   },
+
+  "blogdetails": [
+    {
+      "id": "blog-1",
+      "title": "event-1",
+      "url": "/blogs/blog-1",
+      "lastUpdate": "20170101 10:30",
+      "tags": ["肉", "そば"],
+      "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります",
+      "coverImageUrl": "/img/event-4.jpg"
+  }
+  ],
   "get_todos": [
     {
       "id": 1,
