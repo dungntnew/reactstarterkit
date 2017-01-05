@@ -1,0 +1,50 @@
+.event-detail-cover {
+  position: relative;
+}
+
+.event-detail-cover .thumbnails {
+  display: inline-block;
+  font-size: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0.5rem;
+}
+
+.event-detail-cover>.cover-image>.user-avatar {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+}
+
+.event-detail-cover>.cover-image> .thumbnails {
+padding-right: 20px;
+}
+
+.event-detail-cover>.cover-image> .thumbnails img {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+}
+
+.event-detail-cover>.cover-image>.thumbnails>.item>.show-more {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(0,0,0,.4);
+  vertical-align: middle;
+  border-radius: 4px;
+  opacity: 0.7;
+  padding-top: 20px;
+}
+.event-detail-cover>.cover-image>.thumbnails>.item>.show-more>.show {
+  padding-left: 30px !important;
+  color: #fff;
+}
+
+.event-detail-cover>.cover-image>.thumbnails span.text-show {
+  display: block;
+  text-align: center;
+  color: #fff;
+  padding-top: 4px;
+  font-size: 12px;
+}

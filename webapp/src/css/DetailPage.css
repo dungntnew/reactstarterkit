@@ -1,0 +1,31 @@
+.detail-page {
+  background: #fff;
+}
+
+.detail-page>.ui.grid.detail-content {
+  background-color: #f4f1f0;
+  margin-bottom: 10px;
+}
+
+.detail-page>.detail-content>.left-nav {
+  padding-left: 30px !important;
+  margin-top: 50px;
+}
+
+
+.detail-page>.detail-content>.left-nav a.link {
+  display: block;
+  color: #878787;
+  line-height: 2;
+}
+
+.detail-page>.ui.detail-event {
+  margin-top: 1.5rem;
+}
+
+.detail-page>.detail-event>.left-menu>.ui.segment {
+  background-color: #f4f1f0;
+  border: none;
+  box-shadow: none;
+}
+

@@ -8,6 +8,7 @@ import AboutPage from './containers/AboutPage'
 import TopLandingPage from './containers/TopLandingPage'
 import SearchPage from './containers/SearchPage'
 import CreatePage from './containers/CreatePage'
+import DetailPage from './containers/DetailPage'
 
 const routes = (
   <Route path='/' component={App}>
@@ -16,6 +17,8 @@ const routes = (
            component={SearchPage}/>
     <Route path='/create'
            component={CreatePage}/>
+    <Route path='/events/:eventId'
+          component={DetailPage}/>
     <Route path='/test'
            component={TestPage}/>
     <Route path='/test2'

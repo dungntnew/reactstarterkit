@@ -8,10 +8,23 @@ import 'semantic-ui-dropdown/dropdown.min.css'
 import 'semantic-ui-transition/transition.min.css'
 
 
+import 'semantic-ui-dimmer/dimmer.min.css'
+import 'semantic-ui-modal/modal.min.css'
+
+
 $.fn.transition = require('semantic-ui-transition')
 $.fn.dropdown = require('semantic-ui-dropdown')
 
+$.fn.dimmer = require('semantic-ui-dimmer')
+$.fn.modal = require('semantic-ui-modal')
+
 import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
+
+import {joinToEvent} from '../flux/modules/selected_event'
+
+import MemberList from '../components/MemberList';
+import EventImageSlider from '../components/EventImageSlider';
+
 
 const loadButton = (props) => (
   <button onClick={(e) => {
@@ -30,6 +43,23 @@ const BTN = connect((state)=>({}), (dispatch) => ({
     dispatch(fetchTopNEventsIfNeed('special', 10))
   }
 }))(loadButton)
+
+const joinButton = (props) => (
+  <button onClick={(e) => {
+    e.preventDefault()
+    props.exec()
+  }}>
+  JOIN EVENT
+  </button>
+)
+
+const JOIN = connect((state)=>({}), (dispatch) => ({
+  'exec': ()=> {
+    console.log("running: ", dispatch)
+    dispatch(joinToEvent('event-1', 'user-1'))
+  }
+}))(joinButton)
+
 
 const steps = [
   {
@@ -75,6 +105,33 @@ const event = {
   "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
 }
 
+const MemberListW = connect(()=>({
+  members: [
+    {
+      id: 'user-1',
+      url: '/members/user-1',
+      userAvatar: '/img/avatar.png',
+      displayName: 'Dung 1'
+    },
+    {
+      id: 'user-2',
+      url: '/members/user-2',
+      userAvatar: '/img/avatar.png',
+        displayName: 'Dung 2'
+    },
+    {
+      id: 'user-3',
+      url: '/members/user-3',
+      userAvatar: '/img/avatar.png',
+        displayName: 'Dung 3'
+    }
+  ]
+}), ()=>({
+  onRemove: (memberId) => {
+    console.log('remove member: ', memberId)
+  }
+}))(MemberList)
+
 /* Put your component to here to view */
 class TestPage extends Component {
 
@@ -116,6 +173,42 @@ class TestPage extends Component {
     )
   }
 
+  renderMemberList() {
+    return (<MemberListW />)
+  }
+
+  renderImageSlider() {
+    const images = [
+      '/img/event-1.jpg',
+      '/img/event-2.jpg',
+      '/img/event-3.jpg',
+      '/img/event-4.jpg',
+      '/img/event-1.jpg',
+      '/img/event-2.jpg',
+      '/img/event-3.jpg',
+      '/img/event-4.jpg',
+      '/img/event-1.jpg',
+      '/img/event-2.jpg',
+      '/img/event-3.jpg',
+      '/img/event-4.jpg',
+      '/img/event-1.jpg',
+      '/img/event-2.jpg',
+      '/img/event-3.jpg',
+      '/img/event-4.jpg'
+    ]
+    return (
+      <div className='ui basic modal' ref='eventImageSlider'>
+          <div className="actions">
+            <div className="ui basic cancel inverted button">
+              <i className="remove icon"></i>
+            </div>
+          </div>
+          <div className='content'>
+            <EventImageSlider images={images}/>
+          </div>
+      </div>
+    )
+  }
   render() {
 
 
@@ -127,10 +220,7 @@ class TestPage extends Component {
          </pre>
          <hr/>
          <div className='test-page-wrapper'>
-          <div className="ui form segment">
-
-              {this.renderTargetSelector()}
-          </div>
+         <JOIN />
 
          </div>
       </div>

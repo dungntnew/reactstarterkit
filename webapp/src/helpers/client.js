@@ -41,8 +41,29 @@ export const getJson = (endpoint, query, options) => {
              .then(parseJSON)
 }
 
+export const postJson = (endpoint, params, options) => {
+    const stringified = JSON.stringify(params)
+    const api = `${API_URL}${endpoint}`
+
+    const fetchOptions = Object.assign({}, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: stringified
+    }, options)
+
+    //console.log(api, fetchOptions)
+
+    return fetch(api, fetchOptions)
+             .then(checkHeaders)
+             .then(checkStatus)
+             .then(parseJSON)
+}
+
 const ApiClient = {
   getJson,
+  postJson,
 }
 
 export default ApiClient
