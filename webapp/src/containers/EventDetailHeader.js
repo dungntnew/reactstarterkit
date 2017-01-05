@@ -38,7 +38,7 @@ const EventDetailHeader = (props) => (
         </div>
 
         {/* colum 3*/}
-        <div className='column group-like'>
+        <div className='column group-likes'>
           <InviteButton />
           <JoinButton />
           <ShareButton />

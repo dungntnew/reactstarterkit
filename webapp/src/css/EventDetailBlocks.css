@@ -28,7 +28,7 @@
 }
 
 /*info*/
-.short-desc-block .block-header {
+.block.short-desc-block .block-header {
   font-size: 1.5rem;
   font-weight: 500;
   line-height: 0.83;
@@ -41,4 +41,19 @@
   line-height: 1.5;
   color: #666666;
   padding-bottom: 20px;
+}
+/*google-map*/
+.block.map-block .block-header {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 0.83;
+  color: #383838;
+  padding-bottom: 30px;
+}
+
+.block.map-block .map-content a{
+  color: #ff8a46;
+}
+.block.map-block .map-content .google-maps {
+  padding-top: 24px;
 }
