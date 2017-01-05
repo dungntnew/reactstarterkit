@@ -22,9 +22,10 @@ const blogitem = {
   coverImageUrl: '/img/event-1.jpg',
   title: 'ngoctien',
   url: 'ngoctien.abc',
-  datePosted: 2016,
-  categories:'fish'
+  lastUpdate: "2016",
+  tags: ['fish']
 }
+
 const blogdetail = {
   content: '説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります',
 }

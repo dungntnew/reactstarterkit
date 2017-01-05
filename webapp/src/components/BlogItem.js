@@ -1,6 +1,8 @@
 import React, {Component, PropTypes}from 'react'
 import {Link} from 'react-router';
 
+import {formatDateTime} from '../helpers/blog'
+
 import '../css/BlogItem.css';
 
 
@@ -9,16 +11,15 @@ class BlogItem extends Component {
     coverImageUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-    datePosted: PropTypes.string.isRequired,
-    categories: PropTypes.arrayOf(PropTypes.string.isRequired)
+    lastUpdate: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string.isRequired)
   }
 
   linkCategories() {
-    const links = [
-      <Link to='/category/#1'>角煮</Link>,
-      <Link to='/category/#2'>フェス</Link>,
-      <Link to='/category/#3'>会員制</Link>
-    ]
+    const {tags} = this.props
+    const links = tags.map((tag, index)=>(
+      <Link key={index} to={`/blogs/tags/${tag}`}>{tag}</Link>
+    ))
 
     return links.map((link, index) => (
       <span key={index} className='cetegory'>{link}</span>
@@ -31,8 +32,8 @@ class BlogItem extends Component {
       coverImageUrl,
       title,
       url,
-      datePosted,
-      categories
+      lastUpdate,
+      tags
     }
     = this.props
 
@@ -45,7 +46,7 @@ class BlogItem extends Component {
           <a className='header'>{title}</a>
           <div className='meta'>
             <span className='posted'>投稿日: </span>
-            <span className='date'>{datePosted}</span>
+            <span className='date'>{formatDateTime(lastUpdate)}</span>
           </div>
           <div className='meta category-list'>
             <p className='title'>カテゴリー：{this.linkCategories()} </p>

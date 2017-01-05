@@ -9,6 +9,11 @@ export const initCreateEvent = {
 }
 
 export const initSelectedEvent = {isFetching:true, errorMessage: null, data:{}}
+
+export const initLatestBlog = {
+  isFetching: false, errorMessage: null, blogItems: {}
+}
+
 export const guest = {
   avatarUrl: '/img/avatar.png',
   name: 'Guest',

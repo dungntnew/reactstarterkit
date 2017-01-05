@@ -7,6 +7,7 @@ export default (props) => (
       <span> Quick Link Debug Nav </span>:
       <Link to='/'>Top</Link> |
       <Link to='/create'>Create</Link> |
+      <Link to='/blogs/latest'>Blog</Link> |
       <Link to='/test'>Test Page A</Link> |
       <Link to='/test2'>Test Page B</Link> |
 
