@@ -51,7 +51,7 @@ class TopNav extends Component {
 
   render() {
     return (
-      <div className='top-nav'>
+      <div className='top-nav right menu'>
          <ul className="ui stackable menu top-nav-list">
          {this.renderMenuItems()}
          </ul>

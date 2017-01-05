@@ -5211,9 +5211,21 @@ semantic-ui-css:
   dependencies:
     jquery x.*
 
+semantic-ui-dimmer:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-dimmer/-/semantic-ui-dimmer-2.2.3.tgz#a038dfce488cfb732aecce0598ea253de340a875"
+
+semantic-ui-dropdown:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-dropdown/-/semantic-ui-dropdown-2.2.3.tgz#86cb6671ddd27478bf0438cb1cfb741e1f7da94b"
+
 semantic-ui-form:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/semantic-ui-form/-/semantic-ui-form-2.2.3.tgz#1acca6f885afbdb0a845a7b8b23d086e6cd14edf"
+
+semantic-ui-modal:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-modal/-/semantic-ui-modal-2.2.3.tgz#aee5cc75bee3891241e76c19ede563be63dcfb56"
 
 semantic-ui-progress:
   version "2.2.3"
@@ -5226,6 +5238,14 @@ semantic-ui-rating:
 semantic-ui-sidebar:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/semantic-ui-sidebar/-/semantic-ui-sidebar-2.2.3.tgz#2c1720421a310712265fd49799ddbba5378b5fff"
+
+semantic-ui-sticky:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-sticky/-/semantic-ui-sticky-2.2.3.tgz#ddced7f7dd10a21ae654904774a4ae69b9c3b3c5"
+
+semantic-ui-transition:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-transition/-/semantic-ui-transition-2.2.3.tgz#4bf150aacf91227ac460f4622be34146baf8d04c"
 
 semver-diff@^2.0.0:
   version "2.1.0"

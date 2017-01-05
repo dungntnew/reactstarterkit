@@ -1,0 +1,7 @@
+.send-mail-ok {
+  padding-bottom: 40px;
+}
+.send-mail-ok .field-text .text-link {
+  font-size: 0.75rem;
+  color: #ff8a46;
+}

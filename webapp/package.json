@@ -30,10 +30,15 @@
     "redux-actions": "^1.1.0",
     "redux-thunk": "^2.1.0",
     "semantic-ui-css": "^2.2.4",
+    "semantic-ui-dimmer": "^2.2.3",
+    "semantic-ui-dropdown": "^2.2.3",
     "semantic-ui-form": "^2.2.3",
+    "semantic-ui-modal": "^2.2.3",
     "semantic-ui-progress": "^2.2.3",
     "semantic-ui-rating": "^2.2.3",
     "semantic-ui-sidebar": "^2.2.3",
+    "semantic-ui-sticky": "^2.2.3",
+    "semantic-ui-transition": "^2.2.3",
     "whatwg-fetch": "^2.0.1"
   },
   "scripts": {

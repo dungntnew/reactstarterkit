@@ -1,0 +1,59 @@
+.block {
+  background-color: #fff;
+  padding: 30px 24px;
+  border-radius: 4px;
+  margin: 24px 16px 0;
+}
+.block .member-block {
+
+}
+.block.member-block>.block-header {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #383838;
+  padding-bottom: 1.25rem;
+}
+
+.block.member-block>.block-header span {
+  line-height: 0.83;
+  color: #878787;
+  padding-left: 20px;
+
+}
+
+.block.member-block>.list-member>.item img {
+  width: 64px;
+  height: 64px;
+}
+
+/*info*/
+.block.short-desc-block .block-header {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 0.83;
+  color: #383838;
+  padding-bottom: 30px;
+}
+
+.short-desc-block .description {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #666666;
+  padding-bottom: 20px;
+}
+/*google-map*/
+.block.map-block .block-header {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 0.83;
+  color: #383838;
+  padding-bottom: 30px;
+}
+
+.block.map-block .map-content a{
+  color: #ff8a46;
+}
+.block.map-block .map-content .google-maps {
+  padding-top: 24px;
+}
