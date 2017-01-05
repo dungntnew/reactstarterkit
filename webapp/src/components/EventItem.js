@@ -117,4 +117,4 @@ class EventItem extends Component {
   }
 }
 
-export default EventItem;
+export default EventItem
