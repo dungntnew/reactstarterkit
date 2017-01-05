@@ -21,12 +21,12 @@
 }
 
 .ui.grid.event-detail-header>.row>.detail-header {
-  padding-top: 1.25rem;
-  padding-left: 6.350rem;
+  padding-top: 1rem;
+  padding-left: 10rem;
 }
 
 
-@media only screen and (max-width: 768px) and (min-width: 320px) {
+@media only screen and (max-width: 1024px) and (min-width: 320px) {
   .ui.grid.event-detail-header>.row>.detail-header {
     padding-left: 0;
   }
@@ -38,11 +38,16 @@
   line-height: 1;
   color: #666666;
   font-size: 0.875rem;
+  border-bottom: 2px solid #e7e5e5!important;
+  padding-bottom: 3px;
 }
 
 @media only screen and (max-width: 768px) and (min-width: 320px) {
   .ui.grid.event-detail-header>.row>.detail-header>.des {
-   margin-left: 0.5rem;
+   margin-left: 1rem;
+  }
+  .ui.grid.event-detail-header>.row>.detail-header>.des:first-child {
+   margin-left: 0rem;
   }
 }
 
@@ -58,6 +63,12 @@
   font-size: 1rem;
 }
 
-.ui.grid.event-detail-header>.row>.group-like {
+.ui.grid.event-detail-header>.row>.group-likes {
+  padding-left: 5.25rem !important;
+}
 
+@media only screen and (max-width: 1024px) and (min-width: 320px) {
+  .ui.grid.event-detail-header>.row>.group-likes {
+    padding-left: 0;
+  }
 }

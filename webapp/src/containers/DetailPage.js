@@ -61,20 +61,20 @@ class DetailPage extends Component {
 
     renderEventDetail() {
       return (
-        <div>
-        <EventDetailHeader />
-            <EventDetailCover />
-            <div className='ui grid detail-content'>
-              {this.renderQuickAccessMenu()}
+        <div className='blok-content'>
+          <EventDetailHeader />
+          <EventDetailCover />
+          <div className='ui grid detail-content'>
+            {this.renderQuickAccessMenu()}
 
-              <div className='thirteen wide computer thirteen wide tablet sixteen wide mobile column'>
-                <div className='ui detail-event' id='context'>
-                  <EventDetailBlocks />
-                  <EventDetailCommentForm />
-                  <EventDetailRelatived limit={4}/>
-                </div>
+            <div className='thirteen wide computer thirteen wide tablet sixteen wide mobile column'>
+              <div className='ui detail-event' id='context'>
+                <EventDetailBlocks />
+                <EventDetailCommentForm />
+                <EventDetailRelatived limit={4}/>
               </div>
             </div>
+          </div>
         </div>
       )
     }
@@ -82,7 +82,7 @@ class DetailPage extends Component {
     render() {
       const {isFetching, errorMessage} = this.props
       let content
-      
+
       if (isFetching) {
         content = (
           <div> Loading... </div>
