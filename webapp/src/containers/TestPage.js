@@ -25,6 +25,7 @@ import {joinToEvent} from '../flux/modules/selected_event'
 import MemberList from '../components/MemberList';
 import EventImageSlider from '../components/EventImageSlider';
 
+import Pagination from '../components/Pagination';
 
 const loadButton = (props) => (
   <button onClick={(e) => {
@@ -211,7 +212,6 @@ class TestPage extends Component {
   }
   render() {
 
-
     return (
       <div>
          <p> This is TestPage, you can quick place your component to view</p>
@@ -220,7 +220,11 @@ class TestPage extends Component {
          </pre>
          <hr/>
          <div className='test-page-wrapper'>
-         <JOIN />
+         <Pagination total={100} current={15}
+           onNextClick={()=> console.log("Next page")}
+           onPrevClick={()=> console.log("Prev page")}
+           onChangePage={(i)=> console.log("Select page: " , i)}
+         />
 
          </div>
       </div>

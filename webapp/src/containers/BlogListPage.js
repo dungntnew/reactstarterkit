@@ -11,6 +11,7 @@ import QuickSearchBar from '../containers/QuickSearchBar';
 import PageFooter from '../components/PageFooter';
 
 import BlogItem from '../components/BlogItem';
+import Pagination from '../components/Pagination'
 
 import {fetchLatestBlogsIfNeed} from '../flux/modules/latest_blog';
 
@@ -29,7 +30,7 @@ class BlogListPage extends Component {
           from: 0
         }
       }
-      
+
       const {query} = location
       let {from, limit} = query
 
@@ -60,12 +61,47 @@ class BlogListPage extends Component {
       const keys= _.keys(blogItems)
 
       return (
-        <div className="ui items">
-          {
-            keys.map((key, index) => (
-              <BlogItem key={key} {...blogItems[key]}/>
-            ))
-          }
+        <div>
+          <div className="ui items">
+            {
+              keys.map((key, index) => (
+                <BlogItem key={key} {...blogItems[key]}/>
+              ))
+            }
+          </div>
+          {this.renderPagination()}
+        </div>
+      )
+    }
+
+    onNextPage() {
+      console.log("next page")
+    }
+
+    onPrevPage() {
+       console.log("prev page")
+    }
+
+    onChangePage(index) {
+      console.log("select page", index)
+    }
+
+    renderPagination() {
+      const {total, current} = this.props
+      return (
+          <Pagination
+             total={total}
+             current={current}
+             onNextClick={()=> this.onNextPage()}
+             onPrevClick={()=> this.onPrevPage()}
+             onChangePage={(index)=> this.onChangePage(index)}/>
+        )
+    }
+
+    renderPageTitle() {
+      return (
+        <div className='blog-list-title'>
+           テーブルレポート
         </div>
       )
     }
@@ -95,7 +131,9 @@ class BlogListPage extends Component {
             <QuickSearchBar location={this.props.location} params={this.props.params}/>
             <TopNav />
           </PageHeader>
+          {this.renderPageTitle()}
           {content}
+
           <div>
           <button onClick={()=> {this.props.fetchLatestBlogItems()}}>refresh</button
           >
@@ -108,12 +146,14 @@ class BlogListPage extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const {latestBlog} = state
-  const {isFetching, errorMessage, blogItems} = latestBlog
-  console.log('CURRENT STATE: ', isFetching, errorMessage, blogItems)
+  const {isFetching, errorMessage, data} = latestBlog
+  const {blogItems, total, current} = data
   return {
     isFetching: isFetching,
     errorMessage: errorMessage,
-    blogItems: blogItems
+    blogItems: blogItems,
+    total: total,
+    current: current
   }
 }
 

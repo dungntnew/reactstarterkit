@@ -17,13 +17,15 @@ export const fetchLatestBlogs = (limit, from=0) => {
   }
 }
 
-export const receiveLatestBlogs = (limit, from, blogItems) => {
+export const receiveLatestBlogs = (limit, from, data) => {
   return {
     type: LATEST_BLOGS_RECEIVE,
     payload: {
       from: from,
       limit: limit,
-      blogItems: blogItems
+      blogItems: data.blogItems,
+      total: data.total,
+      current: data.current
     }
   }
 }
@@ -43,10 +45,6 @@ export const fetchLatestBlogsFailed = (limit, from, error) => {
 // - Async Actions
 function shouldFetchLatestBlogs(globalState, limit, from) {
   const {latestBlog} = globalState
-
-  if (latestBlog.isFetching) {
-    return false
-  }
   return true
 }
 
@@ -68,7 +66,7 @@ export const fetchLatestBlogsIfNeed = (limit, from) => {
 
     // dispatch data received blog items
     .then(json=> {
-      return dispatch(receiveLatestBlogs(limit, from, json.blogItems))
+      return dispatch(receiveLatestBlogs(limit, from, json))
     })
 
     // dispatch fetch failed blog items
@@ -91,7 +89,11 @@ const latestBlogReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       isFetching: false,
       errorMessage: '',
-      blogItems: action.payload.blogItems
+      data: Object.assign({}, state.data, {
+        blogItems: action.payload.blogItems,
+        total: action.payload.total,
+        current: action.payload.current
+      })
     })
     case LATEST_BLOGS_FETCH_FAIL:
     return Object.assign({}, state, {

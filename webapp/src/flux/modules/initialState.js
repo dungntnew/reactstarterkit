@@ -11,7 +11,7 @@ export const initCreateEvent = {
 export const initSelectedEvent = {isFetching:true, errorMessage: null, data:{}}
 
 export const initLatestBlog = {
-  isFetching: false, errorMessage: null, blogItems: {}
+  isFetching: true, errorMessage: null, data: {}
 }
 
 export const guest = {
