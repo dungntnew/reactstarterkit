@@ -43,7 +43,7 @@ class BlogItem extends Component {
           <img src={coverImageUrl} alt="blog-img"/>
         </div>
         <div className='content'>
-          <a className='header'>{title}</a>
+          <a className='header' href={url}>{title}</a>
           <div className='meta'>
             <span className='posted'>投稿日: </span>
             <span className='date'>{formatDateTime(lastUpdate)}</span>
