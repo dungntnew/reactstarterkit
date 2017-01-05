@@ -4,34 +4,8 @@ import BlogHeader from '../components/BlogHeader';
 
 import '../css/BlogDetail.css';
 
-const links = [
 
-  {
-    'url': '/category/#1',
-    'name': '角煮'
-  },
-  {
-    'url': '/category/#2',
-    'name': 'フェス'
-  },
-  {
-    'url': '/category/#2',
-    'name': '会員制'
-  },
-]
 
-  const linkCategories = links.map(link => {
-    return(
-      <Link to={link.url}>{link.name}</Link>
-    )
-  })
-
-  const linkCategoryContent = (props) => {
-    const links = linkCategories
-    return links.map((link, index) =>
-      <span key={index} className='cetegory'>{link}</span>
-    )
-  }
 
 class BlogDetail extends Component {
   constructor(props) {
@@ -42,6 +16,20 @@ class BlogDetail extends Component {
     content: PropTypes.string.isRequired,
     coverImage: PropTypes.string.isRequired,
     categories: PropTypes.arrayOf(PropTypes.string.isRequired),
+  }
+
+
+  linkCategories() {
+    const links = [
+      <Link to='/category/#1'>角煮</Link>,
+      <Link to='/category/#2'>フェス</Link>,
+      <Link to='/category/#3'>会員制</Link>
+    ]
+
+    return links.map((link, index) => (
+      <span key={index} className='cetegory'>{link}</span>
+    ))
+
   }
 
 
@@ -67,12 +55,11 @@ class BlogDetail extends Component {
         </div>
 
         <div className='blog-footer'>
-          <p>カテゴリー：{linkCategoryContent()}</p>
+          <p>カテゴリー：{this.linkCategories()}</p>
         </div>
       </div>
     )
   }
-
 }
 
 export default BlogDetail
