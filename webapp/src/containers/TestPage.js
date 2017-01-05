@@ -20,6 +20,8 @@ $.fn.modal = require('semantic-ui-modal')
 
 import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
 
+import {joinToEvent} from '../flux/modules/selected_event'
+
 import MemberList from '../components/MemberList';
 import EventImageSlider from '../components/EventImageSlider';
 
@@ -41,6 +43,23 @@ const BTN = connect((state)=>({}), (dispatch) => ({
     dispatch(fetchTopNEventsIfNeed('special', 10))
   }
 }))(loadButton)
+
+const joinButton = (props) => (
+  <button onClick={(e) => {
+    e.preventDefault()
+    props.exec()
+  }}>
+  JOIN EVENT
+  </button>
+)
+
+const JOIN = connect((state)=>({}), (dispatch) => ({
+  'exec': ()=> {
+    console.log("running: ", dispatch)
+    dispatch(joinToEvent('event-1', 'user-1'))
+  }
+}))(joinButton)
+
 
 const steps = [
   {
@@ -201,13 +220,7 @@ class TestPage extends Component {
          </pre>
          <hr/>
          <div className='test-page-wrapper'>
-         <button onClick={
-           ()=> {
-            const ref = this.refs.eventImageSlider
-            $(ref).modal('show')
-           }
-         }>SHOW</button>
-         {this.renderImageSlider()}
+         <JOIN />
 
          </div>
       </div>

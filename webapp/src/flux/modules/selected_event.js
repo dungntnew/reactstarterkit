@@ -35,7 +35,7 @@ export const joinedEvent = (eventId, userId, data) => {
 
 export const joinEventFailed = (eventId, userId, error) => {
   return {
-    type: EVENT_DETAIL_FETCH_FAIL,
+    type: EVENT_JOIN_FAIL,
     payload: {
       eventId: eventId,
       userId: userId,
@@ -113,7 +113,7 @@ export const joinToEvent = (eventId, userId) => {
     dispatch(joinEvent(eventId, userId))
 
     // start all api-client
-    return ApiClient.postJson(`/join/${eventId}`, {userId: userId})
+    return ApiClient.postJson(`/events/${eventId}`, {userId: userId})
 
     // dispatch data received event
     .then(json=> {

@@ -43,7 +43,7 @@ export const getJson = (endpoint, query, options) => {
 
 export const postJson = (endpoint, params, options) => {
     const stringified = JSON.stringify(params)
-    const api = `${API_URL}${endpoint}?${stringified}`
+    const api = `${API_URL}${endpoint}`
 
     const fetchOptions = Object.assign({}, {
       method: 'POST',

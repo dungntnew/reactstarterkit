@@ -6,6 +6,8 @@ import classNames from 'classnames';
 
 import '../css/JoinButton.css';
 
+import {joinToEvent} from '../flux/modules/selected_event'
+
 const JoinButton = (props) => {
   const buttonTitle = props.joining ? 'キャンセル': '参加'
   const buttonClasses = classNames({
@@ -46,9 +48,12 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
+// TODO: mapping state to dispatch to get event id, user id
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onCancel: ()=>{ console.log('on Cancel')},
-  onJoin: ()=>{ console.log('on Join')}
+  onJoin: ()=>{
+    dispatch(joinToEvent('event-1', 'user-1'))
+  }
 })
 
 export default connect(mapStateToProps,
