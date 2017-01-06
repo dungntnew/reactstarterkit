@@ -12,6 +12,9 @@ import DetailPage from './containers/DetailPage'
 import BlogListPage from './containers/BlogListPage'
 import BlogDetailPage from './containers/BlogDetailPage'
 
+import MyPage from './containers/MyPage'
+import TopMyPage from './containers/TopMyPage'
+
 const routes = (
   <Route path='/' component={App}>
     <IndexRoute component={TopLandingPage}/>
@@ -24,7 +27,13 @@ const routes = (
     <Route path='/blogs/latest'
           component={BlogListPage}/>
     <Route path='/blogs/:blogItemId'
-          component={BlogDetailPage}/>      
+          component={BlogDetailPage}/>
+
+    <Route path='/mypage' component={MyPage}>
+          <IndexRoute component={TopMyPage}/>
+          {/* TODO add sub routes for mypage */}
+    </Route>
+
     <Route path='/test'
            component={TestPage}/>
     <Route path='/test2'
