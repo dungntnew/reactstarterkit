@@ -12,3 +12,26 @@
   bottom: 10px;
 }
 
+@media only screen and (max-width: 667px) and (min-width: 320px) {
+  .blog-item .content .des {
+    position: initial;
+  }
+}
+
+.blog-item .content .des span.cetegory a {
+  color: #878787 !important;
+  padding-left: 5px;
+}
+
+.blog-item .content .des span.cetegory a:hover {
+  color: #ff8a46 !important;
+}
+
+.blog-item .content .des span.cetegory::after {
+  content: ",";
+}
+
+.blog-item .content .des span.cetegory:last-child::after {
+  content: "";
+}
+

@@ -50,7 +50,7 @@ class BlogItem extends Component {
               <span className='date'>{formatDateTime(lastUpdate)}</span>
             </div>
             <div className='meta category-list'>
-              <p className='title'>カテゴリー：{this.linkCategories()} </p>
+              <p className='text-category'>カテゴリー：{this.linkCategories()} </p>
             </div>
           </div>
         </div>
