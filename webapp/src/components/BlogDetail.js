@@ -43,8 +43,9 @@ class BlogDetail extends Component {
           <p className='text-content'>{content}</p>
         </div>
 
+        <div className='line'></div>
         <div className='blog-footer'>
-          <p>カテゴリー：{this.linkCategories()}</p>
+          <p className='text-category'>カテゴリー：{this.linkCategories()}</p>
         </div>
       </div>
     )
