@@ -34,3 +34,11 @@
 .blog-detail .blog-footer span.cetegory a:hover {
   color: #ff8a46 !important;
 }
+
+.blog-detail .blog-footer span.cetegory::after {
+  content: ",";
+}
+
+.blog-detail .blog-footer span.cetegory:last-child::after {
+  content: "";
+}
