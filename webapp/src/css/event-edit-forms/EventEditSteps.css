@@ -50,3 +50,35 @@
   -webkit-box-shadow: -1px -1px 0 0 #ffffff inset;
   box-shadow: -1px -1px 0 0 #ffffff inset;
 }
+
+@media only screen and (max-width: 767px) {
+  .ui.ordered.steps.event-edit-steps {
+    flex-direction: initial;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.ordered.steps.event-edit-steps .step {
+    width: 35% !important;
+    font-size: 9px;
+    padding: 2px;
+  }
+}
+
+@media only screen and (max-width: 374px) {
+  .ui.ordered.steps.event-edit-steps .step {
+    font-size: 7px;
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+  .ui.ordered.steps.event-edit-steps .item_step::before {
+    font-size: 1rem;
+    margin: auto;
+  }
+}
+
+.ui.ordered.steps.event-edit-steps .item_step::before {
+  font-size: 18px !important;
+}
