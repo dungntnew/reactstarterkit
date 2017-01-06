@@ -19,20 +19,5 @@
   font-family: NotoSansCJKjp;
   font-size: 1.250em;
 }
-.blog-content {
-  background-color: #fff;
-  padding: 1rem;
-}
 
-.blog-footer {
-  background-color: #fff;
-  padding: 1rem;
-  color: #878787;
-}
-.blog-footer span a {
-  color: #878787;
-  padding-right: 10px;
-}
-.blog-footer span a:hover {
-  color: #444;
-}
+

@@ -33,13 +33,14 @@ class BlogDetail extends Component {
     const {title, lastUpdate, content, coverImageUrl} = this.props
 
     return(
-      <div className='ui text container blog-detail'>
+      <div className='blog-detail'>
         <BlogHeader title={title} lastUpdate={lastUpdate} />
+        <div className='line'></div>
 
         <div className='blog-content'>
-          <p>{content}</p>
-          <img alt='blog-cover-img' src={coverImageUrl} />
-          <p>{content}</p>
+          <p className='text-content'>{content}</p>
+          <img className ='medium ui image img-detail' alt='blog-cover-img' src={coverImageUrl} />
+          <p className='text-content'>{content}</p>
         </div>
 
         <div className='blog-footer'>

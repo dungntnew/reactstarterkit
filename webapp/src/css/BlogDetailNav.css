@@ -1,3 +1,44 @@
 .blog-detail-nav {
-  
+
+}
+
+.ui.grid.blog-detail-nav {
+  margin: 0;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+@media only screen and (max-width: 667px) and (min-width: 320px) {
+  .ui.stackable.grid.blog-detail-nav {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+  }
+}
+
+
+
+.ui.grid.blog-detail-nav .column{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ff8a46;
+}
+
+.blog-detail-nav .next {
+  text-align: right;
+}
+
+@media only screen and (max-width: 667px) and (min-width: 320px) {
+  .blog-detail-nav .next {
+    text-align: initial;
+  }
+}
+
+.blog-detail-nav .next .icon {
+  margin-left: 20px;
+}
+
+.blog-detail-nav .previous .icon {
+  padding-right: 20px;
 }
