@@ -15,7 +15,7 @@ import Pagination from '../components/Pagination'
 
 import {fetchLatestBlogsIfNeed} from '../flux/modules/latest_blog';
 
-const DEFAULT_MAX_BLOG_PER_PAGE = 10
+const DEFAULT_MAX_BLOG_PER_PAGE = 25
 
 class BlogListPage extends Component {
     static propTypes = {
@@ -90,7 +90,7 @@ class BlogListPage extends Component {
       const {total, current} = this.props
       return (
           <Pagination
-             total={10}
+             total={total}
              current={current}
              onNextClick={()=> this.onNextPage()}
              onPrevClick={()=> this.onPrevPage()}
@@ -160,7 +160,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  fechLatestBlogItems: (limit, from)=> {
+  fetchLatestBlogItems: (limit, from)=> {
     dispatch(fetchLatestBlogsIfNeed(limit, from))
   }
 })
