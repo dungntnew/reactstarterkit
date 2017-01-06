@@ -42,7 +42,7 @@ class BlogDetailPage extends Component {
       const {data} = this.props
 
       return (
-        <div>
+        <div className='ui text container'>
           {this.renderNav()}
           <BlogDetail {...data}/>
           {this.renderNav()}

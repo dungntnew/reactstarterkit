@@ -83,19 +83,19 @@ class Pagination extends Component {
     return (
       <div className="pagination ui borderless menu">
         {hasPrev &&
-          <div className='pagination-icon'
+          <a className='pagination-icon'
             onClick={()=> this.props.onPrevClick()}>
             <i className='chevron left icon'></i>
-          </div>
+          </a>
         }
 
         {indices}
 
         {hasNext &&
-          <div className='pagination-icon'
+          <a className='pagination-icon'
             onClick={()=> this.props.onNextClick()}>
             <i className='chevron right icon'></i>
-          </div>
+          </a>
         }
       </div>
     )

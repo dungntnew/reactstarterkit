@@ -1,7 +1,6 @@
 .blog-header {
   position: relative;
-  padding: 1rem;
-  background-color: #fff;
+  padding-bottom: 0.875rem;
 }
 
 .blog-header .header {

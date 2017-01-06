@@ -1,3 +1,44 @@
 .blog-detail {
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 1rem;
+}
 
+.blog-detail .line {
+  height: 1px;
+  background-color: #ececec;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.blog-detail .blog-content .text-content {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #444444;
+  padding-bottom: 1rem;
+}
+
+.blog-detail .blog-content .img-detail {
+  margin-bottom: 40px;
+}
+
+.blog-detail .blog-footer {
+  font-size: 0.875rem;
+  color: #878787;
+}
+
+.blog-detail .blog-footer span.cetegory a {
+  color: #878787 !important;
+  padding-left: 5px;
+}
+
+.blog-detail .blog-footer span.cetegory a:hover {
+  color: #ff8a46 !important;
+}
+
+.blog-detail .blog-footer span.cetegory::after {
+  content: ",";
+}
+
+.blog-detail .blog-footer span.cetegory:last-child::after {
+  content: "";
 }

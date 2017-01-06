@@ -1,10 +1,24 @@
 .pagination {
 
 }
+
 .pagination .pagination-icon {
   padding: 5px;
 }
 
+.pagination.menu .item{
+  color: #ff8a46 !important;
+}
+
+.pagination.menu .active.item {
+  color: #333333 !important;
+}
+
 .pagination .pagination-icon .icon {
   padding-top: 5px;
+  color:  #ff8a46;
+}
+
+.pagination .pagination-icon .icon:hover {
+  color: #878787;
 }
