@@ -1,36 +1,24 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router';
+import React, {PropTypes} from 'react'
+import {Link} from 'react-router'
 
+import '../css/BlogDetailNav.css'
 
-class BlogDetailNav extends Component {
-  constructor(props) {
-    super(props);
-    this.onPreLink = this.onPreLink.bind(this);
-    this.onNextLink = this.onNextLink.bind(this);
+const BlogDetailNav = (props) => (
+  <div className='blog-detail-nav'>
+      <a className="previous" href="#" onClick={()=> props.onPreLink() }>
+          <i className="angle left icon"></i>前の記事
+      </a>
+      <Link className="center" to='/blogs/latest'>テーブルレポート一覧</Link>
+      <a className="next" href="#" onClick={()=> props.onNextLink() }>
+         次の投稿
+         <i className="angle right icon"></i>
+      </a>
+  </div>
+)
 
-  }
-
-  onPreLink() {
-
-  }
-
-  onNextLink() {
-
-  }
-
-  render() {
-
-
-    return(
-
-      <div className='blog-detail-nav'>
-          <a className="previous"href="#" onClick={this.onPreLink}><i className="angle left icon"></i>前の記事</a>
-          <a className="center" href="#">テーブルレポート一覧</a>
-          <a className="next" href="#" onClick={this.onNextLink}>次の投稿<i className="angle right icon"></i></a>
-      </div>
-
-    )
-  }
+BlogDetailNav.propTypes = {
+  onPreLink: PropTypes.func.isRequired,
+  onNextLink: PropTypes.func.isRequired,
 }
 
 export default BlogDetailNav
