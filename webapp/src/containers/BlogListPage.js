@@ -15,7 +15,7 @@ import Pagination from '../components/Pagination'
 
 import {fetchLatestBlogsIfNeed} from '../flux/modules/latest_blog';
 
-const DEFAULT_MAX_BLOG_PER_PAGE = 25
+const DEFAULT_MAX_BLOG_PER_PAGE = 10
 
 class BlogListPage extends Component {
     static propTypes = {
@@ -90,7 +90,7 @@ class BlogListPage extends Component {
       const {total, current} = this.props
       return (
           <Pagination
-             total={total}
+             total={10}
              current={current}
              onNextClick={()=> this.onNextPage()}
              onPrevClick={()=> this.onPrevPage()}
@@ -131,8 +131,10 @@ class BlogListPage extends Component {
             <QuickSearchBar location={this.props.location} params={this.props.params}/>
             <TopNav />
           </PageHeader>
-          {this.renderPageTitle()}
-          {content}
+            <div className='ui text container'>
+              {this.renderPageTitle()}
+              {content}
+            </div>
 
           <div>
           <button onClick={()=> {this.props.fetchLatestBlogItems()}}>refresh</button
@@ -158,7 +160,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchLatestBlogItems: (limit, from)=> {
+  fechLatestBlogItems: (limit, from)=> {
     dispatch(fetchLatestBlogsIfNeed(limit, from))
   }
 })

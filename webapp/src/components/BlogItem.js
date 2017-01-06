@@ -44,12 +44,14 @@ class BlogItem extends Component {
         </div>
         <div className='content'>
           <a className='header' href={url}>{title}</a>
-          <div className='meta'>
-            <span className='posted'>投稿日: </span>
-            <span className='date'>{formatDateTime(lastUpdate)}</span>
-          </div>
-          <div className='meta category-list'>
-            <p className='title'>カテゴリー：{this.linkCategories()} </p>
+          <div className='des'>
+            <div className='meta'>
+              <span className='posted'>投稿日: </span>
+              <span className='date'>{formatDateTime(lastUpdate)}</span>
+            </div>
+            <div className='meta category-list'>
+              <p className='title'>カテゴリー：{this.linkCategories()} </p>
+            </div>
           </div>
         </div>
       </div>
