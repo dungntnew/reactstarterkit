@@ -3,6 +3,7 @@ import React, {Component, PropTypes} from 'react'
 
 import {connect} from 'react-redux';
 import classNames from 'classnames';
+import {Link} from 'react-router';
 import '../css/CreatedEventListMyPage.css';
 
 import {parsePaggingParams} from '../helpers/params'
@@ -71,28 +72,14 @@ class CreatedEventListMyPage extends Component {
       )
     }
 
-    // TODO: impl next, prev, select pagging
-    onNextPage() {
-      console.log("next page")
-    }
-
-    onPrevPage() {
-       console.log("prev page")
-    }
-
-    onChangePage(index) {
-      console.log("select page", index)
-    }
-
     renderPagination() {
       const {total, current} = this.props
       return (
           <Pagination
+             pathname={'/mypage/events/created'}
+             location={this.props.location}
              total={total}
-             current={current}
-             onNextClick={()=> this.onNextPage()}
-             onPrevClick={()=> this.onPrevPage()}
-             onChangePage={(index)=> this.onChangePage(index)}/>
+             current={current}/>
         )
     }
 
@@ -114,6 +101,7 @@ class CreatedEventListMyPage extends Component {
           "active": this.state.filterTag === filter
         })}
           onClick={()=> this.execFilter(filter)}
+          key={index}
         >
         {filterNames[index]}
         </a>
@@ -124,10 +112,11 @@ class CreatedEventListMyPage extends Component {
           {menuItems}
 
           <div className="right menu">
-             <button className="ui orange icon button">
+             <Link to='/create'
+               className="ui orange icon button">
                <i className="plus icon"></i>
                 新規登録
-             </button>
+             </Link>
             </div>
         </div>
       )

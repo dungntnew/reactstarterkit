@@ -36,7 +36,7 @@ class BlogListPage extends Component {
     }
 
     componentDidUpdate() {
-      
+
     }
 
     renderBlogList() {
@@ -57,27 +57,14 @@ class BlogListPage extends Component {
       )
     }
 
-    onNextPage() {
-      console.log("next page")
-    }
-
-    onPrevPage() {
-       console.log("prev page")
-    }
-
-    onChangePage(index) {
-      console.log("select page", index)
-    }
-
     renderPagination() {
       const {total, current} = this.props
       return (
           <Pagination
+             location={this.props.location}
+             pathname={'/blogs/latest'}
              total={total}
-             current={current}
-             onNextClick={()=> this.onNextPage()}
-             onPrevClick={()=> this.onPrevPage()}
-             onChangePage={(index)=> this.onChangePage(index)}/>
+             current={current}/>
         )
     }
 

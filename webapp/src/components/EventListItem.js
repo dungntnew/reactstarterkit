@@ -5,6 +5,7 @@ import EventTags from '../components/EventTags';
 
 import 'semantic-ui-progress/progress.min.css'
 import '../css/EventItem.css';
+import '../css/EventListItem.css';
 
 $.fn.progress = require('semantic-ui-progress')
 
@@ -56,12 +57,12 @@ class EventListItem extends Component {
     switch (status) {
       case EventStatus.OPENING:
         nextAction = (
-          <button className='ui red button' onClick={this.props.closeEvent()}>閉める</button>
+          <button className='ui red button' onClick={()=> this.props.closeEvent()}>閉める</button>
         )
         break;
       case EventStatus.CLOSED:
         nextAction = (
-          <button className='ui green button' onClick={this.props.requestProfit()}>売上申請</button>
+          <button className='ui green button' onClick={() => this.props.requestProfit()}>売上申請</button>
         )
         break;
       case EventStatus.PROFIT_CONFIRMING:
