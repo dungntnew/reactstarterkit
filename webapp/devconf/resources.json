@@ -390,8 +390,16 @@
   ],
   "events": {
     "total": 100,
+    "current": 99,
     "events": {
       "event-1": {
+        "opening": true,
+        "closed": false,
+        "closedNormally": null,
+        "rate": null,
+        "profitConfirming": null,
+        "profitConfirmed": null,
+        "profitConfirmFailed": null,
         "title": "event-1",
         "price": 431,
         "address": "Yokohama 123",
@@ -424,6 +432,13 @@
         "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
       },
       "event-2": {
+        "opening": false,
+        "closed": true,
+        "closedNormally": true,
+        "rate": 3,
+        "profitConfirming": false,
+        "profitConfirmed": null,
+        "profitConfirmFailed": null,
         "title": "event-2",
         "price": 312,
         "address": "Tokyo 123",
@@ -455,6 +470,13 @@
         "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
       },
       "event-3": {
+        "opening": false,
+        "closed": true,
+        "closedNormally": true,
+        "rate": 1,
+        "profitConfirming": true,
+        "profitConfirmed": null,
+        "profitConfirmFailed": null,
         "title": "event-3",
         "price": 34444,
         "address": "Tamachi 123",

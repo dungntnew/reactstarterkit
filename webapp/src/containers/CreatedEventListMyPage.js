@@ -10,8 +10,7 @@ import {parsePaggingParams} from '../helpers/params'
 import EventListItem from '../components/EventListItem'
 import Pagination from '../components/Pagination'
 
-// TODO impl created event fetch func
-import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
+import {fetchCreatedEventsIfNeed} from '../flux/modules/created_event'
 
 
 // TODO: move const to consts file
@@ -180,25 +179,28 @@ class CreatedEventListMyPage extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  // TODO: mapping state (current using top event)
-  // TODO: fix state for relatied event too!
-  const block = state.topEvent["special"]
-  const eventId = "test-event-1"
-
-  const eventItems = []
-
-  return {
-    isFetching: false,
-    errorMessage: "",
-    eventItems: block.events,
-    total: 10,
-    current: 1
+  const {createdEvent} = state
+  const {isFetching} = createdEvent
+  if (isFetching) {
+    return {
+      isFetching: true,
+    }
+  }
+  else {
+    const {errorMessage, events, total, current} = createdEvent
+    return {
+      isFetching: false,
+      errorMessage: errorMessage,
+      eventItems: events,
+      total: total,
+      current: current
+    }
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchEvents: (limit, from, filter)=> {
-    dispatch(fetchTopNEventsIfNeed("special", 10))
+    dispatch(fetchCreatedEventsIfNeed(filter, limit, from))
   }
 })
 
