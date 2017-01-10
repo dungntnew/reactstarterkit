@@ -2,3 +2,9 @@
   padding: 20px;
   background-color: #fff;
 }
+
+@media only screen and (max-width: 767px) {
+  .event-note-text-form .field{
+    margin-bottom: 1rem !important;
+  }
+}

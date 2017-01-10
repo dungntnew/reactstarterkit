@@ -1,16 +1,25 @@
 .pagination {
-
+  text-align: center;
 }
 
+.pagination .ui.borderless.menu {
+  background: none;
+  border: none;
+  box-shadow: none;
+  display: inline-flex;
+}
 .pagination .pagination-icon {
   padding: 5px;
 }
 
-.pagination.menu .item{
+.pagination .menu .item{
   color: #ff8a46 !important;
+  padding: 1rem !important;
+  min-width: 2em !important;
+
 }
 
-.pagination.menu .active.item {
+.pagination .menu .active.item {
   color: #333333 !important;
 }
 
