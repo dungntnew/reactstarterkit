@@ -35,6 +35,12 @@ class BlogListPage extends Component {
       this.props.fetchLatestBlogItems(limit, from)
     }
 
+    fetchBlogPage(page) {
+      const params = this.parsePrams()
+      const {limit} = params
+      this.props.fetchLatestBlogItems(limit, page)
+    }
+
     componentDidUpdate() {
 
     }
@@ -62,7 +68,9 @@ class BlogListPage extends Component {
       return (
           <Pagination
              location={this.props.location}
+             router={this.props.router}
              pathname={'/blogs/latest'}
+             onChanged={(i)=> {this.fetchBlogPage(i)}}
              total={total}
              current={current}/>
         )

@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import React, {Component, PropTypes}from 'react'
-import {Link} from 'react-router';
 import classNames from 'classnames';
 
 import '../css/Pagination.css';
@@ -15,16 +14,20 @@ class Pagination extends Component {
 
   static propTypes = {
     location: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
     pathname: PropTypes.string.isRequired,
     total: PropTypes.number.isRequired,
     current: PropTypes.number.isRequired,
+    onChanged: PropTypes.func.isRequired,
   }
 
   buildUrlToPage(pathname, mergedQuery, i) {
-    return {
+    const url= {
       pathname: pathname,
       query:Object.assign({}, mergedQuery, {from: i})
     }
+    this.props.router.push(url)
+    this.props.onChanged(i)
   }
 
   render() {
@@ -60,7 +63,7 @@ class Pagination extends Component {
 
          ) {
         return (
-          <Link key={i} className='item' to={this.buildUrlToPage(pathname, mergedQuery, i)}>{i}</Link>
+          <a key={i} className='item' onClick={()=> {this.buildUrlToPage(pathname, mergedQuery, i)}}>{i}</a>
         )
       }
 
@@ -90,19 +93,19 @@ class Pagination extends Component {
 
         <div className=" ui borderless menu">
           {hasPrev &&
-            <Link className='pagination-icon'
-                  to={this.buildUrlToPage(pathname, mergedQuery, current-1)}>
+            <a className='pagination-icon'
+                  onClick={()=> this.buildUrlToPage(pathname, mergedQuery, current-1)}>
                   <i className='chevron left icon'></i>
-            </Link>
+            </a>
           }
 
           {indices}
 
           {hasNext &&
-            <Link className='pagination-icon'
-                  to={this.buildUrlToPage(pathname, mergedQuery, current+1)}>
+            <a className='pagination-icon'
+                  to={()=> this.buildUrlToPage(pathname, mergedQuery, current+1)}>
                   <i className='chevron right icon'></i>
-            </Link>
+            </a>
           }
         </div>
       </div>

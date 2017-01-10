@@ -42,6 +42,12 @@ class CreatedEventListMyPage extends Component {
       this.props.fetchEvents(limit, from, 'all')
     }
 
+    fetchPage(page) {
+      const params = this.parsePrams()
+      const {limit} = params
+      this.props.fetchEvents(limit, page, 'all')
+    }
+
     componentDidUpdate() {
 
     }
@@ -76,8 +82,10 @@ class CreatedEventListMyPage extends Component {
       const {total, current} = this.props
       return (
           <Pagination
+             router={this.props.router}
              pathname={'/mypage/events/created'}
              location={this.props.location}
+             onChanged={(i)=> this.fetchPage(i)}
              total={total}
              current={current}/>
         )
