@@ -58,7 +58,10 @@ class CreatedEventListMyPage extends Component {
           <div className="ui items">
             {
               keys.map((key, index) => (
-                <EventListItem key={key} {...eventItems[key]}/>
+                <EventListItem key={key} {...eventItems[key]}
+                               closeEvent={()=> this.props.closeEvent(key) }
+                               requestProfit={()=> this.props.requestProfit(key) }
+                />
               ))
             }
           </div>
@@ -201,6 +204,12 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchEvents: (limit, from, filter)=> {
     dispatch(fetchCreatedEventsIfNeed(filter, limit, from))
+  },
+  closeEvent: (eventId) => {
+    console.log("request close event: ", eventId)
+  },
+  requestProfit: (eventId) => {
+    console.log("requet profit for: ", eventId)
   }
 })
 

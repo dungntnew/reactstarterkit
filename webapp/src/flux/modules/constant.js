@@ -3,3 +3,12 @@ export const EventFilterTypes = {
   LATEST: 'latest',
   TREND: 'trend'
 }
+
+export const EventStatus = {
+  OPENING: 'OPENING',
+  CLOSED: 'CLOSED',
+  PROFIT_CONFIRMING: 'PROFIT_CONFIRMING',
+  PROFIT_CONFIRMED: 'PROFIT_CONFIRMED',
+  PROFIT_CONFIRM_FAILED: 'PROFIT_CONFIRM_FAILED',
+  CANCELLED: 'CANCELLED'
+}

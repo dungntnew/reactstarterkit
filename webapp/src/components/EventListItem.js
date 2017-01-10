@@ -13,6 +13,8 @@ import {
   formatDateAndTimeStr
 } from '../helpers/event';
 
+import {EventStatus} from '../flux/modules/constant'
+
 class EventListItem extends Component {
   static propTypes = {
     coverImageUrl: PropTypes.string.isRequired,
@@ -26,6 +28,9 @@ class EventListItem extends Component {
     registrationDateStart: PropTypes.string.isRequired,
     registrationDateEnd: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
+
+    closeEvent: PropTypes.func.isRequired,
+    requestProfit: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -40,6 +45,48 @@ class EventListItem extends Component {
     const {joinerCount, joinerLimit} = this.props
     const total = joinerLimit > 1 ? joinerLimit : 1
     return joinerCount / total;
+  }
+
+  renderActions() {
+
+    const {status} = this.props
+
+    let nextAction;
+
+    switch (status) {
+      case EventStatus.OPENING:
+        nextAction = (
+          <button className='ui red button' onClick={this.props.closeEvent()}>閉める</button>
+        )
+        break;
+      case EventStatus.CLOSED:
+        nextAction = (
+          <button className='ui green button' onClick={this.props.requestProfit()}>売上申請</button>
+        )
+        break;
+      case EventStatus.PROFIT_CONFIRMING:
+        nextAction = (
+          <button className='ui orange button disabled'>売上申請中</button>
+        )
+        break;
+      case EventStatus.PROFIT_CONFIRMED:
+        nextAction = (
+          <button className='ui blue button disabled'>売上申請承認済み</button>
+        )
+        break;
+      case EventStatus.PROFIT_CONFIRM_FAILED:
+        nextAction = (
+          <button className='ui red button disabled'>売上申請失敗</button>
+        )
+        break;
+      default:
+    }
+
+    return (
+      <div className='event-actions'>
+      {nextAction}
+      </div>
+    )
   }
 
   render() {
@@ -70,6 +117,7 @@ class EventListItem extends Component {
 
     return (
       <div className='card event-item'>
+
         <a className='image event-cover-img'
            href={url}
             >
@@ -109,9 +157,14 @@ class EventListItem extends Component {
            </div>
         </div>
 
+        <div className='extra content'>
+        {this.renderActions()}
+        </div>
+
         <div ref='joinProgress' className={progressClasses}>
           <div className="bar"></div>
         </div>
+
       </div>
     )
   }
