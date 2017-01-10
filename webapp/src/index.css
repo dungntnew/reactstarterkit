@@ -56,15 +56,33 @@ i.icon {
   margin: 24px 0 !important;
 }
 
-/*
-.column {
-  max-width: 450px;
+.container-customize {
+  max-width: 460px;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  line-height: 1.5;
+  font-size: 1.14285714rem;
+  display: block;
+  margin: auto;
 }
-*/
+
+
+@media only screen and (max-width: 767px) {
+  .container-customize {
+    width: auto !important;
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+  }
+}
+/*.column {
+  max-width: 450px;
+}*/
+
 .text-comfirm {
   color: #666666;
-  font-size: 1rem;
+  font-size: 0.75rem;
 }
+
+
 /*reset*/
 
 /*

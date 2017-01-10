@@ -1,0 +1,45 @@
+.register-profile {
+  margin-top: 30px !important;
+  margin-bottom: 30px!important;
+}
+
+.register-profile .ui.form.form-create {
+  border: none;
+  box-shadow: none;
+  padding: 20px 30px;
+}
+
+.register-profile .form-create .field.field-input label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #666666;
+}
+
+.register-profile .form-create .field.field-input label span {
+  color: #e84465;
+  padding-left: 10px;
+}
+
+.register-profile .form-create .field.field-input input {
+   font-size: 0.875rem !important;
+}
+
+.register-profile .form-create .not-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e84465;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.text.container-customize.register-profile {
+    width: auto !important;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .ui.text.container-customize.register-profile {
+    width: auto !important;
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+  }
+}
