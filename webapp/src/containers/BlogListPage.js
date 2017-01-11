@@ -15,6 +15,8 @@ import Pagination from '../components/Pagination'
 
 import {fetchLatestBlogsIfNeed} from '../flux/modules/latest_blog';
 
+import {parsePaggingParams} from '../helpers/params'
+
 const DEFAULT_MAX_BLOG_PER_PAGE = 25
 
 class BlogListPage extends Component {
@@ -24,27 +26,7 @@ class BlogListPage extends Component {
 
     parsePrams() {
       const {location} = this.props
-      if (!location) {
-        return {
-          limit: DEFAULT_MAX_BLOG_PER_PAGE,
-          from: 0
-        }
-      }
-
-      const {query} = location
-      let {from, limit} = query
-
-      limit = _.toInteger(limit)
-      if (!_.isInteger(limit) || limit <= 0) {
-        limit = DEFAULT_MAX_BLOG_PER_PAGE
-      }
-
-      from = _.toInteger(from)
-      if (!_.isInteger(from) || from < 0) {
-        from = 0
-      }
-
-      return {limit, from}
+      return parsePaggingParams(location, DEFAULT_MAX_BLOG_PER_PAGE)
     }
 
     componentDidMount(){
@@ -53,7 +35,14 @@ class BlogListPage extends Component {
       this.props.fetchLatestBlogItems(limit, from)
     }
 
+    fetchBlogPage(page) {
+      const params = this.parsePrams()
+      const {limit} = params
+      this.props.fetchLatestBlogItems(limit, page)
+    }
+
     componentDidUpdate() {
+
     }
 
     renderBlogList() {
@@ -74,27 +63,16 @@ class BlogListPage extends Component {
       )
     }
 
-    onNextPage() {
-      console.log("next page")
-    }
-
-    onPrevPage() {
-       console.log("prev page")
-    }
-
-    onChangePage(index) {
-      console.log("select page", index)
-    }
-
     renderPagination() {
       const {total, current} = this.props
       return (
           <Pagination
+             location={this.props.location}
+             router={this.props.router}
+             pathname={'/blogs/latest'}
+             onChanged={(i)=> {this.fetchBlogPage(i)}}
              total={total}
-             current={current}
-             onNextClick={()=> this.onNextPage()}
-             onPrevClick={()=> this.onPrevPage()}
-             onChangePage={(index)=> this.onChangePage(index)}/>
+             current={current}/>
         )
     }
 

@@ -12,6 +12,14 @@ import DetailPage from './containers/DetailPage'
 import BlogListPage from './containers/BlogListPage'
 import BlogDetailPage from './containers/BlogDetailPage'
 
+import CreatedEventListMyPage from './containers/CreatedEventListMyPage'
+import LikedEventListMyPage from './containers/LikedEventListMyPage'
+import JoinedEventListMyPage from './containers/JoinedEventListMyPage'
+import ReviewedEventListMyPage from './containers/ReviewedEventListMyPage'
+
+import MyPage from './containers/MyPage'
+import TopMyPage from './containers/TopMyPage'
+
 const routes = (
   <Route path='/' component={App}>
     <IndexRoute component={TopLandingPage}/>
@@ -24,7 +32,17 @@ const routes = (
     <Route path='/blogs/latest'
           component={BlogListPage}/>
     <Route path='/blogs/:blogItemId'
-          component={BlogDetailPage}/>      
+          component={BlogDetailPage}/>
+
+    <Route path='/mypage' component={MyPage}>
+          <IndexRoute component={TopMyPage}/>
+          {/* TODO add sub routes for mypage */}
+          <Route path='/mypage/events/created' component={CreatedEventListMyPage}/>
+          <Route path='/mypage/events/liked' component={LikedEventListMyPage}/>
+          <Route path='/mypage/events/joined' component={JoinedEventListMyPage}/>
+          <Route path='/mypage/events/reviewed' component={ReviewedEventListMyPage}/>
+    </Route>
+
     <Route path='/test'
            component={TestPage}/>
     <Route path='/test2'

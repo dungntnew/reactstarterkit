@@ -49,6 +49,14 @@
         "coverImageUrl": "/img/event-4.jpg",
         "tags": ["肉", "そば"],
         "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります"
+      },
+      "blog-5": {
+        "title": "blog title -5",
+        "url": "/blogs/blog-5",
+        "lastUpdate": "20170103 09:30",
+        "coverImageUrl": "/img/event-4.jpg",
+        "tags": ["肉", "そば"],
+        "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります"
       }
     }
   },
@@ -390,8 +398,12 @@
   ],
   "events": {
     "total": 100,
+    "current": 99,
     "events": {
       "event-1": {
+        "status": "OPENING",
+        "closedStatus": null,
+        "rate": null,
         "title": "event-1",
         "price": 431,
         "address": "Yokohama 123",
@@ -424,6 +436,9 @@
         "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
       },
       "event-2": {
+        "status": "CLOSED",
+        "closedStatus": "NORMALLY",
+        "rate": 5,
         "title": "event-2",
         "price": 312,
         "address": "Tokyo 123",
@@ -455,6 +470,10 @@
         "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
       },
       "event-3": {
+        "status": "PROFIT_CONFIRMING",
+        "closedStatus": "NORMALLY",
+        "rate": 5,
+
         "title": "event-3",
         "price": 34444,
         "address": "Tamachi 123",
@@ -485,7 +504,112 @@
         "ownerUserName": "user-3",
         "ownerFullName": "User-3",
         "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
-      }
+      },
+      "event-4": {
+        "status": "PROFIT_CONFIRMED",
+        "closedStatus": "NORMALLY",
+        "rate": 5,
+        "title": "event-4",
+        "price": 34444,
+        "address": "Tamachi 123",
+        "tags": [
+          "Niku",
+          "Tabehodai",
+          "Dinner"
+        ],
+        "target": "Niku",
+        "targetName": "Niku niku",
+        "joinerCount": 15,
+        "joinerLimit": 20,
+        "joinerIds": [
+          "user-1",
+          "user-2",
+          "user-3"
+        ],
+        "openDate": "20160112",
+        "registrationDateStart": "20160102",
+        "registrationDateEnd": "20160102",
+        "url": "/events/event-3",
+        "coverImageUrl": "/img/event-3.jpg",
+        "eventImageUrls": [
+          "img/event/event3-1.png",
+          "img/event/event3-2.png"
+        ],
+        "ownerId": "user-3",
+        "ownerUserName": "user-3",
+        "ownerFullName": "User-3",
+        "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
+      },
+      "event-5": {
+        "status": "PROFIT_CONFIRM_FAILED",
+        "closedStatus": "NORMALLY",
+        "rate": 2,
+        "title": "event-5",
+        "price": 34444,
+        "address": "Tamachi 123",
+        "tags": [
+          "Niku",
+          "Tabehodai",
+          "Dinner"
+        ],
+        "target": "Niku",
+        "targetName": "Niku niku",
+        "joinerCount": 15,
+        "joinerLimit": 20,
+        "joinerIds": [
+          "user-1",
+          "user-2",
+          "user-3"
+        ],
+        "openDate": "20160112",
+        "registrationDateStart": "20160102",
+        "registrationDateEnd": "20160102",
+        "url": "/events/event-3",
+        "coverImageUrl": "/img/event-3.jpg",
+        "eventImageUrls": [
+          "img/event/event3-1.png",
+          "img/event/event3-2.png"
+        ],
+        "ownerId": "user-3",
+        "ownerUserName": "user-3",
+        "ownerFullName": "User-3",
+        "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
+    },
+    "event-6": {
+      "status": "CLOSE_FAILED",
+      "closedStatus": "NORMALLY",
+      "rate": 2,
+      "title": "event-6",
+      "price": 34444,
+      "address": "Tamachi 123",
+      "tags": [
+        "Niku",
+        "Tabehodai",
+        "Dinner"
+      ],
+      "target": "Niku",
+      "targetName": "Niku niku",
+      "joinerCount": 15,
+      "joinerLimit": 20,
+      "joinerIds": [
+        "user-1",
+        "user-2",
+        "user-3"
+      ],
+      "openDate": "20160112",
+      "registrationDateStart": "20160102",
+      "registrationDateEnd": "20160102",
+      "url": "/events/event-3",
+      "coverImageUrl": "/img/event-3.jpg",
+      "eventImageUrls": [
+        "img/event/event3-1.png",
+        "img/event/event3-2.png"
+      ],
+      "ownerId": "user-3",
+      "ownerUserName": "user-3",
+      "ownerFullName": "User-3",
+      "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
+     }
     }
   },
   "details": [
