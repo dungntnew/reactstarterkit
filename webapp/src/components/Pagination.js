@@ -1,9 +1,10 @@
 import _ from 'lodash'
 import React, {Component, PropTypes}from 'react'
-import {Link} from 'react-router';
 import classNames from 'classnames';
 
 import '../css/Pagination.css';
+
+import {parsePaggingParams} from '../helpers/params'
 
 class Pagination extends Component {
 
@@ -12,27 +13,36 @@ class Pagination extends Component {
   }
 
   static propTypes = {
+    location: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
+    pathname: PropTypes.string.isRequired,
     total: PropTypes.number.isRequired,
     current: PropTypes.number.isRequired,
-    onPrevClick: PropTypes.func.isRequired,
-    onNextClick: PropTypes.func.isRequired,
-    onChangePage: PropTypes.func.isRequired,
+    onChanged: PropTypes.func.isRequired,
   }
 
-  onPrevClick() {
-
-  }
-
-  onNextClick() {
-
+  buildUrlToPage(pathname, mergedQuery, i) {
+    const url= {
+      pathname: pathname,
+      query:Object.assign({}, mergedQuery, {from: i})
+    }
+    this.props.router.push(url)
+    this.props.onChanged(i)
   }
 
   render() {
-    const {total, current} = this.props
+    const {total, current, pathname} = this.props
     const hasNext = current < total
     const hasPrev = current > 1
     let skipBefore = false
     let skipAfter = false
+
+    const {location} = this.props
+    const {query} = location
+    const {from, limit} = parsePaggingParams(location, 25)
+
+    const mergedQuery = Object.assign({}, query, {from, limit})
+
 
     const indices = _.range(1, total).map(i => {
 
@@ -53,9 +63,7 @@ class Pagination extends Component {
 
          ) {
         return (
-          <a  onClick={()=> this.props.onChangePage(i)}
-              key={i}
-              className='item'>{i}</a>
+          <a key={i} className='item' onClick={()=> {this.buildUrlToPage(pathname, mergedQuery, i)}}>{i}</a>
         )
       }
 
@@ -63,18 +71,18 @@ class Pagination extends Component {
       else if (!skipBefore && i > 1 && i < current) {
         skipBefore = true
         return (
-          <div  key={i} className="disabled item before-skip">
+          <a  key={i} className="disabled item before-skip">
             ...
-          </div>
+          </a>
         )
       }
       // skip last active item
       else if (!skipAfter && i < total  && i > current) {
         skipAfter = true
         return (
-          <div  key={i} className="disabled item after-skip">
+          <a  key={i} className="disabled item after-skip">
             ...
-          </div>
+          </a>
         )
       }
     })
@@ -86,8 +94,8 @@ class Pagination extends Component {
         <div className=" ui borderless menu">
           {hasPrev &&
             <a className='pagination-icon'
-              onClick={()=> this.props.onPrevClick()}>
-              <i className='chevron left icon'></i>
+                  onClick={()=> this.buildUrlToPage(pathname, mergedQuery, current-1)}>
+                  <i className='chevron left icon'></i>
             </a>
           }
 
@@ -95,8 +103,8 @@ class Pagination extends Component {
 
           {hasNext &&
             <a className='pagination-icon'
-              onClick={()=> this.props.onNextClick()}>
-              <i className='chevron right icon'></i>
+                  to={()=> this.buildUrlToPage(pathname, mergedQuery, current+1)}>
+                  <i className='chevron right icon'></i>
             </a>
           }
         </div>
