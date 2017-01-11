@@ -1,3 +1,5 @@
+import {JoinEventStep} from './constant'
+
 export const initTopEvent = {
   latest: {isFetching: false, errorMessage: null, events: {}},
   trend: {isFetching: false, errorMessage: null, events: {}},
@@ -16,11 +18,29 @@ export const initLatestBlog = {
 
 export const initSelectedBlog = {isFetching:true, errorMessage: null, data:{}}
 
+export const initCredit = {
+                           isFetching: false,
+                           errorMessage: null,
+                           credits: {},
+                           saving: false,
+                           saved: false,
+                           newCredit: {
+                             method: 'クレジットカード',
+                             number: 'xxx',
+                             securityCode: 'aa',
+                             exprYear: 'dd',
+                             exprMonth: 'dd'
+                           }}
+
+
+export const initJoinEvent = {
+  step: JoinEventStep.BEGIN
+}
 
 export const guest = {
   avatarUrl: '/img/avatar.png',
   name: 'Guest',
-  id: '1',
+  id: 'user-1',
   url: '/user/gust',
   anonymous: true,
 }

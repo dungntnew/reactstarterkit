@@ -40,7 +40,7 @@ const EventDetailHeader = (props) => (
         {/* colum 3*/}
         <div className='column group-likes'>
           <InviteButton />
-          <JoinButton />
+          <JoinButton push={props.router.push}/>
           <ShareButton />
           <LikeButton />
         </div>
@@ -58,19 +58,22 @@ EventDetailHeader.propTypes = {
   entryFee: PropTypes.string,
   joinerCount: PropTypes.number,
   joinerLimit: PropTypes.number,
+  router: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
   const {selectedEvent} = state
   const {isFetching, data} = selectedEvent
   if (!isFetching) {
-    const {title,
+    const {eventId,
+           title,
            registrationDateStart,
            openDate,
            genreName,
            price,
            memberCount, joinerLimit} = data
     return {
+      eventId: eventId,
       isFetching: false,
       title: title,
       entryDealine: formatDateAndTimeStr(registrationDateStart),

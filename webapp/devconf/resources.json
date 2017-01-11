@@ -14,6 +14,16 @@
       "displayName": "Dao Van Nghiem"
     }
   },
+  "credits": {
+    "userId": "user-1",
+    "data": {
+      "number": "xxx",
+      "exprMonth": "dd",
+      "exprYear": "dd",
+      "securityCode": "aa",
+      "method": "クレジットカード"
+    }
+  },
   "blogs": {
     "total": 250,
     "current": 99,
@@ -23,7 +33,10 @@
         "url": "/blogs/blog-1",
         "lastUpdate": "20170101 10:30",
         "coverImageUrl": "/img/event-1.jpg",
-        "tags": ["肉", "そば"],
+        "tags": [
+          "肉",
+          "そば"
+        ],
         "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります"
       },
       "blog-2": {
@@ -31,7 +44,10 @@
         "url": "/blogs/blog-2",
         "lastUpdate": "20170101 11:30",
         "coverImageUrl": "/img/event-2.jpg",
-        "tags": ["肉", "そば"],
+        "tags": [
+          "肉",
+          "そば"
+        ],
         "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります"
       },
       "blog-3": {
@@ -39,7 +55,10 @@
         "url": "/blogs/blog-3",
         "lastUpdate": "20170102 12:30",
         "coverImageUrl": "/img/event-3.jpg",
-        "tags": ["肉", "そば"],
+        "tags": [
+          "肉",
+          "そば"
+        ],
         "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります"
       },
       "blog-4": {
@@ -47,22 +66,27 @@
         "url": "/blogs/blog-4",
         "lastUpdate": "20170103 09:30",
         "coverImageUrl": "/img/event-4.jpg",
-        "tags": ["肉", "そば"],
+        "tags": [
+          "肉",
+          "そば"
+        ],
         "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります"
       }
     }
   },
-
   "blogdetails": [
     {
       "id": "blog-1",
       "title": "event-1",
       "url": "/blogs/blog-1",
       "lastUpdate": "20170101 10:30",
-      "tags": ["肉", "そば"],
+      "tags": [
+        "肉",
+        "そば"
+      ],
       "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります",
       "coverImageUrl": "/img/event-4.jpg"
-  }
+    }
   ],
   "get_todos": [
     {

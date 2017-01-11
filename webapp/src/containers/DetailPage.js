@@ -27,8 +27,6 @@ class DetailPage extends Component {
     }
 
     componentDidMount(){
-      console.log('page detail: params = ', this.props.params)
-
       const {quickAccessMenu} = this.refs
       $(quickAccessMenu).sticky({
           context: '#context'
@@ -38,7 +36,6 @@ class DetailPage extends Component {
     }
 
     componentDidUpdate() {
-
     }
 
     /* TODO: fix quick access menu
@@ -60,10 +57,11 @@ class DetailPage extends Component {
     }
 
     renderEventDetail() {
+      const {eventId} = this.props.params
       return (
         <div className='blok-content'>
-          <EventDetailHeader />
-          <EventDetailCover />
+          <EventDetailHeader router={this.props.router}/>
+          <EventDetailCover/>
           <div className='ui grid detail-content'>
             {this.renderQuickAccessMenu()}
 
@@ -118,7 +116,7 @@ class DetailPage extends Component {
 const mapStateToProps = (state, ownProps) => {
   const {selectedEvent} = state
   const {isFetching, errorMessage, data} = selectedEvent
-  console.log('CURRENT STATE: ', isFetching, errorMessage, data)
+
   return {
     isFetching: isFetching,
     errorMessage: errorMessage,

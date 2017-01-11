@@ -18,11 +18,11 @@ export const defaultRules = {
     ]
   },
   number: {
-    identifier  : 'number',
+    identifier  : 'number_field',
     rules: [
       {
         type   : 'number',
-        prompt : 'Please enter a valid number'
+        prompt : 'Please enter a valid number value'
       }
     ]
   },
