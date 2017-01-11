@@ -1,0 +1,41 @@
+.register-ok {
+  margin-top: 30px !important;
+  margin-bottom: 30px!important;
+}
+
+.register-ok .ui.segment.content {
+  padding: 20px 30px;
+}
+
+.register-ok .ui.segment.content h2 {
+  padding-bottom: 16px;
+  font-size: 1.5rem;
+}
+
+.register-ok .ui.segment.content .button {
+  margin-top: 40px;
+}
+
+.register-ok .ui.segment.content .text-link {
+  margin-top: 14px;
+  font-size: 12px;
+  color: #666666;
+}
+
+.register-ok .ui.segment.content .text-link a {
+   color: #ff8a46;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.text.container-customize.register-ok {
+    width: auto !important;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .ui.text.container-customize.register-ok {
+    width: auto !important;
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+  }
+}

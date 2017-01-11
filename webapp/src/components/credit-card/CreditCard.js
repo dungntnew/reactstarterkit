@@ -2,7 +2,7 @@ import $ from 'jquery';
 import React, {PropTypes, Component} from 'react';
 
 import 'semantic-ui-form/form.min.css'
-import '../css/CreditCard.css';
+import '../../css/credit-card/CreditCard.css';
 
 
 
@@ -11,7 +11,7 @@ class CreditCard extends Component {
 
   static propTypes = {
     number: PropTypes.number.isRequired,
-    password: PropTypes.number.isRequired,
+    password: PropTypes.string.isRequired,
     exprMonth: PropTypes.object.isRequired,
     exprYear: PropTypes.object.isRequired
   }
@@ -25,15 +25,18 @@ class CreditCard extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.addForm.reset();
   }
 
   render() {
     return (
-      <div className='ui text container credit-card' >
-        <div className='ui segments centered'>
-          <h2>お支払い方法</h2>
-          <form className='ui form segment form-create' onSubmit={this.handleSubmit}>
-            <div className='field'>
+      <div className='ui text container-customize credit-card' >
+        <div className='ui segment centered'>
+          <h2 className='center'>お支払い方法</h2>
+          <form className='ui form segment form-create'
+                ref={(input => this.addForm = input)}
+                onSubmit={this.handleSubmit}>
+            <div className='field field-input'>
               <label>カード番号<span>※必須</span></label>
               <input
                   onChange={this.handleChange}
@@ -48,14 +51,14 @@ class CreditCard extends Component {
 
             <label>有効期限<span>※必須</span></label>
             <div className='two fields'>
-              <div className='field'>
+              <div className='field field-input'>
                 <input
                     type="text"
                     ref={(input => this.exprMonth = input)}/>
               </div>
               <label>月</label>
 
-              <div className='field'>
+              <div className='field field-input'>
                 <input
                     type="text"
                     ref={(input => this.exprYear = input)}/>
@@ -63,7 +66,7 @@ class CreditCard extends Component {
               <label>日</label>
             </div>
 
-            <div className='field'>
+            <div className='field field-input'>
               <label>セキュリティコード<span>※必須</span></label>
               <input
                 placeholder='カード背面4桁もしくは3桁の番号'
@@ -72,7 +75,7 @@ class CreditCard extends Component {
             </div>
 
             <p className='not-text'>セキュリティコードとは</p>
-            <button className='ui button btn-orange'>次へ進む</button>
+            <button className='ui button btn-link btn-orange'>次へ進む</button>
           </form>
         </div>
       </div>
