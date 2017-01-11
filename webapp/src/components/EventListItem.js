@@ -48,6 +48,10 @@ class EventListItem extends Component {
     return joinerCount / total;
   }
 
+  showError() {
+    alert("ERROR---")
+  }
+
   renderActions() {
 
     const {status} = this.props
@@ -57,12 +61,17 @@ class EventListItem extends Component {
     switch (status) {
       case EventStatus.OPENING:
         nextAction = (
-          <button className='ui red button' onClick={()=> this.props.closeEvent()}>閉める</button>
+          <button className='ui red button' onClick={()=> this.props.closeEvent()}>終了申請</button>
         )
         break;
       case EventStatus.CLOSED:
         nextAction = (
           <button className='ui green button' onClick={() => this.props.requestProfit()}>売上申請</button>
+        )
+        break;
+      case EventStatus.CLOSE_FAILED:
+        nextAction = (
+          <button className='ui red button' onClick={() => this.showError()}>エラー</button>
         )
         break;
       case EventStatus.PROFIT_CONFIRMING:

@@ -8,12 +8,19 @@ import TopNav from '../containers/TopNav';
 import QuickSearchBar from '../containers/QuickSearchBar';
 import PageFooter from '../components/PageFooter';
 
+import 'semantic-ui-dimmer/dimmer.min.css'
+import 'semantic-ui-modal/modal.min.css'
+
 import '../css/MyPage.css';
+
+$.fn.dimmer = require('semantic-ui-dimmer')
+$.fn.modal = require('semantic-ui-modal')
 
 class MyPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      confirmMessage: ''
     }
   }
 
@@ -85,6 +92,28 @@ class MyPage extends Component {
     )
   }
 
+  showConfirmDiaLog(msg) {
+    this.setState({
+      confirmMessage: msg,
+    })
+    $(this.refs.confirmDiaLog).modal('show')
+  }
+
+  hideConfirmDiaLog() {
+    this.setState({
+      confirmMessage: '',
+    })
+    $(this.refs.confirmDiaLog).modal('hide')
+  }
+
+  renderConfirmDiaLog() {
+    return (
+      <div className='ui modal' ref='confirmDiaLog'>
+         {this.state.confirmMessage}
+      </div>
+    )
+  }
+
   render() {
     const content = (
       <div className='ui stackable two column vertically divided grid'>
@@ -112,6 +141,7 @@ class MyPage extends Component {
           </PageHeader>
           <div className='ui container'>
             {content}
+            {this.renderConfirmDiaLog()}
           </div>
           <PageFooter />
       </div>

@@ -4,6 +4,7 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import {Link} from 'react-router';
+
 import '../css/CreatedEventListMyPage.css';
 
 import {parsePaggingParams} from '../helpers/params'
@@ -12,7 +13,6 @@ import EventListItem from '../components/EventListItem'
 import Pagination from '../components/Pagination'
 
 import {fetchCreatedEventsIfNeed} from '../flux/modules/created_event'
-
 
 // TODO: move const to consts file
 const DEFAULT_MAX_EVENT_PER_PAGE = 25
@@ -131,8 +131,6 @@ class CreatedEventListMyPage extends Component {
     }
 
     execFilter(filter) {
-
-      console.log("dispatch filter event list")
       this.setState({
         filterTag: filter
       })
