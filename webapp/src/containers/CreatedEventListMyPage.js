@@ -57,12 +57,12 @@ class CreatedEventListMyPage extends Component {
       const keys= _.keys(eventItems)
 
       return (
-        <div>
+        <div className='block-content'>
           {this.renderStatusFilters()}
 
           <div className="ui section divider"></div>
 
-          <div className="ui items">
+          <div className="ui link two stackable cards">
             {
               keys.map((key, index) => (
                 <EventListItem key={key} {...eventItems[key]}
@@ -161,10 +161,10 @@ class CreatedEventListMyPage extends Component {
 
       return (
         <div className='created-event-list-mypage'>
-          <div className='ui text container'>
+
             {this.renderPageTitle()}
             {content}
-          </div>
+
 
           <div>
             <button onClick={

@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 
@@ -21,7 +22,13 @@ class MyPage extends Component {
   }
 
   componentDidMount() {
+      $('.ui.sidebar').sidebar({
+          transition: 'overlay'
+      });
+  }
 
+  toggleSidebar () {
+      $('.ui.sidebar').sidebar('toggle');
   }
 
   renderMenu() {
@@ -80,11 +87,17 @@ class MyPage extends Component {
 
   render() {
     const content = (
-      <div className='ui sixteen wide column left aligned grid'>
-        <div className='left floated three wide column'>
+      <div className='ui stackable two column vertically divided grid'>
+        <div className="toggle-sidebar">
+          <i className="list layout large icon" onClick={this.toggleSidebar}></i>
+        </div>
+        <div className='ui left floated three wide column left-menu sidebar'>
         {this.renderMenu()}
         </div>
-        <div className='left floated thirteen wide column'>
+        <div className='ui left floated three wide column left-menu sidebar-pc'>
+        {this.renderMenu()}
+        </div>
+        <div className='left floated thirteen wide column container-render'>
         {this.props.children}
         </div>
       </div>
@@ -97,7 +110,9 @@ class MyPage extends Component {
             <QuickSearchBar location={this.props.location} params={this.props.params}/>
             <TopNav />
           </PageHeader>
-          {content}
+          <div className='ui container'>
+            {content}
+          </div>
           <PageFooter />
       </div>
     )

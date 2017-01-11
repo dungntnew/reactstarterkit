@@ -1,3 +1,21 @@
 .created-event-list-mypage {
-  
+
+}
+
+.created-event-list-mypage .event-list-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.created-event-list-mypage .block-content {
+  margin-top: 2rem;
+}
+
+.created-event-list-mypage .status-filter-menu .menu .button {
+  margin: auto;
+  font-size: 14px;
+}
+
+.created-event-list-mypage .block-content .cards {
+  padding-bottom: 2rem;
 }
