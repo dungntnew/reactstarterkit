@@ -14,6 +14,7 @@ import placeReducer from './modules/place'
 import latestBlogReducer from './modules/latest_blog'
 import createdEventReducer from './modules/created_event'
 import authReducer from './modules/auth'
+import bankAccountReducer from './modules/bankAccount'
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   place: placeReducer,
   latestBlog: latestBlogReducer,
   createdEvent: createdEventReducer,
+  bankAccount: bankAccountReducer,
   routing
 })
 

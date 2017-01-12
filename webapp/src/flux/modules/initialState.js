@@ -22,6 +22,10 @@ export const initLatestBlog = {
 
 export const initSelectedBlog = {isFetching:true, errorMessage: null, data:{}}
 
+export const initBankAccount = {isFetching: false,
+                                errorMessage: null,
+                                isSaving: false,
+                                data: {}}
 
 export const guest = {
   avatarUrl: '/img/avatar.png',

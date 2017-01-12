@@ -14,6 +14,16 @@
       "displayName": "Dao Van Nghiem"
     }
   },
+  "bank-account": {
+    "account": {
+      "bankName": "三菱東京UFJ銀行",
+      "accountType": "普通",
+      "branchCode": "12312",
+      "number": "1234532",
+      "firstName": "グイン",
+      "lastName": "ズン"
+    }
+  },
   "blogs": {
     "total": 250,
     "current": 99,
