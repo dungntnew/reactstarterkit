@@ -77,7 +77,7 @@ class MyPage extends Component {
             <div className="menu">
               <a className="item">パスワード変更</a>
               <a className="item">クレジットカードの管理</a>
-              <a className="item">お振込先銀行口座編集</a>
+              <a className="item" to="/mypage/bank-settings">お振込先銀行口座編集</a>
             </div>
           </div>
           <div className="item">

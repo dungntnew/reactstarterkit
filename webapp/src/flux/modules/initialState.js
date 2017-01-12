@@ -43,6 +43,12 @@ export const initJoinEvent = {
   step: JoinEventStep.BEGIN
 }
 
+export const initBankAccount = {isFetching: false,
+                                errorMessage: null,
+                                isSaving: false,
+                                data: {}}
+
+
 export const guest = {
   avatarUrl: '/img/avatar.png',
   name: 'Guest',
