@@ -9,6 +9,8 @@ import '../css/BankSettingMyPage.css';
 
 import {fetchBankAccount, updateBankAccount} from '../flux/modules/bankAccount'
 
+import BankAccountForm from '../components/bank-forms/BankAccountForm';
+
 class BankSettingMyPage extends Component {
     constructor(props) {
       super(props)
@@ -29,10 +31,6 @@ class BankSettingMyPage extends Component {
       )
     }
 
-    renderBankAccount() {
-
-    }
-
     render() {
       const {isFetching, errorMessage} = this.props
       let content
@@ -48,7 +46,13 @@ class BankSettingMyPage extends Component {
         )
       }
       else {
-        content = this.renderBankAccount()
+        const {data, userId, isSaving, update} = this.props
+
+        content = <BankAccountForm
+                       data={data}
+                       isSaving={isSaving}
+                       userId={userId}
+                       onSubmit={update} />
       }
 
       return (

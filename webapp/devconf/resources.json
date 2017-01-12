@@ -15,13 +15,12 @@
     }
   },
   "bank-account": {
-    "account": {
-      "bankName": "三菱東京UFJ銀行",
-      "accountType": "普通",
-      "branchCode": "12312",
-      "number": "1234532",
-      "firstName": "グイン",
-      "lastName": "ズン"
+    "userId": "1",
+    "data": {
+      "bankName": "三井住友銀行",
+      "accountType": "当座",
+      "term-1": "",
+      "term-2": ""
     }
   },
   "blogs": {
@@ -33,7 +32,10 @@
         "url": "/blogs/blog-1",
         "lastUpdate": "20170101 10:30",
         "coverImageUrl": "/img/event-1.jpg",
-        "tags": ["肉", "そば"],
+        "tags": [
+          "肉",
+          "そば"
+        ],
         "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります"
       },
       "blog-2": {
@@ -41,7 +43,10 @@
         "url": "/blogs/blog-2",
         "lastUpdate": "20170101 11:30",
         "coverImageUrl": "/img/event-2.jpg",
-        "tags": ["肉", "そば"],
+        "tags": [
+          "肉",
+          "そば"
+        ],
         "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります"
       },
       "blog-3": {
@@ -49,7 +54,10 @@
         "url": "/blogs/blog-3",
         "lastUpdate": "20170102 12:30",
         "coverImageUrl": "/img/event-3.jpg",
-        "tags": ["肉", "そば"],
+        "tags": [
+          "肉",
+          "そば"
+        ],
         "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります"
       },
       "blog-4": {
@@ -57,7 +65,10 @@
         "url": "/blogs/blog-4",
         "lastUpdate": "20170103 09:30",
         "coverImageUrl": "/img/event-4.jpg",
-        "tags": ["肉", "そば"],
+        "tags": [
+          "肉",
+          "そば"
+        ],
         "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります"
       },
       "blog-5": {
@@ -65,22 +76,27 @@
         "url": "/blogs/blog-5",
         "lastUpdate": "20170103 09:30",
         "coverImageUrl": "/img/event-4.jpg",
-        "tags": ["肉", "そば"],
+        "tags": [
+          "肉",
+          "そば"
+        ],
         "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります"
       }
     }
   },
-
   "blogdetails": [
     {
       "id": "blog-1",
       "title": "event-1",
       "url": "/blogs/blog-1",
       "lastUpdate": "20170101 10:30",
-      "tags": ["肉", "そば"],
+      "tags": [
+        "肉",
+        "そば"
+      ],
       "content": "説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります",
       "coverImageUrl": "/img/event-4.jpg"
-  }
+    }
   ],
   "get_todos": [
     {
@@ -483,7 +499,6 @@
         "status": "PROFIT_CONFIRMING",
         "closedStatus": "NORMALLY",
         "rate": 5,
-
         "title": "event-3",
         "price": 34444,
         "address": "Tamachi 123",
@@ -584,42 +599,42 @@
         "ownerUserName": "user-3",
         "ownerFullName": "User-3",
         "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
-    },
-    "event-6": {
-      "status": "CLOSE_FAILED",
-      "closedStatus": "NORMALLY",
-      "rate": 2,
-      "title": "event-6",
-      "price": 34444,
-      "address": "Tamachi 123",
-      "tags": [
-        "Niku",
-        "Tabehodai",
-        "Dinner"
-      ],
-      "target": "Niku",
-      "targetName": "Niku niku",
-      "joinerCount": 15,
-      "joinerLimit": 20,
-      "joinerIds": [
-        "user-1",
-        "user-2",
-        "user-3"
-      ],
-      "openDate": "20160112",
-      "registrationDateStart": "20160102",
-      "registrationDateEnd": "20160102",
-      "url": "/events/event-3",
-      "coverImageUrl": "/img/event-3.jpg",
-      "eventImageUrls": [
-        "img/event/event3-1.png",
-        "img/event/event3-2.png"
-      ],
-      "ownerId": "user-3",
-      "ownerUserName": "user-3",
-      "ownerFullName": "User-3",
-      "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
-     }
+      },
+      "event-6": {
+        "status": "CLOSE_FAILED",
+        "closedStatus": "NORMALLY",
+        "rate": 2,
+        "title": "event-6",
+        "price": 34444,
+        "address": "Tamachi 123",
+        "tags": [
+          "Niku",
+          "Tabehodai",
+          "Dinner"
+        ],
+        "target": "Niku",
+        "targetName": "Niku niku",
+        "joinerCount": 15,
+        "joinerLimit": 20,
+        "joinerIds": [
+          "user-1",
+          "user-2",
+          "user-3"
+        ],
+        "openDate": "20160112",
+        "registrationDateStart": "20160102",
+        "registrationDateEnd": "20160102",
+        "url": "/events/event-3",
+        "coverImageUrl": "/img/event-3.jpg",
+        "eventImageUrls": [
+          "img/event/event3-1.png",
+          "img/event/event3-2.png"
+        ],
+        "ownerId": "user-3",
+        "ownerUserName": "user-3",
+        "ownerFullName": "User-3",
+        "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
+      }
     }
   },
   "details": [
