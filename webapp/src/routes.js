@@ -9,6 +9,8 @@ import TopLandingPage from './containers/TopLandingPage'
 import SearchPage from './containers/SearchPage'
 import CreatePage from './containers/CreatePage'
 import DetailPage from './containers/DetailPage'
+import JoinPage from './containers/JoinPage'
+import CancelJoinPage from './containers/CancelJoinPage'
 import BlogListPage from './containers/BlogListPage'
 import BlogDetailPage from './containers/BlogDetailPage'
 
@@ -29,11 +31,14 @@ const routes = (
            component={CreatePage}/>
     <Route path='/events/:eventId'
           component={DetailPage}/>
+    <Route path='/join/:userId/:eventId'
+          component={JoinPage}/>
+    <Route path='/cancelJoin/:userId/:eventId'
+          component={CancelJoinPage}/>
     <Route path='/blogs/latest'
           component={BlogListPage}/>
     <Route path='/blogs/:blogItemId'
           component={BlogDetailPage}/>
-
     <Route path='/mypage' component={MyPage}>
           <IndexRoute component={TopMyPage}/>
           {/* TODO add sub routes for mypage */}
@@ -42,7 +47,6 @@ const routes = (
           <Route path='/mypage/events/joined' component={JoinedEventListMyPage}/>
           <Route path='/mypage/events/reviewed' component={ReviewedEventListMyPage}/>
     </Route>
-
     <Route path='/test'
            component={TestPage}/>
     <Route path='/test2'

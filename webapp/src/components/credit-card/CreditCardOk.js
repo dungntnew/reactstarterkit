@@ -8,7 +8,7 @@ import '../../css/credit-card/CreditCardOk.css';
 class CreditCardOk extends Component {
 
   static propTypes = {
-    url: PropTypes.string.isRequired,
+    onNext: PropTypes.func.isRequired,
   }
 
   render() {
@@ -20,7 +20,7 @@ class CreditCardOk extends Component {
           <p className='text-comfirm center'>ありがとうございます。</p>
           <p className='text-comfirm center'>お支払い方法の登録が完了しました。</p>
           <a className='ui button btn-link btn-orange'
-          href={this.props.url}>次へ進む</a>
+          onClick={() => this.props.onNext() }>次へ進む</a>
         </div>
       </div>
     );

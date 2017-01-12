@@ -1,0 +1,65 @@
+.join-event-payment {
+  margin-top: 72px !important;
+  margin-bottom: 130px !important;
+}
+
+.join-event-payment .title {
+  font-size: 1.5rem;
+  line-height: 0.83;
+  color: #383838;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.join-event-payment .description p {
+  font-size: 1.25rem;
+  line-height: 0.9;
+  color: #444444;
+  font-weight: 500;
+}
+
+.join-event-payment .ui.basic.table tr td.text-des {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #444444;
+}
+
+.join-event-payment .ui.basic.table tr td.content-des {
+  font-size: 1rem;
+  line-height: 1.05;
+  color: #666666;
+}
+
+.join-event-payment .ui.basic.table tbody tr td{
+  border-top: 1px solid rgba(34,36,38,.15);
+}
+
+.join-event-payment .ui.basic.table tbody tr:last-child td {
+  border-top: 0;
+}
+
+.join-event-payment .table .btn-group .button{
+  width: 50%;
+}
+
+@media only screen and (max-width: 767px) {
+  .join-event-payment .table .btn-group .button{
+  width: 80%;
+  }
+  .join-event-payment .ui.basic.table tr td.text-des {
+    font-size: 1rem;
+  }
+  .join-event-payment .ui.basic.table tr td.content-des {
+    font-size: 0.75rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .join-event-payment .table .btn-group .button {
+    width: 90%;
+  }
+  .join-event-payment .ui.basic.table tr td.no-sp {
+    display: none;
+  }
+}
+

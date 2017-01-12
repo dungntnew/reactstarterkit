@@ -14,9 +14,12 @@ import placeReducer from './modules/place'
 import latestBlogReducer from './modules/latest_blog'
 import createdEventReducer from './modules/created_event'
 import authReducer from './modules/auth'
+import creditReducer from './modules/credit'
+import joinEventReducer from './modules/joinEvent'
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  credit: creditReducer,
   target: targetReducer,
   genre: generReducer,
   supplement: supplementReducer,
@@ -28,6 +31,7 @@ const rootReducer = combineReducers({
   selectedBlog: selectedBlogReducer,
   place: placeReducer,
   latestBlog: latestBlogReducer,
+  joinEvent: joinEventReducer,
   createdEvent: createdEventReducer,
   routing
 })

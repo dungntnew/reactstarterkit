@@ -48,3 +48,48 @@ padding-right: 20px;
   padding-top: 4px;
   font-size: 12px;
 }
+
+@media only screen and (max-width: 667px) {
+  .event-detail-cover>.cover-image> .thumbnails .item {
+    padding: 0.1rem;
+  }
+  .event-detail-cover>.cover-image> .thumbnails img {
+    width: 50px;
+    height: 50px;
+  }
+  .event-detail-cover>.cover-image>.thumbnails>.item>.show-more {
+    width: 50px;
+    height: 50px;
+    padding-top: 10px;
+  }
+  .event-detail-cover>.cover-image>.thumbnails>.item>.show-more>.show {
+    padding-left: 17px !important;
+  }
+  .event-detail-cover>.cover-image>.thumbnails span.text-show {
+    font-size: 9px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .event-detail-cover>.cover-image> .thumbnails {
+    padding-right: 10px;
+    padding-bottom: 10px !important;
+  }
+  .event-detail-cover>.cover-image> .thumbnails .item {
+    padding: 0.2rem !important;
+  }
+  .event-detail-cover>.cover-image>.user-avatar {
+    left: 10px;
+    bottom: 20px;
+  }
+  .event-detail-cover>.cover-image>.user-avatar img {
+    width: 55px;
+    height: 55px;
+  }
+  .event-detail-cover>.cover-image>.user-avatar>.user-description {
+    padding-left: 8px;
+  }
+  .event-detail-cover>.cover-image>.user-avatar>.user-description>h3.avatar-name {
+    margin-bottom: 0px !important;
+  }
+}
