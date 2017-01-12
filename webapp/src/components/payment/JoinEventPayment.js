@@ -6,38 +6,54 @@ import {encryptFirstN} from '../../helpers/payment'
 import '../../css/payment/JoinEventPayment.css';
 
 const JoinEventPayment = (props) => (
-  <div className='ui segment join-event-payment'>
-     <div className='title'>支払い手続き</div>
-     <div className='ui image'>
-       <img src={props.imageUrl}/>
-     </div>
-     <div className='desc'>
-      {props.desc}
-     </div>
+  <div className='ui segment container join-event-payment'>
+    <h3 className='title'>支払い手続き</h3>
 
-     <div className='ui divider'></div>
-     <div className='payment-info'>
-        支払い方法:
-          <div>
-              <div>{props.credit.method}</div>
+    <div className='ui items description'>
+      <div className='item'>
+        <div className='image'>
+          <img src={props.imageUrl}/>
+        </div>
+        <div className='content'>
+          <div className='desc'>
+            <p>{props.desc}</p>
           </div>
-          <div>
-              <div>{encryptFirstN(props.credit.number)}</div>
-          </div>
-          <div>
-              <div>有効期限  {props.credit.exprMonth}/{props.credit.exprYear}</div>
-          </div>
+        </div>
       </div>
+    </div>
 
-      <div className='price-info'>
-          支払い金額: {formatPrice(props.price)}
-      </div>
+    <table className='ui very basic unstackable table'>
+      <tbody>
+        <tr className='payment-info'>
+          <td className='six wide center aligned text-des'>支払い方法:</td>
+          <td className='three wide right aligned content-des'>
+            <div>{props.credit.method}</div>
+            <div>{encryptFirstN(props.credit.number)}</div>
+            <div>有効期限  {props.credit.exprMonth}/{props.credit.exprYear}</div>
+          </td>
+          <td className='three wide no-sp'></td>
+        </tr>
 
-      <div>
-      <button className='ui button' onClick={()=> props.cancel()}>戻る</button>
-      <button className='ui orange button' onClick={()=> props.next()}>支払う</button>
-      </div>
-     </div>
+        <tr className='price-info'>
+          <td className='six wide center aligned text-des'>支払い金額:</td>
+          <td className='three wide right aligned content-des'>
+            <div>{formatPrice(props.price)}</div>
+          </td>
+          <td className='three wide no-sp'></td>
+        </tr>
+
+        <tr className='btn-group'>
+          <td className='six wide center aligned'>
+            <button className='ui button' onClick={()=> props.cancel()}>戻る</button>
+          </td>
+          <td className='six wide right aligned mobile only'>
+            <button className='ui orange button' onClick={()=> props.next()}>支払う</button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
 )
 
 JoinEventPayment.propTypes = {

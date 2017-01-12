@@ -44,7 +44,7 @@ class DetailPage extends Component {
 
     renderQuickAccessMenu() {
       return (
-          <div className='two wide computer two wide tablet thirteen wide mobile column left-nav'>
+          <div className='two wide computer two wide tablet sixteen wide mobile column left-nav'>
             <div className="ui" ref='#'>
                 <a className='link' href='#images'>写真</a>
                 <a className='link' href='#members'>参加者</a>

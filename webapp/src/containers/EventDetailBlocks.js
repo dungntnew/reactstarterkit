@@ -73,7 +73,7 @@ class EventDetailBlocks extends Component {
 
     const memberMenu = (
       <div className='item'>
-        <div className='ui avatar tiny image'>
+        <div className='ui avatar tiny wide computer mini wide mobile image'>
           <a href='#' onClick={(e)=>{ e.preventDefault(); this.showMemberList()}}>
               <i className='ellipsis horizontal icon'></i>
            </a>

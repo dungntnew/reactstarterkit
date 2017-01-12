@@ -12,9 +12,14 @@
   margin-top: 50px;
 }
 
+.detail-page>.blok-content>.detail-content>.column.left-nav {
+  padding-left: 2rem !important;
+  padding-top: 6rem !important;
+  padding-right: 0!important;
+}
 
-.detail-page>.detail-content>.left-nav a.link {
-  display: block;
+.detail-page>.blok-content>.detail-content>.column.left-nav a.link {
+  display: block !important;
   color: #878787;
   line-height: 2;
 }
@@ -27,5 +32,18 @@
   background-color: #f4f1f0;
   border: none;
   box-shadow: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .detail-page>.blok-content>.detail-content>.column.left-nav a.link {
+    display: inline-block !important;
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .detail-page>.blok-content>.detail-content>.column.left-nav {
+    padding-top: 3rem !important;
+  }
 }
 

@@ -26,12 +26,6 @@
 }
 
 
-@media only screen and (max-width: 1024px) and (min-width: 320px) {
-  .ui.grid.event-detail-header>.row>.detail-header {
-    padding-left: 0;
-  }
-}
-
 .ui.grid.event-detail-header>.row>.detail-header>.des {
   display: inline-block;
   margin-left: 2rem;
@@ -40,15 +34,6 @@
   font-size: 0.875rem;
   border-bottom: 2px solid #e7e5e5!important;
   padding-bottom: 3px;
-}
-
-@media only screen and (max-width: 768px) and (min-width: 320px) {
-  .ui.grid.event-detail-header>.row>.detail-header>.des {
-   margin-left: 1rem;
-  }
-  .ui.grid.event-detail-header>.row>.detail-header>.des:first-child {
-   margin-left: 0rem;
-  }
 }
 
 .ui.grid.event-detail-header>.row>.detail-header>.des span.count {
@@ -70,5 +55,17 @@
 @media only screen and (max-width: 1024px) and (min-width: 320px) {
   .ui.grid.event-detail-header>.row>.group-likes {
     padding-left: 0;
+  }
+  .ui.grid.event-detail-header>.row>.detail-header {
+    padding-left: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 320px) {
+  .ui.grid.event-detail-header>.row>.detail-header>.des {
+   margin-left: 1rem;
+  }
+  .ui.grid.event-detail-header>.row>.detail-header>.des:first-child {
+   margin-left: 0rem;
   }
 }
