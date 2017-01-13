@@ -1,0 +1,14 @@
+.bank-setting-mypage {
+  background-color: #fff;
+  padding: 20px 22px;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.bank-setting-mypage .bank-account-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #333333;
+  margin-bottom: 2rem;
+}

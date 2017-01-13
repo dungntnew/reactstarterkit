@@ -21,3 +21,42 @@ export const EventStatus = {
   PROFIT_CONFIRM_FAILED: 'PROFIT_CONFIRM_FAILED',
   CANCELLED: 'CANCELLED'
 }
+
+export const bankList = [{
+  id: '0005',
+  label: '三菱東京UFJ銀行'
+},
+{
+  id: '0009',
+  label: '三井住友銀行'
+},
+{
+  id: '0010',
+  label: 'りそな銀行'
+},
+{
+  id: '0017',
+  label: '埼玉りそな銀行'
+},
+{
+  id: '0000',
+  label: '日本銀行'
+},
+]
+
+export const bankAccountTypes = [{
+  id: '01',
+  label: '普通'
+},
+{
+  id: '02',
+  label: '当座'
+},
+{
+  id: '03',
+  label: '貯蓄'
+},
+{
+  id: '04',
+  label: '別段'
+}]

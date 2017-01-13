@@ -1,0 +1,29 @@
+.bank-account-form {
+
+}
+
+.bank-account-form .field {
+  margin-bottom: 1.5rem !important;
+}
+
+.bank-account-form .field>label {
+  font-size: 1.25rem !important;
+  line-height: 0.8  !important;
+  color: #444444 !important;
+  font-weight: normal !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.bank-account-form .field>input {
+  font-size: 12px;
+}
+
+.bank-account-form .text-note {
+  padding-bottom: 1rem;
+}
+
+.bank-account-form .text-note p {
+  margin-bottom: 0;
+  font-size: 1rem;
+  color: #878787;
+}

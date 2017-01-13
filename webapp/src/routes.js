@@ -19,6 +19,8 @@ import LikedEventListMyPage from './containers/LikedEventListMyPage'
 import JoinedEventListMyPage from './containers/JoinedEventListMyPage'
 import ReviewedEventListMyPage from './containers/ReviewedEventListMyPage'
 
+import BankSettingMyPage from './containers/BankSettingMyPage'
+
 import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
 
@@ -46,6 +48,8 @@ const routes = (
           <Route path='/mypage/events/liked' component={LikedEventListMyPage}/>
           <Route path='/mypage/events/joined' component={JoinedEventListMyPage}/>
           <Route path='/mypage/events/reviewed' component={ReviewedEventListMyPage}/>
+
+          <Route path='/mypage/bank-settings' component={BankSettingMyPage} />
     </Route>
     <Route path='/test'
            component={TestPage}/>
