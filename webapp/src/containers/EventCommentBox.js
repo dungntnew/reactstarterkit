@@ -1,15 +1,10 @@
 import _ from 'lodash';
 import React, {PropTypes, Component} from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import classNames from 'classnames';
 import moment from 'moment';
 import '../css/EventCommentBox.css';
 
 class EventCommentBox extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   static propTypes = {
     eventId: PropTypes.string.isRequired,
@@ -143,7 +138,7 @@ class EventCommentBox extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {eventId, limit} = ownProps
+  const {eventId} = ownProps
   const comments = [
     {
       id: "comment-1",

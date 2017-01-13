@@ -1,12 +1,9 @@
 import _ from 'lodash';
 import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 
 import '../css/JoinButton.css';
-
-import {joinToEvent} from '../flux/modules/selected_event'
 
 const JoinButton = (props) => {
   const buttonTitle = props.joining ? 'キャンセル': '参加'

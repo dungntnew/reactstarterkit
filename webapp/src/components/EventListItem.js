@@ -109,7 +109,6 @@ class EventListItem extends Component {
       joinerCount,
       joinerLimit,
       openDate,
-      registrationDateStart,
       registrationDateEnd,
       tags,
       target,

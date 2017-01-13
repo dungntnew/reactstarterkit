@@ -6,9 +6,6 @@ import  '../css/BlogHeader.css';
 import {formatDateTime} from '../helpers/blog'
 
 class BlogHeader extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   static PropTypes = {
     title: PropTypes.string.isRequired,

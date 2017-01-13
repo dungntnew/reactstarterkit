@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import React, {PropTypes, Component} from 'react';
-import classNames from 'classnames';
 
 import {defaultRules} from '../../helpers/validations'
 
@@ -11,9 +10,6 @@ import '../../css/event-edit-forms/EventTermForm.css';
 $.fn.form = require('semantic-ui-form')
 
 class EventTermForm extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   static propTypes = {
     data: PropTypes.shape({

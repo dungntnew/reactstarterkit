@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
 import '../css/ShareButton.css';

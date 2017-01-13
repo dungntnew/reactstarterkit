@@ -1,6 +1,5 @@
-import $ from 'jquery';
+
 import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
 import classNames from 'classnames';
 
 import '../css/EventImageSlider.css';
@@ -75,6 +74,7 @@ class EventImageSlider extends Component {
            }}
 
            src={url}
+           alt='thumbnails'
       />
     ))
 

@@ -1,8 +1,5 @@
 import $ from 'jquery';
 import React, {PropTypes, Component} from 'react';
-import classNames from 'classnames';
-import {connect} from 'react-redux';
-
 import {defaultRules} from '../../helpers/validations'
 
 import 'semantic-ui-form/form.min.css'
@@ -12,10 +9,7 @@ import '../../css/event-edit-forms/EventAddressForm.css';
 $.fn.form = require('semantic-ui-form')
 
 class EventAddressForm extends Component {
-  constructor(props) {
-    super(props)
-  }
-
+  
   static propTypes = {
     data: PropTypes.shape({
       // todo

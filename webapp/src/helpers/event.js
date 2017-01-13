@@ -97,8 +97,8 @@ function formatListValues(values) {
 }
 
 function formatKeyValuePairData(data) {
-  const {target, targetName} = data
-  const {genre, genreName} = data
+  const {targetName} = data
+  const {genreName} = data
   const {memberCount, joinerLimit} = data
   const {tags} = data
 

@@ -9,8 +9,6 @@ import {defaultRules} from '../../helpers/validations'
 import 'semantic-ui-form/form.min.css'
 import '../../css/event-edit-forms/EventBasicInfoForm.css';
 
-import TargetSelector from '../../containers/TargetSelector';
-
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 

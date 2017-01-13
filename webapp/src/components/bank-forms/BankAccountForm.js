@@ -13,10 +13,6 @@ import '../../css/bank-forms/BankAccountForm.css';
 $.fn.form = require('semantic-ui-form')
 
 class BankAccountForm extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   static propTypes = {
     data: PropTypes.shape({
       bankName: PropTypes.string,
