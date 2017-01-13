@@ -91,7 +91,7 @@ class EventCommentBox extends Component {
                     src={user.userAvatar} alt='avatar'
                     />
                   </div>
-                   <div className="fourteen wide field">
+                   <div className="fourteen wide computer sixteen wide mobile field">
                        <input type='text' ref='commentRef'/>
                        <button className="ui button add-comment-btn btn-orange " type="submit">Submit</button>
                    </div>
