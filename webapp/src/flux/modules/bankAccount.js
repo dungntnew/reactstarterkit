@@ -73,13 +73,13 @@ export const accountUpdateFailed = (userId, error) => {
 }
 
 export const fetchBankAccount = (userId)=> {
-  return (getState, dispatch) => {
+  return (dispatch, getState) => {
     dispatch(requestAccout(userId))
     return ApiClient.getJson(`/bank-account`, {
       userId: userId
     })
     .then(json => {
-      return dispatch(accountReceived(userId, json.account))
+      return dispatch(accountReceived(userId, json.data))
     })
     .catch(error => {
       return dispatch(accountRequestFailed(userId, error))
@@ -88,14 +88,14 @@ export const fetchBankAccount = (userId)=> {
 }
 
 export const updateBankAccount = (userId, data)=> {
-  return (getState, dispatch) => {
+  return (dispatch, getState) => {
     dispatch(updateAccout(userId, data))
     return ApiClient.postJson(`/bank-account`, {
       userId: userId,
       data: data
     })
     .then(json => {
-      return dispatch(accountUpdated(userId, json.account))
+      return dispatch(accountUpdated(userId, json.data))
     })
     .catch(error => {
       return dispatch(accountUpdateFailed(userId, error))

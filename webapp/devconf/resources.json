@@ -27,12 +27,12 @@
   "bank-account": {
     "userId": "user-1",
     "data": {
-      "bankName": "埼玉りそな銀行",
+      "bankName": "三菱東京UFJ銀行",
       "accountType": "普通",
-      "branchCode": "",
-      "number": "",
-      "lastName": "",
-      "firstName": ""
+      "branchCode": "021",
+      "number": "89213412",
+      "lastName": "NGUYEN",
+      "firstName": "TRI DUNG"
     }
   },
   "blogs": {
