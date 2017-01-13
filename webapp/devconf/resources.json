@@ -14,7 +14,6 @@
       "displayName": "Dao Van Nghiem"
     }
   },
-<<<<<<< HEAD
   "credits": {
     "userId": "user-1",
     "data": {
@@ -23,15 +22,17 @@
       "exprYear": "dd",
       "securityCode": "aa",
       "method": "クレジットカード"
-=======
+    }
+  },
   "bank-account": {
-    "userId": "1",
+    "userId": "user-1",
     "data": {
-      "bankName": "三井住友銀行",
-      "accountType": "当座",
-      "term-1": "",
-      "term-2": ""
->>>>>>> 306eaa4c987536f8bb93ee0bcb1a971a8c00ae84
+      "bankName": "埼玉りそな銀行",
+      "accountType": "普通",
+      "branchCode": "",
+      "number": "",
+      "lastName": "",
+      "firstName": ""
     }
   },
   "blogs": {

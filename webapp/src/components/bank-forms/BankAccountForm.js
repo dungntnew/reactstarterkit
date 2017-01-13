@@ -102,7 +102,7 @@ class BankAccountForm extends Component {
     const btnTitle = this.props.isSaving ? '保存中' : '保存'
 
     return (
-      <form className="ui form bank-account-form " ref='form'
+      <form className="ui form bank-account-form" ref='form'
              onSubmit={(e) => {
                e.preventDefault()
                this.handleSubmit()
@@ -152,6 +152,10 @@ class BankAccountForm extends Component {
           <input name="firstName" placeholder="例) アヤ" type="text" />
         </div>
 
+        <div className='text-note'>
+          <p>※口座番号が7桁未満の場合は先頭に0をつけてください</p>
+          <p>※振込先が間違っている場合、再振り込み手数料が210円発生します</p>
+        </div>
 
       <div className="ui error message"></div>
       <button className="ui button btn-orange btn-left" type="submit">{btnTitle}</button>

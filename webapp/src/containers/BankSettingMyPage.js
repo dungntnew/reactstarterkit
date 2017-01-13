@@ -25,9 +25,9 @@ class BankSettingMyPage extends Component {
 
     renderPageTitle() {
       return (
-        <div className='bank-account-title'>
+        <h3 className='bank-account-title'>
            振込先口座の指定
-        </div>
+        </h3>
       )
     }
 
@@ -56,9 +56,11 @@ class BankSettingMyPage extends Component {
       }
 
       return (
-        <div className='created-event-list-mypage'>
+        <div>
+          <div className='bank-setting-mypage'>
             {this.renderPageTitle()}
             {content}
+          </div>
           <div>
             <button onClick={
                 ()=> {this.props.fetch()}}>
