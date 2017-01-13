@@ -2,6 +2,9 @@
 
 }
 
+.event-image-slider .ui.horizontal.list:not(.celled)>.item:first-child {
+  padding-left: .5rem !important;
+}
 .event-image-slider .basic .icon{
   display: inline-block;
   position: absolute;
@@ -14,4 +17,16 @@
 
 .event-image-slider .basic .right-icon {
   right: 33px;
+}
+
+@media only screen and (max-width: 480px) {
+  .event-image-slider .basic .image {
+    width: 220px !important;
+  }
+  .event-image-slider .basic .icon {
+    top: 37px;
+  }
+  .event-image-slider img.ui.item.small.image {
+    width: 95px !important;
+  }
 }

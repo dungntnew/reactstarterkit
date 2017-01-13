@@ -102,8 +102,7 @@ class EventImageSlider extends Component {
 
           </div>
 
-
-          <div className=''>
+          <div>
             <div>写真キャプション</div>
             <div className='ui horizontal selection list'>
                {thumbnails}

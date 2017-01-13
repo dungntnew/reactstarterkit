@@ -12,6 +12,9 @@
   margin-top: 50px;
 }
 
+.detail-page>.blok-content>.detail-content {
+  margin: 0;
+}
 .detail-page>.blok-content>.detail-content>.column.left-nav {
   padding-left: 2rem !important;
   padding-top: 6rem !important;

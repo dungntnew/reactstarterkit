@@ -38,10 +38,31 @@
   padding-top: 10px;
 }
 
+.event-comment-box .list-comment .content {
+  display: inline-block;
+}
+
 .event-comment-box .list-comment .time {
   float: right;
 }
 
 .event-comment-box .list-comment .time .update {
   display: block;
+}
+
+@media only screen and (max-width: 667px) {
+  .event-comment-box .comment-box-input-form .form .field img {
+    width: 35px;
+    height: 35px;
+  }
+  .event-comment-box .comment-box-input-form .form .field {
+    margin-bottom: 5px !important;
+  }
+  .event-comment-box .comment-box-input-form .form .field button {
+    float: right;
+  }
+  .event-comment-box .list-comment .img-avatar img {
+    width: 35px;
+    height: 35px;
+  }
 }
