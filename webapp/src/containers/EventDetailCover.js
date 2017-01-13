@@ -14,6 +14,7 @@ import CoverImage from '../components/CoverImage';
 import UserAvatar from '../components/UserAvatar';
 import EventImageSlider from '../components/EventImageSlider';
 
+$.fn.transition = require('semantic-ui-transition')
 $.fn.dimmer = require('semantic-ui-dimmer')
 $.fn.modal = require('semantic-ui-modal')
 
