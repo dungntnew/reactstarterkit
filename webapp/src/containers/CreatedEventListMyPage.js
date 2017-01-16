@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 
 import {connect} from 'react-redux';
 import classNames from 'classnames';
@@ -25,10 +25,6 @@ class CreatedEventListMyPage extends Component {
       this.state = {
         filterTag: 'all'
       }
-    }
-
-    static propTypes = {
-
     }
 
     parsePrams() {

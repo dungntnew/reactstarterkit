@@ -3,7 +3,6 @@ import _ from 'lodash';
 import React, {PropTypes, Component} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import classNames from 'classnames';
 
 import 'semantic-ui-dimmer/dimmer.min.css'
 import 'semantic-ui-modal/modal.min.css'
@@ -22,9 +21,6 @@ $.fn.dimmer = require('semantic-ui-dimmer')
 $.fn.modal = require('semantic-ui-modal')
 
 class EventDetailBlocks extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   static propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
@@ -181,6 +177,7 @@ const mapStateToProps = (state, ownProps) => {
   const {isFetching, data} = selectedEvent
 
   return {
+    isFetching: isFetching,
     tags: data.tags,
     target: data.target,
     targetName: data.targetName,

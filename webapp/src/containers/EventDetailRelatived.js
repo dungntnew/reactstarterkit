@@ -3,7 +3,6 @@ import React, { Component,
                 PropTypes } from 'react'
 
 import { connect } from 'react-redux'
-import {Link} from 'react-router';
 
 import EventItem from '../components/EventItem';
 import '../css/TopNEvents.css';
@@ -86,7 +85,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   refresh: ()=> {
     const {eventId, limit} = ownProps
-    dispatch(fetchTopNEventsIfNeed("special", 3))
+    dispatch(fetchTopNEventsIfNeed("special", 3, eventId, limit))
   }
 })
 

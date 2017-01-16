@@ -1,16 +1,11 @@
 import _ from 'lodash'
 import React, {Component, PropTypes}from 'react'
-import classNames from 'classnames';
 
 import '../css/Pagination.css';
 
 import {parsePaggingParams} from '../helpers/params'
 
 class Pagination extends Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   static propTypes = {
     location: PropTypes.object.isRequired,
@@ -84,6 +79,9 @@ class Pagination extends Component {
             ...
           </a>
         )
+      }
+      else {
+        return null
       }
     })
 

@@ -33,7 +33,6 @@ class BlogItem extends Component {
       title,
       url,
       lastUpdate,
-      tags
     }
     = this.props
 

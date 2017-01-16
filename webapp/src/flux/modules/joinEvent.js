@@ -1,4 +1,4 @@
-import ApiClient from '../../helpers/client';
+//import ApiClient from '../../helpers/client';
 
 
 import {initJoinEvent as initialState} from './initialState';
@@ -54,18 +54,15 @@ const joinEventReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         step: action.payload.step
       })
-      break;
     case JOIN_EVENT_PAYMENT_RECEIVE:
       return Object.assign({}, state, {
         step: JoinEventStep.DONE,
       })
-      break;
     // TODO fix me!
     case JOIN_EVENT_PAYMENT_FAIL:
       return Object.assign({}, state, {
         step: JoinEventStep.DONE,
       })
-      break;
     default:
     return state
 

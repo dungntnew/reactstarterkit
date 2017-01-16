@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import 'semantic-ui-sticky/sticky.min.css'
@@ -23,8 +23,6 @@ import EventDetailRelatived from '../containers/EventDetailRelatived';
 import {fetchEventDetailIfNeed} from '../flux/modules/selected_event';
 
 class DetailPage extends Component {
-    static propTypes = {
-    }
 
     componentDidMount(){
       const {quickAccessMenu} = this.refs
@@ -57,7 +55,6 @@ class DetailPage extends Component {
     }
 
     renderEventDetail() {
-      const {eventId} = this.props.params
       return (
         <div className='blok-content'>
           <EventDetailHeader router={this.props.router}/>
@@ -115,7 +112,7 @@ class DetailPage extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const {selectedEvent} = state
-  const {isFetching, errorMessage, data} = selectedEvent
+  const {isFetching, errorMessage} = selectedEvent
 
   return {
     isFetching: isFetching,

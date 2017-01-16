@@ -1,7 +1,5 @@
 import $ from 'jquery';
 import React, {PropTypes, Component} from 'react';
-import classNames from 'classnames';
-import {connect} from 'react-redux';
 
 import {defaultRules} from '../../helpers/validations'
 
@@ -24,9 +22,6 @@ class CreditCard extends Component {
     onSubmit: PropTypes.func.isRequired,
   }
 
-  constructor(props) {
-    super(props)
-  }
 
   componentDidMount() {
     this.initForm()
