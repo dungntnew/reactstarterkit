@@ -21,6 +21,7 @@ import ReviewedEventListMyPage from './containers/ReviewedEventListMyPage'
 
 import BankSettingMyPage from './containers/BankSettingMyPage'
 import PasswordSettingMyPage from './containers/PasswordSettingMyPage'
+import CreditCardSettingMyPage from './containers/CreditCardSettingMyPage'
 
 import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
@@ -52,6 +53,7 @@ const routes = (
 
           <Route path='/mypage/bank-settings' component={BankSettingMyPage} />
           <Route path='/mypage/change-password' component={PasswordSettingMyPage} />
+          <Route path='/mypage/creditcard-settings' component={CreditCardSettingMyPage} />
     </Route>
     <Route path='/test'
            component={TestPage}/>
