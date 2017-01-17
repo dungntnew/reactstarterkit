@@ -85,8 +85,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const {dispatch} = dispatchProps
-  const {userId} = stateProps
+  //const {dispatch} = dispatchProps
+  //const {userId} = stateProps
 
   return Object.assign({}, stateProps,
     Object.assign({}, ownProps, {

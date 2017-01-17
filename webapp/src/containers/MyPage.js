@@ -47,7 +47,7 @@ class MyPage extends Component {
               <Link className="item" to="/mypage/events/created">登録したテーブル</Link>
               <Link className="item" to="/mypage/events/liked">お気に入りテーブル</Link>
               <Link className="item" to="/mypage/events/joined">参加テーブル</Link>
-              <Link className="item" to="/mypage/events/reviewed">レビュー一覧</Link>
+              {/*<Link className="item" to="/mypage/events/reviewed">レビュー一覧</Link> */}
             </div>
           </div>
           <div className="item">
@@ -61,10 +61,11 @@ class MyPage extends Component {
           <div className="item">
             <div className="header">通知・ニュース</div>
             <div className="menu">
-              <a className="item">通知一覧</a>
-              <a className="item">ニュース一覧</a>
+              <Link className="item" to='/mypage/news'>ニュース一覧</Link>
+              {/*<a className="item">通知一覧</a> */}
             </div>
           </div>
+          {/*
           <div className="item">
             <div className="header">友達・フロー</div>
             <div className="menu">
@@ -72,6 +73,7 @@ class MyPage extends Component {
               <a className="item">フロー一覧</a>
             </div>
           </div>
+          */}
           <div className="item">
             <div className="header">アカウント設定</div>
             <div className="menu">

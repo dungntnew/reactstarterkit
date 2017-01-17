@@ -49,6 +49,21 @@ export const initBankAccount = {isFetching: false,
                                 data: {}}
 
 
+export const initLatestNews = {
+  isFetching: false,
+  errorMessage: null,
+  newsItems: {
+    "news-1": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+    "news-2": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+    "news-3": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+    "news-4": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+    "news-5": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+    "news-6": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+  },
+  total: 5,
+  current: 1
+}
+
 export const guest = {
   avatarUrl: '/img/avatar.png',
   name: 'Guest',
