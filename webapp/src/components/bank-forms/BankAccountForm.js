@@ -7,10 +7,12 @@ import {defaultRules} from '../../helpers/validations'
 import {bankList, bankAccountTypes} from '../../flux/modules/constant'
 
 import 'semantic-ui-form/form.min.css'
+import 'semantic-ui-dropdown/dropdown.min.css'
 import '../../css/bank-forms/BankAccountForm.css';
 
 
 $.fn.form = require('semantic-ui-form')
+$.fn.dropdown = require('semantic-ui-dropdown')
 
 class BankAccountForm extends Component {
   static propTypes = {

@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 import {defaultRules} from '../../helpers/validations'
 
+import 'semantic-ui-dropdown/dropdown.min.css'
 import 'semantic-ui-form/form.min.css'
 import '../../css/event-edit-forms/EventBasicInfoForm.css';
 
@@ -13,6 +14,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 $.fn.form = require('semantic-ui-form')
+$.fn.dropdown = require('semantic-ui-dropdown')
 
 class EventBasicInfoForm extends Component {
   constructor(props) {

@@ -9,6 +9,8 @@ import {fetchBankAccount, updateBankAccount} from '../flux/modules/bankAccount'
 
 import BankAccountForm from '../components/bank-forms/BankAccountForm';
 
+
+
 class BankSettingMyPage extends Component {
 
     componentDidMount(){

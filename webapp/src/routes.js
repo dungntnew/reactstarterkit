@@ -20,6 +20,7 @@ import JoinedEventListMyPage from './containers/JoinedEventListMyPage'
 import ReviewedEventListMyPage from './containers/ReviewedEventListMyPage'
 
 import BankSettingMyPage from './containers/BankSettingMyPage'
+import PasswordSettingMyPage from './containers/PasswordSettingMyPage'
 
 import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
@@ -50,6 +51,7 @@ const routes = (
           <Route path='/mypage/events/reviewed' component={ReviewedEventListMyPage}/>
 
           <Route path='/mypage/bank-settings' component={BankSettingMyPage} />
+          <Route path='/mypage/change-password' component={PasswordSettingMyPage} />
     </Route>
     <Route path='/test'
            component={TestPage}/>
