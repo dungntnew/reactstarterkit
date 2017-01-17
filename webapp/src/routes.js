@@ -23,6 +23,9 @@ import BankSettingMyPage from './containers/BankSettingMyPage'
 import PasswordSettingMyPage from './containers/PasswordSettingMyPage'
 import CreditCardSettingMyPage from './containers/CreditCardSettingMyPage'
 import NewsListMyPage from './containers/NewsListMyPage'
+import ProfitCreateMyPage from './containers/ProfitCreateMyPage'
+import ProfitApplyHistoryMyPage from './containers/ProfitApplyHistoryMyPage'
+import ProfitListMyPage from './containers/ProfitListMyPage'
 
 import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
@@ -56,6 +59,10 @@ const routes = (
           <Route path='/mypage/change-password' component={PasswordSettingMyPage} />
           <Route path='/mypage/creditcard-settings' component={CreditCardSettingMyPage} />
           <Route path='/mypage/news' component={NewsListMyPage} />
+          <Route path='/mypage/profit-apply' component={ProfitCreateMyPage} />
+          <Route path='/mypage/profit-list' component={ProfitListMyPage} />
+          <Route path='/mypage/profit-apply-history' component={ProfitApplyHistoryMyPage} />
+
     </Route>
     <Route path='/test'
            component={TestPage}/>

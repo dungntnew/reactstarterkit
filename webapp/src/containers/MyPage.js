@@ -53,9 +53,9 @@ class MyPage extends Component {
           <div className="item">
             <div className="header">売上・振込</div>
             <div className="menu">
-              <a className="item">売上の記録</a>
-              <a className="item active">支払いの記録</a>
-              <a className="item">振り込み履歴</a>
+              <Link className="item" to="/mypage/profit-apply">売上の記録</Link>
+              <Link className="item" to="/mypage/profit-list">支払いの記録</Link>
+              <Link className="item" to="/mypage/profit-history">振り込み履歴</Link>
             </div>
           </div>
           <div className="item">
