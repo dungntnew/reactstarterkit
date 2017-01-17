@@ -2,17 +2,53 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import CreditCard from '../components/credit-card/CreditCard';
-import RegisterProfile from '../components/credit-card/RegisterProfile';
-import RegisterOk from '../components/credit-card/RegisterOk';
-import CreditCardOk from '../components/credit-card/CreditCardOk';
+import TermsOfService from '../components/fqa/TermsOfService';
+import Terms from '../components/fqa/Terms';
+import Policy from '../components/fqa/Policy';
+import CancelPolicy from '../components/fqa/CancelPolicy';
+import Question from '../components/fqa/Question';
+import Answer from '../components/fqa/Answer';
+
+
 // import SignupForm from '../components/auth-forms/SignupForm';
 import '../css/TestPage.css';
 
 const test = {
-  url: 'ngoctien/1',
-  urlRegister: 'register/1'
+  content: 'fbeg feuig erusigiuegfue gfgue'
+}
+const content = {
+  content: 'fbeg feuig erusigiuegfue gfgue'
 }
 
+const policy = {
+  content: '標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお。'
+}
+
+const tests = {
+  content: '標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお。'
+}
+
+const item = {
+  'lists': [
+  {
+    title: 'ngoctien',
+    text: 'dhug gwwugfwqu wwugf w'
+  },
+  {
+    title: 'Jollydiem',
+    text: 'dhug gwwugfwqu wwugf w'
+  },
+  {
+    title: 'diem khong',
+    text: 'dhug gwwugfwqu wwugf w'
+  },
+
+  ]
+}
+
+const testcontent = {
+  content: '標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお'
+}
 /* Put your component to here to view */
 export default (props) => (
   <div>
@@ -24,9 +60,13 @@ export default (props) => (
      <div className='test-page-wrapper'>
 
         <CreditCard />
-        <RegisterProfile />
-        <RegisterOk {...test}/>
-        <CreditCardOk />
+        <TermsOfService {...test}/>
+        <Terms {...content}/>
+        <Policy {...policy}/>
+        <CancelPolicy {...tests}/>
+        <Question {...item}/>
+        <Answer {...testcontent}/>
+
      </div>
   </div>
 )

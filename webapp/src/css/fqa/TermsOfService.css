@@ -1,0 +1,11 @@
+.terms-of-service {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 4px;
+  margin-top: 2rem;
+}
+
+.terms-of-service .content {
+  padding: 1rem;
+  padding-bottom: 2rem;
+}
