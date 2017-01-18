@@ -64,6 +64,7 @@ class CreatedEventListMyPage extends Component {
                 <EventListItem key={key} {...eventItems[key]}
                                closeEvent={()=> this.props.closeEvent(key) }
                                requestProfit={()=> this.props.requestProfit(key) }
+                               unLike={()=>{}}
                 />
               ))
             }

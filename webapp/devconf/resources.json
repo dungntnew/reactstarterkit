@@ -114,324 +114,12 @@
     {
       "id": 1,
       "text": "KAKAKAK"
-    },
-    {
-      "id": 2,
-      "text": "CCC"
-    },
-    {
-      "id": 3,
-      "text": "AA"
-    },
-    {
-      "id": 4,
-      "text": "GGG"
     }
   ],
   "post_todos": [
     {
       "id": 1,
       "text": "KAKAKAK"
-    },
-    {
-      "id": 2,
-      "text": "HIHIHI"
-    },
-    {
-      "text": "HIHIHI",
-      "id": 3
-    },
-    {
-      "text": "HIHIHI",
-      "id": 4
-    },
-    {
-      "text": "HIHIHI",
-      "id": 5
-    },
-    {
-      "text": "HIHIHI",
-      "id": 6
-    },
-    {
-      "text": "HIHIHI",
-      "id": 7
-    },
-    {
-      "text": "HIHIHI",
-      "id": 8
-    },
-    {
-      "text": "HIHIHI",
-      "id": 9
-    },
-    {
-      "text": "HIHIHI",
-      "id": 10
-    },
-    {
-      "text": "HIHIHI",
-      "id": 11
-    },
-    {
-      "text": "HIHIHI",
-      "id": 12
-    },
-    {
-      "text": "HIHIHI",
-      "id": 13
-    },
-    {
-      "text": "HIHIHI",
-      "id": 14
-    },
-    {
-      "text": "HIHIHI",
-      "id": 15
-    },
-    {
-      "text": "HIHIHI",
-      "id": 16
-    },
-    {
-      "text": "HIHIHI",
-      "id": 17
-    },
-    {
-      "text": "HIHIHI",
-      "id": 18
-    },
-    {
-      "text": "HIHIHI",
-      "id": 19
-    },
-    {
-      "text": "HIHIHI",
-      "id": 20
-    },
-    {
-      "text": "HIHIHI",
-      "id": 21
-    },
-    {
-      "text": "HIHIHI",
-      "id": 22
-    },
-    {
-      "text": "HIHIHI",
-      "id": 23
-    },
-    {
-      "text": "HIHIHI",
-      "id": 24
-    },
-    {
-      "text": "HIHIHI",
-      "id": 25
-    },
-    {
-      "text": "HIHIHI",
-      "id": 26
-    },
-    {
-      "text": "HIHIHI",
-      "id": 27
-    },
-    {
-      "text": "HIHIHI",
-      "id": 28
-    },
-    {
-      "text": "HIHIHI",
-      "id": 29
-    },
-    {
-      "text": "HIHIHI",
-      "id": 30
-    },
-    {
-      "text": "HIHIHI",
-      "id": 31
-    },
-    {
-      "text": "HIHIHI",
-      "id": 32
-    },
-    {
-      "text": "HIHIHI",
-      "id": 33
-    },
-    {
-      "text": "HIHIHI",
-      "id": 34
-    },
-    {
-      "text": "HIHIHI",
-      "id": 35
-    },
-    {
-      "text": "HIHIHI",
-      "id": 36
-    },
-    {
-      "text": "HIHIHI",
-      "id": 37
-    },
-    {
-      "text": "HIHIHI",
-      "id": 38
-    },
-    {
-      "text": "HIHIHI",
-      "id": 39
-    },
-    {
-      "text": "HIHIHI",
-      "id": 40
-    },
-    {
-      "text": "HIHIHI",
-      "id": 41
-    },
-    {
-      "text": "HIHIHI",
-      "id": 42
-    },
-    {
-      "text": "HIHIHI",
-      "id": 43
-    },
-    {
-      "text": "HIHIHI",
-      "id": 44
-    },
-    {
-      "text": "HIHIHI",
-      "id": 45
-    },
-    {
-      "text": "HIHIHI",
-      "id": 46
-    },
-    {
-      "text": "HIHIHI",
-      "id": 47
-    },
-    {
-      "text": "HIHIHI",
-      "id": 48
-    },
-    {
-      "text": "HIHIHI",
-      "id": 49
-    },
-    {
-      "text": "HIHIHI",
-      "id": 50
-    },
-    {
-      "text": "HIHIHI",
-      "id": 51
-    },
-    {
-      "text": "HIHIHI",
-      "id": 52
-    },
-    {
-      "text": "HIHIHI",
-      "id": 53
-    },
-    {
-      "text": "HIHIHI",
-      "id": 54
-    },
-    {
-      "text": "HIHIHI",
-      "id": 55
-    },
-    {
-      "text": "HIHIHI",
-      "id": 56
-    },
-    {
-      "text": "HIHIHI",
-      "id": 57
-    },
-    {
-      "text": "HIHIHI",
-      "id": 58
-    },
-    {
-      "text": "HIHIHI",
-      "id": 59
-    },
-    {
-      "text": "HIHIHI",
-      "id": 60
-    },
-    {
-      "text": "HIHIHI",
-      "id": 61
-    },
-    {
-      "text": "HIHIHI",
-      "id": 62
-    },
-    {
-      "text": "HIHIHI",
-      "id": 63
-    },
-    {
-      "text": "HIHIHI",
-      "id": 64
-    },
-    {
-      "text": "HIHIHI",
-      "id": 65
-    },
-    {
-      "text": "HIHIHI",
-      "id": 66
-    },
-    {
-      "text": "HIHIHI",
-      "id": 67
-    },
-    {
-      "text": "HIHIHI",
-      "id": 68
-    },
-    {
-      "text": "HIHIHI",
-      "id": 69
-    },
-    {
-      "text": "HIHIHI",
-      "id": 70
-    },
-    {
-      "text": "HIHIHI",
-      "id": 71
-    },
-    {
-      "text": "HIHIHI",
-      "id": 72
-    },
-    {
-      "text": "HIHIHI",
-      "id": 73
-    },
-    {
-      "text": "HIHIHI",
-      "id": 74
-    },
-    {
-      "text": "HIHIHI",
-      "id": 75
-    },
-    {
-      "text": "HIHIHI",
-      "id": 76
     }
   ],
   "events": {
@@ -468,6 +156,8 @@
           "img/event/event1-1.png",
           "img/event/event1-2.png"
         ],
+        "owned": true,
+        "liked": true,
         "ownerId": "user-1",
         "ownerUserName": "user-1",
         "ownerFullName": "User-1",
@@ -480,6 +170,8 @@
         "title": "event-2",
         "price": 312,
         "address": "Tokyo 123",
+        "owned": true,
+        "liked": true,
         "tags": [
           "Tabehodai",
           "Dinner"
@@ -508,6 +200,8 @@
         "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
       },
       "event-3": {
+        "owned": false,
+        "liked": true,
         "status": "PROFIT_CONFIRMING",
         "closedStatus": "NORMALLY",
         "rate": 5,
@@ -543,6 +237,8 @@
         "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
       },
       "event-4": {
+        "owned": false,
+        "liked": true,
         "status": "PROFIT_CONFIRMED",
         "closedStatus": "NORMALLY",
         "rate": 5,
@@ -578,6 +274,8 @@
         "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
       },
       "event-5": {
+        "owned": false,
+        "liked": false,
         "status": "PROFIT_CONFIRM_FAILED",
         "closedStatus": "NORMALLY",
         "rate": 2,
@@ -613,6 +311,8 @@
         "ownerAvatarUrl": "https://placeholdit.imgix.net/~text?txtsize=10&txt=100%C3%97100&w=100&h=100"
       },
       "event-6": {
+        "owned": false,
+        "liked": false,
         "status": "CLOSE_FAILED",
         "closedStatus": "NORMALLY",
         "rate": 2,
@@ -679,6 +379,7 @@
       "joinerLimit": 20,
       "joined": false,
       "liked": false,
+      "owned": true,
       "members": [
         {
           "id": "user-1",
