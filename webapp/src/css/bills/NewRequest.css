@@ -1,0 +1,44 @@
+.new-request {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.new-request .title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.new-request .form-new-request .mind {
+  line-height: 1;
+  color: #878787;
+}
+
+.new-request .form-new-request .field-input label {
+  font-size: 1.125rem;
+  line-height: 1;
+  color: #444;
+  margin-bottom: 10px !important;
+}
+
+.new-request .form-new-request .field-input label span{
+  color: #e84465;
+  padding-left: 10px;
+}
+
+.new-request .form-new-request .text-note {
+  font-size: 0.875rem;
+  line-height: 1;
+  text-align: right;
+  color: #e84465;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.new-request .form-new-request .btn-sub {
+  text-align: right;
+}

@@ -60,3 +60,10 @@ export const bankAccountTypes = [{
   id: '04',
   label: '別段'
 }]
+
+
+export const InvoiceStatus = {
+  PROCESSING: 'PROCESSING',
+  SENT: 'SENT',
+  ERROR: 'ERROR'
+}
