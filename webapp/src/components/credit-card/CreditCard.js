@@ -75,13 +75,32 @@ class CreditCard extends Component {
     )
   }
 
+  renderSupportingCreditTypes(){
+    return (
+        <div className={"ui orange huge labels"}>
+          <a className={"ui label"}>
+            <i className={"american express icon"}></i>
+          </a>
+          <a className={"ui label"}>
+            <i className={"japan credit bureau icon"}></i>
+          </a>
+          <a className={"ui label"}>
+            <i className={"visa icon"}></i>
+          </a>
+          <a className={"ui label"}>
+            <i className={"mastercard icon"}></i>
+          </a>
+        </div>
+    )
+  }
+
   renderTimeSelectorField(name, selector, from, to, hint='月') {
     const timeRange = _.range(from, to, 1)
     const timeKeys = timeRange.map(t => _.padStart(t, 2, '0'))
     const timeMaps = timeKeys.map(t => ({id: t, label: t}))
 
     return (
-      <div className="field">
+      <div className="field field-input">
        <div className='ui search selection dropdown' ref={selector}>
           <input type='hidden' name={name} />
           <i className='dropdown icon'></i>
@@ -103,6 +122,7 @@ class CreditCard extends Component {
 
     return (
         <div>
+            {this.renderSupportingCreditTypes()}
             <div className='field field-input'>
               <label>カード番号<span>※必須</span></label>
               <input
