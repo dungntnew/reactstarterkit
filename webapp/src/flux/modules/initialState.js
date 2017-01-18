@@ -49,6 +49,10 @@ export const initBankAccount = {isFetching: false,
                                 data: {}}
 
 
+export const initContact = {errorMessage: null,
+                           isSending: false,
+                           data: {}}
+
 export const initLatestNews = {
   isFetching: false,
   errorMessage: null,

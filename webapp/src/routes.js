@@ -26,6 +26,7 @@ import NewsListMyPage from './containers/NewsListMyPage'
 import ProfitCreateMyPage from './containers/ProfitCreateMyPage'
 import ProfitApplyHistoryMyPage from './containers/ProfitApplyHistoryMyPage'
 import ProfitListMyPage from './containers/ProfitListMyPage'
+import ContactMyPage from './containers/ContactMyPage'
 
 import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
@@ -62,6 +63,7 @@ const routes = (
           <Route path='/mypage/profit-apply' component={ProfitCreateMyPage} />
           <Route path='/mypage/profit-list' component={ProfitListMyPage} />
           <Route path='/mypage/profit-apply-history' component={ProfitApplyHistoryMyPage} />
+          <Route path='/mypage/contact' component={ContactMyPage} />
 
     </Route>
     <Route path='/test'

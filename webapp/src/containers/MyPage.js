@@ -86,7 +86,7 @@ class MyPage extends Component {
             <div className="header">そのほか</div>
             <div className="menu">
               <a className="item">ヘールプ/FQA</a>
-              <a className="item">お問い合わせ</a>
+              <Link className="item" to="/mypage/contact">お問い合わせ</Link>
               <a className="item">ログアウト</a>
             </div>
           </div>

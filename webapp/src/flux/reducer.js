@@ -18,6 +18,7 @@ import creditReducer from './modules/credit'
 import joinEventReducer from './modules/joinEvent'
 import bankAccountReducer from './modules/bankAccount'
 import latestNewsReducer from './modules/latest_news'
+import contactReducer from './modules/contact'
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   createdEvent: createdEventReducer,
   bankAccount: bankAccountReducer,
   latestNews: latestNewsReducer,
+  contact: contactReducer,
   routing
 })
 
