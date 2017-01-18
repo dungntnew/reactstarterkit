@@ -1,6 +1,6 @@
 import ApiClient from '../../helpers/client';
 
-import {initCreatedEvent as initialState} from './initialState';
+import {initJoinedEvent as initialState} from './initialState';
 
 // - Actions
 export const JOINED_EVENTS_FETCH = 'JOINED_EVENTS_FETCH'

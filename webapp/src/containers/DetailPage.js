@@ -55,6 +55,7 @@ class DetailPage extends Component {
     }
 
     renderEventDetail() {
+      const {eventId} = this.props.params
       return (
         <div className='blok-content'>
           <EventDetailHeader router={this.props.router}/>
@@ -66,7 +67,7 @@ class DetailPage extends Component {
               <div className='ui detail-event' id='context'>
                 <EventDetailBlocks />
                 <EventDetailCommentForm />
-                <EventDetailRelatived limit={4}/>
+                <EventDetailRelatived limit={4} from={0} eventId={eventId}/>
               </div>
             </div>
           </div>

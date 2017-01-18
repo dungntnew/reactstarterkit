@@ -18,6 +18,24 @@ export const initCreatedEvent = {isFetching:false,
                                  total: 0,
                                  current: 0}
 
+export const initLikedEvent = {isFetching:false,
+                                 errorMessage: null,
+                                 events: {},
+                                 total: 0,
+                                 current: 0}
+
+export const initJoinedEvent = {isFetching:false,
+                                 errorMessage: null,
+                                 events: {},
+                                 total: 0,
+                                 current: 0}
+
+export const initRelativedEvent = {isFetching:false,
+                                 errorMessage: null,
+                                 events: {},
+                                 total: 0,
+                                 current: 0}
+
 export const initLatestBlog = {
   isFetching: true, errorMessage: null, data: {}
 }
