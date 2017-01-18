@@ -4,6 +4,7 @@ import { routerReducer as routing } from 'react-router-redux'
 import topEventReducer from './modules/top_event'
 import createEventReducer from './modules/create_event'
 import likedEventReducer from './modules/liked_event'
+import joinedEventReducer from './modules/joined_event'
 import selectedEventReducer from './modules/selected_event'
 import selectedBlogReducer from './modules/selected_blog'
 import targetReducer from './modules/target'
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
   latestNews: latestNewsReducer,
   contact: contactReducer,
   likedEvent: likedEventReducer,
+  joinedEvent: joinedEventReducer,
   routing
 })
 

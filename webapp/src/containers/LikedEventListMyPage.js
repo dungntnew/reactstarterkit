@@ -63,8 +63,8 @@ class LikedEventListMyPage extends Component {
 			  keys.map((key, index) => (
 				<EventListItem key={key} {...eventItems[key]}
 							   unLike={()=> this.props.unLikeEvent(key)}
-							   closeEvent={()=>{}}
-							   requestProfit={()=>{}}
+							   closeEvent={()=> this.props.closeEvent(key) }
+							   requestProfit={()=> this.props.requestProfit(key) }
 				/>
 			  ))
 			}
@@ -80,7 +80,7 @@ class LikedEventListMyPage extends Component {
 	  return (
 		  <Pagination
 			 router={this.props.router}
-			 pathname={'/mypage/events/created'}
+			 pathname={'/mypage/events/liked'}
 			 location={this.props.location}
 			 onChanged={(i)=> this.fetchPage(i)}
 			 total={total}
@@ -198,7 +198,13 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	dispatch(fetchLikedEventsIfNeed(filter, limit, from))
   },
   unLikeEvent: (eventId) => {
-	console.log("request unlike event: ", eventId)
+	console.log('request unlike: ', eventId)
+  },
+  closeEvent: (eventId) => {
+	console.log("request close event: ", eventId)
+  },
+  requestProfit: (eventId) => {
+	console.log("requet profit for: ", eventId)
   }
 })
 
