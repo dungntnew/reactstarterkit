@@ -40,7 +40,9 @@ class NewsListMyPage extends Component {
 
       return (
         <div className='ui item news-item' key={key}>
-          {title} - {formatDateAndTimeStr(lastUpdate)}
+          <p className='title'>{title}
+            <span className='date'> {formatDateAndTimeStr(lastUpdate)}</span>
+          </p>
           <p>
           {text}
           </p>

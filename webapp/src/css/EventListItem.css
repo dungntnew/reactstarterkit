@@ -1,3 +1,11 @@
-.event-list-item {
+.event-item {
+
+}
+.event-item .event-cover-img .ui.ribbon.label {
+  position: absolute;
+  left: -14px;
+}
+
+.event-item .price {
 
 }

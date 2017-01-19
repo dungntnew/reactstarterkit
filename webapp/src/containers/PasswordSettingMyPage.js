@@ -33,7 +33,7 @@ class PasswordSettingMyPage extends Component {
 
       return (
         <div>
-          <div className='password-setting-mypage'>
+          <div className='ui container password-setting-mypage'>
             {this.renderPageTitle()}
             {content}
           </div>
