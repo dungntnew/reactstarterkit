@@ -30,6 +30,7 @@ import ContactMyPage from './containers/ContactMyPage'
 
 import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
+import ProfilePage from './containers/ProfilePage'
 
 const routes = (
   <Route path='/' component={App}>
@@ -44,6 +45,8 @@ const routes = (
           component={JoinPage}/>
     <Route path='/cancelJoin/:userId/:eventId'
           component={CancelJoinPage}/>
+    <Route path='/members/:userId'
+          component={ProfilePage}/>
     <Route path='/blogs/latest'
           component={BlogListPage}/>
     <Route path='/blogs/:blogItemId'

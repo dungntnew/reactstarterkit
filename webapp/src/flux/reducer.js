@@ -22,9 +22,11 @@ import joinEventReducer from './modules/joinEvent'
 import bankAccountReducer from './modules/bankAccount'
 import latestNewsReducer from './modules/latest_news'
 import contactReducer from './modules/contact'
+import selectedUserReducer from './modules/selected_user'
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  selectedUser: selectedUserReducer,
   credit: creditReducer,
   target: targetReducer,
   genre: generReducer,

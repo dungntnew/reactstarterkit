@@ -12,6 +12,8 @@ export const initCreateEvent = {
 
 export const initSelectedEvent = {isFetching:true, errorMessage: null, data:{}}
 
+export const initSelectedUser = {isFetching:true, isSaving: false, errorMessage: null, data:{}}
+
 export const initCreatedEvent = {isFetching:false,
                                  errorMessage: null,
                                  events: {},

@@ -18,8 +18,8 @@
     "userId": "user-1",
     "data": {
       "number": "xxx",
-      "exprMoth": "02",
-      "exprYear": "2018",
+      "exprMoth": "",
+      "exprYear": "",
       "securityCode": "aa",
       "method": "クレジットカード"
     }
@@ -349,6 +349,28 @@
       }
     }
   },
+  "userdetails": [
+    {
+      "id": "user-1",
+      "url": "/members/user-1",
+      "rank": 2,
+      "isSelf": true,
+      "createdEventCount": 4,
+      "avatarUrl": "/img/avatar.png",
+      "coverUrl": "/img/cover.png",
+      "displayName": "User 1"
+    },
+    {
+      "id": "user-2",
+      "url": "/members/user-2",
+      "rank": 3,
+      "isSelf": false,
+      "createdEventCount": 10,
+      "avatarUrl": "/img/avatar.png",
+      "coverUrl": "/img/cover.png",
+      "displayName": "User 2"
+    }
+  ],
   "details": [
     {
       "id": "event-1",
@@ -384,25 +406,25 @@
         {
           "id": "user-1",
           "url": "/members/user-1",
-          "userAvatar": "/img/avatar.png",
+          "avatarUrl": "/img/avatar.png",
           "displayName": "Name 1"
         },
         {
           "id": "user-2",
           "url": "/members/user-2",
-          "userAvatar": "/img/avatar.png",
+          "avatarUrl": "/img/avatar.png",
           "displayName": "Name 2"
         },
         {
           "id": "user-3",
           "url": "/members/user-3",
-          "userAvatar": "/img/avatar.png",
+          "avatarUrl": "/img/avatar.png",
           "displayName": "Name 3"
         },
         {
           "id": "user-4",
           "url": "/members/user-4",
-          "userAvatar": "/img/avatar.png",
+          "avatarUrl": "/img/avatar.png",
           "displayName": "Name 4"
         }
       ],
