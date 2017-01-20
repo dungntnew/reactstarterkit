@@ -1,3 +1,37 @@
 .news-list-mypage {
+  background-color: #fff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
 
+.news-list-mypage .news-list-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #333333;
+}
+
+.news-list-mypage .ui.list {
+  margin-bottom: 2rem !important;
+  margin-top: 2rem !important;
+}
+
+.news-list-mypage .list .news-item {
+  border-bottom: 1px solid #ececec;
+}
+
+.news-list-mypage .list .news-item {
+  margin-bottom: 10px;
+}
+
+.news-list-mypage .list .news-item .title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ff8a46;
+  margin-bottom: 10px;
+}
+
+.news-list-mypage .list .news-item .title .date {
+   color: #878787;
+   padding-left: 1rem;
 }

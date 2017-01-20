@@ -9,7 +9,7 @@ import '../../css/event-edit-forms/EventAddressForm.css';
 $.fn.form = require('semantic-ui-form')
 
 class EventAddressForm extends Component {
-  
+
   static propTypes = {
     data: PropTypes.shape({
       // todo
@@ -58,7 +58,7 @@ class EventAddressForm extends Component {
   renderZipCode() {
     return (
       <div className="field">
-        <label>郵便番号<p className='required'>※必須</p><span className='note'>ハイフンなしの半角英数字。入力すると、住所が自動補完されます。</span></label>
+        <label>郵便番号<span className='required'>※必須</span><span className='note'>ハイフンなしの半角英数字。入力すると、住所が自動補完されます。</span></label>
         <input name="zipcode" type="text"/>
       </div>
     )
@@ -68,7 +68,7 @@ class EventAddressForm extends Component {
     const {prefectures} = this.props
       return (
         <div className="field">
-           <label>都道府県<p className='required'>※必須</p><span className='note'>外観や会場全体を表す画像をアップロードしてください。</span></label>
+           <label>都道府県<span className='required'>※必須</span><span className='note'>外観や会場全体を表す画像をアップロードしてください。</span></label>
            <div className='ui search selection dropdown' ref='address1Selector'>
               <input type='hidden' name='address1' />
               <i className='dropdown icon'></i>
@@ -88,7 +88,7 @@ class EventAddressForm extends Component {
   renderAddress2() {
     return (
       <div className="field">
-        <label>群市区町村<p className='required'>※必須</p><span className='note'>外観や会場全体を表す画像をアップロードしてください。</span></label>
+        <label>群市区町村<span className='required'>※必須</span><span className='note'>外観や会場全体を表す画像をアップロードしてください。</span></label>
         <input name="address2" type="text"/>
       </div>
     )

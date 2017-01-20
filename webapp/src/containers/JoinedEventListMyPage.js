@@ -57,13 +57,14 @@ class JoinedEventListMyPage extends Component {
 
 		  <div className="ui section divider"></div>
 
-		  <div className="ui link two stackable cards">
+		  <div className="ui link two stackable cards block-events-content">
 			{
 			  keys.map((key, index) => (
-				<EventListItem key={key} {...eventItems[key]}
-							   unLike={()=> this.props.unLikeEvent(key)}
-							   closeEvent={()=> this.props.closeEvent(key) }
-							   requestProfit={()=> this.props.requestProfit(key) }
+				<EventListItem
+						key={key} {...eventItems[key]}
+						unLike={()=> this.props.unLikeEvent(key)}
+						closeEvent={()=> this.props.closeEvent(key) }
+						requestProfit={()=> this.props.requestProfit(key) }
 				/>
 			  ))
 			}

@@ -101,7 +101,7 @@ class CreditCard extends Component {
 
     return (
       <div className="field field-input">
-       <div className='ui search selection dropdown' ref={selector}>
+       <div className='ui fluid search selection dropdown' ref={selector}>
           <input type='hidden' name={name} />
           <i className='dropdown icon'></i>
           <div className='default text'>{hint}</div>
@@ -122,7 +122,6 @@ class CreditCard extends Component {
 
     return (
         <div>
-            {this.renderSupportingCreditTypes()}
             <div className='field field-input'>
               <label>カード番号<span>※必須</span></label>
               <input
@@ -131,6 +130,7 @@ class CreditCard extends Component {
                   name='number'
                   />
             </div>
+            {this.renderSupportingCreditTypes()}
 
             <div className='list-card'>
             </div>
@@ -181,7 +181,7 @@ class CreditCard extends Component {
     return (
       <div className='ui text container-customize credit-card' >
         <div className='ui segment centered'>
-          <h2 className='center'>お支払い方法</h2>
+          <h2 className='title center'>お支払い方法</h2>
           <form className='ui form segment form-create'
                  ref='form'
                  onSubmit={(e) => {

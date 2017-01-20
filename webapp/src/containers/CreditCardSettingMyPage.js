@@ -50,7 +50,7 @@ class CreditCardSettingMyPage extends Component {
 
       return (
         <div>
-          <div className='bank-setting-mypage'>
+          <div className='creditcard-setting-mypage'>
             {this.renderPageTitle()}
             {content}
           </div>
