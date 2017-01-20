@@ -18,8 +18,8 @@
     "userId": "user-1",
     "data": {
       "number": "xxx",
-      "exprMoth": "",
-      "exprYear": "",
+      "exprMoth": "01",
+      "exprYear": "2017",
       "securityCode": "aa",
       "method": "クレジットカード"
     }
