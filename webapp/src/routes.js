@@ -32,12 +32,14 @@ import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
 import ProfilePage from './containers/ProfilePage'
 import LoginPage from './containers/LoginPage'
+import NotFoundPage from './components/NotFoundPage'
 
 import auth from './helpers/auth'
 
 const requireAuth = (nextState, replace, callback) => {
   if (!auth.loggedIn()) {
     console.log('require login')
+    console.log(nextState)
     replace({
       pathname: '/login',
     })
@@ -93,6 +95,7 @@ const routes = (
            component={TestPage2}/>
     <Route path='/about'
            component={AboutPage}/>
+    <Route path='*' component={NotFoundPage} />
 
   </Route>
 )
