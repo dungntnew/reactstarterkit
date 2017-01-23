@@ -9,6 +9,10 @@
   cursor: pointer;
 }
 
+.user-avatar .edit a {
+  color: #878787;
+}
+
 @media only screen and (max-width: 480px) {
   .user-avatar .edit {
     right: 109px;

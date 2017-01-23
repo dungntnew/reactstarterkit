@@ -42,26 +42,23 @@
 }
 
 .editable-member-profile .cover-image .ui.segment {
-  padding: 2rem;
+  top: 45px;
+  opacity: 0.7;
 }
 
-.editable-member-profile .edit-form {
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-}
-
-.editable-member-profile {
-  /*background-color: #f4f1f0;*/
+.editable-member-profile .cover-image .ui.segment img {
+  height: 80px;
+  object-fit: cover;
 }
 
 .editable-member-profile .cover-image {
-  min-height: 388px;
+  min-height: 488px;
   position: relative;
 }
 
 .editable-member-profile .cover-image .user-avatar {
   position: absolute;
-  top: 42%;
+  top: 40%;
   right: 42%;
 }
 
@@ -81,22 +78,13 @@
   margin-bottom: 0.7rem !important;
 }
 
-.editable-member-profile .cover-image .ui.segment {
-  padding: 2rem;
-}
-
-.editable-member-profile .edit-form {
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-}
-
 .editable-member-profile .edit-form .ui.form {
   text-align: left;
 }
 
 .editable-member-profile .menu-sub {
   display: inline-block;
-  margin-top: 360px;
+  margin-top: 460px;
   margin-bottom: 0;
 
 }

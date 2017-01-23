@@ -101,63 +101,65 @@ class EditableMemberProfile extends Component {
     })
 
     return (
-      <div className='ui text container-customize edit-form'>
+      <div className='edit-form'>
         <div className={classes} style={style}>
 
           {/*-- Preview --*/}
 
 
           {/*-- Form -- */}
-          <div className="ui segment">
-            <img src={avatarPreviewUrl}
-               className='ui tiny circular image'
-               alt='img-avatar'/>
+          <div className='ui text container-customize'>
+            <div className="ui segment">
+              <img src={avatarPreviewUrl}
+                 className='ui tiny circular image'
+                 alt='img-avatar'/>
 
-            <div className={formClassNames}>
-              <div className="field">
-                <label>ニックネーム</label>
-                <input type="text"
-                       placeholder=""
-                       value={displayName}
-                       onChange={(e)=>{
-                          e.preventDefault()
-                          this.setState({displayName: e.target.value})
-                       }}
-                       />
-              </div>
-
-              <div className="field">
-                 <label>アバター</label>
-                 <input
-                    type='file'
-                    placeholder='アバターを選んで下さい'
-                    onChange={(e) => {
-                    this.handleAvatarChange(e)
-                 }}/>
-              </div>
-
-              <div className="field">
-                 <label>壁紙</label>
-                 <input
-                    type='file'
-                    placeholder='壁紙を選んで下さい'
-                    onChange={(e) => {
-                    this.handleCoverChange(e)
-                 }}/>
-              </div>
-
-              <div className='btn-group'>
-                <div className="ui submit btn-orange button btn-wid50"
-                     onClick={(e)=> {this.saveProfile(e)}}>
-                     {btnTitle}
+              <div className={formClassNames}>
+                <div className="field">
+                  <label>ニックネーム</label>
+                  <input type="text"
+                         placeholder=""
+                         value={displayName}
+                         onChange={(e)=>{
+                            e.preventDefault()
+                            this.setState({displayName: e.target.value})
+                         }}
+                         />
                 </div>
-                <div className="ui submit button btn-wid50"
-                     onClick={(e)=> {this.cancelProfile(e)}}>
-                     取消
+
+                <div className="field">
+                   <label>アバター</label>
+                   <input
+                      type='file'
+                      placeholder='アバターを選んで下さい'
+                      onChange={(e) => {
+                      this.handleAvatarChange(e)
+                   }}/>
+                </div>
+
+                <div className="field">
+                   <label>壁紙</label>
+                   <input
+                      type='file'
+                      placeholder='壁紙を選んで下さい'
+                      onChange={(e) => {
+                      this.handleCoverChange(e)
+                   }}/>
+                </div>
+
+                <div className='btn-group'>
+                  <div className="ui submit btn-orange button btn-wid50"
+                       onClick={(e)=> {this.saveProfile(e)}}>
+                       {btnTitle}
+                  </div>
+                  <div className="ui submit button btn-wid50"
+                       onClick={(e)=> {this.cancelProfile(e)}}>
+                       取消
+                  </div>
                 </div>
               </div>
+
             </div>
-
           </div>
         </div>
       </div>
