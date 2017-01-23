@@ -1,9 +1,7 @@
 import $ from 'jquery';
 import React, {PropTypes, Component} from 'react';
-//import classNames from 'classnames';
-// default fields validations,
-// ignore this, setup late is OK
-//import {defaultRules} from '../../helpers/validations'
+import {Link} from 'react-router';
+import {defaultRules} from '../../helpers/validations'
 
 import 'semantic-ui-form/form.min.css'
 import '../../css/auth-forms/LoginForm.css';
@@ -18,12 +16,12 @@ class LoginForm extends Component {
 
   static propTypes = {
     data: PropTypes.shape({
-      //todo
-    }).isRequired,
-    facebookUrl: PropTypes.string.isRequired,
-    googleUrl: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
+      email: PropTypes.string,
+      password: PropTypes.string,
+    }),
     onSubmit: PropTypes.func.isRequired,
+    onFBAuth: PropTypes.func.isRequired,
+    onGGAuth: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -34,16 +32,17 @@ class LoginForm extends Component {
     const {form} = this.refs
     const {data} = this.props
 
-     // setup validations
-    // $(form).form({
-    //     on: 'blur',
-    //     fields: defaultRules
-    // })
+    //setup validations
+    $(form).form({
+        on: 'blur',
+        fields: defaultRules
+    })
 
     // init form values
     $(form).form('set values', data)
   }
 
+  // process login with email-password
   handleSubmit() {
     const {form} = this.refs
 
@@ -60,25 +59,43 @@ class LoginForm extends Component {
     }
   }
 
+  // process login with facebook
+  // use external auth-service
+  authFB(e) {
+    e.preventDefault();
+    this.props.onFBAuth()
+  }
+
+  // process login with google+
+  // use external auth-service
+  authGG(e) {
+    e.preventDefault();
+    this.props.onGGAuth()
+  }
+
   render() {
     return (
         <form className='ui large form login-form' ref='form'
               onSubmit={(e) => {
                 e.preventDefault()
-               this.handleSubmit()
+                this.handleSubmit()
               }}>
 
           <div className='ui segment'>
             <h2 className='tite-form center'>ログイン</h2>
 
             <div className='field'>
-              <a className='ui button btn-link link-face' href={this.props.facebookUrl}>
+              <a className='ui button btn-link link-face' onClick={(e)=>{
+                this.authFB(e)
+              }}>
                 <i className="facebook f icon icon-left"></i>Facebookでログイン
               </a>
             </div>
 
             <div className='field'>
-              <a className='ui button btn-link link-gle' href={this.props.goooleUrl}>
+              <a className='ui button btn-link link-gle' onClick={(e)=>{
+                this.authGG(e)
+              }}>
                 <i className="google icon icon-left"></i>Google+でログイン
               </a>
             </div>
@@ -86,14 +103,14 @@ class LoginForm extends Component {
           <div className="field">
             <input
                   type="email"
-                  name="email1"
+                  name="email"
                   placeholder="メールアドレス"/>
           </div>
 
           <div className="field">
             <input
                   type="password"
-                  name="pass1"
+                  name="password"
                   placeholder="パスワード"/>
           </div>
 
@@ -101,12 +118,12 @@ class LoginForm extends Component {
           <button className="ui button btn-link btn-orange" type="submit">ログイン</button>
 
           <div className='field field-text'>
-            <a className='text-forget-pass center' href={this.props.url}>パスワードをお忘れの方はこちら</a>
+            <Link to='/forgot-password' className='text-forget-pass center'>
+               パスワードをお忘れの方はこちら
+            </Link>
           </div>
         </div>
-
         </form>
-
     )
   }
 }
