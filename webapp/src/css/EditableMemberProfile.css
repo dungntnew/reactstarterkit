@@ -5,6 +5,7 @@
 .editable-member-profile .cover-image {
   min-height: 388px;
   position: relative;
+  text-align: center;
 }
 
 .editable-member-profile .cover-image .user-avatar {
@@ -84,13 +85,11 @@
   padding-top: 2rem;
   padding-bottom: 4rem;
 }
-.editable-member-profile .menu-block {
-  text-align: center;
-  margin-top: 340px;
-}
+
 .editable-member-profile .menu-sub {
   display: inline-block;
-  margin: 0;
+  margin-top: 360px;
+  margin-bottom: 0;
 
 }
 .editable-member-profile .menu-sub .nav-item {
@@ -112,7 +111,7 @@
   color: #878787;
 }
 
-.editable-member-profile .menu-sub .nav-item .link-item.active {
+.editable-member-profile .menu-sub .nav-item .link-item:hover {
   border-bottom: 2px solid #ff8a46;
   padding-bottom: 10px;
   color: #ff8a46;

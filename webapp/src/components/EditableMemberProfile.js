@@ -206,11 +206,9 @@ class EditableMemberProfile extends Component {
         <UserAvatar {...data} editable={isSelf} onEdit={()=>{
           this.setState({editing: true})
         }}/>
-        <div className='menu-block'>
-          <ul className='menu-sub'>
-            {this.renderLink()}
-          </ul>
-        </div>
+        <ul className='menu-sub'>
+          {this.renderLink()}
+        </ul>
       </CoverImage>
     )
   }

@@ -74,8 +74,8 @@ class ProfilePage extends Component {
 	  const keys= _.keys(eventItems)
 
 	  return (
-		<div className='block-content'>
-		  <div className="ui link two stackable cards">
+		<div className='ui container block-content'>
+		  <div className="ui link three stackable cards">
 			{
 			  keys.map((key, index) => (
 				<EventListItem key={key} {...eventItems[key]}
