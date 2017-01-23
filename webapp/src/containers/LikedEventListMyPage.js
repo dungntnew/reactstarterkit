@@ -58,7 +58,7 @@ class LikedEventListMyPage extends Component {
 
 		  <div className="ui section divider"></div>
 
-		  <div className="ui link two stackable cards">
+		  <div className="ui link two stackable cards block-events-content">
 			{
 			  keys.map((key, index) => (
 				<EventListItem key={key} {...eventItems[key]}

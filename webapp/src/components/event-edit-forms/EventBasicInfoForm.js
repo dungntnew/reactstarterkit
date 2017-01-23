@@ -129,7 +129,7 @@ class EventBasicInfoForm extends Component {
 
       return (
         <div className="field field-input">
-         <label>{title}<p className='required'>※必須</p></label>
+         <label>{title}<span className='required'>※必須</span></label>
          <div className={classes} ref={selector}>
             <input type='hidden' name={name} />
             <i className='dropdown icon'></i>
@@ -149,7 +149,7 @@ class EventBasicInfoForm extends Component {
   renderEventTitle() {
     return (
       <div className="field field-input">
-        <label>テーブル名<p className='required'>※必須</p><span className='note'>50文字以内。テーブル名を入力してください。</span></label>
+        <label>テーブル名<span className='required'>※必須</span><span className='note'>50文字以内。テーブル名を入力してください。</span></label>
         <input name="title" type="text"/>
       </div>
     )
@@ -158,7 +158,7 @@ class EventBasicInfoForm extends Component {
   renderCoverImage() {
     return (
       <div className="field field-input">
-        <label>カバー写真<p className='required'>※必須</p><span className='note'>50文字以内。テーブル名を入力してください。</span></label>
+        <label>カバー写真<span className='required'>※必須</span><span className='note'>50文字以内。テーブル名を入力してください。</span></label>
         <input name="coverImage" type="file" />
       </div>
     )
@@ -187,7 +187,7 @@ class EventBasicInfoForm extends Component {
   renderEventDetail() {
     return (
       <div className="field field-input">
-          <label>テーブル詳細<p className='required'>※必須</p><span className='note'>10文字以上800文字以内</span></label>
+          <label>テーブル詳細<span className='required'>※必須</span><span className='note'>10文字以上800文字以内</span></label>
           <textarea name="detail" rows="5"></textarea>
       </div>
     )

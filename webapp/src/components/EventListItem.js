@@ -141,12 +141,12 @@ class EventListItem extends Component {
     return (
       <div className='card event-item'>
 
-        <div className='image event-cover-img'
+        <a className='image event-cover-img'
            href={url}>
           {!owned && liked &&
             this.renderRemoveBookmark()}
           <img alt='event-cover-img' src={coverImageUrl}/>
-        </div>
+        </a>
         <div className="ui top right attached label price text-orange">
            {formatPrice(price)}
         </div>
