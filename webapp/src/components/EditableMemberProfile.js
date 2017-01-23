@@ -181,15 +181,6 @@ class EditableMemberProfile extends Component {
     })
   }
 
-  renderEditButton() {
-    return (
-      <div className='edit'>
-        <a onClick={()=>{
-          this.setState({editing: true})
-        }}>Edit</a>
-      </div>
-    )
-  }
 
   renderLink() {
     const links = [
@@ -212,10 +203,9 @@ class EditableMemberProfile extends Component {
 
     return (
       <CoverImage backgroundUrl={data.coverUrl}>
-        <UserAvatar {...data}/>
-        {isSelf &&
-          this.renderEditButton()
-        }
+        <UserAvatar {...data} editable={isSelf} onEdit={()=>{
+          this.setState({editing: true})
+        }}/>
         <div className='menu-block'>
           <ul className='menu-sub'>
             {this.renderLink()}

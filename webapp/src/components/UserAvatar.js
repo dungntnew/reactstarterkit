@@ -15,6 +15,8 @@ class UserAvatar extends Component {
     url: PropTypes.string.isRequired,
     rank: PropTypes.number.isRequired,
     createdEventCount: PropTypes.number.isRequired,
+    editable: PropTypes.bool,
+    onEdit: PropTypes.func,
   }
 
   componentDidMount() {
@@ -32,7 +34,8 @@ class UserAvatar extends Component {
     return (
       <div className='edit'>
         <a onClick={()=>{
-          this.setState({editing: true})
+          if (this.props.onEdit)
+            this.props.onEdit()
         }}>Edit</a>
       </div>
     )
@@ -52,7 +55,7 @@ class UserAvatar extends Component {
         <a className='image cover-img-avatar' href={url}>
           <img src={avatarUrl} className='circle-image' alt='img-avatar'/>
         </a>
-        {this.renderEditButton()}
+        {this.props.editable&& this.renderEditButton()}
         <div className='user-description'>
           <h3 className='avatar-name'>{displayName}</h3>
           <div className="ui star rating" ref="ratingRef"></div>
