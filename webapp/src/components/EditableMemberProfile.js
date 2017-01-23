@@ -26,6 +26,8 @@ class EditableMemberProfile extends Component {
       url: PropTypes.string.isRequired,
       rank: PropTypes.number.isRequired,
       createdEventCount: PropTypes.number.isRequired,
+      joinedEventCount: PropTypes.number.isRequired,
+      reviewedEventCount: PropTypes.number.isRequired,
       isSelf: PropTypes.bool.isRequired
     }).isRequired,
     isSaving: PropTypes.bool.isRequired,
@@ -185,12 +187,19 @@ class EditableMemberProfile extends Component {
 
 
   renderLink() {
-    const links = [
+    const {data} = this.props
+    const {url, createdEventCount, joinedEventCount, reviewedEventCount} = data
 
-      <Link to='/hosted'className='link-item'>主催テーブル<span className="count">2</span></Link>,
-      <Link to='/review'className='link-item'>レビュー<span className="count">0</span></Link>,
-      <Link to='/join'className='link-item'>参加予定テーブル<span className="count">1</span></Link>,
-      <Link to='/join1'className='link-item'>参加予定テーブル<span className="count">10</span></Link>
+    const links = [
+      <Link to={`${url}/created`} activeClassName='active'
+                               className='link-item'>主催テーブル
+                                 <span className="count">{createdEventCount}</span></Link>,
+      <Link to={`${url}/reviewed`} activeClassName='active'
+                         className='link-item'>レビュー
+                               <span className="count">{reviewedEventCount}</span></Link>,
+      <Link to={`${url}/joined`} activeClassName='active'
+                       className='link-item'>参加予定テーブル
+                               <span className="count">{joinedEventCount}</span></Link>,
       ]
 
     return links.map((link, index) => (

@@ -86,9 +86,9 @@ class MyPage extends Component {
           <div className="item">
             <div className="header">そのほか</div>
             <div className="menu">
-              <a className="item" activeClassName="active">ヘールプ/FQA</a>
+              <Link className="item" activeClassName="active" to="/mypage/fqa">ヘールプ/FQA</Link>
               <Link className="item" activeClassName="active" to="/mypage/contact">お問い合わせ</Link>
-              <a className="item" activeClassName="active">ログアウト</a>
+              <a className="item">ログアウト</a>
             </div>
           </div>
         </div>

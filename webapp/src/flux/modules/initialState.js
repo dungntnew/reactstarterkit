@@ -96,8 +96,10 @@ export const guest = {
   anonymous: true,
 }
 
+localStorage.token = '======'
 export const initAuth = {
   authenticated: true,
+  authenticating: false,
   user: guest,
   anonymous: true
 }
