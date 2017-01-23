@@ -39,15 +39,15 @@ import auth from './helpers/auth'
 const requireAuth = (nextState, replace, callback) => {
   if (!auth.loggedIn()) {
     console.log('require login')
-    console.log(nextState)
     replace({
       pathname: '/login',
     })
-    callback();
+
   }
   else {
     console.log("passed.")
   }
+  callback();
 }
 
 

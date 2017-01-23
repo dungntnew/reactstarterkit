@@ -146,8 +146,9 @@ const authReducer = (state = initAuth, action) => {
 			anonymous: false,
 			errorMessage: action.payload.errorMessage,
 		})
+		default:
+		  return state;
 	}
-  return state;
 }
 
 export default authReducer;

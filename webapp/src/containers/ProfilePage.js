@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import $ from 'jquery';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
@@ -69,7 +68,7 @@ class ProfilePage extends Component {
 	}
 
 	renderEventList() {
-	  const {filter} = this.props.params
+	  //const {filter} = this.props.params
 	  const {eventItems} = this.props
 	  const keys= _.keys(eventItems)
 
@@ -167,7 +166,7 @@ const mapStateToProps = (state, ownProps) => {
   if (filter === 'hosted' || filter === 'created') {
 	eventStateBlock = state.createdEvent
   }
-  else if (filter == 'liked') {
+  else if (filter === 'liked') {
 	eventStateBlock = state.likedEvent
   }
 

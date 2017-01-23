@@ -9,11 +9,6 @@ import '../../css/auth-forms/LoginForm.css';
 $.fn.form = require('semantic-ui-form')
 
 class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
   static propTypes = {
     data: PropTypes.shape({
       email: PropTypes.string,
