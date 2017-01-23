@@ -28,6 +28,16 @@ class UserAvatar extends Component {
     .rating('disable', true)
   }
 
+  renderEditButton() {
+    return (
+      <div className='edit'>
+        <a onClick={()=>{
+          this.setState({editing: true})
+        }}>Edit</a>
+      </div>
+    )
+  }
+
   render() {
     const {
       url,
@@ -42,6 +52,7 @@ class UserAvatar extends Component {
         <a className='image cover-img-avatar' href={url}>
           <img src={avatarUrl} className='circle-image' alt='img-avatar'/>
         </a>
+        {this.renderEditButton()}
         <div className='user-description'>
           <h3 className='avatar-name'>{displayName}</h3>
           <div className="ui star rating" ref="ratingRef"></div>
