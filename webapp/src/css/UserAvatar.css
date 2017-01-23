@@ -24,6 +24,7 @@
 .user-avatar .user-description {
   float: right;
   padding-left: 12px;
+  text-align: left;
 }
 .user-avatar.user-description h3.avatar-name {
   margin: 0;
