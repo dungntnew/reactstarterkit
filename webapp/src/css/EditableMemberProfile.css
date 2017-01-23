@@ -65,6 +65,10 @@
   right: 42%;
 }
 
+.editable-member-profile .cover-image .user-avatar .user-description {
+  text-align: left;
+}
+
 .editable-member-profile .cover-image img {
   margin: auto;
 }
@@ -84,6 +88,10 @@
 .editable-member-profile .edit-form {
   padding-top: 2rem;
   padding-bottom: 4rem;
+}
+
+.editable-member-profile .edit-form .ui.form {
+  text-align: left;
 }
 
 .editable-member-profile .menu-sub {
