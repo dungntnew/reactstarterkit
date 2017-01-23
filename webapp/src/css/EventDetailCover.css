@@ -11,9 +11,10 @@
 }
 
 .event-detail-cover>.cover-image>.user-avatar {
-  position: absolute;
-  bottom: 24px;
+  position: relative;
+  bottom: 0;
   left: 24px;
+  top: 360px;
 }
 
 .event-detail-cover>.cover-image> .thumbnails {

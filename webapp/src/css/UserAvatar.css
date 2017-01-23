@@ -1,6 +1,20 @@
 .user-avatar {
   display: inline-block;
+  position: relative;
 }
+
+.user-avatar .edit {
+  position: absolute;
+  right: 122px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 480px) {
+  .user-avatar .edit {
+    right: 109px;
+  }
+}
+
 .user-avatar .circle-image {
   width: 72px;
   height: 72px;

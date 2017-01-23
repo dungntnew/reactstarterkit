@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-router'
 
 import $ from 'jquery';
 import classNames from 'classnames';
@@ -190,6 +191,21 @@ class EditableMemberProfile extends Component {
     )
   }
 
+  renderLink() {
+    const links = [
+
+      <Link to='/hosted'className='link-item'>主催テーブル<span className="count">2</span></Link>,
+      <Link to='/review'className='link-item'>レビュー<span className="count">0</span></Link>,
+      <Link to='/join'className='link-item'>参加予定テーブル<span className="count">1</span></Link>,
+      <Link to='/join1'className='link-item'>参加予定テーブル<span className="count">10</span></Link>
+      ]
+
+    return links.map((link, index) => (
+      <li className="nav-item" key={index}>{link}</li>
+
+    ))
+
+  }
   renderContent() {
     const {data} = this.props
     const {isSelf} = data
@@ -200,6 +216,11 @@ class EditableMemberProfile extends Component {
         {isSelf &&
           this.renderEditButton()
         }
+        <div className='menu-block'>
+          <ul className='menu-sub'>
+            {this.renderLink()}
+          </ul>
+        </div>
       </CoverImage>
     )
   }
