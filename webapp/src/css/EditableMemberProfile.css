@@ -107,7 +107,7 @@
   color: #878787;
 }
 
-.editable-member-profile .menu-sub .nav-item .link-item:hover {
+.editable-member-profile .menu-sub .nav-item .link-item.active {
   border-bottom: 2px solid #ff8a46;
   padding-bottom: 10px;
   color: #ff8a46;
