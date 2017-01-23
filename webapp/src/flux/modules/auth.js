@@ -88,9 +88,9 @@ export const asyncAuthByEmailAndPassword = (email, password) => {
 		.then(json => {
 			// TODO: fix!
 			localStorage.token = json.data.token
-			loginWithEmailSuccess(email, password, json.data)
+			dispatch(loginWithEmailSuccess(email, password, json.data))
 		})
-		.catch(error => loginWithEmailFailed(email, password, error))
+		.catch(error => dispatch(loginWithEmailFailed(email, password, error)))
 	}
 }
 
@@ -143,7 +143,8 @@ const authReducer = (state = initAuth, action) => {
 			authencating: false,
 			authenticated: false,
 			user: null,
-			anonymous: false
+			anonymous: false,
+			errorMessage: action.payload.errorMessage,
 		})
 	}
   return state;

@@ -11,33 +11,38 @@ import PageFooter from '../components/PageFooter';
 
 import LoginForm from '../components/auth-forms/LoginForm';
 
-//import {} from '../flux/modules/';
+import {asyncAuthByEmailAndPassword} from '../flux/modules/auth';
 
+// TODO: cannot go login page after have an error message
+// FIX IT!
 class LoginPage extends Component {
 
     componentDidMount(){
-      const {blogItemId} = this.props.params
     }
 
     componentDidUpdate() {
     }
 
     renderLoginForm() {
-      return <LoginForm />
+      return <LoginForm
+         onSubmit={this.props.onEmailAuth}
+         onFBAuth={this.props.onFBAuth}
+         onGGAuth={this.props.onGGAuth}
+      />
     }
 
     render() {
-      const {isFetching, errorMessage} = this.props
+      const {authencating, errorMessage} = this.props
       let content
 
-      if (isFetching) {
+      if (authencating) {
         content = (
-          <div> Loading... </div>
+          <div> Authenticating... </div>
         )
       }
-      else if (!isFetching && errorMessage) {
+      else if (!authencating && errorMessage) {
         content = (
-          <div> System Error: {errorMessage} </div>
+          <div> Authentication Error: {errorMessage} </div>
         )
       }
       else {
@@ -59,17 +64,27 @@ class LoginPage extends Component {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const {selectedBlog} = state
-  const {isFetching, errorMessage, data} = selectedBlog
+  const {auth} = state
+  const {authenticating, authenticated, errorMessage, data} = auth
 
   return {
-    isFetching: isFetching,
-    errorMessage: errorMessage,
+    authenticating,
+    authenticated,
+    errorMessage,
     data: data
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+ onEmailAuth: ({email, password}) => {
+    dispatch(asyncAuthByEmailAndPassword(email, password))
+ },
+ onFBAuth: (data) => {
+    console.log('not impl auth fb yet')
+ },
+ onGGAuth: (data) => {
+   console.log('not impl auth gg yet')
+ },
 })
 
 export default connect(mapStateToProps,
