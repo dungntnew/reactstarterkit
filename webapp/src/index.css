@@ -46,6 +46,9 @@ i.icon {
   width: 100%;
 }
 
+.btn-wid50 {
+  width: 48%;
+}
 .tite-form {
   font-size: 1.5rem;
 }

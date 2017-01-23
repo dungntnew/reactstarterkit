@@ -1,3 +1,43 @@
 .editable-member-profile {
-
+  /*background-color: #f4f1f0;*/
 }
+
+.editable-member-profile .cover-image {
+  min-height: 318px;
+  position: relative;
+}
+
+.editable-member-profile .cover-image .user-avatar {
+  position: absolute;
+  top: 42%;
+  right: 42%;
+}
+
+.editable-member-profile .cover-image img {
+  margin: auto;
+}
+
+.editable-member-profile .cover-image .form label {
+  font-size: 1.125rem !important;
+  line-height: 0.8 !important;
+  color: #444444 !important;
+  font-weight: 500!important;
+  margin-bottom: 0.7rem !important;
+}
+
+.editable-member-profile .cover-image .ui.segment {
+  padding: 2rem;
+}
+
+.editable-member-profile .edit-form {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.editable-member-profile .edit a {
+  position: absolute;
+  top: 67%;
+  right: 52%;
+  cursor: pointer;
+}
+
