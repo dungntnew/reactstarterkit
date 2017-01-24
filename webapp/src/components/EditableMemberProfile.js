@@ -16,6 +16,8 @@ import 'semantic-ui-dropdown/dropdown.min.css'
 import '../css/CoverImage.css';
 import '../css/EditableMemberProfile.css';
 
+import EditableAvatar from '../components/EditableAvatar'
+
 class EditableMemberProfile extends Component {
 
   static propTypes = {
@@ -69,21 +71,6 @@ class EditableMemberProfile extends Component {
      reader.readAsDataURL(file)
   }
 
-  handleAvatarChange(e) {
-     e.preventDefault();
-
-     let reader = new FileReader()
-     let file = e.target.files[0]
-
-     reader.onloadend = ()=> {
-        this.setState({
-          avatarPreviewUrl: reader.result,
-          avatarFile: file
-        })
-     }
-     reader.readAsDataURL(file)
-  }
-
   renderForm() {
     const {isSaving} = this.props
     const {coverPreviewUrl, avatarPreviewUrl, displayName} = this.state
@@ -112,9 +99,15 @@ class EditableMemberProfile extends Component {
           {/*-- Form -- */}
           <div className='ui text container-customize'>
             <div className="ui segment">
-              <img src={avatarPreviewUrl}
-                 className='ui tiny circular image'
-                 alt='img-avatar'/>
+
+             <EditableAvatar
+               avatarUrl={avatarPreviewUrl}
+               defaultAvatarUrl={'/img/avatar-01.png'}
+               onSubmit={(url)=>{
+                this.setState({avatarPreviewUrl: url})
+               }}
+             />
+
 
               <div className={formClassNames}>
                 <div className="field">

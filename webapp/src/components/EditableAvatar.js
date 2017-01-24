@@ -83,7 +83,7 @@ class EditableAvatar extends Component {
                 height={250}
                 border={50}
                 color={[255, 255, 255, 0.6]} // RGBA
-                scale={1.2}
+                scale={1.1}
                 ref={this.setEditorRef.bind(this)}
               />
         <button className='ui orange button'
