@@ -1,7 +1,21 @@
 .cover-image {
   width: 100%;
-  min-height: 480px;
+  height: 480px;
   background-color: white;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
+
+@media only screen and (max-width: 768px) {
+  .cover-image {
+    height: 400px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .cover-image {
+    height: 350px;
+  }
+}
+

@@ -7,28 +7,11 @@
   color: #fff !important;
 }
 
-.btn-black {
-  background-color: #444444 !important;
-  color: #fff !important;
-}
-
-.btn-error {
-  background-color: #e84465 !important;
-  color: #fff;
-}
 .btn-left {
   padding: 10px 70px !important;
   margin-top: 15px;
 }
 
-.btn-wid-full {
-  width: 100%;
-}
-
-.btn-width {
-  width: 30%;
-  margin-bottom: 20px !important;
-}
 .btn-bottom {
   margin-bottom: 4px !important;
 }
@@ -36,6 +19,7 @@
 .text-orange {
   color: #ff8a46 !important;
 }
+
 
 .required {
   font-size: 0.750em;
@@ -91,17 +75,14 @@ i.icon {
     margin-right: auto !important;
     margin-left: auto !important;
   }
-  .btn-width {
-    width: 40%;
-  }
 }
 
 @media only screen and (max-width: 480px) {
-    .btn-width {
-    width: 70%;
+  .container-customize {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
   }
 }
-
 /*.column {
   max-width: 450px;
 }*/
