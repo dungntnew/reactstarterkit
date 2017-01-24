@@ -19,6 +19,7 @@
 .event-comment-box .comment-box-input-form .form .field img {
   width: 48px;
   height: 48px;
+  object-fit: cover;
 }
 .event-comment-box .list-comment .comment-item {
   padding-bottom: 20px !important;
