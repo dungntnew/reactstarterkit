@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import '../css/CancelJoinPage.css';
@@ -10,11 +10,8 @@ import QuickSearchBar from '../containers/QuickSearchBar';
 import PageFooter from '../components/PageFooter';
 
 class CancelJoinPage extends Component {
-    static propTypes = {
-    }
 
     componentDidMount(){
-       const {userId, eventId} = this.props.params
     }
 
     componentDidUpdate() {

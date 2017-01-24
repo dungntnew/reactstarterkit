@@ -1,20 +1,12 @@
 import _ from 'lodash';
-import React, {PropTypes, Component} from 'react';
-import {Link} from 'react-router';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import classNames from 'classnames';
 
 import '../css/EventDetailCommentForm.css';
 
 import EventCommentBox from './EventCommentBox';
 
 class EventDetailCommentForm extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  static propTypes = {
-  }
 
   render() {
 

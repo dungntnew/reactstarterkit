@@ -12,7 +12,7 @@ const JoinEventPayment = (props) => (
     <div className='ui items description'>
       <div className='item'>
         <div className='image'>
-          <img src={props.imageUrl}/>
+          <img src={props.imageUrl} alt='item-thumbnail'/>
         </div>
         <div className='content'>
           <div className='desc'>

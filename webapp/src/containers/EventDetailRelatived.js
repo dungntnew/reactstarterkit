@@ -3,22 +3,23 @@ import React, { Component,
                 PropTypes } from 'react'
 
 import { connect } from 'react-redux'
-import {Link} from 'react-router';
 
 import EventItem from '../components/EventItem';
 import '../css/TopNEvents.css';
 import '../css/EventDetailRelatived.css';
 
-import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
+import {fetchRelativedEventsIfNeed} from '../flux/modules/relatived_event'
 
 class EventDetailRelatived extends Component {
   static propTypes = {
     eventId: PropTypes.string.isRequired,
-    limit: PropTypes.number.isRequired
+    limit: PropTypes.number.isRequired,
+    from: PropTypes.number.isRequired,
   }
 
   componentDidMount() {
-    this.props.refresh()
+    const {eventId, limit, from} = this.props
+    this.props.refresh(eventId, limit, from)
   }
 
   renderLoading() {
@@ -66,27 +67,33 @@ class EventDetailRelatived extends Component {
   }
 }
 
-/*
-TODO:// change top event data to truly related events
-// now for test UI using templ Top N event data
-*/
-
 const mapStateToProps = (state, ownProps) => {
-  // const {eventId} = ownProps
-  const block = state.topEvent["special"]
-  const eventId = "test-event-1"
-  return {
-    eventId: eventId,
-    limit: 3,
-    isFetching: false,
-    events: block.events
+  const {eventId, limit} = ownProps
+  const {relativedEvent} = state
+  const {isFetching} = relativedEvent
+
+  if (isFetching) {
+    return {
+      isFetching: true,
+    }
+  }
+  else {
+    const {errorMessage, events, total, current} = relativedEvent
+    return {
+      limit: limit,
+      isFetching: false,
+      errorMessage: errorMessage,
+      eventId: eventId,
+      events: events,
+      total: total,
+      current: current
+    }
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  refresh: ()=> {
-    const {eventId, limit} = ownProps
-    dispatch(fetchTopNEventsIfNeed("special", 3))
+  refresh: (eventId, limit, from)=> {
+    dispatch(fetchRelativedEventsIfNeed(eventId, limit, from))
   }
 })
 

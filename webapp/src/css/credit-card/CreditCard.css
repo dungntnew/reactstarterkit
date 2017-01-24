@@ -1,6 +1,6 @@
 .credit-card {
-  margin-top: 120px !important;
-  margin-bottom: 100px!important;
+  margin-top: 3rem !important;
+  margin-bottom: 2rem!important;
 }
 
 .credit-card .ui.form.form-create {
@@ -9,9 +9,15 @@
   padding: 20px 30px;
 }
 
+.credit-card .title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #666666;
+}
 .credit-card .form-create .field.field-input label {
   font-size: 12px ;
   font-weight: 500;
+  margin-bottom: 7px;
 }
 
 .credit-card .form-create .field.field-input label span {
@@ -22,9 +28,8 @@
 .credit-card .form-create label {
   font-size: 12px ;
   font-weight: 500;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
   display: block;
-
 }
 
 .credit-card .form-create span {
@@ -33,6 +38,17 @@
 
 }
 
+.credit-card .form-create .labels {
+ padding-bottom: 5px;
+}
+
+.credit-card .form-create .labels .label {
+  font-size: 1rem !important;
+}
+
+.credit-card .form-create .labels .label .icon {
+  font-size: 1.25rem;
+}
 .credit-card .form-create .not-text {
   font-size: 12px;
   font-weight: 500;
@@ -44,6 +60,9 @@
   font-size: 0.875rem !important;
 }
 
+.credit-card .form-create .button {
+  margin-top: 2rem;
+}
 @media only screen and (max-width: 767px) {
   .ui.text.container-customize.credit-card {
     width: auto !important;

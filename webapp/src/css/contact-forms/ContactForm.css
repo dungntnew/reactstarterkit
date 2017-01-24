@@ -1,0 +1,11 @@
+.contact-form {
+
+}
+
+.contact-form .field label {
+  font-size: 1.125rem !important;
+  line-height: 0.8 !important;
+  color: #444444 !important;
+  font-weight: 500 !important;
+  margin-bottom: 7px !important;
+}

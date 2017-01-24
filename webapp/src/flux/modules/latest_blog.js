@@ -44,7 +44,6 @@ export const fetchLatestBlogsFailed = (limit, from, error) => {
 
 // - Async Actions
 function shouldFetchLatestBlogs(globalState, limit, from) {
-  const {latestBlog} = globalState
   return true
 }
 
