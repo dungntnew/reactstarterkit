@@ -39,32 +39,34 @@ class MyPage extends Component {
   }
 
   renderMenu() {
+
     return (
       <div className="ui secondary vertical pointing menu">
           <div className="item">
             <div className="header">テーブル管理</div>
             <div className="menu">
-              <Link className="item" to="/mypage/events/created">登録したテーブル</Link>
-              <Link className="item" to="/mypage/events/liked">お気に入りテーブル</Link>
-              <Link className="item" to="/mypage/events/joined">参加テーブル</Link>
-              <Link className="item" to="/mypage/events/reviewed">レビュー一覧</Link>
+              <Link className="item" activeClassName="active" to="/mypage/events/created">登録したテーブル</Link>
+              <Link className="item" activeClassName="active" to="/mypage/events/liked">お気に入りテーブル</Link>
+              <Link className="item" activeClassName="active" to="/mypage/events/joined">参加テーブル</Link>
+              {/*<Link className="item" activeClassName="active" to="/mypage/events/reviewed">レビュー一覧</Link> */}
             </div>
           </div>
           <div className="item">
             <div className="header">売上・振込</div>
             <div className="menu">
-              <a className="item">売上の記録</a>
-              <a className="item active">支払いの記録</a>
-              <a className="item">振り込み履歴</a>
+              <Link className="item" activeClassName="active" to="/mypage/profit-apply">売上の記録</Link>
+              <Link className="item" activeClassName="active" to="/mypage/profit-list">支払いの記録</Link>
+              <Link className="item" activeClassName="active" to="/mypage/profit-history">振り込み履歴</Link>
             </div>
           </div>
           <div className="item">
             <div className="header">通知・ニュース</div>
             <div className="menu">
-              <a className="item">通知一覧</a>
-              <a className="item">ニュース一覧</a>
+              <Link className="item" activeClassName="active" to='/mypage/news'>ニュース一覧</Link>
+              {/*<a className="item">通知一覧</a> */}
             </div>
           </div>
+          {/*
           <div className="item">
             <div className="header">友達・フロー</div>
             <div className="menu">
@@ -72,19 +74,20 @@ class MyPage extends Component {
               <a className="item">フロー一覧</a>
             </div>
           </div>
+          */}
           <div className="item">
             <div className="header">アカウント設定</div>
             <div className="menu">
-              <a className="item">パスワード変更</a>
-              <a className="item">クレジットカードの管理</a>
-              <a className="item" to="/mypage/bank-settings">お振込先銀行口座編集</a>
+              <Link className="item" activeClassName="active" to="/mypage/change-password">パスワード変更</Link>
+              <Link className="item" activeClassName="active" to="/mypage/creditcard-settings">クレジットカード変更</Link>
+              <Link className="item" activeClassName="active" to="/mypage/bank-settings">お振込先銀行口座編集</Link>
             </div>
           </div>
           <div className="item">
             <div className="header">そのほか</div>
             <div className="menu">
-              <a className="item">ヘールプ/FQA</a>
-              <a className="item">お問い合わせ</a>
+              <Link className="item" activeClassName="active" to="/mypage/fqa">ヘールプ/FQA</Link>
+              <Link className="item" activeClassName="active" to="/mypage/contact">お問い合わせ</Link>
               <a className="item">ログアウト</a>
             </div>
           </div>

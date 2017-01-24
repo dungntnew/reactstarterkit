@@ -12,7 +12,27 @@ export const initCreateEvent = {
 
 export const initSelectedEvent = {isFetching:true, errorMessage: null, data:{}}
 
+export const initSelectedUser = {isFetching:true, isSaving: false, errorMessage: null, data:{}}
+
 export const initCreatedEvent = {isFetching:false,
+                                 errorMessage: null,
+                                 events: {},
+                                 total: 0,
+                                 current: 0}
+
+export const initLikedEvent = {isFetching:false,
+                                 errorMessage: null,
+                                 events: {},
+                                 total: 0,
+                                 current: 0}
+
+export const initJoinedEvent = {isFetching:false,
+                                 errorMessage: null,
+                                 events: {},
+                                 total: 0,
+                                 current: 0}
+
+export const initRelativedEvent = {isFetching:false,
                                  errorMessage: null,
                                  events: {},
                                  total: 0,
@@ -49,6 +69,25 @@ export const initBankAccount = {isFetching: false,
                                 data: {}}
 
 
+export const initContact = {errorMessage: null,
+                           isSending: false,
+                           data: {}}
+
+export const initLatestNews = {
+  isFetching: false,
+  errorMessage: null,
+  newsItems: {
+    "news-1": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+    "news-2": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+    "news-3": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+    "news-4": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+    "news-5": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+    "news-6": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+  },
+  total: 5,
+  current: 1
+}
+
 export const guest = {
   avatarUrl: '/img/avatar.png',
   name: 'Guest',
@@ -57,8 +96,10 @@ export const guest = {
   anonymous: true,
 }
 
+localStorage.token = '======'
 export const initAuth = {
   authenticated: true,
+  authenticating: false,
   user: guest,
   anonymous: true
 }

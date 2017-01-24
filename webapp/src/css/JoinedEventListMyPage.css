@@ -1,3 +1,16 @@
 .joined-event-list-mypage {
-  
+
+}
+
+.joined-event-list-mypage .block-content {
+  margin-top: 2rem;
+}
+
+.joined-event-list-mypage .block-content .pagination {
+  margin-top: 2rem;
+}
+
+.joined-event-list-mypage .event-list-title {
+  font-size: 1.5rem;
+  font-weight: 500;
 }

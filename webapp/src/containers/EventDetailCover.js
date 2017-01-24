@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import _ from 'lodash';
 import React, {PropTypes, Component} from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 
@@ -90,7 +89,9 @@ class EventDetailCover extends Component {
           src={url}
           onClick={
             ()=> this.setState({activeIndex: index})
-          }/>
+          }
+          alt='thumbnail'
+          />
       </div>
     ))
 

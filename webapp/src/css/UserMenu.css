@@ -8,6 +8,7 @@
   border-radius: 100%;
   position: absolute;
   top: -4px;
+  object-fit: cover;
 }
 
 .user-menu > a {

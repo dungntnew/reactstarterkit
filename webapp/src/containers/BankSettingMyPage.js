@@ -1,9 +1,7 @@
 import _ from 'lodash';
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 
 import {connect} from 'react-redux';
-import classNames from 'classnames';
-import {Link} from 'react-router';
 
 import '../css/BankSettingMyPage.css';
 
@@ -11,13 +9,9 @@ import {fetchBankAccount, updateBankAccount} from '../flux/modules/bankAccount'
 
 import BankAccountForm from '../components/bank-forms/BankAccountForm';
 
-class BankSettingMyPage extends Component {
-    constructor(props) {
-      super(props)
-    }
 
-    static propTypes = {
-    }
+
+class BankSettingMyPage extends Component {
 
     componentDidMount(){
       this.props.fetch()

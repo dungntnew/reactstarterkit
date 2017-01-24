@@ -30,6 +30,8 @@ class EventListItem extends Component {
     registrationDateEnd: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
 
+    owned: PropTypes.bool.isRequired,
+    unLike: PropTypes.func.isRequired,
     closeEvent: PropTypes.func.isRequired,
     requestProfit: PropTypes.func.isRequired,
   }
@@ -99,6 +101,16 @@ class EventListItem extends Component {
     )
   }
 
+  renderRemoveBookmark() {
+    return (
+      <div className="ui orange ribbon label"
+        onClick={()=> {this.props.unLike()}}
+        >
+        <i className="remove bookmark icon"></i>
+      </div>
+    )
+  }
+
   render() {
     const {
       url,
@@ -112,7 +124,9 @@ class EventListItem extends Component {
       registrationDateEnd,
       tags,
       target,
-      targetName
+      targetName,
+      owned,
+      liked,
     }
     = this.props
 
@@ -128,16 +142,15 @@ class EventListItem extends Component {
       <div className='card event-item'>
 
         <a className='image event-cover-img'
-           href={url}
-            >
-          <img
-             alt='event-cover-img'
-             src={coverImageUrl}
-          />
+           href={url}>
+          {!owned && liked &&
+            this.renderRemoveBookmark()}
+          <img alt='event-cover-img' src={coverImageUrl}/>
         </a>
         <div className="ui top right attached label price text-orange">
            {formatPrice(price)}
         </div>
+
 
         <div className="content">
            <a className="header-item" href={url}>{title}</a>
@@ -167,7 +180,7 @@ class EventListItem extends Component {
         </div>
 
         <div className='extra content'>
-        {this.renderActions()}
+        {owned && this.renderActions()}
         </div>
 
         <div ref='joinProgress' className={progressClasses}>

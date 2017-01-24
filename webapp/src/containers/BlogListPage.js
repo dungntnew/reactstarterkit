@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import '../css/BlogListPage.css';
@@ -20,9 +20,6 @@ import {parsePaggingParams} from '../helpers/params'
 const DEFAULT_MAX_BLOG_PER_PAGE = 25
 
 class BlogListPage extends Component {
-    static propTypes = {
-
-    }
 
     parsePrams() {
       const {location} = this.props
