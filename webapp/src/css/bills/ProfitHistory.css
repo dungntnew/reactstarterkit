@@ -1,26 +1,26 @@
-.history {
+.profit-history {
   background-color: #fff;
   border-radius: 4px;
   padding: 1.5rem;
   margin-bottom: 2rem;
 }
 
-.history h3.title {
+.profit-history h3.title {
   font-size: 24px;
   font-weight: 500;
   line-height: 1;
   color: #333333;
 }
 
-.history .ui.container {
+.profit-history .ui.container {
   margin-top: 10px ;
 }
 
-.history .btn-group .button {
+.profit-history .btn-group .button {
   color: #fff;
 }
 
-.history .sum-info {
+.profit-history .sum-info {
   position: relative;
   border-bottom: 1px solid  #ececec;
   margin-bottom: 2rem;
@@ -31,12 +31,12 @@
 
 }
 
-.history .sum-info span {
+.profit-history .sum-info span {
   position: absolute;
   right: 0;
 }
 
-.history .des-info {
+.profit-history .des-info {
   font-size:  1rem;
   font-weight: 500;
   color: #444;

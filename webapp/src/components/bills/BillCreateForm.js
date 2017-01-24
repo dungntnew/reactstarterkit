@@ -4,12 +4,12 @@ import {defaultRules} from '../../helpers/validations'
 
 
 import 'semantic-ui-form/form.min.css'
-import '../../css/bills/NewRequest.css'
+import '../../css/bills/BillCreateForm.css'
 
 $.fn.form = require('semantic-ui-form')
 
 
-class NewRequest extends Component {
+class BillCreateForm extends Component {
 
   constructor(props) {
     super(props);
@@ -49,9 +49,9 @@ class NewRequest extends Component {
 
   render() {
       return (
-        <div className='ui text container segment new-request'>
+        <div className='ui text container segment bill-greate-form'>
             <h2 className='title'>振込申請金額を入力</h2>
-            <form className='ui form form-new-request' ref='form'
+            <form className='ui form bill-form' ref='form'
                 onSubmit={(e) => {
                 e.preventDefault()
                 this.handleSubmit()
@@ -84,4 +84,4 @@ class NewRequest extends Component {
   }
 }
 
-export default NewRequest
+export default BillCreateForm

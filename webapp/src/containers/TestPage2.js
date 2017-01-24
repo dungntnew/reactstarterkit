@@ -3,9 +3,9 @@ import {connect} from 'react-redux';
 
 import CreditCard from '../components/credit-card/CreditCard';
 import CreditCardOk from '../components/credit-card/CreditCardOk';
-import NewRequest from '../components/bills/NewRequest';
-import History from '../components/bills/History';
-import HistoryAll from '../components/bills/HistoryAll';
+import BillCreateForm from '../components/bills/BillCreateForm';
+import ProfitHistory from '../components/bills/ProfitHistory';
+import BillList from '../components/bills/BillList';
 import RequestOK from '../components/bills/RequestOK';
 // import SignupForm from '../components/auth-forms/SignupForm';
 import '../css/TestPage.css';
@@ -70,9 +70,9 @@ export default (props) => (
 
         <CreditCard />
         <CreditCardOk />
-        <NewRequest {...test}/>
-        <History {...content}/>
-        <HistoryAll {...history}/>
+        <BillCreateForm {...test}/>
+        <ProfitHistory {...content}/>
+        <BillList {...history}/>
         <RequestOK {...text}/>
      </div>
   </div>
