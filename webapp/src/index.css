@@ -76,6 +76,13 @@ i.icon {
     margin-left: auto !important;
   }
 }
+
+@media only screen and (max-width: 480px) {
+  .container-customize {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+  }
+}
 /*.column {
   max-width: 450px;
 }*/
