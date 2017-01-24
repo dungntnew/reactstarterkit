@@ -47,7 +47,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "start-api": "json-server --watch  --port 8081 --routes devconf/resources-routes.json devconf/resources.json",
-    "sync-dev": "scp -r ./build tabledev:/opt/apps/webapp",
+    "sync-dev": "scp -r ./build/* tabledev:/opt/apps/webapp",
     "sync-dev-api": "scp ./devconf/resources.json tabledev:/opt/apps/dumpapi/resources.json"
   },
   "proxy": "http://http://52.37.92.74"
