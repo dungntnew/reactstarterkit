@@ -3,7 +3,6 @@
 }
 
 .editable-member-profile .cover-image {
-  min-height: 388px;
   position: relative;
   text-align: center;
 }
@@ -50,17 +49,6 @@
   object-fit: cover;
 }
 
-.editable-member-profile .cover-image {
-  min-height: 488px;
-  position: relative;
-}
-
-.editable-member-profile .cover-image .user-avatar {
-  position: absolute;
-  top: 40%;
-  right: 42%;
-}
-
 .editable-member-profile .cover-image .user-avatar .user-description {
   text-align: left;
 }
@@ -83,7 +71,7 @@
 
 .editable-member-profile .menu-sub {
   display: inline-block;
-  margin-top: 460px;
+  margin-top: 452px;
   margin-bottom: 0;
 
 }
@@ -116,6 +104,13 @@
   .editable-member-profile .cover-image .user-avatar {
     right: 39%;
   }
+  .editable-member-profile .cover-image {
+    height: 400px;
+  }
+  .editable-member-profile .cover-image .ui.segment {
+    top: 10px;
+  }
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -128,4 +123,16 @@
   .editable-member-profile .menu-sub .nav-item {
     padding-bottom: 2rem;
   }
+  .editable-member-profile .cover-image .ui.segment img {
+    height: 50px;
+    width: 50px;
+  }
+  .editable-member-profile .cover-image .form label {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .editable-member-profile .cover-image {
+    height: 350px;
+  }
+
 }
