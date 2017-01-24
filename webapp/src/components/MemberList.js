@@ -9,7 +9,7 @@ const MemberList = (props) => {
     <div className='item' key={index}>
       <div className='ui avatar tiny image'>
         <Link to={member.url}>
-           <img className='img-avatar' src={member.userAvatar} alt='avatar'/>
+           <img className='img-avatar' src={member.avatarUrl} alt='avatar'/>
         </Link>
       </div>
       <div className="content">
@@ -40,7 +40,7 @@ const MemberList = (props) => {
 MemberList.propTypes = {
   members: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
-    userAvatar: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     displayName: PropTypes.string.isRequired,
   })),

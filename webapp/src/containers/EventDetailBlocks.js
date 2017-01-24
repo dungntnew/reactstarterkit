@@ -29,7 +29,7 @@ class EventDetailBlocks extends Component {
     members: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
-      userAvatar: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
       displayName: PropTypes.string.isRequired,
     }).isRequired).isRequired,
     memberCount: PropTypes.number.isRequired,
@@ -61,7 +61,7 @@ class EventDetailBlocks extends Component {
       <div className='item' key={index}>
         <div className='ui avatar tiny image'>
         <Link to={member.url}>
-           <img src={member.userAvatar} alt='avatar'/>
+           <img src={member.avatarUrl} alt='avatar'/>
         </Link>
         </div>
       </div>

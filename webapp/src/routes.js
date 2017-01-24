@@ -30,25 +30,48 @@ import ContactMyPage from './containers/ContactMyPage'
 
 import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
+import ProfilePage from './containers/ProfilePage'
+import LoginPage from './containers/LoginPage'
+import NotFoundPage from './components/NotFoundPage'
+
+import auth from './helpers/auth'
+
+const requireAuth = (nextState, replace, callback) => {
+  if (!auth.loggedIn()) {
+    console.log('require login')
+    replace({
+      pathname: '/login',
+    })
+
+  }
+  else {
+    console.log("passed.")
+  }
+  callback();
+}
+
 
 const routes = (
   <Route path='/' component={App}>
     <IndexRoute component={TopLandingPage}/>
+    <Route path='/login' component={LoginPage}/>
     <Route path='/search'
            component={SearchPage}/>
     <Route path='/create'
-           component={CreatePage}/>
+           component={CreatePage} onEnter={requireAuth}/>
     <Route path='/events/:eventId'
           component={DetailPage}/>
     <Route path='/join/:userId/:eventId'
-          component={JoinPage}/>
+          component={JoinPage} onEnter={requireAuth}/>
     <Route path='/cancelJoin/:userId/:eventId'
-          component={CancelJoinPage}/>
+          component={CancelJoinPage} onEnter={requireAuth}/>
+    <Route path='/members/:userId/:filter'
+          component={ProfilePage}/>
     <Route path='/blogs/latest'
           component={BlogListPage}/>
     <Route path='/blogs/:blogItemId'
           component={BlogDetailPage}/>
-    <Route path='/mypage' component={MyPage}>
+    <Route path='/mypage' component={MyPage} onEnter={requireAuth}>
           <IndexRoute component={TopMyPage}/>
           {/* TODO add sub routes for mypage */}
           <Route path='/mypage/events/created' component={CreatedEventListMyPage}/>
@@ -72,6 +95,7 @@ const routes = (
            component={TestPage2}/>
     <Route path='/about'
            component={AboutPage}/>
+    <Route path='*' component={NotFoundPage} />
 
   </Route>
 )

@@ -12,6 +12,8 @@ export const initCreateEvent = {
 
 export const initSelectedEvent = {isFetching:true, errorMessage: null, data:{}}
 
+export const initSelectedUser = {isFetching:true, isSaving: false, errorMessage: null, data:{}}
+
 export const initCreatedEvent = {isFetching:false,
                                  errorMessage: null,
                                  events: {},
@@ -94,8 +96,10 @@ export const guest = {
   anonymous: true,
 }
 
+localStorage.token = '======'
 export const initAuth = {
   authenticated: true,
+  authenticating: false,
   user: guest,
   anonymous: true
 }

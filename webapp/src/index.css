@@ -46,6 +46,9 @@ i.icon {
   width: 100%;
 }
 
+.btn-wid50 {
+  width: 48%;
+}
 .tite-form {
   font-size: 1.5rem;
 }
@@ -69,8 +72,8 @@ i.icon {
 @media only screen and (max-width: 767px) {
   .container-customize {
     width: auto !important;
-    margin-right: 1rem !important;
-    margin-left: 1rem !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
   }
 }
 /*.column {
