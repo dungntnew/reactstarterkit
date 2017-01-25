@@ -60,6 +60,14 @@ class EditableMemberProfile extends Component {
       selectedAvatarDataUrl: avatarUrl,
       selectedCoverDataUrl: coverUrl,
 
+      avatarFileLoading: false,
+      loadedAvatarFileDataUrl: null,
+      selectedAvatarFile: null,
+
+      coverFileLoading: false,
+      loadedCoverFileDataUrl: null,
+      selectedCoverFile: null,
+
       avatarScalePercent: 150,
       coverScalePercent: 120,
       editingCover: false,
@@ -78,14 +86,23 @@ class EditableMemberProfile extends Component {
 
   handleAvatarSelectedLocalFile(e) {
      let file = e.target.files[0]
+     const {avatarFileUpload} = this.refs
 
-     localFileToDataUrl(file, (url)=>{
-        this.setState({
-          selectedAvatarDataUrl: url,
-        })
+     this.setState({
+      selectedAvatarFile: file,
+      avatarFileLoading: true,
      })
 
-    this.showAvatarEditor(e)
+     localFileToDataUrl(file, (url)=>{
+        setTimeout(()=>{
+           avatarFileUpload.value = ""
+           this.setState({
+             avatarFileLoading: false,
+             loadedAvatarFileDataUrl: url
+           })
+        }, 1000)
+     })
+     $(this.refs.avatarEditorModal).modal('show')
   }
 
   openCoverFileDialog(e) {
@@ -97,20 +114,21 @@ class EditableMemberProfile extends Component {
      let file = e.target.files[0]
      const {coverFileUpload} = this.refs
 
+     this.setState({
+      selectedCoverFile: file,
+      coverFileLoading: true,
+      editingCover: true,
+     })
+
      localFileToDataUrl(file, (url)=>{
-        this.setState({
-          selectedCoverDataUrl: url,
-        })
-        coverFileUpload.value = ""
-        console.log("new file: ", file)
-        this.setState({editingCover: true})
+        setTimeout(()=>{
+           this.setState({
+             coverFileLoading: false,
+             loadedCoverFileDataUrl: url
+           })
+        }, 1000)
      })
   }
-
-  showAvatarEditor(e) {
-    $(this.refs.avatarEditorModal).modal('show')
-  }
-
 
   saveUserAvatar () {
     const canvas = this.avatarEditor.getImage()
@@ -137,25 +155,24 @@ class EditableMemberProfile extends Component {
 
   renderAvatarEditor(file) {
 
-    const {selectedAvatarDataUrl} = this.state
-    const avatarUrl = selectedAvatarDataUrl
-                    || this.props.avatarUrl
-                    || this.props.defaultAvatarUrl
+    const {avatarFileLoading, loadedAvatarFileDataUrl} = this.state
     const avatarEditorStyle = {
       width: 320,
       height: 320,
     }
 
-    return (
-      <div className='ui modal' ref='avatarEditorModal'>
-        <div className="header">
-          Position and resize your Photo
+    const content = avatarFileLoading ? (
+      <div className="ui segment" style={{height: 320}}>
+        <div className="ui active inverted dimmer">
+          <div className="ui large text loader">Loading</div>
         </div>
-
-        <div className='content'>
+      </div>
+    ):
+    (
+        <div className='content' style={{textAlign: 'center'}}>
           <AvatarEditor
                   style={avatarEditorStyle}
-                  image={avatarUrl}
+                  image={loadedAvatarFileDataUrl}
                   width={400}
                   height={400}
                   border={50}
@@ -164,6 +181,7 @@ class EditableMemberProfile extends Component {
                   ref={(editor)=>{this.avatarEditor=editor}}
                 />
 
+          <div className='rangeSlider'>
           <InputRange
               maxValue={250}
               minValue={25}
@@ -172,36 +190,59 @@ class EditableMemberProfile extends Component {
                 this.setState({avatarScalePercent: v})
               }}
           />
-
           </div>
+          </div>
+    )
+
+
+
+    const saveBtnCls = classNames({
+      'ui approve orange button': true,
+      'disabled': avatarFileLoading
+    })
+
+    return (
+      <div className='ui modal' ref='avatarEditorModal'>
+        <div className="header">
+          Position and resize your Photo
+        </div>
+
+        {content}
 
         <div className="actions">
             <div className="ui cancel button">Cancel</div>
-            <div className="ui approve orange button"
+            <div className={saveBtnCls}
               onClick={(e)=>{this.saveUserAvatar()}}>Apply</div>
         </div>
-
       </div>
     )
   }
 
   renderCoverEditor(file) {
 
-    const {selectedCoverDataUrl} = this.state
-    const coverUrl = selectedCoverDataUrl
-                    || this.props.coverUrl
-                    || this.props.defaultCoverUrl
-    const coverEditorStyle = {
-      width: '100%',
-      height: 'auto',
-    }
 
-    return (
-      <div className='cover-image-editing-wrapper'>
+    const {coverFileLoading, loadedCoverFileDataUrl} = this.state
+    const avatarEditorStyle = {
+      width: 320,
+      height: 320,
+    }
+    const saveBtnCls = classNames({
+      'ui approve orange button': true,
+      'disabled': coverFileLoading
+    })
+
+    const content = coverFileLoading ? (
+      <div className="ui segment" style={{height: 320}}>
+        <div className="ui active inverted dimmer">
+          <div className="ui large text loader">Loading</div>
+        </div>
+      </div>
+    ):
+    (
         <div className='content'>
           <AvatarEditor
                   style={coverEditorStyle}
-                  image={coverUrl}
+                  image={loadedCoverFileDataUrl}
                   width={1500}
                   height={500}
                   border={1}
@@ -218,12 +259,21 @@ class EditableMemberProfile extends Component {
                 this.setState({coverScalePercent: v})
               }}
           />
-
           </div>
+    )
+
+    const coverEditorStyle = {
+      width: '100%',
+      height: 'auto',
+    }
+
+    return (
+      <div className='cover-image-editing-wrapper'>
+        {content}
 
         <div className="actions">
             <div className="ui cancel button">Cancel</div>
-            <div className="ui approve orange button"
+            <div className={saveBtnCls}
               onClick={(e)=>{this.saveCoverImage()}}>Apply</div>
         </div>
 
@@ -304,8 +354,12 @@ class EditableMemberProfile extends Component {
         <div className="ui basic segment">
           <div className="ui secondary menu">
               <div className="right menu">
-                <div className="ui button">Cancel</div>
-                <div className="ui primary button">Save Profile</div>
+                <div className="ui button" onClick={
+                  (e)=>{this.discard(e)}
+                }>Cancel</div>
+                <div className="ui primary button" onClick={
+                  (e)=> {this.saveProfile(e)}
+                }>Save Profile</div>
               </div>
           </div>
         </div>
@@ -345,21 +399,17 @@ class EditableMemberProfile extends Component {
     )
   }
 
+  discard(e) {
+    e.preventDefault()
+    this.setState({editing: false})
+  }
+
   saveProfile(e) {
     e.preventDefault()
-    const {avatarFile, coverFile, displayName} = this.state
 
-    console.log("update avatar: ", avatarFile)
-    console.log("update cover: ", coverFile)
+    const {displayName} = this.state
     console.log("change display name: ", displayName)
-
     this.setState({editing: false})
-
-    this.props.onSubmit({
-      avatarFile: avatarFile,
-      coverFile: coverFile,
-      displayName: displayName
-    })
   }
 
 
@@ -387,7 +437,9 @@ class EditableMemberProfile extends Component {
 
   renderEditButton() {
     return (
-       <button className='ui orange button'>Edit Profile</button>
+       <button className='ui orange button' onClick={(e)=>{
+        this.setState({editing: true})
+       }}>Edit Profile</button>
     )
   }
 
