@@ -196,11 +196,11 @@
     height: 80px;
     line-height: 80px;
     background: black;
-    opacity: 0.4;
+    opacity: 0.0;
 }
 
 .user-avatar-selecting:hover .overlay {
-  opacity: 0.0;
+  opacity: 0.4;
 }
 
 .user-avatar-selecting:hover .change-link {

@@ -272,7 +272,9 @@ class EditableMemberProfile extends Component {
         {content}
 
         <div className="actions">
-            <div className="ui cancel button">Cancel</div>
+            <div className="ui cancel button" onClick={
+              (e) => {this.setState({editingCover: false})}
+            }>Cancel</div>
             <div className={saveBtnCls}
               onClick={(e)=>{this.saveCoverImage()}}>Apply</div>
         </div>
