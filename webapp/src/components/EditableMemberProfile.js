@@ -7,16 +7,27 @@ import classNames from 'classnames';
 import CoverImage from '../components/CoverImage'
 import UserAvatar from '../components/UserAvatar'
 
+import AvatarEditor from 'react-avatar-editor'
+
 $.fn.form = require('semantic-ui-form')
 $.fn.dropdown = require('semantic-ui-dropdown')
+$.fn.transition = require('semantic-ui-transition')
+$.fn.dimmer = require('semantic-ui-dimmer')
+$.fn.modal = require('semantic-ui-modal')
 
 import 'semantic-ui-form/form.min.css'
 import 'semantic-ui-dropdown/dropdown.min.css'
+import 'semantic-ui-dimmer/dimmer.min.css'
+import 'semantic-ui-modal/modal.min.css'
 
 import '../css/CoverImage.css';
 import '../css/EditableMemberProfile.css';
 
-import EditableAvatar from '../components/EditableAvatar'
+import InputRange from 'react-input-range';
+import 'react-input-range/dist/react-input-range.css';
+
+import {isSupport, canvasToDataUrl, localFileToDataUrl} from '../helpers/canvas'
+
 
 class EditableMemberProfile extends Component {
 
@@ -34,7 +45,6 @@ class EditableMemberProfile extends Component {
     }).isRequired,
     isSaving: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
-
   }
 
   constructor(props) {
@@ -43,12 +53,16 @@ class EditableMemberProfile extends Component {
     const {data} = props
     const {avatarUrl, coverUrl, displayName} = data
 
+
     this.state = {
-      editing: false,
-      coverFile: null,
-      coverPreviewUrl: coverUrl,
-      avatarFile: null,
-      avatarPreviewUrl: avatarUrl,
+      editing: true,
+
+      selectedAvatarDataUrl: avatarUrl,
+      selectedCoverDataUrl: coverUrl,
+
+      avatarScalePercent: 150,
+      coverScalePercent: 120,
+      editingCover: false,
       displayName: displayName,
     }
   }
@@ -56,107 +70,277 @@ class EditableMemberProfile extends Component {
   componentDidMount() {
   }
 
-  handleCoverChange(e) {
-     e.preventDefault();
 
-     let reader = new FileReader()
+  openAvatarFileDialog(e) {
+    const {avatarFileUpload} = this.refs
+    avatarFileUpload.click()
+  }
+
+  handleAvatarSelectedLocalFile(e) {
      let file = e.target.files[0]
 
-     reader.onloadend = ()=> {
+     localFileToDataUrl(file, (url)=>{
         this.setState({
-          coverPreviewUrl: reader.result,
-          coverFile: file
+          selectedAvatarDataUrl: url,
         })
-     }
-     reader.readAsDataURL(file)
+     })
+
+    this.showAvatarEditor(e)
+  }
+
+  openCoverFileDialog(e) {
+    const {coverFileUpload} = this.refs
+    coverFileUpload.click()
+  }
+
+  handleCoverSelectedLocalFile(e) {
+     let file = e.target.files[0]
+     const {coverFileUpload} = this.refs
+
+     localFileToDataUrl(file, (url)=>{
+        this.setState({
+          selectedCoverDataUrl: url,
+        })
+        coverFileUpload.value = ""
+        console.log("new file: ", file)
+        this.setState({editingCover: true})
+     })
+  }
+
+  showAvatarEditor(e) {
+    $(this.refs.avatarEditorModal).modal('show')
+  }
+
+
+  saveUserAvatar () {
+    const canvas = this.avatarEditor.getImage()
+    const canvasScaled = this.avatarEditor.getImageScaledToCanvas()
+    const url = canvasToDataUrl(canvasScaled)
+    this.setState({
+      selectedAvatarDataUrl: url,
+    })
+    console.log("okkkk avar")
+    //this.props.onSubmit(url)
+  }
+
+  saveCoverImage () {
+    const canvas = this.coverEditor.getImage()
+    const canvasScaled = this.coverEditor.getImageScaledToCanvas()
+    const url = canvasToDataUrl(canvasScaled)
+    this.setState({
+      selectedCoverDataUrl: url,
+      editingCover: false,
+    })
+    console.log("okkkk cover")
+    //this.props.onSubmit(url)
+  }
+
+  renderAvatarEditor(file) {
+
+    const {selectedAvatarDataUrl} = this.state
+    const avatarUrl = selectedAvatarDataUrl
+                    || this.props.avatarUrl
+                    || this.props.defaultAvatarUrl
+    const avatarEditorStyle = {
+      width: 320,
+      height: 320,
+    }
+
+    return (
+      <div className='ui modal' ref='avatarEditorModal'>
+        <div className="header">
+          Position and resize your Photo
+        </div>
+
+        <div className='content'>
+          <AvatarEditor
+                  style={avatarEditorStyle}
+                  image={avatarUrl}
+                  width={400}
+                  height={400}
+                  border={50}
+                  color={[255, 255, 255, 0.6]}
+                  scale={(this.state.avatarScalePercent * 1.0)/100}
+                  ref={(editor)=>{this.avatarEditor=editor}}
+                />
+
+          <InputRange
+              maxValue={250}
+              minValue={25}
+              value={this.state.avatarScalePercent}
+              onChange={(c, v)=>{
+                this.setState({avatarScalePercent: v})
+              }}
+          />
+
+          </div>
+
+        <div className="actions">
+            <div className="ui cancel button">Cancel</div>
+            <div className="ui approve orange button"
+              onClick={(e)=>{this.saveUserAvatar()}}>Apply</div>
+        </div>
+
+      </div>
+    )
+  }
+
+  renderCoverEditor(file) {
+
+    const {selectedCoverDataUrl} = this.state
+    const coverUrl = selectedCoverDataUrl
+                    || this.props.coverUrl
+                    || this.props.defaultCoverUrl
+    const coverEditorStyle = {
+      width: '100%',
+      height: 'auto',
+    }
+
+    return (
+      <div className='cover-image-editing-wrapper'>
+        <div className='content'>
+          <AvatarEditor
+                  style={coverEditorStyle}
+                  image={coverUrl}
+                  width={1500}
+                  height={500}
+                  border={1}
+                  color={[255, 0, 0, 0.9]}
+                  scale={(this.state.coverScalePercent * 1.0)/100}
+                  ref={(editor)=>{this.coverEditor=editor}}
+                />
+
+          <InputRange
+              maxValue={250}
+              minValue={25}
+              value={this.state.coverScalePercent}
+              onChange={(c, v)=>{
+                this.setState({coverScalePercent: v})
+              }}
+          />
+
+          </div>
+
+        <div className="actions">
+            <div className="ui cancel button">Cancel</div>
+            <div className="ui approve orange button"
+              onClick={(e)=>{this.saveCoverImage()}}>Apply</div>
+        </div>
+
+      </div>
+    )
+  }
+
+  renderAvatar() {
+
+    const {selectedAvatarDataUrl} = this.state
+    const avatarUrl = selectedAvatarDataUrl
+                    || this.props.avatarUrl
+                    || this.props.defaultAvatarUrl
+
+    return (
+        <div className="user-avatar-selecting" onClick={(e)=>{
+          this.openAvatarFileDialog()
+        }}>
+          <a className="overlay">Change</a>
+          <a className="change-link">Change</a>
+          <img className='ui circular image' src={avatarUrl}/>
+          <input
+            ref="avatarFileUpload"
+            type="file"
+            style={{"display" : "none"}}
+            onChange={(e)=>{this.handleAvatarSelectedLocalFile(e)}}/>
+        </div>
+    )
+  }
+
+  renderFormFields() {
+    const {displayName} = this.state
+    return (
+      <div className='center-fields'>
+       <input className="displayNameField"
+                 type="text"
+                 placeholder=""
+                 value={displayName}
+                 onChange={(e)=>{
+                    e.preventDefault()
+                    this.setState({displayName: e.target.value})
+                 }}
+                 />
+      </div>
+    )
+  }
+
+  renderCoverImage() {
+    const {selectedCoverDataUrl} = this.state
+    const coverUrl = selectedCoverDataUrl
+                    || this.props.coverUrl
+                    || this.props.defaultCoverUrl
+    return (
+      <div className='cover-image-wrapper'>
+        <img className='ui image cover-image' src={coverUrl} />
+        <input
+          ref="coverFileUpload"
+          type="file"
+          style={{"display" : "none"}}
+          onChange={(e)=>{
+            this.handleCoverSelectedLocalFile(e)
+          }}/>
+      </div>
+    )
+  }
+
+  renderChangeCoverButton() {
+    return (
+      <button className='ui orange button change-cover-btn'
+              onClick={(e)=>{this.openCoverFileDialog(e)}}
+      >Change Cover </button>
+    )
+  }
+
+  renderActionButtons() {
+    return (
+      <div className="ui container">
+        <div className="ui basic segment">
+          <div className="ui secondary menu">
+              <div className="right menu">
+                <div className="ui button">Cancel</div>
+                <div className="ui primary button">Save Profile</div>
+              </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   renderForm() {
-    const {isSaving} = this.props
-    const {coverPreviewUrl, avatarPreviewUrl, displayName} = this.state
+    const editContent = this.state.editingCover ?
 
-    const classes = classNames({
-      'cover-image': true,
-    })
-
-    const style = {
-      backgroundImage: `url("${coverPreviewUrl}")`,
-      // border: isSaving ? '2px solid red': '2px solid blue'
-    }
-
-    const btnTitle = isSaving ? '保存' : '保存中'
-    const formClassNames = classNames({
-      "ui form": true,
-    })
+    this.renderCoverEditor()
+    :
+    (
+          <div className='form-wrapper'>
+            {this.renderCoverImage()}
+            <div className='form-top-layer'>
+              <div className='ui text container-customize'>
+                  {this.renderAvatar()}
+                  {this.renderFormFields()}
+              </div>
+              {this.renderChangeCoverButton()}
+            </div>
+          </div>
+    )
 
     return (
       <div className='edit-form'>
-        <div className={classes} style={style}>
+        {editContent}
+        <div className='ui deliver'/>
+        {this.renderAvatarEditor()}
 
-          {/*-- Preview --*/}
-
-
-          {/*-- Form -- */}
-          <div className='ui text container-customize'>
-            <div className="ui segment">
-
-             <EditableAvatar
-               avatarUrl={avatarPreviewUrl}
-               defaultAvatarUrl={'/img/avatar-01.png'}
-               onSubmit={(url)=>{
-                this.setState({avatarPreviewUrl: url})
-               }}
-             />
-
-
-              <div className={formClassNames}>
-                <div className="field">
-                  <label>ニックネーム</label>
-                  <input type="text"
-                         placeholder=""
-                         value={displayName}
-                         onChange={(e)=>{
-                            e.preventDefault()
-                            this.setState({displayName: e.target.value})
-                         }}
-                         />
-                </div>
-
-                <div className="field">
-                   <label>アバター</label>
-                   <input
-                      type='file'
-                      placeholder='アバターを選んで下さい'
-                      onChange={(e) => {
-                      this.handleAvatarChange(e)
-                   }}/>
-                </div>
-
-                <div className="field">
-                   <label>壁紙</label>
-                   <input
-                      type='file'
-                      placeholder='壁紙を選んで下さい'
-                      onChange={(e) => {
-                      this.handleCoverChange(e)
-                   }}/>
-                </div>
-
-                <div className='btn-group'>
-                  <div className="ui submit btn-orange button btn-wid50"
-                       onClick={(e)=> {this.saveProfile(e)}}>
-                       {btnTitle}
-                  </div>
-                  <div className="ui submit button btn-wid50"
-                       onClick={(e)=> {this.cancelProfile(e)}}>
-                       取消
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
+        {!this.state.editingCover
+          &&
+          this.renderActionButtons()
+        }
       </div>
     )
   }
@@ -199,8 +383,14 @@ class EditableMemberProfile extends Component {
       <li className="nav-item" key={index}>{link}</li>
 
     ))
-
   }
+
+  renderEditButton() {
+    return (
+       <button className='ui orange button'>Edit Profile</button>
+    )
+  }
+
   renderContent() {
     const {data} = this.props
     const {isSelf} = data
@@ -212,6 +402,7 @@ class EditableMemberProfile extends Component {
         }}/>
         <ul className='menu-sub'>
           {this.renderLink()}
+          {this.renderEditButton()}
         </ul>
       </CoverImage>
     )

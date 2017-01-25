@@ -4733,6 +4733,10 @@ react-file-input:
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/react-file-input/-/react-file-input-0.2.5.tgz#a355367d9323d5c6352ddd3cd7ec3582e5c9b245"
 
+react-input-range:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/react-input-range/-/react-input-range-0.9.3.tgz#77f321b5eea1f0480bd88929aabbe5600588f265"
+
 react-json-tree@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/react-json-tree/-/react-json-tree-0.10.0.tgz#92d5c223fc7718614a906591cd916127ce2b6033"

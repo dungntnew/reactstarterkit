@@ -79,11 +79,11 @@ class EditableAvatar extends Component {
       <div className='editable-avatar'>
         <AvatarEditor
                 image={avatarUrl}
-                width={250}
-                height={250}
+                width={160}
+                height={160}
                 border={50}
-                color={[255, 255, 255, 0.6]} // RGBA
-                scale={1.1}
+                color={[255, 0, 0, 0.6]} // RGBA
+                scale={1}
                 ref={this.setEditorRef.bind(this)}
               />
         <button className='ui orange button'

@@ -2,9 +2,53 @@
   margin-top: -1rem;
 }
 
-.editable-member-profile .cover-image {
+.editable-member-profile .container-customize {
+  padding-top: 50px;
+}
+
+.editable-member-profile .edit-form .form-wrapper {
   position: relative;
-  text-align: center;
+}
+
+.editable-member-profile .edit-form .form-wrapper .cover-image-wrapper {
+}
+
+.cover-image-editing-wrapper {
+  width: 100%;
+}
+
+.editable-member-profile .edit-form .form-wrapper .cover-image-wrapper .cover-image {
+  width: auto;
+  height: auto;
+}
+
+.editable-member-profile .edit-form .form-wrapper .cover-image-wrapper:hover {
+  background-color: red;
+}
+
+.editable-member-profile .change-cover-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.editable-member-profile .edit-form
+                        .form-wrapper
+                        .cover-image-wrapper
+                        .content
+                        .select-cover-image-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.editable-member-profile .edit-form .form-top-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .editable-member-profile .cover-image .user-avatar {
@@ -40,14 +84,6 @@
   margin-bottom: 0.7rem !important;
 }
 
-.editable-member-profile .cover-image .ui.segment {
-  top: 45px;
-}
-
-.editable-member-profile .cover-image .ui.segment img {
-  height: 80px;
-  object-fit: cover;
-}
 
 .editable-member-profile .cover-image .user-avatar .user-description {
   text-align: left;
@@ -135,4 +171,70 @@
     height: 350px;
   }
 
+}
+
+.user-avatar-selecting {
+    margin: 0px auto;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    clip-path: circle();
+}
+
+.user-avatar-selecting .overlay {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    z-index: 1001;
+    left: 0;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    background: black;
+    opacity: 0.4;
+}
+
+.user-avatar-selecting:hover .overlay {
+  opacity: 0.0;
+}
+
+.user-avatar-selecting:hover .change-link {
+  color: red;
+  font-size: 18px;
+}
+
+.user-avatar-selecting .change-link {
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    z-index: 1001;
+    left: 0;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    opacity: 1;
+}
+
+.center-fields {
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+}
+
+.displayNameField {
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bolder;
+    color: darkgrey;
+    text-align: center;
 }

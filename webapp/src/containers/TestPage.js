@@ -1,7 +1,9 @@
 
 import React, {Component, PropTypes} from 'react';
 import '../css/TestPage.css';
-import EditableAvatar from '../components/EditableAvatar'
+
+import InputRange from 'react-input-range';
+import 'react-input-range/dist/react-input-range.css';
 
 /* Put your component to here to view */
 class TestPage extends Component {
@@ -10,10 +12,9 @@ class TestPage extends Component {
 
   constructor() {
     super()
-    this.state = {
-      url: ''
-    }
+    this.state = {value: 5}
   }
+
 
   render() {
 
@@ -25,18 +26,17 @@ class TestPage extends Component {
          </pre>
          <hr/>
          <div className='test-page-wrapper'>
-           <EditableAvatar
-             avatarUrl={''}
-             defaultAvatarUrl={'/img/avatar-01.png'}
-             onSubmit={(url)=>{
-              this.setState({url})
-             }}
-           />
 
-           <hr />
-           <div>
-           <img className='ui image' src={this.state.url} />
-           </div>
+
+         <InputRange
+            maxValue={20}
+            minValue={0}
+            value={this.state.value}
+            onChange={(c, v)=>{
+              this.setState({value: v})
+            }}
+          />
+
          </div>
       </div>
     )
