@@ -2,8 +2,35 @@
 import React, {Component, PropTypes} from 'react';
 import '../css/TestPage.css';
 
-import InputRange from 'react-input-range';
 import 'react-input-range/dist/react-input-range.css';
+
+import {fetchQuote} from '../flux/modules/todo';
+
+import {connect} from 'react-redux';
+
+const Btn = (props) => (
+   <div className='ui segment'>
+     <div>
+        Loading: {props.isFetching}
+     </div>
+     <button className='ui orange button'
+             onClick={()=> {props.load()}}>Load</button>
+   </div>
+)
+
+const LoadBtn = connect((state)=>{
+    const {quotes} = state;
+    return {
+      isFetching: quotes.isFetching,
+      quote: quotes.quotes,
+    }
+  },
+  (dispatch)=>({
+    load: ()=>{
+       dispatch(fetchQuote())
+    }
+}))(Btn);
+
 
 /* Put your component to here to view */
 class TestPage extends Component {
@@ -12,7 +39,6 @@ class TestPage extends Component {
 
   constructor() {
     super()
-    this.state = {value: 5}
   }
 
 
@@ -27,15 +53,7 @@ class TestPage extends Component {
          <hr/>
          <div className='test-page-wrapper'>
 
-
-         <InputRange
-            maxValue={20}
-            minValue={0}
-            value={this.state.value}
-            onChange={(c, v)=>{
-              this.setState({value: v})
-            }}
-          />
+         <LoadBtn />
 
          </div>
       </div>

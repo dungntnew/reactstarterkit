@@ -24,6 +24,8 @@ import latestNewsReducer from './modules/latest_news'
 import contactReducer from './modules/contact'
 import selectedUserReducer from './modules/selected_user'
 
+import quotes from './modules/todo';
+
 const rootReducer = combineReducers({
   auth: authReducer,
   selectedUser: selectedUserReducer,
@@ -47,6 +49,7 @@ const rootReducer = combineReducers({
   likedEvent: likedEventReducer,
   joinedEvent: joinedEventReducer,
   relativedEvent: relativedEventReducer,
+  quotes: quotes,
   routing
 })
 
