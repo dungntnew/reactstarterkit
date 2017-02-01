@@ -8,7 +8,7 @@ import {Link} from 'react-router';
 import EventItem from '../components/EventItem';
 import '../css/TopNEvents.css';
 
-import {fetchTopNEventsIfNeed} from '../flux/modules/top_event'
+import {fetchTopNEvents, getTopNEvents} from '../flux/modules/resource'
 
 class TopNEvents extends Component {
   static propTypes = {
@@ -77,17 +77,18 @@ class TopNEvents extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const {filter} = ownProps
-  const block = state.topEvent[filter]
+  const {isFetching, events} = getTopNEvents(state, filter)
+
   return {
-    isFetching: block.isFetching,
-    events: block.events
+    isFetching,
+    events
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   refresh: ()=> {
     const {filter, limit} = ownProps
-    dispatch(fetchTopNEventsIfNeed(filter, limit))
+    dispatch(fetchTopNEvents({pagging: {limit: limit}, query:{[filter]: 1}}))
   }
 })
 

@@ -20,7 +20,9 @@ import EventDetailBlocks from '../containers/EventDetailBlocks';
 import EventDetailCommentForm from '../containers/EventDetailCommentForm';
 import EventDetailRelatived from '../containers/EventDetailRelatived';
 
-import {fetchEventDetailIfNeed} from '../flux/modules/selected_event';
+import {fetchEventDetail,
+        fetchEventDetailIfNeed,
+        getEventData} from '../flux/modules/resource';
 
 class DetailPage extends Component {
 
@@ -66,8 +68,8 @@ class DetailPage extends Component {
             <div className='thirteen wide computer thirteen wide tablet sixteen wide mobile column'>
               <div className='ui detail-event' id='context'>
                 <EventDetailBlocks />
-                <EventDetailCommentForm />
-                <EventDetailRelatived limit={4} from={0} eventId={eventId}/>
+                {/*<EventDetailCommentForm />*/}
+                {/*<EventDetailRelatived limit={4} from={0} eventId={eventId}/>*/}
               </div>
             </div>
           </div>
@@ -112,8 +114,7 @@ class DetailPage extends Component {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const {selectedEvent} = state
-  const {isFetching, errorMessage} = selectedEvent
+  const {isFetching, errorMessage} = getEventData(state)
 
   return {
     isFetching: isFetching,

@@ -4,7 +4,8 @@ import '../css/TestPage.css';
 
 import 'react-input-range/dist/react-input-range.css';
 
-import {fetchQuote} from '../flux/modules/todo';
+import {fetchCategories,
+        fetchCategoryDetail} from '../flux/modules/resource';
 
 import {connect} from 'react-redux';
 
@@ -15,19 +16,20 @@ const Btn = (props) => (
      </div>
      <button className='ui orange button'
              onClick={()=> {props.load()}}>Load</button>
+     <button className='ui green button'
+       onClick={()=> {props.detail()}}>Detail</button>
    </div>
 )
 
 const LoadBtn = connect((state)=>{
-    const {quotes} = state;
-    return {
-      isFetching: quotes.isFetching,
-      quote: quotes.quotes,
-    }
+     return {}
   },
   (dispatch)=>({
     load: ()=>{
-       dispatch(fetchQuote())
+       dispatch(fetchCategories())
+    },
+    detail: ()=> {
+       dispatch(fetchCategoryDetail('11'))
     }
 }))(Btn);
 

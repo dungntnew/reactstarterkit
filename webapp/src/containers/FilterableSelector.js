@@ -6,7 +6,7 @@ import '../css/FilterableSelector.css';
 class FilterableItem extends Component {
     static propTypes = {
       id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
       selected: PropTypes.bool.isRequired
     }
 
@@ -24,7 +24,7 @@ class FilterableItem extends Component {
            onClick={this.props.onClick}
            >
           <a>
-            {this.props.label}
+            {this.props.name}
           </a>
         </li>
       )
@@ -50,10 +50,7 @@ class FilterableSelector extends Component {
   }
 
   static propTypes = {
-    items: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-      label: PropTypes.string
-    })),
+    items: PropTypes.object.isRequired,
     selectedIds: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     fetching: PropTypes.bool,
     multiple: PropTypes.bool,
@@ -109,20 +106,23 @@ class FilterableSelector extends Component {
       )
     }
     const filter = this.state.filter || ''
-    const filtedItems = !_.isEmpty(filter) ?
-                _.filter(this.props.items, (item) => item.label.includes(filter))
-                : this.props.items
+    const keys = _.keys(this.props.items)
 
-    return filtedItems.map(item => {
-      const selected = _.includes(this.state.selectedIds, item.id)
+    return keys.map(key => {
+      const item = this.props.items[key]
+      if (!item.name.includes(filter)) {
+        return null;
+      }
+      const selected = _.includes(this.state.selectedIds, key)
 
       return <FilterableItem
-        key={item.id}
-        id={item.id}
-        label={item.label}
+        key={key}
+        id={key}
+        name={item.name}
         selected={selected}
-        onClick={() => this.onItemClick(item.id)}
+        onClick={() => this.onItemClick(key)}
       />
+
     })
   }
 

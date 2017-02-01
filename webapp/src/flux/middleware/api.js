@@ -2,10 +2,12 @@
 import fetch from 'isomorphic-fetch'
 import queryString from 'query-string'
 
-import { Schema, arrayOf, normalize } from 'normalizr'
+import _ from 'lodash'
+import { normalize } from 'normalizr'
 import { camelizeKeys } from 'humps'
 
-const BASE_URL = 'http://127.0.0.1:8000/events/api/'
+//const BASE_URL = 'http://127.0.0.1:8000/events/api/'
+const BASE_URL = 'http://localhost:8081/api/'
 const MAX_ITEM_PER_PAGE = 25
 
 const checkHeaders = (response) => {
@@ -94,9 +96,12 @@ function callApi(endpoint, schema, params, httpOptions={}) {
 	.then(checkStatus)
 	.then(parseJSON)
 	.then(json => {
-		console.log('raws JSON: ', json)
-		const camelizedJson = camelizeKeys(json.results)
-		const rest = Object.assign({}, normalize(camelizedJson, schema), {})
+		console.log('**JSON**: ', json)
+
+		if (_.has(json, 'results')) {
+			json = camelizeKeys(json.results)
+		}
+		const rest = Object.assign({}, normalize(json, schema), {})
 
 		console.log("**DATA**", rest)
 		return rest
@@ -147,12 +152,12 @@ export default store => next => action => {
   }
 
   const [ requestType, successType, failureType ] = types
-  next(actionWith({ type: requestType }))
+  next(actionWith({ type: requestType, params: params }))
 
   return callApi(endpoint, schema, params).then(
 	response => next(actionWith({
-	  response,
-	  params,
+	  payload: response,
+	  params: params,
 	  type: successType
 	})),
 	error => next(actionWith({

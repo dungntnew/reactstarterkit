@@ -11,6 +11,7 @@ import LikeButton from './LikeButton';
 
 import {formatDateAndTimeStr,
         formatPrice} from '../helpers/event';
+import {getEventData} from '../flux/modules/resource';
 
 const EventDetailHeader = (props) => (
   <div className="ui stackable grid event-detail-header">
@@ -61,8 +62,9 @@ EventDetailHeader.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {selectedEvent} = state
-  const {isFetching, data} = selectedEvent
+
+  const {isFetching, data} = getEventData(state)
+
   if (!isFetching) {
     const {eventId,
            title,

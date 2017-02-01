@@ -17,6 +17,8 @@ $.fn.transition = require('semantic-ui-transition')
 $.fn.dimmer = require('semantic-ui-dimmer')
 $.fn.modal = require('semantic-ui-modal')
 
+import {getEventData} from '../flux/modules/resource';
+
 class EventDetailCover extends Component {
   constructor(props) {
     super(props)
@@ -137,8 +139,7 @@ class EventDetailCover extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {selectedEvent} = state
-  const {isFetching, data} = selectedEvent
+  const {isFetching, data} = getEventData(state)
 
   if (!isFetching) {
     const {eventImageUrls, coverImageUrl} = data

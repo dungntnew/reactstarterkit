@@ -17,6 +17,8 @@ import {formatAddress,
         googleMapIFrameLink,
         formatKeyValuePairData} from '../helpers/event';
 
+import {getEventData} from '../flux/modules/resource';
+
 $.fn.dimmer = require('semantic-ui-dimmer')
 $.fn.modal = require('semantic-ui-modal')
 
@@ -173,8 +175,7 @@ class EventDetailBlocks extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {selectedEvent} = state
-  const {isFetching, data} = selectedEvent
+  const {isFetching, data} = getEventData(state)
 
   return {
     isFetching: isFetching,

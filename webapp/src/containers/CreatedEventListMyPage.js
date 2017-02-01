@@ -12,7 +12,7 @@ import {parsePaggingParams} from '../helpers/params'
 import EventListItem from '../components/EventListItem'
 import Pagination from '../components/Pagination'
 
-import {fetchCreatedEventsIfNeed} from '../flux/modules/created_event'
+import {fetchCreatedEvents, getListCreatedEvents} from '../flux/modules/resource'
 
 // TODO: move const to consts file
 const DEFAULT_MAX_EVENT_PER_PAGE = 25
@@ -174,7 +174,7 @@ class CreatedEventListMyPage extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  const {createdEvent} = state
+  const createdEvent = getListCreatedEvents(state, 'admin', 'all')
   const {isFetching} = createdEvent
   if (isFetching) {
     return {
@@ -195,7 +195,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchEvents: (limit, from, filter)=> {
-    dispatch(fetchCreatedEventsIfNeed(filter, limit, from))
+    dispatch(fetchCreatedEvents({pagging: {limit: limit},
+                                query:{
+                                   owner: 'admin',
+                                   status: filter
+                                }}))
   },
   closeEvent: (eventId) => {
     console.log("request close event: ", eventId)
