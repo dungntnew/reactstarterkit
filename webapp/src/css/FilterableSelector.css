@@ -1,5 +1,5 @@
 .fiterable-selector .ui {
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .fiterable-selector .ui.input input {
@@ -10,6 +10,7 @@
   background-color: #fff;
   margin-top: 0;
   padding-bottom: 1px;
+  margin-bottom: 5px;
 }
 
 .fiterable-selector .item-list .item {
@@ -30,5 +31,20 @@
 @media only screen and (max-width: 667px) and (min-width: 320px) {
   .fiterable-selector .item-list .item {
     width: 50%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .fiterable-selector {
+    position: fixed;
+    z-index: 123;
+    background: rgba(0,0,0,.6);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-x: hidden;
+    text-align: center;
+    padding-top: 20px;
   }
 }

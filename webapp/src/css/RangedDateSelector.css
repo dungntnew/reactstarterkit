@@ -5,3 +5,26 @@
 .ranged-date-selector .date-selector {
   border: 1px solid red;
 }
+
+.ranged-date-selector .ui.hidden.divider {
+  margin: auto;
+}
+
+@media only screen and (max-width: 480px) {
+  .ranged-date-selector {
+    position: fixed;
+    z-index: 123;
+    background: rgba(0,0,0,.6);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-x: hidden;
+    text-align: center;
+    padding: 10px;
+  }
+  .ranged-date-selector.react-datepicker {
+    margin-bottom: 10px;
+  }
+}
+

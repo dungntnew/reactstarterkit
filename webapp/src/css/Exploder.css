@@ -1,9 +1,10 @@
 .ui.text.container.exploder {
-  margin-top: 43px;
+  margin-top: 30px;
 }
 
 .ui.stackable.menu.form-elements.buttons {
   border: 0;
+  margin-bottom: 5px;
 }
 
 .exploder .form-elements {
