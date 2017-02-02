@@ -17,6 +17,10 @@
   .user-avatar .edit {
     right: 109px;
   }
+  .user-avatar .circle-image {
+    width: 60px !important;
+    height: 60px !important;
+  }
 }
 
 .user-avatar .circle-image {
