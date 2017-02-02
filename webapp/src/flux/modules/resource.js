@@ -454,6 +454,12 @@ const resourcesReducer = combineReducers({
     event: eventReducer,
 })
 
+export const getErrors = (globalState) => {
+  const {resources} = globalState
+  const {errors} = resources
+  return errors
+}
+
 export const isLoading = (globalState) => {
   const {resources} = globalState
   const {loadings} = resources
