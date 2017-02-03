@@ -5,10 +5,15 @@
 .event-image-slider .ui.horizontal.list:not(.celled)>.item:first-child {
   padding-left: .5rem !important;
 }
+
 .event-image-slider .basic .icon{
   display: inline-block;
   position: absolute;
   top: 70px;
+}
+
+.event-image-slider .ui.basic .image {
+  height: 310px;
 }
 
 .event-image-slider .basic .left-icon {
@@ -28,5 +33,8 @@
   }
   .event-image-slider img.ui.item.small.image {
     width: 95px !important;
+  }
+  .event-image-slider .ui.basic .image {
+    height: 155px;
   }
 }
