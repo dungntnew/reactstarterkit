@@ -44,7 +44,6 @@
   left: 0;
 }
 
-
 .editable-member-profile .edit-form .form-top-layer {
   position: absolute;
   top: 25%;
@@ -53,6 +52,9 @@
   z-index: 1;
 }
 
+.editable-member-profile .edit-form .form-top-layer .center-fields {
+  opacity: 0.9;
+}
 .editable-member-profile .cover-image .user-avatar {
   position: absolute;
   top: 40%;
@@ -198,7 +200,6 @@
   .editable-member-profile .edit-form .form-wrapper .cover-image-wrapper .cover-image {
     height: 300px;
   }
-
 }
 
 .user-avatar-selecting {
