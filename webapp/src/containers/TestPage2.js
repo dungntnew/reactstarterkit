@@ -7,6 +7,7 @@ import NewRequest from '../components/bills/NewRequest';
 import History from '../components/bills/History';
 import HistoryAll from '../components/bills/HistoryAll';
 import RequestOK from '../components/bills/RequestOK';
+import Teaser from '../components/Teaser';
 // import SignupForm from '../components/auth-forms/SignupForm';
 import '../css/TestPage.css';
 
@@ -58,6 +59,10 @@ const history = {
 const text = {
   url: 'ngoc/tien'
 }
+
+const text1 = {
+  lastUpdate: '12. 12. 2017'
+}
 /* Put your component to here to view */
 export default (props) => (
   <div>
@@ -74,6 +79,7 @@ export default (props) => (
         <History {...content}/>
         <HistoryAll {...history}/>
         <RequestOK {...text}/>
+        <Teaser {...text1}/>
      </div>
   </div>
 )
