@@ -222,7 +222,7 @@ class EventBasicInfoForm extends Component {
     return (
       <div className="field field-input">
 
-        <label>申し込み開始<p className='required'>※必須</p></label>
+        <label>申し込み開始日<p className='required'>※必須</p></label>
         <div className='two fields'>
           <div className='field'>
             <DatePicker
@@ -248,7 +248,7 @@ class EventBasicInfoForm extends Component {
     return (
       <div className="field field-input">
 
-        <label>申し込み終了<p className='required'>※必須</p></label>
+        <label>申し込み終了日<p className='required'>※必須</p></label>
         <div className='two fields'>
           <div className='field'>
             <DatePicker
@@ -275,7 +275,7 @@ class EventBasicInfoForm extends Component {
     return (
       <div className="field field-input">
 
-          <label>開始<p className='required'>※必須</p></label>
+          <label>開催日時<p className='required'>※必須</p></label>
           <div className='two fields'>
             <div className='field'>
               <DatePicker
@@ -301,7 +301,7 @@ class EventBasicInfoForm extends Component {
     return (
       <div className="field field-input">
 
-          <label>終了<p className='required'>※必須</p></label>
+          <label>終了日時<p className='required'>※必須</p></label>
           <div className='two fields'>
             <div className='field'>
               <DatePicker
@@ -324,7 +324,7 @@ class EventBasicInfoForm extends Component {
   renderEntryFee() {
     return (
       <div className="field field-input">
-        <label>金額</label>
+        <label>参加費</label>
         <input name="entryFee" type="text"/>
       </div>
     )
