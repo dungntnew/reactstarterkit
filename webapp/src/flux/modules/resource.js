@@ -30,6 +30,27 @@ export const EVENT_FAILURE = 'EVENT_FAILURE'
 
 export const ERROR_CLEAR = 'ERROR_CLEAR'
 
+
+// - resolver reducer - service name mappings for classifed events
+const mapServiceNameToResolverReducerName = (serviceName) => {
+  switch(serviceName) {
+    case 'created': return 'listCreatedEvents'
+    case 'joined': return 'listJoinedEvents'
+    case 'liked': return 'listLikedEvents'
+    default: return 'unknown-service-name'
+  }
+}
+
+// - service name - sub state name mappings for classifed events
+const mapServiceToSubState = (serviceName) => {
+  switch(serviceName) {
+    case 'created': return 'createdBy'
+    case 'joined': return 'joinedBy'
+    case 'liked': return 'likedBy'
+    default: return 'unknown-service-name'
+  }
+}
+
 // clear all error relatived to resource
 export const clearErrors = () => {
   return {
@@ -131,6 +152,9 @@ export const fetchEvents = ({ caller={service:'list',
                               },
                               query={},
                             }) => {
+
+  console.log("resource - fetchEvents caller=: ", caller, "query=: ", query)
+
   return {
     [CALL_API]: {
       endpoint: 'api_events',
@@ -160,19 +184,11 @@ export const fetchTopNEvents = ({pagging={offset: 0,
   return fetchEvents({pagging, query, caller:{service: 'listTopNEvents'}})
 }
 
-export const fetchCreatedEvents = ({pagging={offset: 0, limit: 25},
-                                    query={}}) => {
-  return fetchEvents({pagging, query, caller:{service: 'listCreatedEvents'}})
-}
-
-export const fetchJoinedEvents = ({pagging={offset: 0, limit: 25},
-                                    query={}}) => {
-  return fetchEvents({pagging, query, caller:{service: 'listJoinedEvents'}})
-}
-
-export const fetchLikedEvents = ({pagging={offset: 0, limit: 25},
-                                    query={}}) => {
-  return fetchEvents({pagging, query, caller:{service: 'listLikedEvents'}})
+export const fetchEventsWithServiceName = ({service, 
+                                            pagging={offset: 0, limit: 25}, 
+                                            query={}}) => {
+  const resolverName = mapServiceNameToResolverReducerName(service)
+  return fetchEvents({pagging, query, caller:{service: resolverName}})
 }
 
 export const fetchEventDetail = (id) => {
@@ -205,7 +221,7 @@ export const fetchEventDetailIfNeed = (id) => {
 
 // listening all actions and if has entities in payload
 // merge to app's entities database
-const entities = (state=initEntities, action) => {
+export const entitiesReducer = (state=initEntities, action) => {
   const {payload} = action
   if (payload && payload.entities) {
     return _.merge({}, state, payload.entities)
@@ -214,7 +230,7 @@ const entities = (state=initEntities, action) => {
 }
 
 // categories reducer will be storing only categories ids.
-const categories = (state=[], action) => {
+export const categoriesReducer = (state=[], action) => {
   switch(action.type) {
     case CATEGORIES_SUCCESS:
       return [...state, action.payload.result]
@@ -224,7 +240,7 @@ const categories = (state=[], action) => {
 }
 
 // category reducer will store current category id.
-const category = (state={isFetching: false, id: null}, action) => {
+export const categoryReducer = (state={isFetching: false, id: null}, action) => {
   switch(action.type) {
     case CATEGORY_REQUEST:
       return _.merge({}, state, {
@@ -245,7 +261,7 @@ const category = (state={isFetching: false, id: null}, action) => {
 }
 
 // blogs reducer will be storing only blogs ids.
-const blogs = (state=[], action) => {
+export const blogsReducer = (state=[], action) => {
   switch(action.type) {
     case BLOGS_SUCCESS:
       return [...state, action.payload.result]
@@ -255,7 +271,7 @@ const blogs = (state=[], action) => {
 }
 
 // blog reducer will store current blog id.
-const blog = (state={isFetching: false, id: null}, action) => {
+export const blogReducer = (state={isFetching: false, id: null}, action) => {
   switch(action.type) {
     case BLOG_REQUEST:
       return _.merge({}, state, {
@@ -276,9 +292,10 @@ const blog = (state={isFetching: false, id: null}, action) => {
 }
 
 // events reducer will be storing only events ids.
-const allEvents = (state=[], action) => {
+export const allEventsReducer = (state=[], action) => {
   switch(action.type) {
     case EVENTS_SUCCESS:
+      console.log("ALL -EVENT REDUCER - EVENT _SUCCESS")
       return [...state, ...action.payload.result]
     default:
       return state
@@ -320,12 +337,14 @@ const listTopNEvents = (state={}, action) => {
 }
 
 // split event ids by tags: tags = ['closed', 'oppening']
-const listCreatedEvents = (state={}, action) => {
+const listFilteredEventsByUserIdAndFilter = (state={}, action, subFilter) => {
+    console.log('FILTERED EVENT ID AND SERVICE: subFilter=', subFilter)
     const {params} = action
     const {query} = params
-    const {owner} = query
+    const {userId} = query
 
     const splitSubStateByTags = (subState) => {
+      console.log('FILTERED QUERY: ', query)
       const {status} = query || 'all'
       const ids = subState[status] || []
 
@@ -334,41 +353,50 @@ const listCreatedEvents = (state={}, action) => {
       })
     }
 
-    let {createdBy} = state
-    let subState = createdBy[owner] || {}
+    let filteredState = state[subFilter]
+    let subState = filteredState[userId] || {}
 
     return _.merge(state, {}, {
-      createdBy: _.merge(createdBy, {}, {
-        [owner]: splitSubStateByTags(subState)
+      [subFilter]: _.merge(filteredState, {}, {
+        [userId]: splitSubStateByTags(subState)
       })
     })
 }
 
 // classify event ids to groups by service
-const classifiedEvents = (state={ topNEvents: {},
+export const classifiedEventsReducer = (state={ topNEvents: {},
                                   createdBy: {},
                                   likedBy: {},
                                   joinedBy: {} }, action) => {
+  console.log("CLASSIFED EVENT: ACTION=: ", action)
+
   switch(action.type) {
     case EVENTS_SUCCESS:
       const {params} = action
       const {caller} = params
 
+      console.log("[EVENTS_SUCCESS]CLASSIFED EVENT CALL BY CALLER=: ", caller)
+
       switch (caller.service) {
         case 'listTopNEvents':
           return listTopNEvents(state, action)
         case 'listCreatedEvents':
-          return listCreatedEvents(state, action)
+          return listFilteredEventsByUserIdAndFilter(state, action, 'createdBy')
+        case 'listJoinedEvents':
+          return listFilteredEventsByUserIdAndFilter(state, action, 'joinedBy')
+        case 'listLikedEvents':
+          return listFilteredEventsByUserIdAndFilter(state, action, 'likedBy')
         default:
           return state
       }
+      return state;
     default:
       return state
   }
 }
 
 // store event ids that data already loaded
-const loadedEventDetails = (state=[], action) => {
+export const loadedEventDetailsReducer = (state=[], action) => {
   switch(action.type) {
     case EVENT_SUCCESS:
       return [...state, action.payload.result]
@@ -378,7 +406,7 @@ const loadedEventDetails = (state=[], action) => {
 }
 
 // event reducer will store current event id.
-const viewingEventDetail = (state={isFetching: true, eventId: null}, action) => {
+export const viewingEventDetailReducer = (state={isFetching: true, eventId: null}, action) => {
   switch(action.type) {
     case EVENT_REQUEST:
       return _.merge({}, state, {
@@ -399,14 +427,7 @@ const viewingEventDetail = (state={isFetching: true, eventId: null}, action) => 
   }
 }
 
-const eventReducer = combineReducers({
-  allEvents: allEvents,
-  classifiedEvents: classifiedEvents,
-  loadedEventDetails: loadedEventDetails,
-  viewingEventDetail: viewingEventDetail,
-})
-
-const loadingReducer = (state={}, action)=> {
+export const loadingReducer = (state={}, action)=> {
   if (_.endsWith(action.type, '_REQUEST')) {
     const resource = _.replace(action.type, '_REQUEST', '')
     return _.merge(state, {}, {
@@ -429,7 +450,7 @@ const loadingReducer = (state={}, action)=> {
   }
 }
 
-const errorReducer = (state=[], action)=> {
+export const errorReducer = (state=[], action)=> {
   if (_.endsWith(action.type, '_FAILURE')){
     return [...state, action.error]
   }
@@ -443,16 +464,8 @@ const errorReducer = (state=[], action)=> {
   }
 }
 
-const resourcesReducer = combineReducers({
-    loadings: loadingReducer,
-    errors: errorReducer,
-    entities: entities,
-    categories: categories,
-    category: category,
-    blogs: blogs,
-    blog: blog,
-    event: eventReducer,
-})
+
+// - selectors 
 
 export const getErrors = (globalState) => {
   const {resources} = globalState
@@ -537,19 +550,22 @@ export const getEventData = (globalState) => {
   }
 }
 
-export const getListCreatedEvents = (globalState, owner, tag) => {
-  const {resources} = globalState
-  const {entities} = resources
+export const getEventsWithServiceName = (globalState, service, userId, status) => {
+  const subStateName = mapServiceToSubState(service)
+
+  const {entities} = globalState
   const {events} = entities
 
-  const {event} = resources
-  const {classifiedEvents} = event
-  const {createdBy} = classifiedEvents
+  const {classifiedEvents} = globalState
+  const subState = classifiedEvents[subStateName]
+  
+  console.log("GET event with subStateName: ", subStateName, "userId: ", userId, "status: ", status)
+  console.log("STATE: ", globalState)
 
   // TODO: working with pagging
 
   // not found any event with givent owner name
-  if (!_.has(createdBy, owner)) {
+  if (!_.has(subState, userId)) {
     console.log("return empty object")
     return {
       isFetching: false,
@@ -560,9 +576,9 @@ export const getListCreatedEvents = (globalState, owner, tag) => {
   }
 
 
-  const eventIdsByOwner = createdBy[owner]
-  if (!_.has(eventIdsByOwner, tag)) {
-    console.log("return empty object cause not found tag", tag)
+  const eventIdsByUserId = subState[userId]
+  if (!_.has(eventIdsByUserId, status)) {
+    console.log("return empty object cause not found status", status)
     return {
       isFetching: false,
       events: [],
@@ -572,7 +588,7 @@ export const getListCreatedEvents = (globalState, owner, tag) => {
   }
 
   // return event data list from entities DB
-  const eventIds = eventIdsByOwner[tag]
+  const eventIds = eventIdsByUserId[status]
 
   return {
     isFetching: false,
@@ -584,11 +600,3 @@ export const getListCreatedEvents = (globalState, owner, tag) => {
     current: 0,
   }
 }
-
-
-export const getListLikedEvents = (globalState, owner, tag) => {
-}
-
-export const getListJoinedEvents = (globalState, owner, tag) => {
-}
-export default resourcesReducer;

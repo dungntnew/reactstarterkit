@@ -11,158 +11,163 @@ const BASE_URL = 'http://localhost:8081/api/'
 const MAX_ITEM_PER_PAGE = 25
 
 const checkHeaders = (response) => {
-  return response
+	return response
 }
 
 const checkStatus = (response) => {
-  if (response.status >= 200 && response.status < 300) {
-	return response
-  } else {
-	var error = new Error(response.statusText)
-	error.response = response
-	throw error
-  }
+	if (response.status >= 200 && response.status < 300) {
+		return response
+	} else {
+		var error = new Error(response.statusText)
+		error.response = response
+		throw error
+	}
 }
 
 const parseJSON = (response) => {
-  const json = response.json()
-  return json
+	const json = response.json()
+	return json
 }
 
-function callApi(endpoint, schema, params, httpOptions={}) {
+function callApi(endpoint, schema, params, httpOptions = {}) {
 
-  let token = localStorage.getItem('id_token') || null
-  let config = {}
+	let token = localStorage.getItem('id_token') || null
+	let config = {}
 
-  console.log("API CALL", endpoint, "PARAMS: ", params)
-  const {authenticated, method, query, pagging} = params
+	console.log("API CALL", endpoint, "PARAMS: ", params)
+	const {authenticated, method, query, pagging} = params
 
-  // build HTTP Headers options
-  let headers = {
-	'Content-Type': 'application/json'
-  }
-
-  // apply token if authentication is required API
-  if(authenticated) {
-	if(token) {
-		headers = Object.assign({}, headers, {
-			'Authorization': `Bearer ${token}`
-		})
+	// build HTTP Headers options
+	let headers = {
+		'Content-Type': 'application/json'
 	}
-	else {
-	  throw "No token saved!"
-	}
-  }
 
-  // build query params
-  let queryParams = {}
-  if (pagging) {
+	// apply token if authentication is required API
+	if (authenticated) {
+		if (token) {
+			headers = Object.assign({}, headers, {
+				'Authorization': `Bearer ${token}`
+			})
+		}
+		else {
+			throw "No token saved!"
+		}
+	}
+
+	// build query params
+	let queryParams = {}
+	if (pagging) {
 		const {offset, limit} = pagging
 		queryParams = Object.assign({}, queryParams, {
 			offset: 0,
 			limit: limit || MAX_ITEM_PER_PAGE
 		})
-  }
+	}
 
-  // apply query param to request
-  // if request method is GET, add query param to query url
-  // else add query param as request body
-  const requestMethod = method || 'GET'
-  let fetchOptions = {'headers': headers}
-
-
-  if (requestMethod === 'POST') {
-	fetchOptions = Object.assign({}, {
-		  method: 'POST',
-		  body: JSON.stringify(query)
-	}, httpOptions)
-  }
-  else if (requestMethod === 'GET')  {
-	  fetchOptions = Object.assign({}, {
-		  method: 'GET',
-	  }, httpOptions)
-	  if (query) {
-		queryParams = Object.assign({}, queryParams, query)
-	  }
-  }
+	// apply query param to request
+	// if request method is GET, add query param to query url
+	// else add query param as request body
+	const requestMethod = method || 'GET'
+	let fetchOptions = { 'headers': headers }
 
 
-  const stringified = queryString.stringify(queryParams)
-  const API_CALL_URL = `${BASE_URL}${endpoint}?${stringified}`
-  console.log('API_CALL_URL', API_CALL_URL)
-
-  return fetch(API_CALL_URL, fetchOptions)
-	.then(checkHeaders)
-	.then(checkStatus)
-	.then(parseJSON)
-	.then(json => {
-		console.log('**JSON**: ', json)
-
-		if (_.has(json, 'results')) {
-			json = camelizeKeys(json.results)
+	if (requestMethod === 'POST') {
+		fetchOptions = Object.assign({}, {
+			method: 'POST',
+			body: JSON.stringify(query)
+		}, httpOptions)
+	}
+	else if (requestMethod === 'GET') {
+		fetchOptions = Object.assign({}, {
+			method: 'GET',
+		}, httpOptions)
+		if (query) {
+			queryParams = Object.assign({}, queryParams, query)
 		}
-		const rest = Object.assign({}, normalize(json, schema), {})
+	}
 
-		console.log("**DATA**", rest)
-		return rest
-	})
-	.catch(err => {
-		console.log(err)
-		return Promise.reject(err)
-	})
+
+	const stringified = queryString.stringify(queryParams)
+	const API_CALL_URL = `${BASE_URL}${endpoint}?${stringified}`
+	console.log('API_CALL_URL', API_CALL_URL)
+
+	return fetch(API_CALL_URL, fetchOptions)
+		.then(checkHeaders)
+		.then(checkStatus)
+		.then(parseJSON)
+		.then(json => {
+			console.log('**JSON**: ', json)
+
+			if (_.has(json, 'results')) {
+				json = camelizeKeys(json.results)
+			}
+			const rest = Object.assign({}, normalize(json, schema), {})
+
+			console.log("**DATA**", rest)
+			return rest
+		})
+		.catch(err => {
+			console.log(err)
+			return Promise.reject(err)
+		})
 }
 
 export const CALL_API = Symbol('Call API')
 
 export default store => next => action => {
+  
+	console.log("API MIDDLWARE: ACTION=: ", action)
+	
+	const callAPI = action[CALL_API]
 
-  const callAPI = action[CALL_API]
+	// So the middleware doesn't get applied to every single action
+	if (typeof callAPI === 'undefined') {
+		return next(action)
+	}
 
-  // So the middleware doesn't get applied to every single action
-  if (typeof callAPI === 'undefined') {
-	return next(action)
-  }
+	let { endpoint, types, schema, params } = callAPI
 
-  let { endpoint, types, schema, params } = callAPI
+	// Verify input params
+	if (typeof endpoint === 'function') {
+		endpoint = endpoint(store.getState())
+	}
 
-  // Verify input params
-  if (typeof endpoint === 'function') {
-	endpoint = endpoint(store.getState())
-  }
+	if (typeof endpoint !== 'string') {
+		throw new Error('Specify a string endpoint URL.')
+	}
+	if (!schema) {
+		throw new Error('Specify one of the exported Schemas.')
+	}
+	if (!Array.isArray(types) || types.length !== 3) {
+		throw new Error('Expected an array of three action types.')
+	}
+	if (!types.every(type => typeof type === 'string')) {
+		throw new Error('Expected action types to be strings.')
+	}
 
-  if (typeof endpoint !== 'string') {
-	throw new Error('Specify a string endpoint URL.')
-  }
-  if (!schema) {
-	throw new Error('Specify one of the exported Schemas.')
-  }
-  if (!Array.isArray(types) || types.length !== 3) {
-	throw new Error('Expected an array of three action types.')
-  }
-  if (!types.every(type => typeof type === 'string')) {
-	throw new Error('Expected action types to be strings.')
-  }
+	// Passing the authenticated boolean back in our data
+	// will let us distinguish between normal and secret resource
+	const actionWith = data => {
+		console.log('ACTION WITH DATA: ', data)
+		const finalAction = Object.assign({}, action, data)
+		delete finalAction[CALL_API]
 
-  // Passing the authenticated boolean back in our data
-  // will let us distinguish between normal and secret resource
-  const actionWith = data => {
-	const finalAction = Object.assign({}, action, data)
-	delete finalAction[CALL_API]
-	return finalAction
-  }
+		console.log('ACTION WITH finalAction: ', finalAction)
+		return finalAction
+	}
 
-  const [ requestType, successType, failureType ] = types
-  next(actionWith({ type: requestType, params: params }))
+	const [requestType, successType, failureType] = types
+	next(actionWith({ type: requestType, params: params }))
 
-  return callApi(endpoint, schema, params).then(
-	response => next(actionWith({
-	  payload: response,
-	  params: params,
-	  type: successType
-	})),
-	error => next(actionWith({
-	  type: failureType,
-	  error: error.message || 'Something bad happened'
-	}))
-  )
+	return callApi(endpoint, schema, params).then(
+		response => next(actionWith({
+			payload: response,
+			params: params,
+			type: successType
+		})),
+		error => next(actionWith({
+			type: failureType,
+			error: error.message || 'Something bad happened'
+		}))
+	)
 }

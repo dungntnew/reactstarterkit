@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
+import classNames from 'classnames';
 
 import Logo from '../components/PageLogo';
 import PageHeader from '../components/PageHeader';
@@ -20,7 +21,8 @@ class MyPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      confirmMessage: ''
+      confirmMessage: '',
+      activeLink: '',
     }
   }
 
@@ -38,6 +40,19 @@ class MyPage extends Component {
       $('.ui.sidebar').sidebar('toggle');
   }
 
+  link(to, title) {
+    return (
+      <Link 
+      to={to}
+      className={classNames({
+        item: true,
+        active: to === this.state.activeLink
+      })}
+      onClick={()=>{ this.setState({activeLink: to})}}
+      >{title}</Link>
+    )
+  }
+
   renderMenu() {
 
     return (
@@ -45,9 +60,9 @@ class MyPage extends Component {
           <div className="item">
             <div className="header">テーブル管理</div>
             <div className="menu">
-              <Link className="item" activeClassName="active" to="/mypage/events/created">登録したテーブル</Link>
-              <Link className="item" activeClassName="active" to="/mypage/events/liked">お気に入りテーブル</Link>
-              <Link className="item" activeClassName="active" to="/mypage/events/joined">参加テーブル</Link>
+              {this.link('/mypage/events/created/all', '登録したテーブル')}
+              {this.link('/mypage/events/liked/all', 'お気に入りテーブル')}
+              {this.link('/mypage/events/joined/all', '参加テーブル')}
               {/*<Link className="item" activeClassName="active" to="/mypage/events/reviewed">レビュー一覧</Link> */}
             </div>
           </div>

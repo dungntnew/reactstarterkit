@@ -12,7 +12,7 @@ import {parsePaggingParams} from '../helpers/params'
 import EventListItem from '../components/EventListItem'
 import Pagination from '../components/Pagination'
 
-import {fetchLikedEventsIfNeed} from '../flux/modules/liked_event'
+import {fetchLikedEvents, getListLikedEvents} from '../flux/modules/resource'
 
 // TODO: move const to consts file
 const DEFAULT_MAX_EVENT_PER_PAGE = 25
@@ -174,7 +174,7 @@ class LikedEventListMyPage extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  const {likedEvent} = state
+  const likedEvent = getListLikedEvents(state, 'admin', 'all')
   const {isFetching} = likedEvent
   if (isFetching) {
 	return {
@@ -195,7 +195,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchEvents: (limit, from, filter)=> {
-	dispatch(fetchLikedEventsIfNeed(filter, limit, from))
+		dispatch(fetchLikedEvents({pagging: {limit: limit},
+                                query:{
+                                   userId: 'admin',
+                                   status: filter
+                                }}))
   },
   unLikeEvent: (eventId) => {
 	console.log('request unlike: ', eventId)

@@ -14,9 +14,7 @@ import CancelJoinPage from './containers/CancelJoinPage'
 import BlogListPage from './containers/BlogListPage'
 import BlogDetailPage from './containers/BlogDetailPage'
 
-import CreatedEventListMyPage from './containers/CreatedEventListMyPage'
-import LikedEventListMyPage from './containers/LikedEventListMyPage'
-import JoinedEventListMyPage from './containers/JoinedEventListMyPage'
+import EventListMyPage from './containers/EventListMyPage'
 import ReviewedEventListMyPage from './containers/ReviewedEventListMyPage'
 
 import BankSettingMyPage from './containers/BankSettingMyPage'
@@ -50,7 +48,6 @@ const requireAuth = (nextState, replace, callback) => {
   callback();
 }
 
-
 const routes = (
   <Route path='/' component={App}>
     <IndexRoute component={TopLandingPage}/>
@@ -74,10 +71,8 @@ const routes = (
     <Route path='/mypage' component={MyPage} onEnter={requireAuth}>
           <IndexRoute component={TopMyPage}/>
           {/* TODO add sub routes for mypage */}
-          <Route path='/mypage/events/created' component={CreatedEventListMyPage}/>
-          <Route path='/mypage/events/liked' component={LikedEventListMyPage}/>
-          <Route path='/mypage/events/joined' component={JoinedEventListMyPage}/>
-          <Route path='/mypage/events/reviewed' component={ReviewedEventListMyPage}/>
+          <Route path='/mypage/events/:service/:status' component={EventListMyPage}/>
+          {/*<Route path='/mypage/events/reviewed' component={ReviewedEventListMyPage}/> */}
 
           <Route path='/mypage/bank-settings' component={BankSettingMyPage} />
           <Route path='/mypage/change-password' component={PasswordSettingMyPage} />

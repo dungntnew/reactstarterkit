@@ -12,7 +12,7 @@ import {parsePaggingParams} from '../helpers/params'
 import EventListItem from '../components/EventListItem'
 import Pagination from '../components/Pagination'
 
-import {fetchJoinedEventsIfNeed} from '../flux/modules/joined_event'
+import {fetchJoinedEvents, getListJoinedEvents} from '../flux/modules/resource'
 
 // TODO: move const to consts file
 const DEFAULT_MAX_EVENT_PER_PAGE = 25
@@ -174,12 +174,12 @@ class JoinedEventListMyPage extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  const {joinedEvent} = state
+  const joinedEvent = getListJoinedEvents(state, 'admin', 'all')
   const {isFetching} = joinedEvent
   if (isFetching) {
-	return {
-	  isFetching: true,
-	}
+		return {
+		  isFetching: true,
+		}
   }
   else {
 	const {errorMessage, events, total, current} = joinedEvent
@@ -195,7 +195,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchEvents: (limit, from, filter)=> {
-	dispatch(fetchJoinedEventsIfNeed(filter, limit, from))
+		dispatch(fetchJoinedEvents({pagging: {limit: limit},
+                                query:{
+                                   userId: 'admin',
+                                   status: filter
+                                }}))
   },
   unLikeEvent: (eventId) => {
 	console.log('request unlike: ', eventId)

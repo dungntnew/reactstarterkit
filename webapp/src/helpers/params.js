@@ -21,7 +21,7 @@ export const parsePaggingParams = (location, defaultLimit) => {
     from = 0
   }
 
-  return {limit, from}
+  return { limit, from }
 }
 
 const ParamsHelper = {
