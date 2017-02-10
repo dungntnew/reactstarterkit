@@ -374,8 +374,8 @@ class EventBasicInfoForm extends Component {
       {this.renderSelector({
         'selector': 'genreSelector',
         'name': 'genre',
-        'title': 'ジェンル',
-        'hint': 'ジェンルを選択してください',
+        'title': 'ジャンル',
+        'hint': 'ジャンルを選択してください',
         'items': genreItems
       })}
       {this.renderSelector({
