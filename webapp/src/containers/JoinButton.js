@@ -5,6 +5,8 @@ import classNames from 'classnames';
 
 import '../css/JoinButton.css';
 
+import {getEventData} from '../flux/modules/resource'
+
 const JoinButton = (props) => {
   const buttonTitle = props.joining ? 'キャンセル': '参加'
   const buttonClasses = classNames({
@@ -29,7 +31,8 @@ JoinButton.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {selectedEvent} = state
+
+  const {isFetching, data} = getEventData(state)
   const {auth} = state
   const {authenticated, user} = auth
 
@@ -37,7 +40,7 @@ const mapStateToProps = (state, ownProps) => {
       console.error("pre-required authenticate")
   }
 
-  const {isFetching, data} = selectedEvent
+
   if (!isFetching && authenticated && user) {
     const {joined, id} = data
     const userId = user.id

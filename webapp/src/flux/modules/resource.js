@@ -153,8 +153,6 @@ export const fetchEvents = ({ caller={service:'list',
                               query={},
                             }) => {
 
-  console.log("resource - fetchEvents caller=: ", caller, "query=: ", query)
-
   return {
     [CALL_API]: {
       endpoint: 'api_events',
@@ -206,14 +204,10 @@ export const fetchEventDetail = (id) => {
 
 export const fetchEventDetailIfNeed = (id) => {
   return (dispatch, getState) => {
-    const {resources} = getState()
-    const {event} = resources
-    const {loadedEventDetails} = event
-    console.log("loaded event ids: ", loadedEventDetails)
+    const {loadedEventDetails} = getState()
     if (_.includes(loadedEventDetails, id)) {
       return Promise.resolve()
     } else {
-      console.log("require load new event id", id)
       return dispatch(fetchEventDetail(id))
     }
   }
@@ -295,7 +289,6 @@ export const blogReducer = (state={isFetching: false, id: null}, action) => {
 export const allEventsReducer = (state=[], action) => {
   switch(action.type) {
     case EVENTS_SUCCESS:
-      console.log("ALL -EVENT REDUCER - EVENT _SUCCESS")
       return [...state, ...action.payload.result]
     default:
       return state
@@ -338,13 +331,11 @@ const listTopNEvents = (state={}, action) => {
 
 // split event ids by tags: tags = ['closed', 'oppening']
 const listFilteredEventsByUserIdAndFilter = (state={}, action, subFilter) => {
-    console.log('FILTERED EVENT ID AND SERVICE: subFilter=', subFilter)
     const {params} = action
     const {query} = params
     const {userId} = query
 
     const splitSubStateByTags = (subState) => {
-      console.log('FILTERED QUERY: ', query)
       const {status} = query || 'all'
       const ids = subState[status] || []
 
@@ -368,14 +359,11 @@ export const classifiedEventsReducer = (state={ topNEvents: {},
                                   createdBy: {},
                                   likedBy: {},
                                   joinedBy: {} }, action) => {
-  console.log("CLASSIFED EVENT: ACTION=: ", action)
 
   switch(action.type) {
     case EVENTS_SUCCESS:
       const {params} = action
       const {caller} = params
-
-      console.log("[EVENTS_SUCCESS]CLASSIFED EVENT CALL BY CALLER=: ", caller)
 
       switch (caller.service) {
         case 'listTopNEvents':
@@ -481,16 +469,14 @@ export const isLoading = (globalState) => {
 }
 
 export const getTargetItems = (globalState) => {
-  return globalState.resources.entities.targets;
+  return globalState.entities.targets;
 }
 
 export const getTopNEvents = (globalState, tag) => {
-  const {resources} = globalState
-  const {entities} = resources
+  const {entities} = globalState
   const {events} = entities
 
-  const {event} = resources
-  const {classifiedEvents} = event
+  const {classifiedEvents} = globalState
   const {topNEvents} = classifiedEvents
 
   // not found any event with givent tag name
@@ -526,13 +512,11 @@ export const getTopLatestEvents = (globalState) => {
 }
 
 export const getEventData = (globalState) => {
-  const {resources} = globalState
-  const {entities} = resources
+  const {entities} = globalState
   const {events} = entities
   const {users} = entities
 
-  const {event} = resources
-  const {viewingEventDetail} = event
+  const {viewingEventDetail} = globalState
   const {isFetching, errorMessage, eventId} = viewingEventDetail
 
   let data = eventId ? events[eventId]: null
@@ -558,15 +542,11 @@ export const getEventsWithServiceName = (globalState, service, userId, status) =
 
   const {classifiedEvents} = globalState
   const subState = classifiedEvents[subStateName]
-  
-  console.log("GET event with subStateName: ", subStateName, "userId: ", userId, "status: ", status)
-  console.log("STATE: ", globalState)
 
   // TODO: working with pagging
 
   // not found any event with givent owner name
   if (!_.has(subState, userId)) {
-    console.log("return empty object")
     return {
       isFetching: false,
       events: [],
@@ -578,7 +558,6 @@ export const getEventsWithServiceName = (globalState, service, userId, status) =
 
   const eventIdsByUserId = subState[userId]
   if (!_.has(eventIdsByUserId, status)) {
-    console.log("return empty object cause not found status", status)
     return {
       isFetching: false,
       events: [],

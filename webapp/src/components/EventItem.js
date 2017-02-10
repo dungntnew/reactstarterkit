@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames';
+import {Link} from 'react-router';
 import EventTags from '../components/EventTags';
 
 import 'semantic-ui-progress/progress.min.css'
@@ -44,7 +45,7 @@ class EventItem extends Component {
 
   render() {
     const {
-      url,
+      id,
       title,
       coverImageUrl,
       price,
@@ -67,22 +68,24 @@ class EventItem extends Component {
       'ui bottom attached red progress': percent >= 0.7,
     })
 
+    const eventUrl = `/events/${id}`
+
     return (
       <div className='card event-item'>
-        <a className='image event-cover-img'
-           href={url}
+        <Link className='image event-cover-img'
+           to={eventUrl}
             >
           <img
              alt='event-cover-img'
              src={coverImageUrl}
           />
-        </a>
+        </Link>
         <div className="ui top right attached label price text-orange">
            {formatPrice(price)}
         </div>
 
         <div className="content">
-           <a className="header-item" href={url}>{title}</a>
+           <Link className="header-item" to={eventUrl}>{title}</Link>
 
            <div className="address">
              {address}

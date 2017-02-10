@@ -34,7 +34,6 @@ function callApi(endpoint, schema, params, httpOptions = {}) {
 	let token = localStorage.getItem('id_token') || null
 	let config = {}
 
-	console.log("API CALL", endpoint, "PARAMS: ", params)
 	const {authenticated, method, query, pagging} = params
 
 	// build HTTP Headers options
@@ -102,8 +101,6 @@ function callApi(endpoint, schema, params, httpOptions = {}) {
 				json = camelizeKeys(json.results)
 			}
 			const rest = Object.assign({}, normalize(json, schema), {})
-
-			console.log("**DATA**", rest)
 			return rest
 		})
 		.catch(err => {
@@ -116,8 +113,6 @@ export const CALL_API = Symbol('Call API')
 
 export default store => next => action => {
   
-	console.log("API MIDDLWARE: ACTION=: ", action)
-	
 	const callAPI = action[CALL_API]
 
 	// So the middleware doesn't get applied to every single action
@@ -148,11 +143,8 @@ export default store => next => action => {
 	// Passing the authenticated boolean back in our data
 	// will let us distinguish between normal and secret resource
 	const actionWith = data => {
-		console.log('ACTION WITH DATA: ', data)
 		const finalAction = Object.assign({}, action, data)
 		delete finalAction[CALL_API]
-
-		console.log('ACTION WITH finalAction: ', finalAction)
 		return finalAction
 	}
 

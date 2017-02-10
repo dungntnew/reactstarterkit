@@ -5,6 +5,8 @@ import classNames from 'classnames'
 
 import '../css/LikeButton.css';
 
+import {getEventData} from '../flux/modules/resource'
+
 const LikeButton = (props) => {
   const buttonTitle = classNames({
     'red heart': props.liked,
@@ -32,8 +34,8 @@ LikeButton.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {selectedEvent} = state
-  const {isFetching, data} = selectedEvent
+ 
+  const {isFetching, data} = getEventData(state)
   if (!isFetching) {
     const {liked} = data
     return {

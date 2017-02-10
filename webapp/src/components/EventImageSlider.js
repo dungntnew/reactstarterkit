@@ -10,7 +10,6 @@ class EventImageSlider extends Component {
     super(props)
 
     const {startIndex} = props
-    console.log('start index: ', startIndex)
 
     this.state = {
       activeIndex: startIndex
