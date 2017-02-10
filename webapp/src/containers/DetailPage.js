@@ -103,10 +103,6 @@ class DetailPage extends Component {
             <TopNav />
           </PageHeader>
           {content}
-          <div>
-          <button onClick={()=> {this.props.fetchEvent("event-1")}}>refresh</button
-          >
-          </div>
           <PageFooter />
         </div>
       )
