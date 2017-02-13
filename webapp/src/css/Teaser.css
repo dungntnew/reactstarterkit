@@ -1,0 +1,90 @@
+.teaser {
+
+}
+
+.teaser .teaser-content {
+  height: 460px;
+  background-color: #ff8a46;
+}
+
+.teaser .teaser-content .title {
+  font-size: 40px;
+  letter-spacing: -1.1px;
+  color: #ffffff;
+  padding-top: 3rem;
+  font-weight: normal;
+}
+
+.teaser .teaser-content .page-logo {
+  width: 524px;
+  height: 90px;
+  object-fit: contain;
+  margin-top: 5rem;
+}
+
+.teaser .teaser-content .date {
+  font-size: 32px;
+  font-weight: normal;
+  letter-spacing: -0.9px;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 5rem;
+}
+
+.teaser .list-social {
+  height: 160px;
+  background-color: #f4f1f0;
+  display: inline-block;
+  list-style: none;
+  padding-top: 4%;
+}
+
+.teaser .list-social .container {
+  padding-left: 0;
+}
+
+.teaser .list-social .item-icon {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.teaser .list-social .item-icon .icon {
+  margin-left: 10px;
+}
+
+.teaser .list-social .item-icon a {
+  font-size: 20px;
+  line-height: 1.6;
+  letter-spacing: normal;
+  color: #444444;
+}
+
+.teaser .footer {
+  height: 60px;
+  background-color: #ffffff;
+  padding-top: 2%;
+  font-size: 12px;
+  color: #383838;
+}
+
+@media only screen and (max-width: 767px) {
+  .teaser .list-social {
+    padding-top: 6%;
+  }
+  .teaser .footer {
+    padding-top: 3%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .teaser .teaser-content .page-logo {
+    width: 360px;
+    height: 60px;
+  }
+  .teaser .teaser-content .title {
+    font-size: 34px;
+  }
+  .teaser .footer {
+    padding-top: 5%;
+  }
+}
