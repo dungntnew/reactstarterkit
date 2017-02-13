@@ -1,0 +1,47 @@
+.friend-list {
+  background-color: #f4f1f0 !important;
+}
+
+.friend-list .container {
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.friend-list .title {
+  padding: 1rem 1rem 0;
+}
+
+.friend-list .text-link {
+  text-align: center;
+  display: block;
+}
+
+.friend-list .list .item {
+  border: none !important;
+  padding: 0.5rem 1rem !important;
+}
+
+/*notification new*/
+
+.friend-list .list .item.new {
+  background-color: #e7e5e5;
+}
+
+.friend-list .list .item .ui.avatar.image {
+  padding-right: 0!important;
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+}
+
+.friend-list .list .item .content {
+  max-width: 430px;
+  font-size: 12px;
+  line-height: 1.5!important;
+  color: #444444;
+}
+
+.friend-list .list .item .content .date {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

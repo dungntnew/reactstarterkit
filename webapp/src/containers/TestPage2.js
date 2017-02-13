@@ -11,6 +11,7 @@ import Teaser from '../components/Teaser';
 import CancelTable from '../components/CancelTable';
 import ReportTable from '../components/ReportTable';
 import AboutTable from '../components/AboutTable';
+import FriendList from '../components/FriendList'
 // import SignupForm from '../components/auth-forms/SignupForm';
 import '../css/TestPage.css';
 
@@ -75,6 +76,26 @@ const text2 = {
 const text3 = {
   comment: 'このコンテンツは不適切であり、Your Tableのサイトから削除する必要があると思われる場合は、下記のボタンをクリックしてお知らせください。コンテンツが不適切だと'
 }
+
+const friend = {
+  friends: [
+    {
+    id: '12',
+    avatarUrl: '/img/event-2.jpg',
+    url: 'ngoctien/tien',
+    displayNoti: 'このコンテンツは不適切であり',
+    updated: 12/3/4
+    },
+    {
+    id: '12',
+    avatarUrl: '/img/event-2.jpg',
+    url: 'ngoctien/tien',
+    displayNoti: 'Your Tableのサイトから削除する必要があると思われる場合は',
+    updated: 12/3/4
+    },
+
+  ]
+}
 /* Put your component to here to view */
 export default (props) => (
   <div>
@@ -95,6 +116,7 @@ export default (props) => (
         <CancelTable {...text2}/>
         <ReportTable {...text3} />
         <AboutTable />
+        <FriendList {...friend}/>
      </div>
   </div>
 )
