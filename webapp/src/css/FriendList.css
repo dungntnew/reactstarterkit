@@ -4,12 +4,11 @@
 
 .friend-list .container {
   background-color: #fff;
-  padding: 1rem;
   border-radius: 4px;
 }
 
 .friend-list .title {
-
+  padding: 1rem 1rem 0;
 }
 
 .friend-list .text-link {
@@ -19,7 +18,13 @@
 
 .friend-list .list .item {
   border: none !important;
+  padding: 0.5rem 1rem !important;
+}
 
+/*notification new*/
+
+.friend-list .list .item.new {
+  background-color: #e7e5e5;
 }
 
 .friend-list .list .item .ui.avatar.image {
