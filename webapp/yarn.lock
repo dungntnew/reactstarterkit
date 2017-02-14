@@ -5236,6 +5236,10 @@ sax@^1.1.4, sax@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
 
+semantic-ui-accordion:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-accordion/-/semantic-ui-accordion-2.2.3.tgz#89c70b55b90687b113100e5b0bbfc6e74f41b11f"
+
 semantic-ui-css:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/semantic-ui-css/-/semantic-ui-css-2.2.4.tgz#e886e6e55e2a16874bd5de49c25f26cd2eb720b7"

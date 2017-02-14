@@ -20,6 +20,10 @@
   color: #ff8a46 !important;
 }
 
+.btn-center {
+  text-align: center;
+}
+
 
 .required {
   font-size: 0.750em;

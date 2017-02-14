@@ -1,0 +1,11 @@
+.cancel-policy {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 4px;
+  margin-top: 2rem;
+}
+
+.cancel-policy .content {
+  padding-bottom: 2rem;
+  padding-top: 1rem;
+}
