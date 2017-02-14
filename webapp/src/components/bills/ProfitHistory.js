@@ -3,11 +3,11 @@ import React, {Component, PropTypes} from 'react'
 
 
 import 'semantic-ui-form/form.min.css'
-import '../../css/bills/History.css'
+import '../../css/bills/ProfitHistory.css'
 
 $.fn.form = require('semantic-ui-form')
 
-class History extends Component {
+class ProfitHistory extends Component {
   constructor(props) {
     super(props);
 
@@ -37,7 +37,7 @@ class History extends Component {
 
     return(
 
-      <div className='ui text container history'>
+      <div className='ui text container profit-history'>
         <h3 className='title'>売上履歴</h3>
 
         <div className='ui two column stackable grid container'>
@@ -66,4 +66,4 @@ class History extends Component {
   }
 }
 
-export default History
+export default ProfitHistory

@@ -3,13 +3,13 @@ import React, {Component, PropTypes} from 'react'
 
 
 import 'semantic-ui-form/form.min.css'
-import '../../css/bills/HistoryAll.css'
+import '../../css/bills/BillList.css'
 
 $.fn.form = require('semantic-ui-form')
 
 import {InvoiceStatus} from '../../flux/modules/constant'
 
-class HistoryAll extends Component {
+class BillList extends Component {
   constructor(props) {
     super(props);
 
@@ -81,7 +81,7 @@ class HistoryAll extends Component {
 
     return(
 
-      <div className='ui text container history-all'>
+      <div className='ui text container bill-list'>
         <h3 className='title'>振込申請履歴</h3>
 
         <table className='ui very basic unstackable table list-invoice'>
@@ -95,5 +95,5 @@ class HistoryAll extends Component {
 
 }
 
-export default HistoryAll
+export default BillList
 
