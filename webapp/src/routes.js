@@ -62,13 +62,8 @@ const routes = (
           component={JoinPage} onEnter={requireAuth}/>
     <Route path='/cancelJoin/:userId/:eventId'
           component={CancelJoinPage} onEnter={requireAuth}/>
-    
     <Route path='/members/:userId/:filter'
-          component={ProfilePage}>
-           <IndexRoute component={CreatedEventList} />
-           <Route path='/members/:userId/joined' component={JoinedEventList} />
-    </Route>
-    
+          component={ProfilePage}/>
     <Route path='/blogs/latest'
           component={BlogListPage}/>
     <Route path='/blogs/:blogItemId'

@@ -27,6 +27,7 @@ import authReducer from './modules/auth'
 import {
 
     allEventsReducer,
+    eventIdsByQueryReducer,
     classifiedEventsReducer,
     loadedEventDetailsReducer,
     viewingEventDetailReducer,
@@ -66,6 +67,7 @@ const rootReducer = combineReducers({
 
   // - new reducers
   allEvents: allEventsReducer,
+  eventIds: eventIdsByQueryReducer,
   classifiedEvents: classifiedEventsReducer,
   loadedEventDetails: loadedEventDetailsReducer,
   viewingEventDetail: viewingEventDetailReducer,

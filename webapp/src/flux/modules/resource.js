@@ -6,6 +6,7 @@ import { combineReducers } from 'redux'
 import { CALL_API } from '../middleware/api'
 import Schemas from '../schemas'
 import {initEntities} from './initialState'
+import {idsToFilteredDict} from '../../helpers/params'
 
 export const CATEGORIES_REQUEST = 'CATEGORIES_REQUEST'
 export const CATEGORIES_SUCCESS = 'CATEGORIES_SUCCESS'
@@ -382,6 +383,21 @@ export const classifiedEventsReducer = (state={ topNEvents: {},
       return state
   }
 }
+
+export const eventIdsByQueryReducer = (state={}, action) => {
+  switch(action.type) {
+    case EVENTS_SUCCESS:
+      const {params} = action
+      const {query} = params
+      const {caller} = params
+
+     return idsToFilteredDict(query, action.payload.result, state)
+     
+    default:
+    return state;
+  }
+}
+
 
 // store event ids that data already loaded
 export const loadedEventDetailsReducer = (state=[], action) => {
