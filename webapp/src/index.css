@@ -50,6 +50,17 @@ i.icon {
   width: 100%;
 }
 
+.btn-wid50 {
+  width: 48%;
+}
+
+.btn-wid70 {
+  width: 75%;
+}
+
+.btn-wid-full {
+  width: 100%;
+}
 .tite-form {
   font-size: 1.5rem;
 }
@@ -69,10 +80,16 @@ i.icon {
   margin: auto;
 }
 
-
 @media only screen and (max-width: 767px) {
   .container-customize {
     width: auto !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .container-customize {
     margin-right: 1rem !important;
     margin-left: 1rem !important;
   }

@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import queryString from 'query-string'
 
-export const API_URL = 'http://localhost:3000/api'
+export const API_URL = 'http://52.37.92.74/api'
 
 const checkHeaders = (response) => {
   return response

@@ -1,14 +1,17 @@
+import _ from 'lodash'
 import $ from 'jquery';
+import moment from 'moment';
+
 import React, {PropTypes, Component} from 'react';
-import classNames from 'classnames';
-import {connect} from 'react-redux';
 
 import {defaultRules} from '../../helpers/validations'
 
 import 'semantic-ui-form/form.min.css'
+import 'semantic-ui-dropdown/dropdown.min.css'
 import '../../css/credit-card/CreditCard.css';
 
 $.fn.form = require('semantic-ui-form')
+$.fn.dropdown = require('semantic-ui-dropdown')
 
 class CreditCard extends Component {
   static propTypes = {
@@ -24,16 +27,13 @@ class CreditCard extends Component {
     onSubmit: PropTypes.func.isRequired,
   }
 
-  constructor(props) {
-    super(props)
-  }
 
   componentDidMount() {
     this.initForm()
   }
 
   initForm() {
-    const {form} = this.refs
+    const {form, monthSelector, yearSelector} = this.refs
     const {data} = this.props
 
     // setup validations
@@ -43,6 +43,8 @@ class CreditCard extends Component {
     })
 
    // setup dropdown
+   $(monthSelector).dropdown({})
+   $(yearSelector).dropdown({})
 
     // init form values
     $(form).form('set values', data)
@@ -73,7 +75,51 @@ class CreditCard extends Component {
     )
   }
 
+  renderSupportingCreditTypes(){
+    return (
+        <div className={"ui orange huge labels"}>
+          <a className={"ui label"}>
+            <i className={"american express icon"}></i>
+          </a>
+          <a className={"ui label"}>
+            <i className={"japan credit bureau icon"}></i>
+          </a>
+          <a className={"ui label"}>
+            <i className={"visa icon"}></i>
+          </a>
+          <a className={"ui label"}>
+            <i className={"mastercard icon"}></i>
+          </a>
+        </div>
+    )
+  }
+
+  renderTimeSelectorField(name, selector, from, to, hint='月') {
+    const timeRange = _.range(from, to, 1)
+    const timeKeys = timeRange.map(t => _.padStart(t, 2, '0'))
+    const timeMaps = timeKeys.map(t => ({id: t, label: t}))
+
+    return (
+      <div className="field field-input">
+       <div className='ui fluid search selection dropdown' ref={selector}>
+          <input type='hidden' name={name} />
+          <i className='dropdown icon'></i>
+          <div className='default text'>{hint}</div>
+          <div className='menu'>
+          {
+            timeMaps.map(t => (
+              <div key={t.id} className="item" data-value={t.id}>{t.label}</div>
+            ))
+          }
+          </div>
+       </div>
+      </div>
+    )
+  }
+
   renderInputFields() {
+    const currentYear = moment().year()
+
     return (
         <div>
             <div className='field field-input'>
@@ -84,25 +130,27 @@ class CreditCard extends Component {
                   name='number'
                   />
             </div>
+            {this.renderSupportingCreditTypes()}
 
             <div className='list-card'>
             </div>
 
             <label>有効期限<span>※必須</span></label>
             <div className='two fields'>
-              <div className='field field-input'>
-                <input type="text"
-                       name='exprMonth'
-                />
-              </div>
-              <label>月</label>
-
-              <div className='field field-input'>
-                <input type="text"
-                       name='exprYear'
-                />
-              </div>
-              <label>日</label>
+              {this.renderTimeSelectorField(
+                'exprMoth',
+                'monthSelector',
+                1,
+                12,
+                '月')
+              }
+              {this.renderTimeSelectorField(
+                'exprYear',
+                'yearSelector',
+                currentYear,
+                currentYear + 20,
+                '年')
+              }
             </div>
 
             <div className='field field-input'>
@@ -133,7 +181,7 @@ class CreditCard extends Component {
     return (
       <div className='ui text container-customize credit-card' >
         <div className='ui segment centered'>
-          <h2 className='center'>お支払い方法</h2>
+          <h2 className='title center'>お支払い方法</h2>
           <form className='ui form segment form-create'
                  ref='form'
                  onSubmit={(e) => {

@@ -1,5 +1,4 @@
 import React, {PropTypes, Component} from 'react';
-import classNames from 'classnames';
 import {connect} from 'react-redux';
 
 import '../css/EventEditForm.css';
@@ -69,10 +68,9 @@ class EventEditForm extends Component {
   }
 
   renderFormPerStep() {
-    const {event} = this.props
+    //const {event} = this.props
     const {step} = this.state
 
-    console.log(this.props.targetItems)
     const data = {
       title: '',
       target: '',

@@ -22,6 +22,20 @@ export const EventStatus = {
   CANCELLED: 'CANCELLED'
 }
 
+export const contactCategories = [{
+  id: 'cat-1',
+  label: 'カテゴリー1'
+},
+{
+  id: 'cat-2',
+  label: 'カテゴリー2'
+},
+{
+  id: 'cat-3',
+  label: 'カテゴリー3'
+}
+]
+
 export const bankList = [{
   id: '0005',
   label: '三菱東京UFJ銀行'
@@ -60,3 +74,10 @@ export const bankAccountTypes = [{
   id: '04',
   label: '別段'
 }]
+
+
+export const InvoiceStatus = {
+  PROCESSING: 'PROCESSING',
+  SENT: 'SENT',
+  ERROR: 'ERROR'
+}

@@ -7,11 +7,11 @@
 }
 
 .bank-account-form .field>label {
-  font-size: 1.25rem !important;
+  font-size: 1.125rem !important;
   line-height: 0.8  !important;
   color: #444444 !important;
   font-weight: normal !important;
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.7rem !important;
 }
 
 .bank-account-form .field>input {
@@ -26,4 +26,8 @@
   margin-bottom: 0;
   font-size: 1rem;
   color: #878787;
+}
+
+.bank-account-form .field .dropdown i.icon {
+  line-height: 1.5 !important;
 }

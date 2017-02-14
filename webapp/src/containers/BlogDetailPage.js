@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import '../css/BlogDetailPage.css';
@@ -15,8 +15,6 @@ import BlogDetail from '../components/BlogDetail';
 import {fetchBlogDetailIfNeed} from '../flux/modules/selected_blog';
 
 class BlogDetailPage extends Component {
-    static propTypes = {
-    }
 
     componentDidMount(){
         const {blogItemId} = this.props.params

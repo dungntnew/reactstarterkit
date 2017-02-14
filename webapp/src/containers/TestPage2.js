@@ -2,52 +2,99 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import CreditCard from '../components/credit-card/CreditCard';
-import TermsOfService from '../components/fqa/TermsOfService';
-import Terms from '../components/fqa/Terms';
-import Policy from '../components/fqa/Policy';
-import CancelPolicy from '../components/fqa/CancelPolicy';
-import Question from '../components/fqa/Question';
-import Answer from '../components/fqa/Answer';
-
-
+import CreditCardOk from '../components/credit-card/CreditCardOk';
+import BillCreateForm from '../components/bills/BillCreateForm';
+import ProfitHistory from '../components/bills/ProfitHistory';
+import BillList from '../components/bills/BillList';
+import RequestOK from '../components/bills/RequestOK';
+import Teaser from '../components/Teaser';
+import CancelTable from '../components/CancelTable';
+import ReportTable from '../components/ReportTable';
+import AboutTable from '../components/AboutTable';
+import FriendList from '../components/FriendList'
 // import SignupForm from '../components/auth-forms/SignupForm';
 import '../css/TestPage.css';
 
 const test = {
-  content: 'fbeg feuig erusigiuegfue gfgue'
+  url: 'ngoctien/1',
+  amount: 5
 }
+
 const content = {
-  content: 'fbeg feuig erusigiuegfue gfgue'
+  profitTotal: 5,
+  eventCount: 10,
+  listEvent: [
+    {
+    event_title: 'nfiaguifeegiu',
+    event_price: 234
+    },
+
+    {
+    event_title: 'nfiaguifeegiu',
+    event_price: 234
+    }
+  ]
 }
 
-const policy = {
-  content: '標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお。'
-}
-
-const tests = {
-  content: '標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお。'
-}
-
-const item = {
-  'lists': [
+const history = {
+  listInvoice: [
   {
-    title: 'ngoctien',
-    text: 'dhug gwwugfwqu wwugf w'
+    submitDate: '45/23/4',
+    bankName: 'tienbank',
+    accountName: 'ngoctien',
+    amount: 123
   },
   {
-    title: 'Jollydiem',
-    text: 'dhug gwwugfwqu wwugf w'
+    submitDate: '45/23/4',
+    bankName: 'tienbank',
+    accountName: 'ngoctien',
+    amount: 123
   },
   {
-    title: 'diem khong',
-    text: 'dhug gwwugfwqu wwugf w'
-  },
+    submitDate: '45/23/4',
+    bankName: 'tienbank',
+    accountName: 'ngoctien',
+    amount: 123
+  }
 
   ]
 }
 
-const testcontent = {
-  content: '標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。標準キャンセルポリシーだお。リシーだお。標準キャンセルポリシーだお'
+const text = {
+  url: 'ngoc/tien'
+}
+
+const text1 = {
+  lastUpdate: '12. 12. 2017'
+}
+
+const text2 = {
+   sumMoney: 12345,
+    policyUrl: 'ngoctien/123'
+}
+
+const text3 = {
+  comment: 'このコンテンツは不適切であり、Your Tableのサイトから削除する必要があると思われる場合は、下記のボタンをクリックしてお知らせください。コンテンツが不適切だと'
+}
+
+const friend = {
+  friends: [
+    {
+    id: '12',
+    avatarUrl: '/img/event-2.jpg',
+    url: 'ngoctien/tien',
+    displayNoti: 'このコンテンツは不適切であり',
+    updated: 12/3/4
+    },
+    {
+    id: '12',
+    avatarUrl: '/img/event-2.jpg',
+    url: 'ngoctien/tien',
+    displayNoti: 'Your Tableのサイトから削除する必要があると思われる場合は',
+    updated: 12/3/4
+    },
+
+  ]
 }
 /* Put your component to here to view */
 export default (props) => (
@@ -60,13 +107,16 @@ export default (props) => (
      <div className='test-page-wrapper'>
 
         <CreditCard />
-        <TermsOfService {...test}/>
-        <Terms {...content}/>
-        <Policy {...policy}/>
-        <CancelPolicy {...tests}/>
-        <Question {...item}/>
-        <Answer {...testcontent}/>
-
+        <CreditCardOk />
+        <BillCreateForm {...test}/>
+        <ProfitHistory {...content}/>
+        <BillList {...history}/>
+        <RequestOK {...text}/>
+        <Teaser {...text1}/>
+        <CancelTable {...text2}/>
+        <ReportTable {...text3} />
+        <AboutTable />
+        <FriendList {...friend}/>
      </div>
   </div>
 )

@@ -1,0 +1,273 @@
+.editable-member-profile {
+  margin-top: -1rem;
+  position: relative;
+}
+
+.editable-member-profile .container-customize {
+  padding-top: 50px;
+}
+
+.editable-member-profile .edit-form .form-wrapper {
+  position: relative;
+}
+
+.editable-member-profile .edit-form .form-wrapper .cover-image-wrapper {
+}
+
+.cover-image-editing-wrapper {
+  width: 100%;
+}
+
+.editable-member-profile .edit-form .form-wrapper .cover-image-wrapper .cover-image {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+}
+
+.editable-member-profile .edit-form .form-wrapper .cover-image-wrapper:hover {
+  background-color: red;
+}
+
+.editable-member-profile .change-cover-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.editable-member-profile .edit-form
+                        .form-wrapper
+                        .cover-image-wrapper
+                        .content
+                        .select-cover-image-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.editable-member-profile .edit-form .form-top-layer {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.editable-member-profile .edit-form .form-top-layer .center-fields {
+  opacity: 0.9;
+}
+.editable-member-profile .cover-image .user-avatar {
+  position: absolute;
+  top: 40%;
+  right: 42%;
+}
+
+.editable-member-profile .cover-image img {
+  margin: auto;
+}
+
+.editable-member-profile .cover-image .form label {
+  font-size: 1.125rem !important;
+  line-height: 0.8 !important;
+  color: #444444 !important;
+  font-weight: 500!important;
+  margin-bottom: 0.7rem !important;
+}
+
+
+.editable-member-profile .cover-image .user-avatar .user-description {
+  text-align: left;
+}
+
+.editable-member-profile .cover-image img {
+  margin: auto;
+}
+
+.editable-member-profile .cover-image .form label {
+  font-size: 1.125rem !important;
+  line-height: 0.8 !important;
+  color: #444444 !important;
+  font-weight: 500!important;
+  margin-bottom: 0.7rem !important;
+}
+
+.editable-member-profile .edit-form .ui.form {
+  text-align: left;
+  line-height: 1.2;
+}
+
+.editable-member-profile .edit-form .ui.button {
+  line-height: 1.2;
+}
+
+.editable-member-profile .menu-sub {
+  display: inline-block;
+  bottom: -14px;
+  position: absolute;
+  left: 30%;
+}
+
+.editable-member-profile .menu-sub .nav-item {
+  display: inline-block;
+  position: relative;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.editable-member-profile .menu-sub .nav-item .count {
+  position: absolute;
+  top: -1rem;
+  right: 50%;
+
+}
+
+.editable-member-profile .menu-sub .nav-item .link-item {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #878787;
+}
+
+.editable-member-profile .menu-sub .nav-item .link-item.active {
+  border-bottom: 2px solid #ff8a46;
+  padding-bottom: 10px;
+  color: #ff8a46;
+}
+
+@media only screen and (max-width: 768px) {
+  .editable-member-profile .cover-image .user-avatar {
+    right: 39%;
+  }
+  .editable-member-profile .cover-image {
+    height: 400px;
+  }
+  .editable-member-profile .cover-image .ui.segment {
+    top: 10px;
+  }
+  .editable-member-profile .menu-sub {
+    left: 20%;
+  }
+  .editable-member-profile .menu-sub .nav-item {
+    padding-bottom: 1.5rem;
+  }
+  .editable-member-profile .edit-form .form-wrapper .cover-image-wrapper .cover-image {
+    height: 400px;
+  }
+
+}
+
+@media only screen and (max-width: 480px) {
+  .editable-member-profile .cover-image .user-avatar {
+    right: 22%;
+    top: 30%;
+  }
+  .editable-member-profile .cover-image .user-avatar .edit {
+    right: 120px;
+  }
+  .editable-member-profile .cover-image .ui.segment img {
+    height: 50px;
+    width: 50px;
+  }
+  .editable-member-profile .cover-image .form label {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .editable-member-profile .cover-image {
+    height: 300px;
+  }
+  .editable-member-profile .cover-image .user-avatar {
+    right: 22%;
+  }
+  .editable-member-profile .cover-image .user-avatar .edit {
+    right: 120px;
+  }
+  .user-avatar-selecting {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  .user-avatar-selecting .overlay {
+    width: 60px !important;
+    height: 60px !important;
+    line-height: 60px !important;
+  }
+  .user-avatar-selecting .change-link {
+    width: 60px !important;
+    height: 60px !important;
+    line-height: 60px !important;
+  }
+  .editable-member-profile .menu-sub {
+    left: 0;
+  }
+  .editable-member-profile .edit-form .form-wrapper .cover-image-wrapper .cover-image {
+    height: 300px;
+  }
+}
+
+.user-avatar-selecting {
+  margin: 0px auto;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  clip-path: circle();
+}
+
+.user-avatar-selecting .overlay {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    z-index: 1001;
+    left: 0;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    background: black;
+    opacity: 0.0;
+}
+
+.user-avatar-selecting:hover .overlay {
+  opacity: 0.4;
+}
+
+.user-avatar-selecting:hover .change-link {
+  color: red;
+  font-size: 18px;
+}
+
+.user-avatar-selecting .change-link {
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    z-index: 1001;
+    left: 0;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    opacity: 1;
+}
+
+.center-fields {
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+}
+
+.displayNameField {
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bolder;
+    color: darkgrey;
+    text-align: center;
+}
+
+.rangeSlider {
+  margin-top: 15px;
+}

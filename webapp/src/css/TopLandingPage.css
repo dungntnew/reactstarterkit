@@ -11,7 +11,7 @@
 .top-lp .lp-header .title-introduce {
   text-align: center;
   color: #fff;
-  margin-top: 100px;
+  margin-top: 60px;
 }
 
 .top-lp .lp-header .title-introduce h1 {
@@ -26,4 +26,10 @@
   min-height: 400px;
   display: block;
   background-color: #f4f1f0;
+}
+
+@media only screen and (max-width: 480px) {
+  .top-lp .lp-header .title-introduce {
+    margin-top: 0;
+  }
 }

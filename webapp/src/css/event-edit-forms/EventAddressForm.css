@@ -2,3 +2,11 @@
   padding: 20px;
   background-color: #fff;
 }
+
+.event-address-form .field label {
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  font-size: 1.25rem !important;
+  color: #444 !important;
+  margin-bottom: 1rem !important;
+}

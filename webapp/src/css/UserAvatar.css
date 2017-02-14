@@ -1,15 +1,39 @@
 .user-avatar {
   display: inline-block;
+  position: relative;
 }
+
+.user-avatar .edit {
+  position: absolute;
+  right: 122px;
+  cursor: pointer;
+}
+
+.user-avatar .edit a {
+  color: #878787;
+}
+
+@media only screen and (max-width: 480px) {
+  .user-avatar .edit {
+    right: 109px;
+  }
+  .user-avatar .circle-image {
+    width: 55px !important;
+    height: 55px !important;
+  }
+}
+
 .user-avatar .circle-image {
   width: 72px;
   height: 72px;
   border-radius: 100px;
+  object-fit: cover;
 }
 
 .user-avatar .user-description {
   float: right;
   padding-left: 12px;
+  text-align: left;
 }
 .user-avatar.user-description h3.avatar-name {
   margin: 0;

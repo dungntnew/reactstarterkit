@@ -1,7 +1,9 @@
 .lp-header {
   width: 100%;
-  min-height: 480px;
+  min-height: 544px;
   background-color: white;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
+

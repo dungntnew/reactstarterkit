@@ -1,0 +1,13 @@
+.profile-page {
+  background-color: #f4f1f0;
+}
+
+.profile-page .block-content {
+  margin-top: 48px;
+  margin-bottom: 2rem;
+}
+
+.profile-page .pagination {
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+}

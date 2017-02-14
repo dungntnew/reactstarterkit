@@ -5,9 +5,6 @@ import BlogHeader from '../components/BlogHeader';
 import '../css/BlogDetail.css';
 
 class BlogDetail extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   static PropTypes = {
     content: PropTypes.string.isRequired,
@@ -39,7 +36,7 @@ class BlogDetail extends Component {
 
         <div className='blog-content'>
           <p className='text-content'>{content}</p>
-          <img className ='medium ui image img-detail' alt='blog-cover-img' src={coverImageUrl} />
+          <img className='medium ui image img-detail' alt='blog-cover-img' src={coverImageUrl} />
           <p className='text-content'>{content}</p>
         </div>
 

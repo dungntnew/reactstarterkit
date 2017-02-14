@@ -1,8 +1,8 @@
 .bank-setting-mypage {
-  background-color: #fff;
-  padding: 20px 22px;
   border-radius: 4px;
   margin-bottom: 2rem;
+  background-color: #fff;
+  padding: 2rem;
 }
 
 .bank-setting-mypage .bank-account-title {

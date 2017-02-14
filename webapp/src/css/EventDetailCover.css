@@ -11,9 +11,10 @@
 }
 
 .event-detail-cover>.cover-image>.user-avatar {
-  position: absolute;
-  bottom: 24px;
+  position: relative;
+  bottom: 0;
   left: 24px;
+  top: 370px;
 }
 
 .event-detail-cover>.cover-image> .thumbnails {
@@ -68,6 +69,14 @@ padding-right: 20px;
   .event-detail-cover>.cover-image>.thumbnails span.text-show {
     font-size: 9px;
   }
+  .event-detail-cover>.cover-image>.user-avatar {
+    top: 305px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .event-detail-cover>.cover-image>.user-avatar {
+    top: 305px;
+  }
 }
 
 @media only screen and (max-width: 480px) {
@@ -80,11 +89,8 @@ padding-right: 20px;
   }
   .event-detail-cover>.cover-image>.user-avatar {
     left: 10px;
-    bottom: 20px;
-  }
-  .event-detail-cover>.cover-image>.user-avatar img {
-    width: 55px;
-    height: 55px;
+    bottom: 0;
+    top: 275px;
   }
   .event-detail-cover>.cover-image>.user-avatar>.user-description {
     padding-left: 8px;

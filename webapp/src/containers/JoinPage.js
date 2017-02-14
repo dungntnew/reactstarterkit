@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import '../css/JoinPage.css';
@@ -21,13 +21,6 @@ import {changeJoinStep, execPayment} from '../flux/modules/joinEvent';
 import {JoinEventStep} from '../flux/modules/constant';
 
 class JoinPage extends Component {
-
-    constructor(props) {
-      super(props)
-    }
-
-    static propTypes = {
-    }
 
     backToEventDetail() {
       this.props.setStep(JoinEventStep.BEGIN)
@@ -132,7 +125,7 @@ class JoinPage extends Component {
       if (step === JoinEventStep.DONE) {
         return;
       }
-      
+
       if ((step === JoinEventStep.BEGIN
           || nextProps.step === JoinEventStep.BEGIN) && creditIds.length > 0){
         this.props.setStep(JoinEventStep.SELECT_PAYMENT)
