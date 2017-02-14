@@ -1,13 +1,20 @@
 
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import '../css/TestPage.css';
 
-import EditableMemberProfile from '../components/EditableMemberProfile'
+import InputRange from 'react-input-range';
+import 'react-input-range/dist/react-input-range.css';
 
 /* Put your component to here to view */
 class TestPage extends Component {
   componentDidMount() {
   }
+
+  constructor() {
+    super()
+    this.state = {value: 5}
+  }
+
 
   render() {
 
@@ -19,20 +26,17 @@ class TestPage extends Component {
          </pre>
          <hr/>
          <div className='test-page-wrapper'>
-           <EditableMemberProfile data={{
-              coverUrl: '/img/cover-01.jpg',
-              displayName: 'Dungntnew',
-              avatarUrl: '/img/avatar-01.png',
-              url: '/members/dungntnew',
-              rank: 3,
-              createdEventCount: 11,
-              isSelf: true
-           }}
-           isSaving={true}
-           onSubmit={(data)=>{
-            console.log("save data: ", data)
-           }}
-           />
+
+
+         <InputRange
+            maxValue={20}
+            minValue={0}
+            value={this.state.value}
+            onChange={(c, v)=>{
+              this.setState({value: v})
+            }}
+          />
+
          </div>
       </div>
     )

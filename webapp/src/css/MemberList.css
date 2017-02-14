@@ -28,3 +28,21 @@
   top: 20px;
   right: 0px;
 }
+
+@media only screen and (max-width: 768px) {
+  .member-list {
+    margin-top: -320px !important;
+  }
+}
+
+@media only screen and (max-width: 667px) {
+  .member-list {
+    margin-top: 0px !important;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .member-list {
+    margin-top: -100px !important;
+  }
+}

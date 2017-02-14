@@ -20,6 +20,9 @@
   margin-bottom: 7px;
 }
 
+.credit-card .form-create .field.field-input .dropdown i.icon {
+  line-height: 1.5;
+}
 .credit-card .form-create .field.field-input label span {
   color: #e84465;
   padding-left: 10px;

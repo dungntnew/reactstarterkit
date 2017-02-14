@@ -86,7 +86,7 @@ class ProfilePage extends Component {
 			}
 		  </div>
 
-		  {this.renderPagination()}
+		  {/*this.renderPagination()*/}
 		</div>
 	  )
 	}
