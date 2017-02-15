@@ -9,29 +9,7 @@ import {fetchCategories,
 
 import {connect} from 'react-redux';
 
-const Btn = (props) => (
-   <div className='ui segment'>
-     <div>
-        Loading: {props.isFetching}
-     </div>
-     <button className='ui orange button'
-             onClick={()=> {props.load()}}>Load</button>
-     <button className='ui green button'
-       onClick={()=> {props.detail()}}>Detail</button>
-   </div>
-)
-
-const LoadBtn = connect((state)=>{
-     return {}
-  },
-  (dispatch)=>({
-    load: ()=>{
-       dispatch(fetchCategories())
-    },
-    detail: ()=> {
-       dispatch(fetchCategoryDetail('11'))
-    }
-}))(Btn);
+import FetchableEventList from '../containers/TopNEvents';
 
 
 /* Put your component to here to view */
@@ -45,6 +23,7 @@ class TestPage extends Component {
 
 
   render() {
+    const ok = this.props.router ? <h1>Ok</h1>: <h1>Not OK </h1>
 
     return (
       <div>
@@ -54,8 +33,17 @@ class TestPage extends Component {
          </pre>
          <hr/>
          <div className='test-page-wrapper'>
+        {ok}
 
-         <LoadBtn />
+        <FetchableEventList 
+          router={this.props.router}
+          location={this.props.location}
+          query={{special: true}}
+          pagging={{limit: 3}}
+          paginated={true}
+          pathname={'/test'}
+          listClassName='ui link three stackable cards block-events-content'
+        />
 
          </div>
       </div>

@@ -6,7 +6,7 @@ import { combineReducers } from 'redux'
 import { CALL_API } from '../middleware/api'
 import Schemas from '../schemas'
 import {initEntities} from './initialState'
-import {idsToFilteredDict} from '../../helpers/params'
+import {idsToFilteredDict, filterDictByDict} from '../../helpers/params'
 
 export const CATEGORIES_REQUEST = 'CATEGORIES_REQUEST'
 export const CATEGORIES_SUCCESS = 'CATEGORIES_SUCCESS'
@@ -171,24 +171,6 @@ export const fetchEvents = ({ caller={service:'list',
 }
 
 
-export const searchEvents = ({pagging={offset: 0,
-                                       limit: 25
-                              }, query={}}) => {
-  return fetchEvents({pagging, query, caller:{service: 'searchEvents'}})
-}
-
-export const fetchTopNEvents = ({pagging={offset: 0,
-                                       limit: 25
-                              }, query={}}) => {
-  return fetchEvents({pagging, query, caller:{service: 'listTopNEvents'}})
-}
-
-export const fetchEventsWithServiceName = ({service, 
-                                            pagging={offset: 0, limit: 25}, 
-                                            query={}}) => {
-  const resolverName = mapServiceNameToResolverReducerName(service)
-  return fetchEvents({pagging, query, caller:{service: resolverName}})
-}
 
 export const fetchEventDetail = (id) => {
   return {
@@ -296,102 +278,19 @@ export const allEventsReducer = (state=[], action) => {
   }
 }
 
-// classify event ids list by tag and filter conditions
-// example:
-// in top page event will split by tags:[special, trend, latest]
-// in search page event will split by tags:
-// [special,
-//  trend,
-//  latest,
-//  area: yokohama,
-//  closed: true,
-//  startDate: "2018",..
-// ]
-// in mypage event will split by createdBy-me
-// [createdBy: []]
-
-// split event ids by tags: tags = ['special', 'trend', 'latest']
-const listTopNEvents = (state={}, action) => {
-    const {params} = action
-    const {query} = params
-
-    const tags = ['special', 'trend', 'latest']
-    const filterKeys = _.filter(_.keys(query), (key) =>_.includes(tags, key))
-
-    let {topNEvents} = state
-    let temp = _.merge(topNEvents, {}, {})
-
-    filterKeys.forEach(key => {
-      const ids = temp[key] || []
-      temp = _.merge(temp, {}, {
-        [key]: [...ids, ...action.payload.result]
-      })
-    })
-    return _.merge(state, {}, {topNEvents})
-}
-
-// split event ids by tags: tags = ['closed', 'oppening']
-const listFilteredEventsByUserIdAndFilter = (state={}, action, subFilter) => {
-    const {params} = action
-    const {query} = params
-    const {userId} = query
-
-    const splitSubStateByTags = (subState) => {
-      const {status} = query || 'all'
-      const ids = subState[status] || []
-
-      return _.merge(subState, {}, {
-        [status]: [...ids, ...action.payload.result]
-      })
-    }
-
-    let filteredState = state[subFilter]
-    let subState = filteredState[userId] || {}
-
-    return _.merge(state, {}, {
-      [subFilter]: _.merge(filteredState, {}, {
-        [userId]: splitSubStateByTags(subState)
-      })
-    })
-}
-
-// classify event ids to groups by service
-export const classifiedEventsReducer = (state={ topNEvents: {},
-                                  createdBy: {},
-                                  likedBy: {},
-                                  joinedBy: {} }, action) => {
-
-  switch(action.type) {
-    case EVENTS_SUCCESS:
-      const {params} = action
-      const {caller} = params
-
-      switch (caller.service) {
-        case 'listTopNEvents':
-          return listTopNEvents(state, action)
-        case 'listCreatedEvents':
-          return listFilteredEventsByUserIdAndFilter(state, action, 'createdBy')
-        case 'listJoinedEvents':
-          return listFilteredEventsByUserIdAndFilter(state, action, 'joinedBy')
-        case 'listLikedEvents':
-          return listFilteredEventsByUserIdAndFilter(state, action, 'likedBy')
-        default:
-          return state
-      }
-      return state;
-    default:
-      return state
-  }
-}
-
 export const eventIdsByQueryReducer = (state={}, action) => {
   switch(action.type) {
     case EVENTS_SUCCESS:
       const {params} = action
       const {query} = params
+      const {pagging} = params
       const {caller} = params
+      const {currentPage} = pagging
+      const mergedPaggingQuery = Object.assign({}, query, {
+        page: currentPage
+      })
 
-     return idsToFilteredDict(query, action.payload.result, state)
+     return idsToFilteredDict(mergedPaggingQuery, action.payload.result, state)
      
     default:
     return state;
@@ -478,8 +377,7 @@ export const getErrors = (globalState) => {
 }
 
 export const isLoading = (globalState) => {
-  const {resources} = globalState
-  const {loadings} = resources
+  const {loadings} = globalState
   const loadingCount = _.sum(_.values(loadings))
   return loadingCount > 0
 }
@@ -488,43 +386,20 @@ export const getTargetItems = (globalState) => {
   return globalState.entities.targets;
 }
 
-export const getTopNEvents = (globalState, tag) => {
+export const getEventByQueryDict = (globalState, queryDict) => {
+  const {eventIds} = globalState
+
   const {entities} = globalState
   const {events} = entities
 
-  const {classifiedEvents} = globalState
-  const {topNEvents} = classifiedEvents
-
-  // not found any event with givent tag name
-  if (!_.has(topNEvents, tag)) {
-    return {
-      isFetching: false,
-      events: []
-    }
-  }
-
-  // return event data list from entities DB
-  const eventIds = topNEvents[tag]
-
+  const filteredIds = filterDictByDict(queryDict, eventIds)
   return {
-    isFetching: false,
-    events: eventIds.map(eventId => {
+    isFetching: isLoading(globalState),
+    events: filteredIds.map(eventId => {
       const data = events[eventId]
       return data;
     })
   }
-}
-
-export const getTopSpecialEvents = (globalState) => {
-  return getTopNEvents(globalState, 'special')
-}
-
-export const getTopTrendEvents = (globalState) => {
-  return getTopNEvents(globalState, 'trend')
-}
-
-export const getTopLatestEvents = (globalState) => {
-  return getTopNEvents(globalState, 'latest')
 }
 
 export const getEventData = (globalState) => {
@@ -547,51 +422,5 @@ export const getEventData = (globalState) => {
     isFetching,
     errorMessage,
     data
-  }
-}
-
-export const getEventsWithServiceName = (globalState, service, userId, status) => {
-  const subStateName = mapServiceToSubState(service)
-
-  const {entities} = globalState
-  const {events} = entities
-
-  const {classifiedEvents} = globalState
-  const subState = classifiedEvents[subStateName]
-
-  // TODO: working with pagging
-
-  // not found any event with givent owner name
-  if (!_.has(subState, userId)) {
-    return {
-      isFetching: false,
-      events: [],
-      total: 0,
-      current: 0,
-    }
-  }
-
-
-  const eventIdsByUserId = subState[userId]
-  if (!_.has(eventIdsByUserId, status)) {
-    return {
-      isFetching: false,
-      events: [],
-      total: 0,
-      current: 0,
-    }
-  }
-
-  // return event data list from entities DB
-  const eventIds = eventIdsByUserId[status]
-
-  return {
-    isFetching: false,
-    events: eventIds.map(eventId => {
-      const data = events[eventId]
-      return data;
-    }),
-    total: eventIds.length,
-    current: 0,
   }
 }

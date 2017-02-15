@@ -1,31 +1,56 @@
 import _ from 'lodash'
-import React, { Component,
-                PropTypes } from 'react'
+import React, {
+  Component,
+  PropTypes
+} from 'react'
 
 import { connect } from 'react-redux'
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
 import EventItem from '../components/EventItem';
 import '../css/TopNEvents.css';
 
-import {fetchTopNEvents, getTopNEvents} from '../flux/modules/resource'
+import {
+  fetchTopNEvents, getTopNEvents,
+  getEventByQueryDict, fetchEvents
+} from '../flux/modules/resource'
 
-class TopNEvents extends Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    filter: PropTypes.string.isRequired,
-    linkTitle: PropTypes.string.isRequired,
-    limit: PropTypes.number.isRequired
+import { normalizeQueryDict, grouppedQueryParams } from '../helpers/params'
+
+import Pagination from '../components/Pagination'
+
+const Item = (props) => (
+  <div className={props.className || 'item'}>
+    {props.id}:
+    {props.childrent || props.title}
+  </div>
+)
+
+class ItemList extends Component {
+  constructor(props) {
+    super(props)
+    this.locationHasChanged = this.locationHasChanged.bind(this)
   }
 
   componentDidMount() {
-    this.props.refresh()
+    const {router} = this.props
+    if (router) {
+      router.listen(this.locationHasChanged)
+    }
+    this.props.load()
   }
 
-  renderLink(filter, linkTitle) {
-    return  (
-      <Link to={`/events/${filter}`}>{linkTitle}</Link>
-    )
+  componentWillUnmount() {
+    const {router} = this.props
+    if (router) {
+      router.unregisterTransitionHook(this.locationHasChanged)
+    }
+  }
+
+  locationHasChanged() {
+    setTimeout(()=>{
+      this.props.load()
+    }, 100)
   }
 
   renderLoading() {
@@ -40,57 +65,175 @@ class TopNEvents extends Component {
     )
   }
 
-  renderEventItems(filter, limit) {
-    const {isFetching, events} = this.props
+  renderItem(item, index, className) {
+    return (<Item key={index} {...item} className={className} />)
+  }
 
-    if (isFetching) {
-      return this.renderLoading()
-    } else if (!events || events.length === 0){
-      return this.renderEmpty()
-    }
-    else {
-      const keys = _.keys(events)
-      return keys.map((key, index) => (
-        <EventItem key={key} {...events[key]}/>
-      ))
-    }
+  renderList(items, className = 'ui list') {
+    return (<div className={className}>{items}</div>)
   }
 
   render() {
-    const {title, filter, linkTitle, limit} = this.props
-    const link = this.renderLink(filter, linkTitle)
-    const blockContent = this.renderEventItems(filter, limit)
+    const {isFetching, items, listClassName, itemClassName} = this.props
+    const listRender = this.props.listRender || this.renderList
+    const itemRender = this.props.itemRender || this.renderItem
+    const loadingRender = this.props.loadingRender || this.renderLoading
+    const emptyRender = this.props.emptyRender || this.renderEmpty
 
+    if (isFetching) {
+      return loadingRender()
+    }
+    if (!items || items.length === 0) {
+      return emptyRender()
+    }
+
+    const renderedItems = _.keys(items).map((key, index) => {
+      return itemRender(items[key], key, itemClassName)
+    })
+
+    return listRender(renderedItems, listClassName)
+  }
+}
+
+const PaginatedItemList = (props) => {
+  const {paginated} = props
+  if (!paginated) {
+    return (<ItemList {...props} />)
+  }
+  else {
+    const {pagging} = props
     return (
-      <div className='top-n-events'>
-        <div className='block-events-header'>
-           <div className='block-events-title'>{title} </div>
-           <div className='block-events-link'>{link} <i className="angle right icon"></i></div>
-        </div>
-         <div className="ui link three stackable cards block-events-content">
-             {blockContent}
-         </div>
+      <div>
+        <ItemList {...props} />
+        {/* query passed to Pagination must be raw query url got from location */}
+        {/* that query dict used to build new url with query included pagging params */}
+        <Pagination {...pagging} onChanged={() => {}}/>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const {filter} = ownProps
-  const {isFetching, events} = getTopNEvents(state, filter)
+const FetchableEventList = connect((state, ownProps) => {
+  const {paginated, router, location, 
+        query, pagging, sort,
+        pathname} = ownProps
+  
+  let mergedQuery = query || {}
+  if (location && location.query) {
+    mergedQuery = Object.assign({}, mergedQuery, location.query)
+  }
+  if (pagging) {
+    mergedQuery = Object.assign({}, mergedQuery, pagging)
+  }
+  if (sort) {
+    mergedQuery = Object.assign({}, mergedQuery, sort)
+  }
+
+  console.log("GET MERGED: ", mergedQuery)
+
+  let {paggingParams, 
+       sortParams, 
+       queryParams} = grouppedQueryParams(mergedQuery)
+
+  
+  const {currentPage} = paggingParams
+  const mergedPaggingQuery = Object.assign({}, queryParams, {
+    page: currentPage
+  })
+  const normalizedQuery = normalizeQueryDict(mergedPaggingQuery)
+
+  const {isFetching, events} = getEventByQueryDict(state, normalizedQuery)
+  /** TODO: return total page, current page from API */
+  /* merge url query dict that will used for build pagging url */
+  if (paginated) {
+    paggingParams = {
+      query: mergedQuery,
+      pathname: pathname,
+      currentPage: 0, 
+      totalPages: 10
+    }
+  }
 
   return {
+    router,
+    location,
     isFetching,
-    events
+    items: events,
+    paginated,
+    pagging: paggingParams
+  }
+},
+  (dispatch, ownProps) => ({
+    load: () => {
+     
+      const {location, 
+            query, pagging, sort, caller} = ownProps
+      let mergedQuery = query || {}
+      if (location && location.query) {
+        mergedQuery = Object.assign({}, mergedQuery, location.query)
+      }
+      if (pagging) {
+        mergedQuery = Object.assign({}, mergedQuery, pagging)
+      }
+      if (sort) {
+        mergedQuery = Object.assign({}, mergedQuery, sort)
+      }
+
+      console.log("LOAD MERGED: ", mergedQuery)
+      
+      let {paggingParams, 
+          sortParams, 
+          queryParams} = grouppedQueryParams(mergedQuery)
+      
+      console.log("paggingParams: ", paggingParams)
+      console.log("sort params: ", sortParams)
+
+      const normalizedQuery = normalizeQueryDict(queryParams)
+      {/* query passed to APIs must splited to:
+            filter params, 
+            order params,
+            pagging params */}
+      dispatch(fetchEvents({
+        caller: caller || { service: 'list', ref: 'un-known' },
+        pagging: paggingParams,
+        query: normalizedQuery,
+        sort: sortParams,
+      }))
+    },
+    itemRender: (item, index, className) => {
+      return (<EventItem key={index} {...item} />)
+    },
+  }))(PaginatedItemList)
+
+class TopNEvents extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    filter: PropTypes.string.isRequired,
+    linkTitle: PropTypes.string.isRequired,
+    limit: PropTypes.number.isRequired
+  }
+
+  render() {
+    const {title, filter, linkTitle, limit} = this.props
+    const link = `events/?${filter}=true`
+    return (
+      <div className='top-n-events'>
+        <div className='block-events-header'>
+          <div className='block-events-title'>{title} </div>
+          <div className='block-events-link'>
+            <Link to={link}>{linkTitle}</Link>
+            <i className="angle right icon"></i>
+          </div>
+        </div>
+        <FetchableEventList 
+          query={{[filter]: true}}
+          pagging={{limit: limit}}
+          pathname={'/events'}
+          listClassName='ui link three stackable cards block-events-content'
+        />
+      </div>
+    )
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  refresh: ()=> {
-    const {filter, limit} = ownProps
-    dispatch(fetchTopNEvents({pagging: {limit: limit}, query:{[filter]: 1}}))
-  }
-})
-
-export default connect(mapStateToProps,
-                       mapDispatchToProps)(TopNEvents)
+export default TopNEvents;

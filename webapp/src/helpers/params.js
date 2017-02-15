@@ -1,27 +1,49 @@
 import _ from 'lodash'
 
-export const parsePaggingParams = (location, defaultLimit) => {
-  if (!location) {
-    return {
-      limit: defaultLimit,
-      from: 0
-    }
-  }
+export const parsePaggingParams = (query, defaultLimit = 25) => {
 
-  const {query} = location
-  let {from, limit} = query
+  let {currentPage, limit} = query
 
   limit = _.toInteger(limit)
   if (!_.isInteger(limit) || limit <= 0) {
     limit = defaultLimit
   }
 
-  from = _.toInteger(from)
-  if (!_.isInteger(from) || from < 0) {
-    from = 0
+  currentPage = _.toInteger(currentPage)
+  if (!_.isInteger(currentPage) || currentPage < 0) {
+    currentPage = 0
   }
 
-  return { limit, from }
+  return { limit, currentPage }
+}
+
+export const parseSortParams = (query) => {
+  const {orderBy, desc} = query
+  return {
+    orderBy, 
+    desc: desc || false
+  }
+}
+
+export const grouppedQueryParams = (query) => {
+  const rawQuery = _.clone(query)
+  const pagging = parsePaggingParams(rawQuery)
+  const sort = parseSortParams(rawQuery)
+  
+  delete rawQuery['currentPage']
+  delete rawQuery['limit']
+  delete rawQuery['orderBy']
+  delete rawQuery['desc']
+  
+  return {
+    paggingParams: pagging,
+    sortParams: sort,
+    queryParams: rawQuery
+  }
+}
+
+export const normalizeQueryDict = (query) => {
+  return query;
 }
 
 /* Input:
@@ -156,9 +178,11 @@ export const idsToFilteredDict = (paramDict, ids, state) => {
 }
 
 const ParamsHelper = {
+  grouppedQueryParams,
   parsePaggingParams,
   filterDictByDict,
   idsToFilteredDict,
+  normalizeQueryDict,
 }
 
 export default ParamsHelper
