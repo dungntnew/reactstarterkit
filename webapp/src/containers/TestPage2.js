@@ -93,6 +93,13 @@ const friend = {
     displayNoti: 'Your Tableのサイトから削除する必要があると思われる場合は',
     updated: 12/3/4
     },
+    {
+    id: '12',
+    avatarUrl: '/img/event-2.jpg',
+    url: 'ngoctien/tien',
+    displayNoti: 'Your Tableのサイトから削除する必要があると思われる場合は トから削除する必要があると思われる場合は',
+    updated: 5
+    },
 
   ]
 }
