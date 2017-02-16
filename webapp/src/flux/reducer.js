@@ -36,6 +36,9 @@ import {
     // blogsReducer,
     // blogReducer,
 
+    loadedUserDetailsReducer,
+    viewingUserDetailReducer,
+
 } from './modules/resource';
 
 import {loadingReducer} from './modules/loading'
@@ -79,7 +82,8 @@ const rootReducer = combineReducers({
   // category: categoryReducer,
   // blogs: blogsReducer,
   // blog: blogReducer,
-
+  loadedUserDetails: loadedUserDetailsReducer,
+  viewingUserDetail: viewingUserDetailReducer,
 
   routing
 })

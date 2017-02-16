@@ -25,7 +25,6 @@ export const errorReducer = (state=[], action)=> {
 
 // - selectors 
 export const getErrors = (globalState) => {
-  const {resources} = globalState
-  const {errors} = resources
+  const {errors} = globalState
   return errors
 }

@@ -30,26 +30,9 @@ export const EVENT_REQUEST = 'EVENT_REQUEST'
 export const EVENT_SUCCESS = 'EVENT_SUCCESS'
 export const EVENT_FAILURE = 'EVENT_FAILURE'
 
-
-// - resolver reducer - service name mappings for classifed events
-const mapServiceNameToResolverReducerName = (serviceName) => {
-  switch(serviceName) {
-    case 'created': return 'listCreatedEvents'
-    case 'joined': return 'listJoinedEvents'
-    case 'liked': return 'listLikedEvents'
-    default: return 'unknown-service-name'
-  }
-}
-
-// - service name - sub state name mappings for classifed events
-const mapServiceToSubState = (serviceName) => {
-  switch(serviceName) {
-    case 'created': return 'createdBy'
-    case 'joined': return 'joinedBy'
-    case 'liked': return 'likedBy'
-    default: return 'unknown-service-name'
-  }
-}
+export const USER_REQUEST = 'USER_REQUEST'
+export const USER_SUCCESS = 'USER_SUCCESS'
+export const USER_FAILURE = 'USER_FAILURE'
 
 
 // Uses the API middlware to get a categories
@@ -117,6 +100,30 @@ export const fetchBlogDetail = (id) => {
       params: {
         method: 'GET',
       }
+    }
+  }
+}
+
+export const fetchUserDetail = (id) => {
+  return {
+    [CALL_API]: {
+      endpoint: `userdetails/${id}`,
+      types: [USER_REQUEST, USER_SUCCESS, USER_FAILURE],
+      schema: Schemas.USER,
+      params: {
+        method: 'GET',
+      }
+    }
+  }
+}
+
+export const fetchUserDetailIfNeed = (id) => {
+  return (dispatch, getState) => {
+    const {loadedUserDetails} = getState()
+    if (_.includes(loadedUserDetails, id)) {
+      return Promise.resolve()
+    } else {
+      return dispatch(fetchUserDetail(id))
     }
   }
 }
@@ -301,7 +308,7 @@ export const loadedEventDetailsReducer = (state=[], action) => {
   }
 }
 
-// event reducer will store current event id.
+// user reducer will store current user id.
 export const viewingEventDetailReducer = (state={isFetching: true, eventId: null}, action) => {
   switch(action.type) {
     case EVENT_REQUEST:
@@ -317,7 +324,40 @@ export const viewingEventDetailReducer = (state={isFetching: true, eventId: null
       return _.merge({}, state, {
         isFetching: false,
         eventId: null,
-        errorMessage: action.payload.error
+        errorMessage: action.error
+      })
+    default: return state
+  }
+}
+
+
+// store users ids that data already loaded
+export const loadedUserDetailsReducer = (state=[], action) => {
+  switch(action.type) {
+    case USER_SUCCESS:
+      return [...state, action.payload.result]
+    default:
+      return state
+  }
+}
+
+// user reducer will store current user id.
+export const viewingUserDetailReducer = (state={isFetching: true, userId: null}, action) => {
+  switch(action.type) {
+    case USER_REQUEST:
+      return _.merge({}, state, {
+        isFetching: true
+      })
+    case USER_SUCCESS:
+      return _.merge({}, state, {
+        isFetching: false,
+        userId: action.payload.result
+      })
+    case USER_FAILURE:
+      return _.merge({}, state, {
+        isFetching: false,
+        userId: null,
+        errorMessage: action.error
       })
     default: return state
   }
@@ -362,6 +402,22 @@ export const getEventData = (globalState) => {
 
   return {
     isFetching,
+    errorMessage,
+    data
+  }
+}
+
+export const getUserData = (globalState) => {
+  const {entities} = globalState
+  const {users} = entities
+
+  const {viewingUserDetail} = globalState
+  const {isFetching, errorMessage, userId} = viewingUserDetail
+  const data = users ? users[userId]: null
+
+  return {
+    isFetching,
+    isSaving: false, // TODO: save that state in editingUser reducer
     errorMessage,
     data
   }
