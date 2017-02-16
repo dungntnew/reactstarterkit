@@ -1,88 +1,101 @@
-import {JoinEventStep} from './constant'
+import { JoinEventStep } from './constant'
 
 export const initTopEvent = {
-  latest: {isFetching: false, errorMessage: null, events: {}},
-  trend: {isFetching: false, errorMessage: null, events: {}},
-  special: {isFetching: false, errorMessage: null, events: {}}
+  latest: { isFetching: false, errorMessage: null, events: {} },
+  trend: { isFetching: false, errorMessage: null, events: {} },
+  special: { isFetching: false, errorMessage: null, events: {} }
 }
 
 export const initCreateEvent = {
   event: {}
 }
 
-export const initSelectedEvent = {isFetching:true, errorMessage: null, data:{}}
+export const initSelectedEvent = { isFetching: true, errorMessage: null, data: {} }
 
-export const initSelectedUser = {isFetching:true, isSaving: false, errorMessage: null, data:{}}
+export const initSelectedUser = { isFetching: true, isSaving: false, errorMessage: null, data: {} }
 
-export const initCreatedEvent = {isFetching:false,
-                                 errorMessage: null,
-                                 events: {},
-                                 total: 0,
-                                 current: 0}
+export const initCreatedEvent = {
+  isFetching: false,
+  errorMessage: null,
+  events: {},
+  total: 0,
+  current: 0
+}
 
-export const initLikedEvent = {isFetching:false,
-                                 errorMessage: null,
-                                 events: {},
-                                 total: 0,
-                                 current: 0}
+export const initLikedEvent = {
+  isFetching: false,
+  errorMessage: null,
+  events: {},
+  total: 0,
+  current: 0
+}
 
-export const initJoinedEvent = {isFetching:false,
-                                 errorMessage: null,
-                                 events: {},
-                                 total: 0,
-                                 current: 0}
+export const initJoinedEvent = {
+  isFetching: false,
+  errorMessage: null,
+  events: {},
+  total: 0,
+  current: 0
+}
 
-export const initRelativedEvent = {isFetching:false,
-                                 errorMessage: null,
-                                 events: {},
-                                 total: 0,
-                                 current: 0}
+export const initRelativedEvent = {
+  isFetching: false,
+  errorMessage: null,
+  events: {},
+  total: 0,
+  current: 0
+}
 
 export const initLatestBlog = {
   isFetching: true, errorMessage: null, data: {}
 }
 
-export const initSelectedBlog = {isFetching:true, errorMessage: null, data:{}}
+export const initSelectedBlog = { isFetching: true, errorMessage: null, data: {} }
 
 export const initCredit = {
-                           isFetching: false,
-                           errorMessage: null,
-                           credits: {},
-                           saving: false,
-                           saved: false,
-                           newCredit: {
-                             method: 'クレジットカード',
-                             number: 'xxx',
-                             securityCode: 'aa',
-                             exprYear: 'dd',
-                             exprMonth: 'dd'
-                           }}
+  isFetching: false,
+  errorMessage: null,
+  credits: {},
+  saving: false,
+  saved: false,
+  newCredit: {
+    method: 'クレジットカード',
+    number: 'xxx',
+    securityCode: 'aa',
+    exprYear: 'dd',
+    exprMonth: 'dd'
+  }
+}
 
 
 export const initJoinEvent = {
   step: JoinEventStep.BEGIN
 }
 
-export const initBankAccount = {isFetching: false,
-                                errorMessage: null,
-                                isSaving: false,
-                                data: {}}
+export const initBankAccount = {
+  isFetching: false,
+  errorMessage: null,
+  isSaving: false,
+  data: {}
+}
 
 
-export const initContact = {errorMessage: null,
-                           isSending: false,
-                           data: {}}
+export const initContact = {
+  errorMessage: null,
+  isSending: false,
+  data: {}
+}
 
 export const initLatestNews = {
   isFetching: false,
   errorMessage: null,
   newsItems: {
-    "news-1": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
-    "news-2": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
-    "news-3": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
-    "news-4": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
-    "news-5": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
-    "news-6": {"title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": ""},
+    "news-1": { "title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": "" },
+    "news-2": { "title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": "" },
+    "news-3": { "title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": "" },
+    "news-4": { "title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": "" },
+    "news-5": { "title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": "" },
+    "news-6": { "title": "YT開発開始しました", "lastUpdate": "2016-10-25", "text": "" },
   },
   total: 5,
   current: 1
@@ -104,6 +117,7 @@ export const initAuth = {
   anonymous: true
 }
 
+
 export const initEntities = {
   'targets': {
     '0': {id: '0', name: 'niku'},
@@ -111,28 +125,84 @@ export const initEntities = {
   }
 }
 
- export const initGenres = [
+export const initTargets = [
   {
     id: '0',
-    label: 'gener1',
+    label: 'おいしいものを食べたい',
   },
   {
     id: '1',
-    label: 'gener2',
-  },{
+    label: '友達をつくりたい',
+  }, {
     id: '2',
-    label: 'gener3',
-  },{
+    label: '料理を習いたい',
+  }, {
     id: '3',
-    label: 'gener4',
+    label: '有名人に会いたい',
   },
   {
     id: '4',
-    label: 'gener5',
+    label: 'レアものを経験したい',
   },
   {
     id: '5',
-    label: 'gener6',
+    label: 'ご当地グルメを味わいたい',
+  },
+  {
+    id: '6',
+    label: 'セレブな気分を楽しみたい',
+  },
+  {
+    id: '7',
+    label: 'ワケありイベントで得したい',
+  },
+  {
+    id: '8',
+    label: 'ヘルシー食材で美しくなりたい',
+  },
+  {
+    id: '9',
+    label: '静かなムードでゆっくりしたい',
+  },
+  {
+    id: '10',
+    label: '特別な思い出を体験したい',
+  },
+  {
+    id: '11',
+    label: '自然と触れ合いたい',
+  }
+];
+
+export const initGenres = [
+  {
+    id: '0',
+    label: '和食',
+  },
+  {
+    id: '1',
+    label: 'フレンチ',
+  }, {
+    id: '2',
+    label: 'イタリアン',
+  }, {
+    id: '3',
+    label: '中華',
+  },
+  {
+    id: '4',
+    label: 'アジア料理',
+  },
+  {
+    id: '5',
+    label: 'その他欧州料理',
+  }, {
+    id: '6',
+    label: '北中南米料理',
+  },
+  {
+    id: '7',
+    label: 'その他',
   }
 ];
 
@@ -144,7 +214,7 @@ export const initSupplements = [
   {
     id: '1',
     label: '駐車場',
-  },{
+  }, {
     id: '2',
     label: 'WiFi',
   },

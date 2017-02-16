@@ -75,3 +75,9 @@
     margin: auto;
   }
 }
+
+@media only screen and (max-width: 320px) {
+  .ui.ordered.steps.event-edit-steps .step {
+    font-size: 7px;
+  }
+}

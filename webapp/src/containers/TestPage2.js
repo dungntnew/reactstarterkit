@@ -3,10 +3,15 @@ import {connect} from 'react-redux';
 
 import CreditCard from '../components/credit-card/CreditCard';
 import CreditCardOk from '../components/credit-card/CreditCardOk';
-import NewRequest from '../components/bills/NewRequest';
-import History from '../components/bills/History';
-import HistoryAll from '../components/bills/HistoryAll';
+import BillCreateForm from '../components/bills/BillCreateForm';
+import ProfitHistory from '../components/bills/ProfitHistory';
+import BillList from '../components/bills/BillList';
 import RequestOK from '../components/bills/RequestOK';
+import Teaser from '../components/Teaser';
+import CancelTable from '../components/CancelTable';
+import ReportTable from '../components/ReportTable';
+import AboutTable from '../components/AboutTable';
+import FriendList from '../components/FriendList'
 // import SignupForm from '../components/auth-forms/SignupForm';
 import '../css/TestPage.css';
 
@@ -58,6 +63,39 @@ const history = {
 const text = {
   url: 'ngoc/tien'
 }
+
+const text1 = {
+  lastUpdate: '12. 12. 2017'
+}
+
+const text2 = {
+   sumMoney: 12345,
+    policyUrl: 'ngoctien/123'
+}
+
+const text3 = {
+  comment: 'このコンテンツは不適切であり、Your Tableのサイトから削除する必要があると思われる場合は、下記のボタンをクリックしてお知らせください。コンテンツが不適切だと'
+}
+
+const friend = {
+  friends: [
+    {
+    id: '12',
+    avatarUrl: '/img/event-2.jpg',
+    url: 'ngoctien/tien',
+    displayNoti: 'このコンテンツは不適切であり',
+    updated: 12/3/4
+    },
+    {
+    id: '12',
+    avatarUrl: '/img/event-2.jpg',
+    url: 'ngoctien/tien',
+    displayNoti: 'Your Tableのサイトから削除する必要があると思われる場合は',
+    updated: 12/3/4
+    },
+
+  ]
+}
 /* Put your component to here to view */
 export default (props) => (
   <div>
@@ -70,10 +108,15 @@ export default (props) => (
 
         <CreditCard />
         <CreditCardOk />
-        <NewRequest {...test}/>
-        <History {...content}/>
-        <HistoryAll {...history}/>
+        <BillCreateForm {...test}/>
+        <ProfitHistory {...content}/>
+        <BillList {...history}/>
         <RequestOK {...text}/>
+        <Teaser {...text1}/>
+        <CancelTable {...text2}/>
+        <ReportTable {...text3} />
+        <AboutTable />
+        <FriendList {...friend}/>
      </div>
   </div>
 )

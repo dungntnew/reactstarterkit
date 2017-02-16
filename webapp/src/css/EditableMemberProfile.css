@@ -1,5 +1,6 @@
 .editable-member-profile {
   margin-top: -1rem;
+  position: relative;
 }
 
 .editable-member-profile .container-customize {
@@ -18,8 +19,9 @@
 }
 
 .editable-member-profile .edit-form .form-wrapper .cover-image-wrapper .cover-image {
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
 }
 
 .editable-member-profile .edit-form .form-wrapper .cover-image-wrapper:hover {
@@ -42,34 +44,21 @@
   left: 0;
 }
 
-
 .editable-member-profile .edit-form .form-top-layer {
   position: absolute;
-  top: 0;
+  top: 25%;
   left: 0;
   width: 100%;
   z-index: 1;
 }
 
+.editable-member-profile .edit-form .form-top-layer .center-fields {
+  opacity: 0.9;
+}
 .editable-member-profile .cover-image .user-avatar {
   position: absolute;
-  top: 42%;
+  top: 40%;
   right: 42%;
-}
-
-@media only screen and (max-width: 768px) {
-  .editable-member-profile .cover-image .user-avatar {
-    right: 39%;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .editable-member-profile .cover-image .user-avatar {
-    right: 22%;
-  }
-  .editable-member-profile .cover-image .user-avatar .edit {
-    right: 120px;
-  }
 }
 
 .editable-member-profile .cover-image img {
@@ -103,26 +92,34 @@
 
 .editable-member-profile .edit-form .ui.form {
   text-align: left;
+  line-height: 1.2;
+}
+
+.editable-member-profile .edit-form .ui.button {
+  line-height: 1.2;
 }
 
 .editable-member-profile .menu-sub {
   display: inline-block;
-  margin-top: 452px;
-  margin-bottom: 0;
-
+  bottom: -14px;
+  position: absolute;
+  left: 30%;
 }
+
 .editable-member-profile .menu-sub .nav-item {
   display: inline-block;
   position: relative;
   padding-right: 8px;
   padding-left: 8px;
 }
+
 .editable-member-profile .menu-sub .nav-item .count {
-    position: absolute;
-    top: -1rem;
-    right: 50%;
+  position: absolute;
+  top: -1rem;
+  right: 50%;
 
 }
+
 .editable-member-profile .menu-sub .nav-item .link-item {
   font-size: 14px;
   font-weight: 500;
@@ -146,18 +143,25 @@
   .editable-member-profile .cover-image .ui.segment {
     top: 10px;
   }
+  .editable-member-profile .menu-sub {
+    left: 20%;
+  }
+  .editable-member-profile .menu-sub .nav-item {
+    padding-bottom: 1.5rem;
+  }
+  .editable-member-profile .edit-form .form-wrapper .cover-image-wrapper .cover-image {
+    height: 400px;
+  }
 
 }
 
 @media only screen and (max-width: 480px) {
   .editable-member-profile .cover-image .user-avatar {
     right: 22%;
+    top: 30%;
   }
   .editable-member-profile .cover-image .user-avatar .edit {
     right: 120px;
-  }
-  .editable-member-profile .menu-sub .nav-item {
-    padding-bottom: 2rem;
   }
   .editable-member-profile .cover-image .ui.segment img {
     height: 50px;
@@ -168,18 +172,43 @@
     margin-bottom: 0.5rem !important;
   }
   .editable-member-profile .cover-image {
-    height: 350px;
+    height: 300px;
   }
-
+  .editable-member-profile .cover-image .user-avatar {
+    right: 22%;
+  }
+  .editable-member-profile .cover-image .user-avatar .edit {
+    right: 120px;
+  }
+  .user-avatar-selecting {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  .user-avatar-selecting .overlay {
+    width: 60px !important;
+    height: 60px !important;
+    line-height: 60px !important;
+  }
+  .user-avatar-selecting .change-link {
+    width: 60px !important;
+    height: 60px !important;
+    line-height: 60px !important;
+  }
+  .editable-member-profile .menu-sub {
+    left: 0;
+  }
+  .editable-member-profile .edit-form .form-wrapper .cover-image-wrapper .cover-image {
+    height: 300px;
+  }
 }
 
 .user-avatar-selecting {
-    margin: 0px auto;
-    position: relative;
-    width: 80px;
-    height: 80px;
-    overflow: hidden;
-    clip-path: circle();
+  margin: 0px auto;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  clip-path: circle();
 }
 
 .user-avatar-selecting .overlay {

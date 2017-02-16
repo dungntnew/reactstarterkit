@@ -1,0 +1,38 @@
+.report-table {
+  margin-bottom: 2rem;
+}
+
+.report-table .title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 0.83;
+  color: #383838;
+  padding: 1rem 0;
+}
+
+.report-table .line {
+  border: solid 1px #ececec;
+  margin-bottom: 10px;
+}
+
+.report-table .content {
+  padding-top: 1rem;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666666;
+}
+
+.report-table .form-input {
+  padding-top: 1rem;
+}
+
+.report-table .form-input label {
+  font-size: 14px !important;
+  color: #666666 !important;
+  font-weight: normal !important;
+}
+
+.report-table .form-input .btn-group {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}

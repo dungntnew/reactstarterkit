@@ -135,6 +135,7 @@ const PageFooter = (props) => (
         {linkBlocks('OTHERS')}
         {linkBlocks('SOCIAL')}
       </div>
+      <div className='copyright'>COPYRIGHT © YOURTABLE. ALL RIGHTS RESERVED.</div>
     </div>
   </div>
 )

@@ -20,6 +20,10 @@
   color: #ff8a46 !important;
 }
 
+.btn-center {
+  text-align: center;
+}
+
 
 .required {
   font-size: 0.750em;
@@ -49,6 +53,14 @@ i.icon {
 .btn-wid50 {
   width: 48%;
 }
+
+.btn-wid70 {
+  width: 75%;
+}
+
+.btn-wid-full {
+  width: 100%;
+}
 .tite-form {
   font-size: 1.5rem;
 }
@@ -67,7 +79,6 @@ i.icon {
   display: block;
   margin: auto;
 }
-
 
 @media only screen and (max-width: 767px) {
   .container-customize {

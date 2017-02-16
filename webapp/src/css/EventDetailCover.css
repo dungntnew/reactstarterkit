@@ -92,10 +92,6 @@ padding-right: 20px;
     bottom: 0;
     top: 275px;
   }
-  .event-detail-cover>.cover-image>.user-avatar img {
-    width: 55px;
-    height: 55px;
-  }
   .event-detail-cover>.cover-image>.user-avatar>.user-description {
     padding-left: 8px;
   }

@@ -1,17 +1,17 @@
-.history-all {
+.bill-list {
   background-color: #fff;
   border-radius: 4px;
   padding: 1.5rem;
   margin-bottom: 2rem;
 }
 
-.history-all .invoice-info p {
+.bill-list .invoice-info p {
   margin-bottom: 0;
   font-size: 14px;
   font-weight: 500;
   color: #444444;
 }
 
-.history-all .invoice-info .status .button {
+.bill-list .invoice-info .status .button {
   color: #fff;
 }
