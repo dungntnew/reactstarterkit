@@ -22,18 +22,14 @@ import authReducer from './modules/auth'
 // import bankAccountReducer from './modules/bankAccount'
 // import latestNewsReducer from './modules/latest_news'
 // import contactReducer from './modules/contact'
-// import selectedUserReducer from './modules/selected_user'
+import selectedUserReducer from './modules/selected_user'
 
 import {
-
     allEventsReducer,
     eventIdsByQueryReducer,
-    classifiedEventsReducer,
     loadedEventDetailsReducer,
     viewingEventDetailReducer,
 
-    loadingReducer,
-    errorReducer,
     entitiesReducer,
     // categoriesReducer,
     // categoryReducer,
@@ -42,11 +38,16 @@ import {
 
 } from './modules/resource';
 
+import {loadingReducer} from './modules/loading'
 
+import {errorReducer} from './modules/error'
 
 const rootReducer = combineReducers({
+  loadings: loadingReducer,
+  errors: errorReducer,
+
   auth: authReducer,
-  // selectedUser: selectedUserReducer,
+  selectedUser: selectedUserReducer,
   // credit: creditReducer,
   // target: targetReducer,
   // genre: generReducer,
@@ -68,13 +69,11 @@ const rootReducer = combineReducers({
   // - new reducers
   allEvents: allEventsReducer,
   eventIds: eventIdsByQueryReducer,
-  classifiedEvents: classifiedEventsReducer,
   loadedEventDetails: loadedEventDetailsReducer,
   viewingEventDetail: viewingEventDetailReducer,
   
   // // 
-  loadings: loadingReducer,
-  errors: errorReducer,
+
   entities: entitiesReducer,
   // categories: categoriesReducer,
   // category: categoryReducer,

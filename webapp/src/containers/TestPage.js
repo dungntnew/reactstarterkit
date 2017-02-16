@@ -9,7 +9,7 @@ import {fetchCategories,
 
 import {connect} from 'react-redux';
 
-import FetchableEventList from '../containers/TopNEvents';
+import {FetchableEventList} from '../containers/event/FetchableEventList';
 
 
 /* Put your component to here to view */

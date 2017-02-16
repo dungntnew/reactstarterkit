@@ -11,20 +11,16 @@ import QuickSearchBar from '../containers/QuickSearchBar';
 import PageFooter from '../components/PageFooter';
 
 import EditableMemberProfile from '../components/EditableMemberProfile'
+import {FetchableEventList} from '../containers/event/FetchableEventList';
+import {isLoading} from '../flux/modules/loading';
+import {fetchUserDetailIfNeed} from '../flux/modules/selected_user';
 
-import { fetchUserDetailIfNeed } from '../flux/modules/selected_user'
-
-
-// TODO: move const to consts file
-const DEFAULT_MAX_EVENT_PER_PAGE = 25
+const MAX_EVENT_PER_PAGE = 25
 
 class ProfilePage extends Component {
 
 	componentDidMount() {
-		const {userId, filter} = this.props.params
-		const params = this.parsePrams()
-		const {from, limit} = params
-
+		const {userId} = this.props.params
 		this.props.loadUser(userId)
 	}
 
@@ -34,9 +30,28 @@ class ProfilePage extends Component {
 		)
 	}
 
+	renderErrors(errorMessage) {
+		return (
+			<div> System Error: {errorMessage} </div>
+		)
+	}
+
 	renderPageContent() {
 		const {userProfile, isSaving, updateProfile} = this.props
-		const {filter} = this.props.params
+		const {userId, filter} = this.props.params
+        
+		const pathname = `/members/${userId}/${filter}`
+		
+		let query = {}
+		if (filter === 'joined') {
+			query = Object.assign({}, query, {joiners: [userId]})
+		}
+		else if (filter === 'created') {
+			query = Object.assign({}, query, {createdBy: userId})
+		}
+		else if (filter === 'liked') {
+			query = Object.assign({}, query, {likes: [userId]})
+		}
 
 		return (
 			<div>
@@ -45,6 +60,15 @@ class ProfilePage extends Component {
 					isSaving={isSaving}
 					filter={filter}
 					onSubmit={updateProfile}
+				/>
+				<FetchableEventList 
+				router={this.props.router}
+				location={this.props.location}
+				query={query}
+				pagging={{limit: MAX_EVENT_PER_PAGE}}
+				paginated={true}
+				pathname={pathname}
+				listClassName='ui link three stackable cards block-events-content'
 				/>
 			</div>
 		)
@@ -59,9 +83,7 @@ class ProfilePage extends Component {
 			content = this.renderLoading()
 		}
 		else if (!isFetching && errorMessage) {
-			content = (
-				<div> System Error: {errorMessage} </div>
-			)
+			content = this.renderErrors(errorMessage)
 		}
 		else {
 			content = this.renderPageContent()
@@ -82,26 +104,22 @@ class ProfilePage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	const {filter} = ownProps.params
 	const {selectedUser} = state
 
-	if (selectedUser.isFetching) {
-		return {
-			isFetching: true,
-		}
+	if (selectedUser.isFetching || isLoading(state)) {
+		return {isFetching: true}
 	}
-	else {
-		const {data, isSaving} = selectedUser
-		return {
 
-			// global state
-			isFetching: false,
-			errorMessage: selectedUser.errorMessage,
+    const {data, isSaving} = selectedUser
 
-			// user-profile state
-			userProfile: data,
-			isSaving: isSaving,
-		}
+	return {
+		// global state
+		isFetching: false,
+		errorMessage: selectedUser.errorMessage,
+
+		// user-profile state
+		userProfile: data,
+		isSaving: isSaving,
 	}
 }
 

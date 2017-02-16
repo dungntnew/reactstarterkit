@@ -7,6 +7,7 @@ import { CALL_API } from '../middleware/api'
 import Schemas from '../schemas'
 import {initEntities} from './initialState'
 import {idsToFilteredDict, filterDictByDict} from '../../helpers/params'
+import {isLoading} from './loading'
 
 export const CATEGORIES_REQUEST = 'CATEGORIES_REQUEST'
 export const CATEGORIES_SUCCESS = 'CATEGORIES_SUCCESS'
@@ -29,8 +30,6 @@ export const EVENT_REQUEST = 'EVENT_REQUEST'
 export const EVENT_SUCCESS = 'EVENT_SUCCESS'
 export const EVENT_FAILURE = 'EVENT_FAILURE'
 
-export const ERROR_CLEAR = 'ERROR_CLEAR'
-
 
 // - resolver reducer - service name mappings for classifed events
 const mapServiceNameToResolverReducerName = (serviceName) => {
@@ -52,12 +51,6 @@ const mapServiceToSubState = (serviceName) => {
   }
 }
 
-// clear all error relatived to resource
-export const clearErrors = () => {
-  return {
-    type: ERROR_CLEAR
-  }
-}
 
 // Uses the API middlware to get a categories
 export const fetchCategories = () => {
@@ -330,57 +323,6 @@ export const viewingEventDetailReducer = (state={isFetching: true, eventId: null
   }
 }
 
-export const loadingReducer = (state={}, action)=> {
-  if (_.endsWith(action.type, '_REQUEST')) {
-    const resource = _.replace(action.type, '_REQUEST', '')
-    return _.merge(state, {}, {
-      [resource]: state[resource] ? state[resource] + 1 : 1
-    })
-  }
-  else if (_.endsWith(action.type, '_SUCCESS')) {
-    const resource = _.replace(action.type, '_SUCCESS', '')
-    return _.merge(state, {}, {
-      [resource]: state[resource] > 0 ? state[resource] - 1 : 0
-    })
-  }
-  else if (_.endsWith(action.type, '_FAILURE')){
-    const resource = _.replace(action.type, '_FAILURE', '')
-    return _.merge(state, {}, {
-      [resource]: state[resource] > 0 ? state[resource] - 1 : 0
-    })
-  }else {
-    return state;
-  }
-}
-
-export const errorReducer = (state=[], action)=> {
-  if (_.endsWith(action.type, '_FAILURE')){
-    return [...state, action.error]
-  }
-  else {
-    switch(action.type) {
-      case ERROR_CLEAR:
-        return []
-      default:
-        return state
-    }
-  }
-}
-
-
-// - selectors 
-
-export const getErrors = (globalState) => {
-  const {resources} = globalState
-  const {errors} = resources
-  return errors
-}
-
-export const isLoading = (globalState) => {
-  const {loadings} = globalState
-  const loadingCount = _.sum(_.values(loadings))
-  return loadingCount > 0
-}
 
 export const getTargetItems = (globalState) => {
   return globalState.entities.targets;
