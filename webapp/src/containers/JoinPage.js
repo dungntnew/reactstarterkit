@@ -15,7 +15,10 @@ import CreditCardOk from '../components/credit-card/CreditCardOk';
 import JoinEventPayment from '../components/payment/JoinEventPayment';
 import JoinEventPaymentFinish from '../components/payment/JoinEventPaymentFinish';
 
-import {fetchEventDetailIfNeed} from '../flux/modules/selected_event';
+import {fetchEventDetail,
+        fetchEventDetailIfNeed,
+        getEventData} from '../flux/modules/resource';
+
 import {fetchCreditsIfNeed} from '../flux/modules/credit';
 import {changeJoinStep, execPayment} from '../flux/modules/joinEvent';
 import {JoinEventStep} from '../flux/modules/constant';
@@ -179,7 +182,7 @@ const mapStateToProps = (state, ownProps) => {
   const {auth} = state
   const {authenticated, user} = auth
 
-  const {selectedEvent} = state
+  const selectedEvent = getEventData(state)
   const {credit} = state
 
   const isFetching = selectedEvent.isFetching || credit.isFetching

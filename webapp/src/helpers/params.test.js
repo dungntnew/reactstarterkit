@@ -30,6 +30,10 @@ const resourceDict = {
         'tsuda': [999, 323, 121, 21, 1, 2, 3, 4, 5],
         'dungntnew': [9, 1, 9, 21, 33, 4, 12, 3, 12, 3, 12, 455, 66]
     },
+    relatedTo: {
+        '12': [10, 12, 14, 13, 199, 12, 32],
+        '1': [2, 3, 4, 5, 6, 7, 8, 9]
+    },
     status: {
         'OPEN': [1, 2, 3, 4, 5, 6, 7, 8],
         'CLOSED': [999, 12121, 3231, 2121, 444, 55, 555]
@@ -136,13 +140,22 @@ test('filterDictByDict9', () => {
     }, resourceDict)).toEqual([1, 2, 3, 4, 5])
 })
 
-test('filterDictByDict9', () => {
+test('filterDictByDict10', () => {
     expect(filterDictByDict({
         page: 1,
         status: 'OPEN',
         latest: true,
     }, resourceDict)).toEqual([1, 2, 3, 4, 5])
 })
+
+test('filterDictByDict11', () => {
+    expect(filterDictByDict({
+        page: 1,
+        status: 'OPEN',
+        relatedTo: '1',
+    }, resourceDict)).toEqual([2, 3, 4, 5, 6])
+})
+
 
 test('idsToFilteredDict1', ()=> {
     const state = {
@@ -241,3 +254,4 @@ test('idsToFilteredDict3', ()=> {
         }
     })
 })
+

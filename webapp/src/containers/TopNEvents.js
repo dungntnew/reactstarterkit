@@ -9,20 +9,23 @@ import { Link } from 'react-router';
 
 import {FetchableEventList} from '../containers/event/FetchableEventList'
 
+import {dictToQueryString} from '../helpers/params'
+
 import '../css/TopNEvents.css';
 
 
 class TopNEvents extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    filter: PropTypes.string.isRequired,
+    query: PropTypes.object.isRequired,
     linkTitle: PropTypes.string.isRequired,
     limit: PropTypes.number.isRequired
   }
 
   render() {
-    const {title, filter, linkTitle, limit} = this.props
-    const link = `events/?${filter}=true`
+    const {query, title, linkTitle, limit} = this.props
+    const link = `/events/?${dictToQueryString(query)}`
+    
     return (
       <div className='top-n-events'>
         <div className='block-events-header'>
@@ -33,7 +36,7 @@ class TopNEvents extends Component {
           </div>
         </div>
         <FetchableEventList 
-          query={{[filter]: true}}
+          query={query}
           pagging={{limit: limit}}
           pathname={'/events'}
           listClassName='ui link three stackable cards block-events-content'

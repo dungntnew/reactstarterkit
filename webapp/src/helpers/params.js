@@ -1,4 +1,9 @@
 import _ from 'lodash'
+import {stringify} from 'query-string'
+
+export const dictToQueryString = (dict, options={}) => {
+  return stringify(dict, options)
+}
 
 export const parsePaggingParams = (query, defaultLimit = 25) => {
 
@@ -180,6 +185,7 @@ export const idsToFilteredDict = (paramDict, ids, state) => {
 const ParamsHelper = {
   grouppedQueryParams,
   parsePaggingParams,
+  dictToQueryString,
   filterDictByDict,
   idsToFilteredDict,
   normalizeQueryDict,

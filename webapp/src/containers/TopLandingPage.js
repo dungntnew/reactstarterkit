@@ -12,8 +12,6 @@ import LPBaner02 from '../components/LPBaner02';
 import PageFooter from '../components/PageFooter';
 import TopNEvents from '../containers/TopNEvents';
 
-import {EventFilterTypes} from '../flux/modules/constant';
-
 class TopLandingPage extends Component {
   static propTypes = {
   }
@@ -42,17 +40,17 @@ class TopLandingPage extends Component {
           <div className='ui container'>
             <TopNEvents title='スペシャル'
                          linkTitle='ALL'
-                         filter={EventFilterTypes.SPECIAL}
+                         query={{special: true}}
                          limit={4}
              />
              <TopNEvents title='トレンドテーブル'
                          linkTitle='ALL'
-                         filter={EventFilterTypes.TREND}
+                         query={{trend: true}}
                          limit={4}
              />
              <TopNEvents title='最新テーブル'
                          linkTitle='ALL'
-                         filter={EventFilterTypes.LATEST}
+                         query={{latest: true}}
                          limit={4}
              />
           </div>

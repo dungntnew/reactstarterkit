@@ -14,11 +14,12 @@ import TopNav from '../containers/TopNav';
 import QuickSearchBar from '../containers/QuickSearchBar';
 import PageFooter from '../components/PageFooter';
 
+import TopNEvents from '../containers/TopNEvents';
+
 import EventDetailHeader from '../containers/EventDetailHeader';
 import EventDetailCover from '../containers/EventDetailCover';
 import EventDetailBlocks from '../containers/EventDetailBlocks';
 import EventDetailCommentForm from '../containers/EventDetailCommentForm';
-import EventDetailRelatived from '../containers/EventDetailRelatived';
 
 import {fetchEventDetail,
         fetchEventDetailIfNeed,
@@ -58,6 +59,7 @@ class DetailPage extends Component {
 
     renderEventDetail() {
       const {eventId} = this.props.params
+      const query = {relatedTo: eventId}
       return (
         <div className='blok-content'>
           <EventDetailHeader router={this.props.router}/>
@@ -69,7 +71,11 @@ class DetailPage extends Component {
               <div className='ui detail-event' id='context'>
                 <EventDetailBlocks />
                 {/*<EventDetailCommentForm />*/}
-                {/*<EventDetailRelatived limit={4} from={0} eventId={eventId}/>*/}
+                <TopNEvents title='関するテーブル'
+                            linkTitle='ALL'
+                            query={query}
+                            limit={4}
+                />
               </div>
             </div>
           </div>
