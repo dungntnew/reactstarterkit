@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import '../css/InviteButton.css';
+import '../../css/InviteButton.css';
 
 const InviteButton = (props) => (
   <button className='ui button btn-bottom invite-button' onClick={props.onInvite}>Invite</button>

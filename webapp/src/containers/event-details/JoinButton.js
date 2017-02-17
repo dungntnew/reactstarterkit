@@ -3,9 +3,9 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 
-import '../css/JoinButton.css';
+import '../../css/JoinButton.css';
 
-import {getEventData} from '../flux/modules/resource'
+import {getEventData} from '../../flux/modules/resource'
 
 const JoinButton = (props) => {
   const buttonTitle = props.joining ? 'キャンセル': '参加'

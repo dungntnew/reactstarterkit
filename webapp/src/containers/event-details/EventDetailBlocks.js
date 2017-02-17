@@ -7,17 +7,17 @@ import {connect} from 'react-redux';
 import 'semantic-ui-dimmer/dimmer.min.css'
 import 'semantic-ui-modal/modal.min.css'
 
-import '../css/EventDetailBlocks.css';
+import '../../css/EventDetailBlocks.css';
 
-import EventTags from '../components/EventTags';
-import MemberList from '../components/MemberList';
+import EventTags from '../../components/EventTags';
+import MemberList from '../../components/MemberList';
 
 import {formatAddress,
         addressToGoogleMapsLink,
         googleMapIFrameLink,
-        formatKeyValuePairData} from '../helpers/event';
+        formatKeyValuePairData} from '../../helpers/event';
 
-import {getEventData} from '../flux/modules/resource';
+import {getEventData} from '../../flux/modules/resource';
 
 $.fn.dimmer = require('semantic-ui-dimmer')
 $.fn.modal = require('semantic-ui-modal')

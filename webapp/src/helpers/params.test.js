@@ -1,6 +1,7 @@
 import {
     filterDictByDict,
     idsToFilteredDict,
+    dictToQueryString,
 } from './params'
 
 import moment from 'moment'
@@ -255,3 +256,6 @@ test('idsToFilteredDict3', ()=> {
     })
 })
 
+test('dictToQueryString1', ()=>{
+    expect(dictToQueryString({latest:true})).toBe('latest=true')
+})

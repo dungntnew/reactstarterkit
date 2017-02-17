@@ -6,24 +6,24 @@ import 'semantic-ui-sticky/sticky.min.css'
 
 $.fn.sticky = require('semantic-ui-sticky')
 
-import '../css/DetailPage.css';
+import '../../css/DetailPage.css';
 
-import Logo from '../components/PageLogo';
-import PageHeader from '../components/PageHeader';
-import TopNav from '../containers/TopNav';
-import QuickSearchBar from '../containers/QuickSearchBar';
-import PageFooter from '../components/PageFooter';
+import Logo from '../../components/PageLogo';
+import PageHeader from '../../components/PageHeader';
+import TopNav from '../../containers/TopNav';
+import QuickSearchBar from '../../containers/QuickSearchBar';
+import PageFooter from '../../components/PageFooter';
 
-import TopNEvents from '../containers/TopNEvents';
+import TopNEvents from '../../containers/TopNEvents';
 
-import EventDetailHeader from '../containers/EventDetailHeader';
-import EventDetailCover from '../containers/EventDetailCover';
-import EventDetailBlocks from '../containers/EventDetailBlocks';
-import EventDetailCommentForm from '../containers/EventDetailCommentForm';
+import EventDetailHeader from './EventDetailHeader';
+import EventDetailCover from './EventDetailCover';
+import EventDetailBlocks from './EventDetailBlocks';
+import EventDetailCommentForm from './EventDetailCommentForm';
 
 import {fetchEventDetail,
         fetchEventDetailIfNeed,
-        getEventData} from '../flux/modules/resource';
+        getEventData} from '../../flux/modules/resource';
 
 class DetailPage extends Component {
 

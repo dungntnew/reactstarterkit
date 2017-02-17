@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import '../css/ShareButton.css';
+import '../../css/ShareButton.css';
 
 const ShareButton = (props) => (
   <button className='ui button btn-bottom share-button' onClick={props.onShare}><i className="share icon"></i></button>

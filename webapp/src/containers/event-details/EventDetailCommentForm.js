@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import '../css/EventDetailCommentForm.css';
+import '../../css/EventDetailCommentForm.css';
 
-import EventCommentBox from './EventCommentBox';
+import CommentBox from './CommentBox';
 
 class EventDetailCommentForm extends Component {
 
@@ -12,7 +12,7 @@ class EventDetailCommentForm extends Component {
 
     return (
       <div className="event-detail-comment-form">
-      <EventCommentBox
+      <CommentBox
          eventId={this.props.eventId}
          limit={this.props.limit}/>
       </div>

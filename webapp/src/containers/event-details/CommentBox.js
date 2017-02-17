@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
 import moment from 'moment';
-import '../css/EventCommentBox.css';
+import '../../css/CommentBox.css';
 
-class EventCommentBox extends Component {
+class CommentBox extends Component {
 
   static propTypes = {
     eventId: PropTypes.string.isRequired,
@@ -188,4 +188,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 export default connect(mapStateToProps,
-                       mapDispatchToProps)(EventCommentBox)
+                       mapDispatchToProps)(CommentBox)

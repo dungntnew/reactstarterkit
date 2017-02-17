@@ -3,9 +3,9 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames'
 
-import '../css/LikeButton.css';
+import '../../css/LikeButton.css';
 
-import {getEventData} from '../flux/modules/resource'
+import {getEventData} from '../../flux/modules/resource'
 
 const LikeButton = (props) => {
   const buttonTitle = classNames({

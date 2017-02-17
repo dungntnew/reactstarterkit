@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import '../css/EventDetailHeader.css';
+import '../../css/EventDetailHeader.css';
 
 import InviteButton from './InviteButton';
 import JoinButton from './JoinButton';
@@ -10,8 +10,8 @@ import ShareButton from './ShareButton';
 import LikeButton from './LikeButton';
 
 import {formatDateAndTimeStr,
-        formatPrice} from '../helpers/event';
-import {getEventData} from '../flux/modules/resource';
+        formatPrice} from '../../helpers/event';
+import {getEventData} from '../../flux/modules/resource';
 
 const EventDetailHeader = (props) => (
   <div className="ui stackable grid event-detail-header">
