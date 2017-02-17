@@ -8,12 +8,6 @@ $.fn.sticky = require('semantic-ui-sticky')
 
 import '../../css/DetailPage.css';
 
-import Logo from '../../components/PageLogo';
-import PageHeader from '../../components/PageHeader';
-import TopNav from '../../containers/TopNav';
-import QuickSearchBar from '../../containers/QuickSearchBar';
-import PageFooter from '../../components/PageFooter';
-
 import TopNEvents from '../../containers/TopNEvents';
 
 import EventDetailHeader from './EventDetailHeader';
@@ -36,80 +30,46 @@ class DetailPage extends Component {
         this.props.fetchEvent(eventId)
     }
 
-    componentDidUpdate() {
-    }
-
-    /* TODO: fix quick access menu
-       it not rendered by semantic-ui-sticky now >_<
-    */
-
-    renderQuickAccessMenu() {
-      return (
-          <div className='two wide computer two wide tablet sixteen wide mobile column left-nav'>
-            <div className="ui" ref='#'>
-                <a className='link' href='#images'>写真</a>
-                <a className='link' href='#members'>参加者</a>
-                <a className='link' href='#info'>テーブルについて</a>
-                <a className='link' href='#maps'>会場地図</a>
-                <a className='link' href='#comments'>コメント</a>
-            </div>
-          </div>
-      )
-    }
-
-    renderEventDetail() {
-      const {eventId} = this.props.params
-      const query = {relatedTo: eventId}
-      return (
-        <div className='blok-content'>
-          <EventDetailHeader router={this.props.router}/>
-          <EventDetailCover/>
-          <div className='ui grid detail-content'>
-            {this.renderQuickAccessMenu()}
-
-            <div className='thirteen wide computer thirteen wide tablet sixteen wide mobile column'>
-              <div className='ui detail-event' id='context'>
-                <EventDetailBlocks />
-                {/*<EventDetailCommentForm />*/}
-                <TopNEvents title='関するテーブル'
-                            linkTitle='ALL'
-                            query={query}
-                            limit={4}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    }
 
     render() {
-      const {isFetching, errorMessage} = this.props
-      let content
-
+      const {isFetching} = this.props
+      
       if (isFetching) {
-        content = (
-          <div> Loading... </div>
-        )
+        return null
       }
-      else if (!isFetching && errorMessage) {
-        content = (
-          <div> System Error: {errorMessage} </div>
-        )
-      }
-      else {
-        content = this.renderEventDetail()
-      }
+
+      const {eventId} = this.props.params
+      const query = {relatedTo: eventId}
 
       return (
         <div className='detail-page'>
-          <PageHeader>
-            <Logo color={true}/>
-            <QuickSearchBar location={this.props.location} params={this.props.params}/>
-            <TopNav />
-          </PageHeader>
-          {content}
-          <PageFooter />
+          <div className='blok-content'>
+            <EventDetailHeader router={this.props.router}/>
+            <EventDetailCover/>
+            <div className='ui grid detail-content'>
+              
+              <div className='two wide computer two wide tablet sixteen wide mobile column left-nav'>
+                <div className="ui" ref='#'>
+                    <a className='link' href='#images'>写真</a>
+                    <a className='link' href='#members'>参加者</a>
+                    <a className='link' href='#info'>テーブルについて</a>
+                    <a className='link' href='#maps'>会場地図</a>
+                    <a className='link' href='#comments'>コメント</a>
+                </div>
+              </div>
+
+              <div className='thirteen wide computer thirteen wide tablet sixteen wide mobile column'>
+                <div className='ui detail-event' id='context'>
+                  <EventDetailBlocks />
+                  <TopNEvents title='関するテーブル'
+                              linkTitle='ALL'
+                              query={query}
+                              limit={4}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )
     }

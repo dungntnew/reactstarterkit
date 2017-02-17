@@ -1,7 +1,14 @@
 import React from 'react'
 import {Route, IndexRoute} from 'react-router'
 
+// PAGE LAYOUT CONFIGS
 import App from './containers/App'
+import TopBar from './components/topbars/TopBar';
+import LandingTopBar from './components/topbars/LandingTopBar';
+import SideBar from './components/sidebars/SideBar'
+import PageFooter from './components/PageFooter';
+
+// PAGE INCLUDES
 import TestPage from './containers/TestPage'
 import TestPage2 from './containers/TestPage2'
 import AboutPage from './containers/AboutPage'
@@ -29,7 +36,11 @@ import ContactMyPage from './containers/ContactMyPage'
 import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
 import ProfilePage from './containers/ProfilePage'
+
 import LoginPage from './containers/LoginPage'
+import ForgotPasswordPage from './containers/ForgotPasswordPage'
+
+
 import NotFoundPage from './components/NotFoundPage'
 
 import auth from './helpers/auth'
@@ -48,16 +59,54 @@ const requireAuth = (nextState, replace, callback) => {
   callback();
 }
 
+const defaultLayout = {
+      topbar: TopBar,
+      sidebar: SideBar,
+      footer: PageFooter,
+}
+
+const defaultConfig = {
+    has_topbar: true,
+    has_sidebar: true,
+    has_footer: true
+}
+
+const getComponents = (components) => {
+      return Object.assign({}, defaultLayout, components)
+}
+
+const getConfig = (config) => {
+      return Object.assign({}, defaultConfig, config)
+}
+
+
 const routes = (
   <Route path='/' component={App}>
-    <IndexRoute component={TopLandingPage}/>
-    <Route path='/login' component={LoginPage}/>
+    <IndexRoute 
+           components={getComponents({main: TopLandingPage, topbar: LandingTopBar})} 
+           config={getConfig()}/>
+    <Route path='/about'
+           components={getComponents({main: AboutPage})} config={getConfig()}/>                     
+    <Route path='members/:userId/:filter' 
+           components={getComponents({main: ProfilePage})} config={getConfig()}
+           />
+    <Route path='/events/:eventId'
+           components={getComponents({main: DetailPage})} config={getConfig()}
+          />
+    <Route path='/login'
+          components={getComponents({main: LoginPage})} config={getConfig()}
+    />
+   <Route path='/forgot-password'
+          components={getComponents({main: ForgotPasswordPage})} config={getConfig()}
+    />
+    
+   {/*
+    
     <Route path='/search'
            component={SearchPage}/>
     <Route path='/create'
            component={CreatePage} onEnter={requireAuth}/>
-    <Route path='/events/:eventId'
-          component={DetailPage}/>
+
     <Route path='/join/:userId/:eventId'
           component={JoinPage} onEnter={requireAuth}/>
     <Route path='/cancelJoin/:userId/:eventId'
@@ -70,10 +119,8 @@ const routes = (
           component={BlogDetailPage}/>
     <Route path='/mypage' component={MyPage} onEnter={requireAuth}>
           <IndexRoute component={TopMyPage}/>
-          {/* TODO add sub routes for mypage */}
           <Route path='/mypage/events/:service/:status' component={EventListMyPage}/>
-          {/*<Route path='/mypage/events/reviewed' component={ReviewedEventListMyPage}/> */}
-
+         
           <Route path='/mypage/bank-settings' component={BankSettingMyPage} />
           <Route path='/mypage/change-password' component={PasswordSettingMyPage} />
           <Route path='/mypage/creditcard-settings' component={CreditCardSettingMyPage} />
@@ -88,9 +135,8 @@ const routes = (
            component={TestPage}/>
     <Route path='/test2'
            component={TestPage2}/>
-    <Route path='/about'
-           component={AboutPage}/>
-    <Route path='*' component={NotFoundPage} />
+
+    <Route path='*' component={NotFoundPage} />*/}
 
   </Route>
 )

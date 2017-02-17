@@ -1,35 +1,5 @@
-.top-lp .lp-header .ui.secondary.menu.stackable.lp-header-nav {
-  margin-left: 0;
-  margin-right: 0;
-}
-.top-lp .lp-header .lp-header-nav {
-  padding: 14px 27px 0;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.top-lp .lp-header .title-introduce {
-  text-align: center;
-  color: #fff;
-  margin-top: 60px;
-}
-
-.top-lp .lp-header .title-introduce h1 {
-  font-weight: 500px;
-}
-
-.top-lp .lp-header .title-introduce p {
-  font-size: 1.5rem;
-}
-
 .top-lp .lp-main {
   min-height: 400px;
   display: block;
   background-color: #f4f1f0;
-}
-
-@media only screen and (max-width: 480px) {
-  .top-lp .lp-header .title-introduce {
-    margin-top: 0;
-  }
 }

@@ -3,12 +3,6 @@ import {connect} from 'react-redux';
 
 import '../css/LoginPage.css';
 
-import Logo from '../components/PageLogo';
-import PageHeader from '../components/PageHeader';
-import TopNav from '../containers/TopNav';
-import QuickSearchBar from '../containers/QuickSearchBar';
-import PageFooter from '../components/PageFooter';
-
 import LoginForm from '../components/auth-forms/LoginForm';
 
 import {asyncAuthByEmailAndPassword} from '../flux/modules/auth';
@@ -17,47 +11,17 @@ import {asyncAuthByEmailAndPassword} from '../flux/modules/auth';
 // FIX IT!
 class LoginPage extends Component {
 
-    componentDidMount(){
-    }
-
-    componentDidUpdate() {
-    }
-
-    renderLoginForm() {
-      return <LoginForm
-         onSubmit={this.props.onEmailAuth}
-         onFBAuth={this.props.onFBAuth}
-         onGGAuth={this.props.onGGAuth}
-      />
-    }
-
     render() {
-      const {authencating, errorMessage} = this.props
-      let content
-
-      if (authencating) {
-        content = (
-          <div> Authenticating... </div>
-        )
-      }
-      else if (!authencating && errorMessage) {
-        content = (
-          <div> Authentication Error: {errorMessage} </div>
-        )
-      }
-      else {
-        content = this.renderLoginForm()
-      }
+      const {authencating} = this.props
+      if (authencating) return null;
 
       return (
         <div className='login-page'>
-          <PageHeader>
-            <Logo color={true}/>
-            <QuickSearchBar location={this.props.location} params={this.props.params}/>
-            <TopNav />
-          </PageHeader>
-          {content}
-          <PageFooter />
+            <LoginForm
+              onSubmit={this.props.onEmailAuth}
+              onFBAuth={this.props.onFBAuth}
+              onGGAuth={this.props.onGGAuth}
+             />
         </div>
       )
     }
@@ -80,10 +44,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(asyncAuthByEmailAndPassword(email, password))
  },
  onFBAuth: (data) => {
-    console.log('not impl auth fb yet')
+    console.log('この機能は開発中です！')
  },
  onGGAuth: (data) => {
-   console.log('not impl auth gg yet')
+   console.log('この機能は開発中です！')
  },
 })
 
