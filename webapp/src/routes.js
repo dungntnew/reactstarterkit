@@ -129,6 +129,10 @@ const routes = (
    <Route path='/mypage/events/:service/:status'
           components={getComponents({main: EventListMyPage})} config={getConfig()}
     />
+   {/* mypage - bank account settings */}
+   <Route path='/mypage/bank-account'
+          components={getComponents({main: BankSettingMyPage})} config={getConfig()}
+    />    
    {/*
     
     <Route path='/search'
