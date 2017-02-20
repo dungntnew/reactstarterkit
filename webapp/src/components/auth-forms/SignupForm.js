@@ -42,8 +42,31 @@ class SignupForm extends Component {
               </a>
             </div>
 
-            <div className="line"></div>
+            {/*<div className="line"></div>*/}
 
+              <div className="field">
+                <label>メールアドレス</label>
+                <input
+                      type="email"
+                      name="email"
+                      placeholder="メールアドレスを入力して下さい"/>
+              </div>
+              <div className="field">
+                <label>パスワード</label>
+                <input
+                      type="password"
+                      name="password1"
+                      placeholder="パスワードを入力してください（６文字以上）"/>
+              </div>
+              <div className="field">
+                <label>再度パスワード</label>
+                <input
+                      type="password"
+                      name="password2"
+                      placeholder="再度パスワードを入力してください（６文字以上）"/>
+              </div>
+              <div className="ui error message"></div>
+            
             <button className="ui button btn-link btn-orange" type="submit">メールアドレスで登録</button>
 
             <div className='field'>

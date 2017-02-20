@@ -37,8 +37,11 @@ import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
 import ProfilePage from './containers/ProfilePage'
 
-import LoginPage from './containers/LoginPage'
-import ForgotPasswordPage from './containers/ForgotPasswordPage'
+import LoginPage from './containers/user/LoginPage'
+import SignupPage from './containers/user/SignupPage'
+import ForgotPasswordPage from './containers/user/ForgotPasswordPage'
+import ResetPasswordPage from './containers/user/ResetPasswordPage'
+import ChangePasswordPage from './containers/user/ChangePasswordPage'
 
 
 import NotFoundPage from './components/NotFoundPage'
@@ -96,10 +99,18 @@ const routes = (
     <Route path='/login'
           components={getComponents({main: LoginPage})} config={getConfig()}
     />
+    <Route path='/signup'
+           components={getComponents({main: SignupPage})} config={getConfig()}
+    />
    <Route path='/forgot-password'
           components={getComponents({main: ForgotPasswordPage})} config={getConfig()}
     />
-    
+   <Route path='/reset-password'
+          components={getComponents({main: ResetPasswordPage})} config={getConfig()}
+    />
+   <Route path='/change-password'
+          components={getComponents({main: ChangePasswordPage})} config={getConfig()}
+    />    
    {/*
     
     <Route path='/search'

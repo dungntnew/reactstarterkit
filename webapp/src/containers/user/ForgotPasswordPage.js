@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 
-import InputMailForm from '../components/auth-forms/InputMailForm';
+import InputMailForm from '../../components/auth-forms/InputMailForm';
 
 class ForgotPasswordPage extends Component {
     render() {

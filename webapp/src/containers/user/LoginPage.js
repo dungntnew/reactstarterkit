@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import '../css/LoginPage.css';
+import '../../css/LoginPage.css';
 
-import LoginForm from '../components/auth-forms/LoginForm';
+import LoginForm from '..//../components/auth-forms/LoginForm';
 
-import {asyncAuthByEmailAndPassword} from '../flux/modules/auth';
+import {asyncAuthByEmailAndPassword} from '..//../flux/modules/auth';
 
 // TODO: cannot go login page after have an error message
 // FIX IT!
