@@ -1,147 +1,47 @@
-import _ from 'lodash';
-import React, { Component } from 'react'
 
+import _ from 'lodash';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {browserHistory, Link} from 'react-router';
 import classNames from 'classnames';
-import { browserHistory, Link } from 'react-router';
 
 import '../css/EventListMyPage.css';
 
-import { parsePaggingParams,
-         parseFilterStatusParams } from '../helpers/params'
-
 import EventListItem from '../components/EventListItem'
-import Pagination from '../components/Pagination'
 
-import { fetchEventsWithServiceName, 
-         getEventsWithServiceName} from '../flux/modules/resource'
+import { FetchableEventList } from '../containers/event/FetchableEventList';
 
-// TODO: move const to consts file
-const MAX_EVENT_PER_PAGE = 25
+import { eventListForMyPageTabId } from '../helpers/query_builder';
 
-const PAGE_TITLES = {
-  created: '作ったテーブル',
-  joined: '参加したテーブル',
-  liked: '気に入ったテーブル'
-}
+import {EVENT_LIST_TITLES, EVENT_STATUS_TITLES} from '../flux/modules/constant';
 
-const FILTER_NAMES = {
-  all: 'すべて',
-  opening: '公開中',
-  stopped: '停止中'
-}
 
 class EventListMyPage extends Component {
 
-  parsePrams() {
-    const {params, location} = this.props
-    const {service, status} = params
-    const pagging = parsePaggingParams(location, MAX_EVENT_PER_PAGE)
-
-    return {
-      service,
-      status,
-      pagging,
-    }
-  }
-
-  componentDidMount() {
-    this.loadEvents()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const lastParams = this.parsePrams()
-    const {params, location} = this.props
-    const {service, status} = params
-    if (service != lastParams.service) {
-      console.log("service changed...")
-      setTimeout(()=> {this.loadEvents()}, 100)
-    }
-    else {
-      console.log("service not change")
-    }
-  }
-
-  renderEventList() {
-    const {eventItems} = this.props
-    const keys = _.keys(eventItems)
-
-    return (
-      <div className='block-content'>
-        {this.renderStatusFilters()}
-
-        <div className="ui section divider"></div>
-
-        <div className="ui link two stackable cards block-events-content">
-          {
-            keys.map((key, index) => (
-              <EventListItem key={key} {...eventItems[key]}
-                closeEvent={() => this.props.closeEvent(key)}
-                requestProfit={() => this.props.requestProfit(key)}
-                unLike={() => { }}
-              />
-            ))
-          }
-        </div>
-
-        {this.renderPagination()}
-      </div>
-    )
-  }
-
-  renderPagination() {
-    const {total, current} = this.props
-    return (
-      <Pagination
-        router={this.props.router}
-        pathname={'/mypage/events/created'}
-        location={this.props.location}
-        onChanged={(i) => this.fetchPage(i)}
-        total={total}
-        current={current} />
-    )
-  }
-
-  renderPageTitle() {
-    const {params} = this.props
-    const {service} = params
-
-    return (
-      <div className='event-list-title'>
-        {PAGE_TITLES[service]}
-      </div>
-    )
-  }
-
   renderStatusFilters() {
-    const {router} = this.props 
-    const params = this.parsePrams()
-    const filter_keys = _.keys(FILTER_NAMES)
+    const {service, status} = this.props.params // for ex: created/stopped
 
-    const menuItems = filter_keys.map((filter, index) => (
-      <a  className={classNames({
-            'item': true,
-            'active': filter === params.status 
-          })}
-          key={index}
-          onClick={()=>{
-            const url = `/mypage/events/${params.service}/${filter}`
-            browserHistory.push({
-              pathname: url,
-            })
-            setTimeout(()=>{
-              this.loadEvents()
-            }, 100)
-          }}
+    const filterMenuItems = _.keys(EVENT_STATUS_TITLES).map((filter, index) => (
+      <a className={classNames({
+        'item': true,
+        'active': filter === status
+      })
+      }
+        key={index}
+        onClick={() => {
+          const pathname = `/mypage/events/${service}/${filter}`
+          browserHistory.push({
+            pathname,
+          })
+        }}
       >
-        {FILTER_NAMES[filter]}
+        {EVENT_STATUS_TITLES[filter]}
       </a>
     ))
 
     return (
       <div className="ui secondary menu status-filter-menu">
-        {menuItems}
-
+        {filterMenuItems}
         <div className="right menu">
           <Link to='/create'
             className="ui orange icon button">
@@ -153,89 +53,57 @@ class EventListMyPage extends Component {
     )
   }
 
-  fetchPage(page) {
-    let params = this.parsePrams()
-    params = Object.assign({}, params, {
-      pagging: Object.assign({}, params.pagging, {
-        from: page
-      })
-    })
-    this.props.fetchEvents({...params})
-  }
-
-  loadEvents() {
-    const params = this.parsePrams()
-    this.props.fetchEvents({...params})
-  }
-
   render() {
-    const {isFetching, errorMessage} = this.props
-    let content
+    const {userId} = this.props // load from auth state
+    const {service, status} = this.props.params // for ex: created/stopped
 
-    if (isFetching) {
-      content = (
-        <div> Loading... </div>
-      )
-    }
-    else if (!isFetching && errorMessage) {
-      content = (
-        <div> System Error: {errorMessage} </div>
-      )
-    }
-    else {
-      content = this.renderEventList()
-    }
+    const {query, pagging} = eventListForMyPageTabId(userId, service, status)
+    const pathname = `/mypage/events/${service}/${status}`
 
     return (
       <div className='event-list-mypage'>
-        {this.renderPageTitle()}
-        {content}
+        <div className='event-list-title'>
+          {EVENT_LIST_TITLES[service]}
+        </div>
+
+        <div className='block-content'>
+          {this.renderStatusFilters()}
+          <div className="ui section divider"></div>
+          <FetchableEventList
+            router={this.props.router}
+            location={this.props.location}
+            query={query}
+            pagging={pagging}
+            paginated={true}
+            pathname={pathname}
+            listClassName='ui link two stackable cards block-events-content'
+            itemRender={(item, index, className) => {
+              return (<EventListItem
+                key={index} {...item}
+                closeEvent={() => this.props.closeEvent(item.id)}
+                requestProfit={() => this.props.requestProfit(item.id)}
+                unLike={() => { }}
+              />)
+            }}
+          />
+        </div>
       </div>
     )
   }
 }
 
-
-const mapStateToProps = (state, ownProps) => {
-
-  const {params} = ownProps
-  const {service, status} = params
-
-  const createdEvent = getEventsWithServiceName(state, service, 'admin', status)
-  const {isFetching} = createdEvent
-  if (isFetching) {
-    return {
-      isFetching: true,
-    }
-  }
-  else {
-    const {errorMessage, events, total, current} = createdEvent
-    return {
-      isFetching: false,
-      errorMessage: errorMessage,
-      eventItems: events,
-      total: total,
-      current: current
-    }
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+})
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchEvents: ({service, status, pagging={}}) => {
-    dispatch(fetchEventsWithServiceName({
-      service: service,
-      pagging: pagging,
-      query: {
-        userId: 'admin',
-        status: status
-      }
-    }))
-  },
   closeEvent: (eventId) => {
     console.log("request close event: ", eventId)
   },
   requestProfit: (eventId) => {
     console.log("requet profit for: ", eventId)
+  },
+  unLike: (eventId) => {
+    console.log("unLike  for: ", eventId)
   }
 })
 

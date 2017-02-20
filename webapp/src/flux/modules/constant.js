@@ -81,3 +81,15 @@ export const InvoiceStatus = {
   SENT: 'SENT',
   ERROR: 'ERROR'
 }
+
+export const EVENT_LIST_TITLES = {
+  created: '作ったテーブル',
+  joined: '参加したテーブル',
+  liked: '気に入ったテーブル'
+}
+
+export const EVENT_STATUS_TITLES = {
+  all: 'すべて',
+  opening: '公開中',
+  stopped: '停止中'
+}

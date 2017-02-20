@@ -36,8 +36,7 @@ export const defaultPagging = (pagging) => {
 }
 
 /** profile page query helper */
-export const eventListForTabId = (userId, tabId) => {
-    const baseQuery = {}
+export const eventListForTabId = (userId, tabId, baseQuery={}) => {
     let query
     const pagging = defaultPagging()
 
@@ -51,6 +50,19 @@ export const eventListForTabId = (userId, tabId) => {
     return {
         query, pagging
     }
+}
+
+
+/** my-page query helper */
+export const eventStatusValueMaps = {
+    opening: 'OPEN',
+    stopped: 'STOPPED',
+    all: null,
+}
+export const eventListForMyPageTabId = (userId, tabId, status, baseQuery) => {
+    return eventListForTabId(userId, tabId, Object.assign({}, baseQuery, {
+        status: eventStatusValueMaps[status]
+    }))
 }
 
 /** search page query helper */

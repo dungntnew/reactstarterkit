@@ -33,15 +33,14 @@ class ItemList extends Component {
   componentDidMount() {
     const {router} = this.props
     if (router) {
-      router.listen(this.locationHasChanged)
+      this.unlisten = router.listen(this.locationHasChanged)
     }
     this.props.load()
   }
 
   componentWillUnmount() {
-    const {router} = this.props
-    if (router) {
-      router.unregisterTransitionHook(this.locationHasChanged)
+    if (this.unlisten) {
+      this.unlisten()
     }
   }
 

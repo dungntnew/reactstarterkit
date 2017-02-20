@@ -22,7 +22,6 @@ import BlogListPage from './containers/BlogListPage'
 import BlogDetailPage from './containers/BlogDetailPage'
 
 import EventListMyPage from './containers/EventListMyPage'
-import ReviewedEventListMyPage from './containers/ReviewedEventListMyPage'
 
 import BankSettingMyPage from './containers/BankSettingMyPage'
 import PasswordSettingMyPage from './containers/PasswordSettingMyPage'
@@ -126,7 +125,10 @@ const routes = (
    <Route path='/contact'
           components={getComponents({main: ContactPage})} config={getConfig()}
     /> 
-   
+   {/* mypage - event list */}
+   <Route path='/mypage/events/:service/:status'
+          components={getComponents({main: EventListMyPage})} config={getConfig()}
+    />
    {/*
     
     <Route path='/search'
