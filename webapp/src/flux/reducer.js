@@ -15,13 +15,14 @@ import authReducer from './modules/auth'
 // import creditReducer from './modules/credit'
 // import bankAccountReducer from './modules/bankAccount'
 // import latestNewsReducer from './modules/latest_news'
-// import contactReducer from './modules/contact'
+import contactReducer from './modules/contact'
 
 import {
     allEventsReducer,
     eventIdsByQueryReducer,
     loadedEventDetailsReducer,
     viewingEventDetailReducer,
+    creatingEventReducer,
 
     entitiesReducer,
     // categoriesReducer,
@@ -56,13 +57,14 @@ const rootReducer = combineReducers({
   // joinEvent: joinEventReducer,
   // bankAccount: bankAccountReducer,
   // latestNews: latestNewsReducer,
-  // contact: contactReducer,
+  contact: contactReducer,
   
   // - new reducers
   allEvents: allEventsReducer,
   eventIds: eventIdsByQueryReducer,
   loadedEventDetails: loadedEventDetailsReducer,
   viewingEventDetail: viewingEventDetailReducer,
+  creatingEventData: creatingEventReducer,
   
   // // 
 

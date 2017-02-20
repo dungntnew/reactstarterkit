@@ -30,6 +30,14 @@ export const EVENT_REQUEST = 'EVENT_REQUEST'
 export const EVENT_SUCCESS = 'EVENT_SUCCESS'
 export const EVENT_FAILURE = 'EVENT_FAILURE'
 
+export const NEW_EVENT = 'NEW_EVENT'
+export const NEW_EVENT_DATA_CHANGE = 'NEW_EVENT_DATA_CHANGE'
+export const NEW_EVENT_SAVE_REQUEST = 'NEW_EVENT_SAVE_REQUEST'
+export const NEW_EVENT_SAVE_SUCCESS = 'NEW_EVENT_SAVE_SUCCESS'
+export const NEW_EVENT_SAVE_FAILURE = 'NEW_EVENT_SAVE_FAILURE'
+
+
+
 export const USER_REQUEST = 'USER_REQUEST'
 export const USER_SUCCESS = 'USER_SUCCESS'
 export const USER_FAILURE = 'USER_FAILURE'
@@ -196,6 +204,40 @@ export const fetchEventDetailIfNeed = (id) => {
   }
 }
 
+
+// - new event create & save
+export const startCreateEvent = () => {
+  return {
+    type: NEW_EVENT,
+    payload: {} 
+  }
+}
+
+export const changeNewEventData = (data) => {
+  return {
+    type: NEW_EVENT_DATA_CHANGE,
+    payload: {
+      data
+    } 
+  }
+}
+
+export const saveNewEvent = (userId, data) => {
+  return {
+    [CALL_API]: {
+      endpoint: `events`,
+      types: [NEW_EVENT_SAVE_REQUEST, 
+              NEW_EVENT_SAVE_SUCCESS, 
+              NEW_EVENT_SAVE_FAILURE],
+      schema: Schemas.EVENT,
+      params: {
+        method: 'POST',
+        query: {userId, data}
+      }
+    }
+  }
+}
+
 // listening all actions and if has entities in payload
 // merge to app's entities database
 export const entitiesReducer = (state=initEntities, action) => {
@@ -330,6 +372,38 @@ export const viewingEventDetailReducer = (state={isFetching: true, eventId: null
   }
 }
 
+// save state new event
+export const creatingEventReducer = (state={isChanged: false, isSaving: false, data: {}}, action) => {
+  switch(action.type) {
+    case NEW_EVENT:
+      return _.merge({}, state, {
+        isSaving: false,
+        isChanged: false,
+        data: {}
+      })
+    case NEW_EVENT_DATA_CHANGE:
+      return _.merge({}, state, {
+        isSaving: false,
+        isChanged: true,
+        data: _.merge({}, state.data, action.payload.data)
+      })
+    case NEW_EVENT_SAVE_REQUEST:
+      return _.merge({}, state, {
+        isSaving: true,
+      }) 
+    case NEW_EVENT_SAVE_SUCCESS:       
+      return _.merge({}, state, {
+        isSaving: false,
+        isChanged: false
+      }) 
+    case NEW_EVENT_SAVE_FAILURE:
+      return _.merge({}, state, {
+        isSaving: false,
+        errorMessage: action.error
+      })
+    default: return state
+  }
+}
 
 // store users ids that data already loaded
 export const loadedUserDetailsReducer = (state=[], action) => {
@@ -366,6 +440,27 @@ export const viewingUserDetailReducer = (state={isFetching: true, userId: null},
 
 export const getTargetItems = (globalState) => {
   return globalState.entities.targets;
+}
+
+export const getGenreItems = (globalState) => {
+  return globalState.entities.genres;
+}
+
+
+export const getPlaceTypeItems = (globalState) => {
+  return globalState.entities.placeTypes;
+}
+
+export const getDressCodeItems = (globalState) => {
+  return globalState.entities.dressCodes;
+}
+
+export const getSupplementItems = (globalState) => {
+  return globalState.entities.supplements;
+}
+
+export const getPrefectureItems = (globalState) => {
+  return globalState.entities.prefectures;
 }
 
 export const getEventByQueryDict = (globalState, queryDict) => {
@@ -405,6 +500,11 @@ export const getEventData = (globalState) => {
     errorMessage,
     data
   }
+}
+
+export const getCreatingEventData = (globalState) => {
+  const {creatingEventData} = globalState
+  return creatingEventData
 }
 
 export const getUserData = (globalState) => {

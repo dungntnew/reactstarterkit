@@ -3,14 +3,14 @@ import React, {Component} from 'react'
 
 import {connect} from 'react-redux';
 
-import '../css/ContactMyPage.css';
+import '../css/ContactPage.css';
 
 import {contact} from '../flux/modules/contact'
 
 import ContactForm from '../components/contact-forms/ContactForm';
 
 
-class ContactMyPage extends Component {
+class ContactPage extends Component {
 
     renderPageTitle() {
       return (
@@ -31,7 +31,7 @@ class ContactMyPage extends Component {
 
       return (
         <div>
-          <div className='contact-mypage'>
+          <div className='contact-page'>
             {this.renderPageTitle()}
             {content}
           </div>
@@ -45,10 +45,9 @@ const mapStateToProps = (state, ownProps) => {
   const {auth} = state
   const {user} = auth
 
-  const userId = user.id
+  const userId = user ? user.id : null
 
   const {contact} = state
-  console.log("contact: ", contact)
 
   const {isSending, errorMessage, data} = contact
 
@@ -77,4 +76,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 }
 
 export default connect(mapStateToProps,
-                       mapDispatchToProps, mergeProps)(ContactMyPage)
+                       mapDispatchToProps, mergeProps)(ContactPage)

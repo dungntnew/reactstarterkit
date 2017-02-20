@@ -31,7 +31,7 @@ import NewsListMyPage from './containers/NewsListMyPage'
 import ProfitCreateMyPage from './containers/ProfitCreateMyPage'
 import ProfitApplyHistoryMyPage from './containers/ProfitApplyHistoryMyPage'
 import ProfitListMyPage from './containers/ProfitListMyPage'
-import ContactMyPage from './containers/ContactMyPage'
+import ContactPage from './containers/ContactPage'
 
 import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
@@ -96,6 +96,12 @@ const routes = (
     <Route path='/events/:eventId'
            components={getComponents({main: DetailPage})} config={getConfig()}
           />
+    {/* event create */}
+   <Route path='/create'
+           components={getComponents({main: CreatePage})} config={getConfig()}
+          />
+
+    {/* account links */}
     <Route path='/login'
           components={getComponents({main: LoginPage})} config={getConfig()}
     />
@@ -111,12 +117,17 @@ const routes = (
    <Route path='/change-password'
           components={getComponents({main: ChangePasswordPage})} config={getConfig()}
     />    
+
+   {/* help - contact */}
+   <Route path='/contact'
+          components={getComponents({main: ContactPage})} config={getConfig()}
+    /> 
+   
    {/*
     
     <Route path='/search'
            component={SearchPage}/>
-    <Route path='/create'
-           component={CreatePage} onEnter={requireAuth}/>
+
 
     <Route path='/join/:userId/:eventId'
           component={JoinPage} onEnter={requireAuth}/>
@@ -139,7 +150,7 @@ const routes = (
           <Route path='/mypage/profit-apply' component={ProfitCreateMyPage} />
           <Route path='/mypage/profit-list' component={ProfitListMyPage} />
           <Route path='/mypage/profit-apply-history' component={ProfitApplyHistoryMyPage} />
-          <Route path='/mypage/contact' component={ContactMyPage} />
+
 
     </Route>
     <Route path='/test'

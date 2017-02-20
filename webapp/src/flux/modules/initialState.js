@@ -120,8 +120,28 @@ export const initAuth = {
 
 export const initEntities = {
   'targets': {
-    '0': {id: '0', name: 'niku'},
-    '1': {id: '1', name: 'sashimi'}
+    '0': {id: '0', name: 'おいしいものを食べたい'},
+    '1': {id: '1', name: '友達をつくりたい'}
+  },
+  'genres': {
+    '0': {id: '0', name: '和食'},
+    '1': {id: '1', name: 'フレンチ'}
+  },
+  'supplements': {
+    '0': {id: '0', name: 'テーブル椅子'},
+    '1': {id: '1', name: '駐車場'}
+  },
+  'dressCodes': {
+    '0': {id: '0', name: 'コード１'},
+    '1': {id: '1', name: 'コード２'}
+  },
+  'placeTypes': {
+    '0': {id: '0', name: 'イベントスペース'},
+    '1': {id: '1', name: '結婚式場'}
+  },
+  'prefectures': {
+    '0': {id: '0', name: '東京都'},
+    '1': {id: '1', name: '神奈川県'}
   }
 }
 

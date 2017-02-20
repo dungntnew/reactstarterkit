@@ -1,6 +1,7 @@
+import _ from 'lodash';
 import $ from 'jquery';
-import React, {PropTypes, Component} from 'react';
-import {defaultRules} from '../../helpers/validations'
+import React, { PropTypes, Component } from 'react';
+import { defaultRules } from '../../helpers/validations'
 
 import 'semantic-ui-form/form.min.css'
 import '../../css/event-edit-forms/EventAddressForm.css';
@@ -28,12 +29,12 @@ class EventAddressForm extends Component {
 
     // setup validations
     $(form).form({
-        on: 'blur',
-        fields: defaultRules
+      on: 'blur',
+      fields: defaultRules
     })
 
-   // setup dropdown
-   $(address1Selector).dropdown()
+    // setup dropdown
+    $(address1Selector).dropdown()
 
     // init form values
     $(form).form('set values', data)
@@ -59,37 +60,38 @@ class EventAddressForm extends Component {
     return (
       <div className="field">
         <label>郵便番号<span className='required'>※必須</span><span className='note'>ハイフンなしの半角英数字。入力すると、住所が自動補完されます。</span></label>
-        <input name="zipcode" type="text"/>
+        <input name="zipcode" type="text" />
       </div>
     )
   }
 
   renderAddress1() {
     const {prefectures} = this.props
-      return (
-        <div className="field">
-           <label>都道府県<span className='required'>※必須</span><span className='note'>外観や会場全体を表す画像をアップロードしてください。</span></label>
-           <div className='ui search selection dropdown' ref='address1Selector'>
-              <input type='hidden' name='address1' />
-              <i className='dropdown icon'></i>
-              <div className='default text'>都道府県</div>
-              <div className='menu'>
-              {
-                prefectures.map(t => (
-                  <div key={t.id} className="item" data-value={t.id}>{t.label}</div>
-                ))
-              }
-              </div>
-           </div>
-         </div>
-      )
+    const arrItems = _.map(_.keys(prefectures), (k) => prefectures[k])
+    return (
+      <div className="field">
+        <label>都道府県<span className='required'>※必須</span><span className='note'>外観や会場全体を表す画像をアップロードしてください。</span></label>
+        <div className='ui search selection dropdown' ref='address1Selector'>
+          <input type='hidden' name='address1' />
+          <i className='dropdown icon'></i>
+          <div className='default text'>都道府県</div>
+          <div className='menu'>
+            {
+              arrItems.map(t => (
+                <div key={t.id} className="item" data-value={t.id}>{t.name}</div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    )
   }
 
   renderAddress2() {
     return (
       <div className="field">
         <label>群市区町村<span className='required'>※必須</span><span className='note'>外観や会場全体を表す画像をアップロードしてください。</span></label>
-        <input name="address2" type="text"/>
+        <input name="address2" type="text" />
       </div>
     )
   }
@@ -98,7 +100,7 @@ class EventAddressForm extends Component {
     return (
       <div className="field">
         <label>番地・建物名・部屋番号</label>
-        <input name="address3" type="text"/>
+        <input name="address3" type="text" />
       </div>
     )
   }
@@ -107,7 +109,7 @@ class EventAddressForm extends Component {
     return (
       <div className="field">
         <label>アクセス<span className='note'>最寄り駅からの歩き方や高速道路の出口、所要時間などを入力してください。</span></label>
-        <textarea name="howtoAccessText" rows='4'/>
+        <textarea name="howtoAccessText" rows='4' />
       </div>
     )
   }
@@ -115,18 +117,18 @@ class EventAddressForm extends Component {
   render() {
     return (
       <form className="ui form segments event-address-form" ref='form'
-             onSubmit={(e) => {
-               e.preventDefault()
-               this.handleSubmit()
-            }}>
-      {this.renderZipCode()}
-      {this.renderAddress1()}
-      {this.renderAddress2()}
-      {this.renderAddress3()}
-      {this.renderHowToAccess()}
+        onSubmit={(e) => {
+          e.preventDefault()
+          this.handleSubmit()
+        }}>
+        {this.renderZipCode()}
+        {this.renderAddress1()}
+        {this.renderAddress2()}
+        {this.renderAddress3()}
+        {this.renderHowToAccess()}
 
-      <div className="ui error message"></div>
-      <button className="ui button btn-orange btn-left" type="submit">{this.props.btnTitle}</button>
+        <div className="ui error message"></div>
+        <button className="ui button btn-orange btn-left" type="submit">{this.props.btnTitle}</button>
       </form>
     )
   }
