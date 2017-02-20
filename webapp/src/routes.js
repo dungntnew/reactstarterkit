@@ -100,6 +100,10 @@ const routes = (
    <Route path='/create'
            components={getComponents({main: CreatePage})} config={getConfig()}
           />
+    {/* event search page */}
+   <Route path='/search'
+           components={getComponents({main: SearchPage})} config={getConfig()}
+          />
 
     {/* account links */}
     <Route path='/login'

@@ -52,3 +52,14 @@ export const eventListForTabId = (userId, tabId) => {
         query, pagging
     }
 }
+
+/** search page query helper */
+export const eventListWithSearchParams = (params) => {
+    const baseQuery = {}
+    const pagging = defaultPagging()
+
+    return {
+        query: baseQuery,
+        pagging
+    }
+}
