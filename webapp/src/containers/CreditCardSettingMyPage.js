@@ -16,49 +16,23 @@ class CreditCardSettingMyPage extends Component {
       this.props.fetch()
     }
 
-    renderPageTitle() {
-      return (
-        <h3 className='bank-account-title'>
-           お支払い方法の指定
-        </h3>
-      )
-    }
-
     render() {
-      const {isFetching, errorMessage} = this.props
-      let content
-
-      if (isFetching) {
-        content = (
-          <div> Loading... </div>
-        )
-      }
-      else if (!isFetching && errorMessage) {
-        content = (
-          <div> System Error: {errorMessage} </div>
-        )
-      }
-      else {
-        const {data, userId, isSaving, update} = this.props
-
-        content = <CreditCard
-                       data={data}
-                       isSaving={isSaving}
-                       userId={userId}
-                       onSubmit={update} />
-      }
+      const data = {}
+      const isSaving = false
+      const userId = "xx"
+      const update = () => {}
 
       return (
         <div>
           <div className='creditcard-setting-mypage'>
-            {this.renderPageTitle()}
-            {content}
-          </div>
-          <div>
-            <button onClick={
-                ()=> {this.props.fetch()}}>
-                refresh
-            </button>
+            <h3 className='bank-account-title'>
+               お支払い方法の指定
+            </h3>
+            <CreditCard
+                       data={data}
+                       isSaving={isSaving}
+                       userId={userId}
+                       onSubmit={update} />
           </div>
         </div>
       )
@@ -85,16 +59,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  //const {dispatch} = dispatchProps
-  //const {userId} = stateProps
 
   return Object.assign({}, stateProps,
     Object.assign({}, ownProps, {
       fetch: () => {
-        //dispatch(fetchBankAccount(userId))
       },
       update: (data) => {
-        //dispatch(updateBankAccount(userId, data))
       }
   }))
 }

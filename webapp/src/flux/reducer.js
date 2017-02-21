@@ -12,7 +12,7 @@ import { routerReducer as routing } from 'react-router-redux'
 // import placeReducer from './modules/place'
 // import latestBlogReducer from './modules/latest_blog'
 import authReducer from './modules/auth'
-// import creditReducer from './modules/credit'
+import creditReducer from './modules/credit'
 import bankAccountReducer from './modules/bankAccount'
 // import latestNewsReducer from './modules/latest_news'
 import contactReducer from './modules/contact'
@@ -43,7 +43,7 @@ const rootReducer = combineReducers({
   loadings: loadingReducer,
   errors: errorReducer,
   auth: authReducer,
-  // credit: creditReducer,
+  
   // target: targetReducer,
   // genre: generReducer,
   // supplement: supplementReducer,
@@ -56,6 +56,7 @@ const rootReducer = combineReducers({
   // latestBlog: latestBlogReducer,
   // joinEvent: joinEventReducer,
   bankAccount: bankAccountReducer,
+  credit: creditReducer,
   // latestNews: latestNewsReducer,
   contact: contactReducer,
   

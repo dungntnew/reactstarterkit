@@ -133,6 +133,10 @@ const routes = (
    <Route path='/mypage/bank-account'
           components={getComponents({main: BankSettingMyPage})} config={getConfig()}
     />    
+   {/* mypage - credit card settings */}
+   <Route path='/mypage/credit-account'
+          components={getComponents({main: CreditCardSettingMyPage})} config={getConfig()}
+    />  
    {/*
     
     <Route path='/search'
