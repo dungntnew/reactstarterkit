@@ -93,3 +93,132 @@ export const EVENT_STATUS_TITLES = {
   opening: '公開中',
   stopped: '停止中'
 }
+
+export const CONTEXT_MENU_ITEMS = {
+  mobile: [
+    {
+      authRequired: true,
+      title: 'テーブル管理',
+      childs: [{
+        title: '登録したテーブル',
+        to: '/mypage/events/created/all'
+      },
+      {
+        title: 'お気に入りテーブル',
+        to: '/mypage/events/liked/all'
+      },
+      {
+        title: '参加テーブル',
+        to: '/mypage/events/joined/all'
+      }
+      ]
+    },
+    {
+      authRequired: true,
+      title: '売上・振込',
+      childs: [{
+        title: '売上の記録',
+        to: '/mypage/invoice/create'
+      },
+      {
+        title: '支払いの記録',
+        to: '/mypage/invoice/list'
+      },
+      {
+        title: '振込み履歴',
+        to: '/mypage/invoice/all'
+      },
+      ]
+    },
+    {
+      authRequired: true,
+      title: '通知・ニュース',
+      childs: [{
+        title: 'ニュース一覧',
+        to: '/mypage/news/list'
+      },
+      ]
+    },
+    {
+      authRequired: true,
+      title: 'アカウント設定',
+      childs: [{
+        title: 'パスワード変更',
+        to: '/change-password'
+      },
+      {
+        title: 'クレジットカード変更',
+        to: '/mypage/credit-setting'
+      },
+       {
+        title: 'お振込先銀行口座変更',
+        to: '/mypage/bank-account-setting'
+      },
+      {
+        title: 'ログアウト',
+        to: '/logout'
+      },
+      ]
+    },
+    {
+      title: 'その他',
+      childs: [{
+        title: 'YourTableについて',
+        to: '/about'
+      },{
+        title: 'ヘールプ/FQA',
+        to: '/fqa'
+      },
+      {
+        title: 'お問い合わせ',
+        to: '/contact'
+      },
+      {
+        title: 'パスワード忘れ',
+        to: '/forgot-password'
+      }
+      ]
+    }
+  ],
+  pc: [
+    {
+      title: 'PC　メニュー 1',
+      childs: [{
+        title: 'Link A',
+        to: '/a'
+      },
+      {
+        title: 'Link B',
+        to: '/b'
+      }]
+    },
+    {
+      title: 'PC　メニュー ２',
+      childs: [{
+        title: 'Link A',
+        to: '/a'
+      },
+      {
+        title: 'Link B',
+        to: '/b'
+      },
+      {
+        title: 'Link C',
+        to: '/b'
+      },
+      ]
+    },
+    {
+      authRequired: true,
+      title: '秘密な設定3',
+      childs: [{
+        title: 'Link A',
+        to: '/a'
+      },
+      {
+        title: 'Link B',
+        to: '/b'
+      }]
+    }
+  ]
+}

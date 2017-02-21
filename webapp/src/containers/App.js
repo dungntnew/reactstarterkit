@@ -33,7 +33,6 @@ class App extends Component {
       <div className='ui wrapper'>
           {isLoading && <Loading />}
           <DevNav />
-          
           {config.has_topbar &&
           <div className='topbar'>
             {topbar}

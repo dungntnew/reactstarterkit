@@ -5,7 +5,9 @@ import {Route, IndexRoute} from 'react-router'
 import App from './containers/App'
 import TopBar from './components/topbars/TopBar';
 import LandingTopBar from './components/topbars/LandingTopBar';
-import SideBar from './components/sidebars/SideBar'
+
+import {SideBar, MPSideBar} from './components/sidebars/SideBar';
+
 import PageFooter from './components/PageFooter';
 
 // PAGE INCLUDES
@@ -24,15 +26,12 @@ import BlogDetailPage from './containers/BlogDetailPage'
 import EventListMyPage from './containers/EventListMyPage'
 
 import BankSettingMyPage from './containers/BankSettingMyPage'
-import PasswordSettingMyPage from './containers/PasswordSettingMyPage'
 import CreditCardSettingMyPage from './containers/CreditCardSettingMyPage'
 import NewsListMyPage from './containers/NewsListMyPage'
 import ProfitCreateMyPage from './containers/ProfitCreateMyPage'
 import ProfitApplyHistoryMyPage from './containers/ProfitApplyHistoryMyPage'
 import ProfitListMyPage from './containers/ProfitListMyPage'
 import ContactPage from './containers/ContactPage'
-
-import MyPage from './containers/MyPage'
 import TopMyPage from './containers/TopMyPage'
 import ProfilePage from './containers/ProfilePage'
 
@@ -127,15 +126,15 @@ const routes = (
     /> 
    {/* mypage - event list */}
    <Route path='/mypage/events/:service/:status'
-          components={getComponents({main: EventListMyPage})} config={getConfig()}
+          components={getComponents({main: EventListMyPage, sidebar: MPSideBar})} config={getConfig()}
     />
    {/* mypage - bank account settings */}
    <Route path='/mypage/bank-account'
-          components={getComponents({main: BankSettingMyPage})} config={getConfig()}
+          components={getComponents({main: BankSettingMyPage, sidebar: MPSideBar})} config={getConfig()}
     />    
    {/* mypage - credit card settings */}
    <Route path='/mypage/credit-account'
-          components={getComponents({main: CreditCardSettingMyPage})} config={getConfig()}
+          components={getComponents({main: CreditCardSettingMyPage, sidebar: MPSideBar})} config={getConfig()}
     />  
    {/*
     
