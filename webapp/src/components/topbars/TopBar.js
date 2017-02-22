@@ -17,10 +17,8 @@ const TopBar = (props) => (
         </PageHeader>
     </BreakPoint>
     <BreakPoint name='phone'>
-       <div>
         <ToogleButton toogle={()=> {}}/>
         <QuickSearchBar location={props.location} params={props.params} />
-       </div>
     </BreakPoint>
     </div>
 )

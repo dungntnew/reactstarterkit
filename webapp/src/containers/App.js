@@ -33,27 +33,10 @@ class App extends Component {
       <div className='ui wrapper'>
           {isLoading && <Loading />}
           <DevNav />
-          {config.has_topbar &&
-          <div className='topbar'>
-            {topbar}
-          </div>
-          }
-
-          {config.has_sidebar &&
-          <div className='sidebar'>
-            {sidebar}
-          </div>
-          }
-
-          <div className='main'>
-            {main}
-          </div>
-          
-          {config.has_footer &&
-          <div className='sidebar'>
-            {footer}
-          </div>
-          }
+          {config.has_topbar && topbar}
+          {config.has_sidebar && sidebar}
+          {main}
+          {config.has_footer && footer}
       </div>
     )
   }

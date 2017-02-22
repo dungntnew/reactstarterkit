@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { routerReducer as routing } from 'react-router-redux'
+import {reducer as burgerMenu} from 'redux-burger-menu';
 
 // import topEventReducer from './modules/top_event'
 // import createEventReducer from './modules/create_event'
@@ -77,7 +78,8 @@ const rootReducer = combineReducers({
   loadedUserDetails: loadedUserDetailsReducer,
   viewingUserDetail: viewingUserDetailReducer,
 
-  routing
+  routing,
+  burgerMenu
 })
 
 export default rootReducer

@@ -10,6 +10,7 @@ const breakpoints = {
 
 const BreakPoint = (props) => {
     const breakpoint = breakpoints[props.name] || breakpoints.desktop;
+
     const {children} = props
     if (!children) return null;
     return (
