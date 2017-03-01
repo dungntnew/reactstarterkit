@@ -83,26 +83,33 @@ const getConfig = (config) => {
 
 const routes = (
   <Route path='/' component={App}>
-    <IndexRoute 
-           components={getComponents({main: TopLandingPage, topbar: LandingTopBar})} 
-           config={getConfig()}/>
-    <Route path='/about'
-           components={getComponents({main: AboutPage})} config={getConfig()}/>                     
-    <Route path='members/:userId/:filter' 
-           components={getComponents({main: ProfilePage})} config={getConfig()}
-           />
+    {/* <IndexRoute
+            components={getComponents({main: TopLandingPage, topbar: LandingTopBar})}
+            config={getConfig()}/>
+    */}
+    {/* <Route path='/about'
+            components={getComponents({main: AboutPage})} config={getConfig()}/>
+    */}
+    {/* <Route path='members/:userId/:filter'
+            components={getComponents({main: ProfilePage})} config={getConfig()}
+            />
+    */}
     <Route path='/events/:eventId'
            components={getComponents({main: DetailPage})} config={getConfig()}
+          />
+    <Route path='*'
+           components={getComponents({main: NotFoundPage})} config={getConfig()}
           />
     {/* event create */}
    <Route path='/create'
            components={getComponents({main: CreatePage})} config={getConfig()}
           />
     {/* event search page */}
+   {/*
    <Route path='/search'
            components={getComponents({main: SearchPage})} config={getConfig()}
           />
-
+    */}
     {/* account links */}
     <Route path='/login'
           components={getComponents({main: LoginPage})} config={getConfig()}
@@ -118,12 +125,12 @@ const routes = (
     />
    <Route path='/change-password'
           components={getComponents({main: ChangePasswordPage})} config={getConfig()}
-    />    
+    />
 
    {/* help - contact */}
    <Route path='/contact'
           components={getComponents({main: ContactPage})} config={getConfig()}
-    /> 
+    />
    {/* mypage - event list */}
    <Route path='/mypage/events/:service/:status'
           components={getComponents({main: EventListMyPage, sidebar: MPSideBar})} config={getConfig()}
@@ -131,13 +138,13 @@ const routes = (
    {/* mypage - bank account settings */}
    <Route path='/mypage/bank-account'
           components={getComponents({main: BankSettingMyPage, sidebar: MPSideBar})} config={getConfig()}
-    />    
+    />
    {/* mypage - credit card settings */}
    <Route path='/mypage/credit-account'
           components={getComponents({main: CreditCardSettingMyPage, sidebar: MPSideBar})} config={getConfig()}
-    />  
+    />
    {/*
-    
+
     <Route path='/search'
            component={SearchPage}/>
 
@@ -155,7 +162,7 @@ const routes = (
     <Route path='/mypage' component={MyPage} onEnter={requireAuth}>
           <IndexRoute component={TopMyPage}/>
           <Route path='/mypage/events/:service/:status' component={EventListMyPage}/>
-         
+
           <Route path='/mypage/bank-settings' component={BankSettingMyPage} />
           <Route path='/mypage/change-password' component={PasswordSettingMyPage} />
           <Route path='/mypage/creditcard-settings' component={CreditCardSettingMyPage} />
@@ -171,7 +178,7 @@ const routes = (
     <Route path='/test2'
            component={TestPage2}/>
 
-    <Route path='*' component={NotFoundPage} />*/}
+    */}
 
   </Route>
 )
