@@ -119,7 +119,7 @@ class SignupForm extends Component {
                       placeholder="パスワードを入力してください（６文字以上）"/>
               </div>
               <div className="field">
-                <label>再度パスワード</label>
+                <label>パスワード（確認用）</label>
                 <input
                       type="password"
                       name="password_confirmation"
