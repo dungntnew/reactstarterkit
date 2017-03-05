@@ -41,7 +41,7 @@ class TopNav extends Component {
     [
       <HelpMenu />,
       <Link to='/login' className='ui button'>ログイン </Link>,
-      <Link to='/register' className='ui button'>新規登録</Link>
+      <Link to='/signup' className='ui button'>新規登録</Link>
     ]
 
     return links.map((link, index) => (

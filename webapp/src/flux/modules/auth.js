@@ -134,8 +134,8 @@ export const registerWithEmailFailed = (error) => {
 	return {
 		type: REGISTER_WITH_EMAIL_PASSWORD_FAILURE,
 		payload: {
-			error: error.message,
-			errorMessage: error.message
+			error: error,
+			errorMessage: error.message,
 		},
 		error: true
 	}
@@ -203,6 +203,24 @@ const authReducer = (state = initAuth, action) => {
 			authenticated: false,
 			user: null,
 			anonymous: false,
+			errorMessage: action.payload.errorMessage,
+		})
+		case REGISTER_WITH_EMAIL_PASSWORD:
+		return Object.assign({}, state, {
+			registering: true,
+			registered: false,
+			user: action.payload,
+		})
+		case REGISTER_WITH_EMAIL_PASSWORD_RECEIVED:
+		return Object.assign({}, state, {
+			registering: false,
+			registered: true,
+			user: action.payload,
+		})
+		case REGISTER_WITH_EMAIL_PASSWORD_FAILURE:
+		return Object.assign({}, state, {
+			registering: false,
+			registered: false,
 			errorMessage: action.payload.errorMessage,
 		})
 		default:

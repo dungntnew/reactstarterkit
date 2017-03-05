@@ -16,6 +16,7 @@ class SignupForm extends Component {
   }
 
   static propTypes = {
+    error: PropTypes.string,
     data: PropTypes.shape({
       email: PropTypes.string,
     }),
@@ -70,6 +71,9 @@ class SignupForm extends Component {
   }
 
   render() {
+    const {error} = this.props 
+    const errorMessages = error ? error.split(',') : [];
+
     return (
         <form className='ui large form signup-form' ref='form'
               onSubmit={(e) => {
@@ -80,6 +84,12 @@ class SignupForm extends Component {
           <div className='ui segment'>
 
             <h2 className='tite-form center'>新規会員登録</h2>
+            {error && 
+                 errorMessages.map((e)=>
+                 <div className="ui error visible message">{e}</div>
+                 )
+            }
+
             <div className='field'>
               <a className='ui button btn-link link-face' onClick={(e)=>{this.authFB(e)}}>
                 <i className="facebook f icon icon-left"></i>Facebookでログイン
@@ -115,8 +125,8 @@ class SignupForm extends Component {
                       name="password_confirmation"
                       placeholder="再度パスワードを入力してください（６文字以上）"/>
               </div>
-              <div className="ui error message"></div>
-            
+
+              
             <button className="ui button btn-link btn-orange" type="submit">メールアドレスで登録</button>
 
             <div className='field'>
