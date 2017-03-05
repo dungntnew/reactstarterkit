@@ -48,14 +48,14 @@ import auth from './helpers/auth'
 
 const requireAuth = (nextState, replace, callback) => {
   if (!auth.loggedIn()) {
-    console.log('require login')
     replace({
       pathname: '/login',
+      query: {
+          return_to: nextState.location.pathname
+      }
     })
-
   }
   else {
-    console.log("passed.")
   }
   callback();
 }
@@ -97,12 +97,10 @@ const routes = (
     <Route path='/events/:eventId'
            components={getComponents({main: DetailPage})} config={getConfig()}
           />
-    <Route path='*'
-           components={getComponents({main: NotFoundPage})} config={getConfig()}
-          />
     {/* event create */}
    <Route path='/create'
            components={getComponents({main: CreatePage})} config={getConfig()}
+           onEnter={requireAuth}
           />
     {/* event search page */}
    {/*
@@ -179,7 +177,9 @@ const routes = (
            component={TestPage2}/>
 
     */}
-
+    <Route path='*'
+           components={getComponents({main: NotFoundPage})} config={getConfig()}
+          />
   </Route>
 )
 

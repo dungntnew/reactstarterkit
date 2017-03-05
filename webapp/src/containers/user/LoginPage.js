@@ -6,15 +6,38 @@ import '../../css/LoginPage.css';
 import LoginForm from '..//../components/auth-forms/LoginForm';
 
 import {asyncAuthByEmailAndPassword} from '..//../flux/modules/auth';
+import {commingSoon} from '../../helpers';
 
 // TODO: cannot go login page after have an error message
 // FIX IT!
 class LoginPage extends Component {
 
+    componentDidMount() {
+      const {authenticated} = this.props
+      if (authenticated) {
+          const {router, location} = this.props;
+          const return_to = location.query.return_to || '/';
+          console.log("return to: ",return_to);
+          router.push(return_to);
+          return null;
+        }
+    }
+
+    componentDidUpdate() {
+      const {authenticated} = this.props
+      if (authenticated) {
+          const {router, location} = this.props;
+          const return_to = location.query.return_to || '/';
+          console.log("return to: ",return_to);
+          router.push(return_to);
+          return null;
+        }
+    }
+
     render() {
       const {authencating} = this.props
       if (authencating) return null;
-
+    
       return (
         <div className='login-page'>
             <LoginForm
@@ -30,7 +53,7 @@ class LoginPage extends Component {
 const mapStateToProps = (state, ownProps) => {
   const {auth} = state
   const {authenticating, authenticated, errorMessage, data} = auth
-
+  
   return {
     authenticating,
     authenticated,
@@ -44,10 +67,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(asyncAuthByEmailAndPassword(email, password))
  },
  onFBAuth: (data) => {
-    console.log('この機能は開発中です！')
+    commingSoon(data);
  },
  onGGAuth: (data) => {
-   console.log('この機能は開発中です！')
+   commingSoon(data);
  },
 })
 

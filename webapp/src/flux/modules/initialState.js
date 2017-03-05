@@ -109,12 +109,17 @@ export const guest = {
   anonymous: true,
 }
 
-localStorage.token = '======'
+const signedUser = () => {
+  const userData = localStorage.getItem('signedUser');
+  console.log(userData);
+  return JSON.parse(userData) || guest
+}
+
 export const initAuth = {
-  authenticated: true,
+  authenticated: !!localStorage.getItem('access-token'),
   authenticating: false,
-  user: guest,
-  anonymous: true
+  user: signedUser(),
+  anonymous: !!localStorage.getItem('signedUser')
 }
 
 

@@ -58,5 +58,5 @@
     "sync-dev": "scp -r ./build/* tabledev:/opt/apps/webapp",
     "sync-dev-api": "scp ./devconf/resources.json tabledev:/opt/apps/dumpapi/resources.json"
   },
-  "proxy": "http://http://52.37.92.74"
+  "proxy": "http://52.37.92.74"
 }

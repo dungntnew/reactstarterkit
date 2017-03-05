@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { combineReducers } from 'redux'
 
 // The middleware to call the API for quotes
+import ApiClient from '../../helpers/client';
 import { CALL_API } from '../middleware/api'
 import Schemas from '../schemas'
 import {initEntities} from './initialState'
@@ -220,7 +221,7 @@ export const changeNewEventData = (data) => {
   }
 }
 
-export const saveNewEvent = (userId, data) => {
+export const saveNewEvent = (userId, data, callback) => {
   return {
     [CALL_API]: {
       endpoint: `events`,
@@ -230,9 +231,24 @@ export const saveNewEvent = (userId, data) => {
       schema: Schemas.EVENT,
       params: {
         method: 'POST',
-        query: {userId, data}
+        query: {userId, data},
+        afterSuccess: (response) => {
+          callback(response, userId, data);
+        }
       }
     }
+  }
+}
+
+export const saveEventImage = (userId, data) => {
+  console.log("DO SAVE IMG");
+}
+
+export const asyncCreateEvent = (userId, data) => {
+  return (dispatch, getState) => {
+    dispatch(saveNewEvent(userId, data, (response) => {
+      dispatch(saveEventImage(userId, data));
+    }))
   }
 }
 

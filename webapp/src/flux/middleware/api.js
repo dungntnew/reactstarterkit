@@ -7,7 +7,7 @@ import { normalize } from 'normalizr'
 import { camelizeKeys } from 'humps'
 
 //const BASE_URL = 'http://127.0.0.1:8000/events/api/'
-const BASE_URL = 'http://localhost:8081/api/'
+const BASE_URL = 'http://localhost:3000/api/'
 const MAX_ITEM_PER_PAGE = 25
 
 const checkHeaders = (response) => {
@@ -75,6 +75,7 @@ function callApi(endpoint, schema, params, httpOptions = {}) {
 			method: 'POST',
 			body: JSON.stringify(query)
 		}, httpOptions)
+		console.log("fetchOptions: ", fetchOptions);
 	}
 	else if (requestMethod === 'GET') {
 		fetchOptions = Object.assign({}, {
@@ -95,7 +96,7 @@ function callApi(endpoint, schema, params, httpOptions = {}) {
 		.then(checkStatus)
 		.then(parseJSON)
 		.then(json => {
-			console.log('**JSON**: ', json)
+			console.log('**REST JSON**: ', json)
 
 			if (_.has(json, 'results')) {
 				json = camelizeKeys(json.results)
@@ -120,7 +121,7 @@ export default store => next => action => {
 		return next(action)
 	}
 
-	let { endpoint, types, schema, params } = callAPI
+	let { endpoint, types, schema, params} = callAPI
 
 	// Verify input params
 	if (typeof endpoint === 'function') {

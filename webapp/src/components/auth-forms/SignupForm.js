@@ -1,9 +1,8 @@
 import $ from 'jquery';
 import React, {PropTypes, Component} from 'react';
 //import classNames from 'classnames';
-// default fields validations,
-// ignore this, setup late is OK
-//import {defaultRules} from '../../helpers/validations'
+
+import {defaultRules} from '../../helpers/validations'
 
 import 'semantic-ui-form/form.min.css'
 import '../../css/auth-forms/SignupForm.css';
@@ -17,27 +16,78 @@ class SignupForm extends Component {
   }
 
   static propTypes = {
-    facebookUrl: PropTypes.string.isRequired,
-    googleUrl: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
+    data: PropTypes.shape({
+      email: PropTypes.string,
+    }),
+    onFBAuth: PropTypes.func.isRequired,
+    onGGAuth: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
+  }
+
+  // process login with facebook
+  // use external auth-service
+  authFB(e) {
+    e.preventDefault();
+    this.props.onFBAuth()
+  }
+
+  // process login with google+
+  // use external auth-service
+  authGG(e) {
+    e.preventDefault();
+    this.props.onGGAuth()
+  }
+
+  initForm() {
+    const {form} = this.refs
+    const {data} = this.props
+
+    //setup validations
+    $(form).form({
+        on: 'blur',
+        fields: defaultRules
+    })
+
+    // init form values
+    $(form).form('set values', data)
+  }
+
+  // process login with email-password
+  handleSubmit() {
+    const {form} = this.refs
+
+    // check where form data is valid1
+    const valid = $(form).form('is valid')
+
+    if (valid) {
+      // get all field data to dict
+      const cleaned = $(form).form('get values')
+      console.log(cleaned)
+
+       // submit data
+      this.props.onSubmit(cleaned)
+    }
   }
 
   render() {
     return (
-        <form className='ui large form signup-form'>
+        <form className='ui large form signup-form' ref='form'
+              onSubmit={(e) => {
+                e.preventDefault()
+                this.handleSubmit()
+              }}>
 
           <div className='ui segment'>
 
             <h2 className='tite-form center'>新規会員登録</h2>
             <div className='field'>
-              <a className='ui button btn-link link-face' href={this.props.facebookUrl}>
+              <a className='ui button btn-link link-face' onClick={(e)=>{this.authFB(e)}}>
                 <i className="facebook f icon icon-left"></i>Facebookでログイン
               </a>
             </div>
 
             <div className='field'>
-              <a className='ui button btn-link link-gle' href={this.props.goooleUrl}>
+              <a className='ui button btn-link link-gle' onClick={(e)=>{this.authGG(e)}}>
                 <i className="google icon icon-left"></i>Google+でログイン
               </a>
             </div>
@@ -55,14 +105,14 @@ class SignupForm extends Component {
                 <label>パスワード</label>
                 <input
                       type="password"
-                      name="password1"
+                      name="password"
                       placeholder="パスワードを入力してください（６文字以上）"/>
               </div>
               <div className="field">
                 <label>再度パスワード</label>
                 <input
                       type="password"
-                      name="password2"
+                      name="password_confirmation"
                       placeholder="再度パスワードを入力してください（６文字以上）"/>
               </div>
               <div className="ui error message"></div>

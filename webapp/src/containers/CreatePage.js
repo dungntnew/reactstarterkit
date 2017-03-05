@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import '../css/CreatePage.css';
 
 import EventEditForm from '../components/EventEditForm';
+import {asyncCreateEvent} from '../flux/modules/resource';
 
 import {
   getCreatingEventData, 
@@ -49,14 +50,15 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const {dispatch} = dispatchProps
   const {userId} = stateProps
+  const {event} = stateProps
 
   return Object.assign({}, stateProps,
     Object.assign({}, ownProps, {
       create: () => {
         dispatch(startCreateEvent())
       },
-      onSave: (data) => {
-        dispatch(saveNewEvent(userId, data))
+      onSave: () => {
+        dispatch(asyncCreateEvent(userId, event))
       },
       onChange: (data) => {
         dispatch(changeNewEventData(data))

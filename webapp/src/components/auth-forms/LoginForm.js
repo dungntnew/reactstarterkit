@@ -113,9 +113,11 @@ class LoginForm extends Component {
           <button className="ui button btn-link btn-orange" type="submit">ログイン</button>
 
           <div className='field field-text'>
-            <Link to='/forgot-password' className='text-forget-pass center'>
+            <a href="mailto:info@revue.co.jp?subject=">パスワードをお忘れの方はこちら</a>
+            {/*<Link to='/forgot-password' className='text-forget-pass center'>
                パスワードをお忘れの方はこちら
             </Link>
+            */}
           </div>
         </div>
         </form>

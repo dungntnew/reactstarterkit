@@ -47,7 +47,7 @@ export const updatePassword = (userId, currentPassword, newPassword) => {
 
 export const LOGIN_WITH_EMAIL_PASSWORD = 'LOGIN_WITH_EMAIL_PASSWORD'
 export const LOGIN_WITH_EMAIL_PASSWORD_RECEIVED = 'LOGIN_WITH_EMAIL_PASSWORD_RECEIVED'
-export const LOGIN_WITH_EMAIL_PASSWORD_FAIL = 'LOGIN_WITH_EMAIL_PASSWORD_FAIL'
+export const LOGIN_WITH_EMAIL_PASSWORD_FAILURE = 'LOGIN_WITH_EMAIL_PASSWORD_FAILURE'
 
 export const loginWithEmail = (email, password) => {
 	return {
@@ -70,27 +70,86 @@ export const loginWithEmailSuccess = (email, password, data) => {
 
 export const loginWithEmailFailed = (email, password, error) => {
 	return {
-		type: LOGIN_WITH_EMAIL_PASSWORD_FAIL,
+		type: LOGIN_WITH_EMAIL_PASSWORD_FAILURE,
 		payload: {
 			email, password,
+			error: error.message,
 			errorMessage: error.message
 		},
 		error: true
 	}
 }
 
+const mapAuthData = (json) => {
+	const {user} = json
+	const {user_profile} = user
+	return {
+		name: user_profile.display_name || user.email,
+		id: user.id.toString(),
+		uid: user.uid,
+		email: user.email,
+		accountBlance: user_profile.account_blance,
+		createdEventCount: user_profile.created_events_count,
+		rating: user_profile.rating,
+		avatarUrl: user_profile.avatar_url || '/img/avatar.png',
+		url: `/members/${user.id}`,
+		anonymous: false,
+	}
+}
+
 export const asyncAuthByEmailAndPassword = (email, password) => {
 	return (dispatch, getState) => {
 		dispatch(loginWithEmail(email, password))
-		return ApiClient.postJson('/api/authWithEmail', {
+		return ApiClient.doAuth('/v1/auth/sign_in', {
 			email, password
 		})
 		.then(json => {
-			// TODO: fix!
-			localStorage.token = json.data.token
-			dispatch(loginWithEmailSuccess(email, password, json.data))
+			const signedUser = mapAuthData(json);
+			localStorage.setItem('signedUser', JSON.stringify(signedUser));
+			dispatch(loginWithEmailSuccess(email, password, signedUser))
 		})
 		.catch(error => dispatch(loginWithEmailFailed(email, password, error)))
+	}
+}
+
+export const REGISTER_WITH_EMAIL_PASSWORD = 'REGISTER_WITH_EMAIL_PASSWORD'
+export const REGISTER_WITH_EMAIL_PASSWORD_RECEIVED = 'REGISTER_WITH_EMAIL_PASSWORD_RECEIVED'
+export const REGISTER_WITH_EMAIL_PASSWORD_FAILURE = 'REGISTER_WITH_EMAIL_PASSWORD_FAILURE'
+
+export const registerWithEmail = (data) => {
+	return {
+		type: REGISTER_WITH_EMAIL_PASSWORD,
+		payload: data
+	}
+}
+
+export const registerWithEmailSuccess = (data) => {
+	return {
+		type: REGISTER_WITH_EMAIL_PASSWORD_RECEIVED,
+		payload: data
+	}
+}
+
+export const registerWithEmailFailed = (error) => {
+	return {
+		type: REGISTER_WITH_EMAIL_PASSWORD_FAILURE,
+		payload: {
+			error: error.message,
+			errorMessage: error.message
+		},
+		error: true
+	}
+}
+
+export const syncRegisterByEmailAndPassword = (data) => {
+	return (dispatch, getState) => {
+		dispatch(registerWithEmail(data))
+		return ApiClient.postJson('/v1/auth/', data)
+		.then((json) => {
+			// TODO: !
+			dispatch(registerWithEmailSuccess(json.data))
+		})
+		.catch(error => dispatch(registerWithEmailFailed(error)))
 	}
 }
 
@@ -138,7 +197,7 @@ const authReducer = (state = initAuth, action) => {
 			user: action.payload,
 			anonymous: false
 		})
-		case LOGIN_WITH_EMAIL_PASSWORD_FAIL:
+		case LOGIN_WITH_EMAIL_PASSWORD_FAILURE:
 		return Object.assign({}, state, {
 			authencating: false,
 			authenticated: false,
