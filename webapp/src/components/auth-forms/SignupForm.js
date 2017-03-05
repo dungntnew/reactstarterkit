@@ -85,8 +85,8 @@ class SignupForm extends Component {
 
             <h2 className='tite-form center'>新規会員登録</h2>
             {error && 
-                 errorMessages.map((e)=>
-                 <div className="ui error visible message">{e}</div>
+                 errorMessages.map((e, index)=>
+                 <div key={index} className="ui error visible message">{e}</div>
                  )
             }
 

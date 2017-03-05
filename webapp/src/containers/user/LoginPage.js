@@ -35,12 +35,13 @@ class LoginPage extends Component {
     }
 
     render() {
-      const {authencating} = this.props
+      const {authencating, errorMessage} = this.props
       if (authencating) return null;
     
       return (
         <div className='login-page'>
             <LoginForm
+              error={errorMessage}
               onSubmit={this.props.onEmailAuth}
               onFBAuth={this.props.onFBAuth}
               onGGAuth={this.props.onGGAuth}
