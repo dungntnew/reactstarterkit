@@ -1,0 +1,2 @@
+ssh tabledev "tail -100f /var/www/html/your-table-api/current/log/production.log"
+

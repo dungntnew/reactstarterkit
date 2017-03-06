@@ -28,14 +28,16 @@ class EventDetailCover extends Component {
   }
 
   static propTypes = {
-    images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    images: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
 
   backgroundUrl() {
     const {activeIndex} = this.state
     const {images, coverImageUrl} = this.props
-    if (images && images[activeIndex]) {
-      return images[activeIndex]
+    const eventImages = [{id: -1, photoUrl: coverImageUrl}, ...images]
+    
+    if (eventImages[activeIndex]) {
+      return eventImages[activeIndex].photoUrl
     }else {
       return coverImageUrl
     }
@@ -46,8 +48,10 @@ class EventDetailCover extends Component {
   }
 
   renderEventImageSlider() {
-    const {images} = this.props
     const {activeIndex} = this.state
+
+    const {images, coverImageUrl} = this.props
+    const eventImages = [{id: -1, photoUrl: coverImageUrl}, ...images]
 
     return (
       <div className='ui basic modal' ref='eventImageSlider'>
@@ -57,7 +61,7 @@ class EventDetailCover extends Component {
             </div>
           </div>
           <div className='content'>
-            <EventImageSlider images={images} startIndex={activeIndex}/>
+            <EventImageSlider images={eventImages} startIndex={activeIndex}/>
           </div>
       </div>
     )
@@ -73,7 +77,10 @@ class EventDetailCover extends Component {
       </div>
     )
 
-    const thumbnails = this.props.images.slice(0, 4).map((url, index)=>(
+    const {images, coverImageUrl} = this.props
+    const eventImages = [{id: -1, photoUrl: coverImageUrl}, ...images]
+
+    const thumbnails = eventImages.slice(0, 5).map((image, index)=>(
       <div
         className={classNames({
           'item': true,
@@ -88,7 +95,7 @@ class EventDetailCover extends Component {
             })
           }
 
-          src={url}
+          src={image.photoUrl}
           onClick={
             ()=> this.setState({activeIndex: index})
           }
@@ -142,14 +149,20 @@ const mapStateToProps = (state, ownProps) => {
   const {isFetching, data} = getEventData(state)
 
   if (!isFetching) {
-    const {eventImageUrls, coverImageUrl} = data
+    const {eventImages, coverImageUrl} = data
     const {owner} = data
+    const user = Object.assign({}, owner, {
+      avatarUrl: owner.avatarUrl || '/img/avatar.png',
+      url: '/members/' + owner.id,
+      rank: _.floor(owner.rating || 0),
+      createdEventCount: owner.createdEventsCount,
+    })
 
     return {
       isFetching: false,
-      images: eventImageUrls,
+      images: eventImages,
       coverImageUrl: coverImageUrl,
-      user: owner
+      user: user,
     }
   }
   else {

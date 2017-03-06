@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 
 import '../../css/ShareButton.css';
 
+import {commingSoon} from '../../helpers/';
+
 const ShareButton = (props) => (
   <button className='ui button btn-bottom share-button' onClick={props.onShare}><i className="share icon"></i></button>
 )
@@ -19,7 +21,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onShare: ()=> {
     console.log('on Share')
-    alert("not support yet!")
+    commingSoon();
   }
 })
 

@@ -6,8 +6,8 @@ import _ from 'lodash'
 import { normalize } from 'normalizr'
 import { camelizeKeys } from 'humps'
 
-//const BASE_URL = 'http://127.0.0.1:8000/events/api/'
-const BASE_URL = 'http://localhost:3000/api/'
+const BASE_URL = 'http://52.37.92.74/v1/'
+//const BASE_URL = 'http://localhost:3000/api/'
 const MAX_ITEM_PER_PAGE = 25
 
 const checkHeaders = (response) => {
@@ -29,7 +29,7 @@ const parseJSON = (response) => {
 	return json
 }
 
-function callApi(endpoint, schema, params, httpOptions = {}) {
+function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 
 	let token = localStorage.getItem('id_token') || null
 	let config = {}
@@ -97,11 +97,19 @@ function callApi(endpoint, schema, params, httpOptions = {}) {
 		.then(parseJSON)
 		.then(json => {
 			console.log('**REST JSON**: ', json)
-
+            if (formatter) {
+				json = formatter(json)
+				console.log('**FORMATED JSON**: ', json)
+			}
 			if (_.has(json, 'results')) {
 				json = camelizeKeys(json.results)
 			}
+			else {
+				json = camelizeKeys(json)
+			}
 			const rest = Object.assign({}, normalize(json, schema), {})
+			console.log('** NORMALIZED JSON**: ', rest);
+			console.log(JSON.stringify(rest["entities"]["events"]["1"]));
 			return rest
 		})
 		.catch(err => {
@@ -121,7 +129,7 @@ export default store => next => action => {
 		return next(action)
 	}
 
-	let { endpoint, types, schema, params} = callAPI
+	let { endpoint, types, schema, params, formatter} = callAPI
 
 	// Verify input params
 	if (typeof endpoint === 'function') {
@@ -152,7 +160,7 @@ export default store => next => action => {
 	const [requestType, successType, failureType] = types
 	next(actionWith({ type: requestType, params: params }))
 
-	return callApi(endpoint, schema, params).then(
+	return callApi(endpoint, schema, params, {}, formatter).then(
 		response => next(actionWith({
 			payload: response,
 			params: params,

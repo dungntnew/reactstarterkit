@@ -178,16 +178,29 @@ export const fetchEvents = ({ caller={service:'list',
 }
 
 
+const _fixEventDetail = (event) => {
+  console.log("!!!!!!!!!!REMOVE ME!")
+  return Object.assign({}, event, {
+    members: event.members || [],
+    owner: Object.assign({}, event.owner, {
+      avatarUrl: event.owner.avatarUrl || null,
+      createdEventsCount: event.owner.createdEventsCount || 1,
+      rating: 4.5,
+      displayName: event.owner.displayName || "TEST"
+    })
+  })
+}
 
 export const fetchEventDetail = (id) => {
   return {
     [CALL_API]: {
-      endpoint: `details/${id}`,
+      endpoint: `events/${id}`,
       types: [EVENT_REQUEST, EVENT_SUCCESS, EVENT_FAILURE],
       schema: Schemas.EVENT,
       params: {
         method: 'GET',
-      }
+      },
+      formatter: (json) => _fixEventDetail(json['event']),
     }
   }
 }

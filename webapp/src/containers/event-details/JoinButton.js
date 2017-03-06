@@ -8,15 +8,15 @@ import '../../css/JoinButton.css';
 import {getEventData} from '../../flux/modules/resource'
 
 const JoinButton = (props) => {
-  const buttonTitle = props.joining ? 'キャンセル': '参加'
+  const buttonTitle = props.isParticipator ? 'キャンセル': '参加'
   const buttonClasses = classNames({
     'ui button': true,
     'btn-orange': true,
     'btn-bottom': true,
-    'join-button': !props.joining,
-    'cancel-button': props.joining
+    'join-button': !props.isParticipator,
+    'cancel-button': props.isParticipator
   })
-  const onClickFunc = props.joining ? props.onCancel: props.onJoin
+  const onClickFunc = props.isParticipator ? props.onCancel: props.onJoin
   return (props.authenticated &&
     <button className={buttonClasses} onClick={onClickFunc}>{buttonTitle}</button>
   )
@@ -24,7 +24,7 @@ const JoinButton = (props) => {
 
 
 JoinButton.propTypes = {
-  joining: PropTypes.bool.isRequired,
+  isParticipator: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
   onJoin: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
@@ -42,14 +42,14 @@ const mapStateToProps = (state, ownProps) => {
 
 
   if (!isFetching && authenticated && user) {
-    const {joined, id} = data
+    const {isParticipator, id} = data
     const userId = user.id
 
     return {
       authenticated: authenticated,
       userId: userId,
       user: user,
-      joining: joined,
+      isParticipator: isParticipator,
       eventId: id,
       isFetching: false
     }

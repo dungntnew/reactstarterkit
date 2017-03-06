@@ -21,13 +21,13 @@ const EventDetailHeader = (props) => (
         <div className='column title-header'>
            <h3 className='title-event'> {props.title} </h3>
            <p className='note-event'>{props.entryDealine}</p>
-           <p className='note-event'>{props.genre}</p>
+           <p className='note-event'>{props.genre.name}</p>
         </div>
 
         {/* colum 2*/}
         <div className='column detail-header'>
            <p className='des'>
-             金額 <span className='count'>{props.entryFee}</span>
+             参加費 <span className='count'>{props.entryFee}</span>
            </p>
            <p className='des'>
              参加人数
@@ -54,7 +54,7 @@ EventDetailHeader.propTypes = {
   title: PropTypes.string,
   entryDealine: PropTypes.string,
   openDateTime: PropTypes.string,
-  genre: PropTypes.string,
+  genre: PropTypes.object.isRequired,
   entryFee: PropTypes.string,
   joinerCount: PropTypes.number,
   joinerLimit: PropTypes.number,
@@ -66,23 +66,23 @@ const mapStateToProps = (state, ownProps) => {
   const {isFetching, data} = getEventData(state)
 
   if (!isFetching) {
-    const {eventId,
-           title,
-           registrationDateStart,
-           openDate,
-           genreName,
-           price,
-           memberCount, joinerLimit} = data
+    const {id,
+           name,
+           startedRegistrationAt,
+           openedAt,
+           genre,
+           entryFee,
+           joinersCount, joinersLimit} = data
     return {
-      eventId: eventId,
+      eventId: id,
       isFetching: false,
-      title: title,
-      entryDealine: formatDateAndTimeStr(registrationDateStart),
-      openDateTime: formatDateAndTimeStr(openDate),
-      genre: genreName,
-      entryFee: formatPrice(price),
-      joinerCount: memberCount,
-      joinerLimit: joinerLimit
+      title: name,
+      entryDealine: formatDateAndTimeStr(startedRegistrationAt),
+      openDateTime: formatDateAndTimeStr(openedAt),
+      genre: genre,
+      entryFee: formatPrice(entryFee),
+      joinerCount: joinersCount,
+      joinerLimit: joinersLimit
     }
   }
   else {

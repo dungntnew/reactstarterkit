@@ -26,8 +26,7 @@ class EventDetailBlocks extends Component {
 
   static propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    target: PropTypes.string,
-    targetName: PropTypes.string,
+    target: PropTypes.object.isRequired,
     members: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
@@ -50,7 +49,6 @@ class EventDetailBlocks extends Component {
     return (
       <EventTags tags={this.props.tags}
                  target={this.props.target}
-                 targetName={this.props.targetName}
                  limit={5}
       />
     )
@@ -121,9 +119,8 @@ class EventDetailBlocks extends Component {
       <div className='block-header'>
           <div> テーブルについて </div>
       </div>
-      <div className='description'>
-          {this.props.description}
-      </div>
+      <div className='description' 
+           dangerouslySetInnerHTML={ {__html: this.props.description} } />
       <div className='table-info'>
           {this.renderInfoRows()}
       </div>
@@ -181,9 +178,8 @@ const mapStateToProps = (state, ownProps) => {
     isFetching: isFetching,
     tags: data.tags,
     target: data.target,
-    targetName: data.targetName,
     members: data.members,
-    memberCount: data.memberCount,
+    memberCount: data.joinersCount,
     address: formatAddress(data),
     addressLink: addressToGoogleMapsLink(data),
     googleMapIframeLink: googleMapIFrameLink(data),

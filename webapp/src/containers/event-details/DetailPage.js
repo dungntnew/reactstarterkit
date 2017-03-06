@@ -54,20 +54,24 @@ class DetailPage extends Component {
                     <a className='link' href='#members'>参加者</a>
                     <a className='link' href='#info'>テーブルについて</a>
                     <a className='link' href='#maps'>会場地図</a>
-                    <a className='link' href='#comments'>コメント</a>
+                    {/*<a className='link' href='#comments'>コメント</a>*/}
                 </div>
               </div>
-
+              
+             
               <div className='thirteen wide computer thirteen wide tablet sixteen wide mobile column'>
                 <div className='ui detail-event' id='context'>
                   <EventDetailBlocks />
+                  {/*
                   <TopNEvents title='関するテーブル'
                               linkTitle='ALL'
                               query={query}
                               limit={4}
                   />
+                  */}
                 </div>
               </div>
+          
             </div>
           </div>
         </div>

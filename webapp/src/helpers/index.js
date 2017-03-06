@@ -132,6 +132,7 @@ function paramsToQueryObject(params) {
 }
 
 function commingSoon(args) {
+  if (args) {args.preventDefault();}
   console.log("require implement!, ", args);
   alert('現在準備中。3月26日オープン！');
 } 

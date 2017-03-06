@@ -12,11 +12,26 @@ const eventSchema = new Schema('events', {
 
 eventSchema.define({
   owner: userSchema,
-  members: arrayOf(userSchema)
+  target: targetSchema,
+  genre: genreSchema,
+  members: arrayOf(userSchema),
+  // tags: arrayOf(tagSchema),
 })
 
-const categorySchema = new Schema('categories', {
-  idAttribute: category => _.toString(category.id)
+const genreSchema = new Schema('genres', {
+  idAttribute: genre => _.toString(genre.id)
+})
+
+const targetSchema = new Schema('targets', {
+  idAttribute: target => _.toString(target.id)
+})
+
+const tagSchema = new Schema('tags', {
+  idAttribute: tag => _.toString(tag.id)
+})
+
+const imageSchema = new Schema('images', {
+  idAttribute: image => _.toString(image.id)
 })
 
 const blogSchema = new Schema('blogs', {
@@ -29,8 +44,10 @@ const Schemas = {
   USER_ARRAY: arrayOf(userSchema),
   EVENT: eventSchema,
   EVENT_ARRAY: arrayOf(eventSchema),
-  CATEGORY: categorySchema,
-  CATEGORY_ARRAY: arrayOf(categorySchema),
+  GENRE: genreSchema,
+  GENRE_ARRAY: arrayOf(genreSchema),
+  TARGET: targetSchema,
+  TARGET_ARRAY: arrayOf(targetSchema),
   BLOG: blogSchema,
   BLOG_ARRAY: arrayOf(blogSchema),
 }
