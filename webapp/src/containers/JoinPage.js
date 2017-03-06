@@ -4,17 +4,8 @@ import {connect} from 'react-redux';
 
 import '../css/JoinPage.css';
 
-import Logo from '../components/PageLogo';
-import PageHeader from '../components/PageHeader';
-import TopNav from '../containers/TopNav';
-import QuickSearchBar from '../containers/QuickSearchBar';
-import PageFooter from '../components/PageFooter';
-
 import JoinEventPayment from '../components/payment/JoinEventPayment';
 import JoinEventPaymentFinish from '../components/payment/JoinEventPaymentFinish';
-
-
-
 
 class JoinPage extends Component {
 
@@ -23,9 +14,7 @@ class JoinPage extends Component {
     }
 
     componentDidMount(){
-       const {userId, eventId} = this.props.params
-       this.props.init()
-       this.props.execJoinEvent(eventId)
+       const {eventId} = this.props.params
     }
 
     renderPaymentInfo() {
@@ -50,14 +39,10 @@ class JoinPage extends Component {
     }
 
     render() {
-      const {isFetching, errorMessage} = this.props
-      if (isFetching) {
-        return null;
-      }
-
       return (
         <div className='join-page'>
-          
+           TODO:
+           <h2> 決済フォーム</h2>
         </div>
       )
     }

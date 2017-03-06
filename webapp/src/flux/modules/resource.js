@@ -253,19 +253,20 @@ export const asyncCreateEvent = (userId, data) => {
   }
 }
 
-export const NEW_PARTICIPATION_REQUEST = 'NEW_PARTICIPATION_REQUEST' 
-export const NEW_PARTICIPATION_SUCCESS = 'NEW_PARTICIPATION_SUCCESS'
-export const NEW_PARTICIPATION_FAILURE = 'NEW_PARTICIPATION_FAILURE'
+export const NEW_PAYMENT_REQUEST = 'NEW_PAYMENT_REQUEST' 
+export const NEW_PAYMENT_SUCCESS = 'NEW_PAYMENT_SUCCESS'
+export const NEW_PAYMENT_FAILURE = 'NEW_PAYMENT_FAILURE'
 
-export const createParticipation = (eventId) => {
+export const createPayment = (eventId) => {
   return {
     [CALL_API]: {
       endpoint: `participations`,
-      types: [NEW_PARTICIPATION_REQUEST, 
-              NEW_PARTICIPATION_SUCCESS, 
-              NEW_PARTICIPATION_FAILURE],
+      types: [NEW_PAYMENT_REQUEST, 
+              NEW_PAYMENT_SUCCESS, 
+              NEW_PAYMENT_FAILURE],
       schema: Schemas.PAYMENT,
       params: {
+        authenticated: true,
         method: 'POST',
         query: {event_id: eventId},
       },
@@ -474,35 +475,33 @@ export const viewingUserDetailReducer = (state={isFetching: true, userId: null},
 }
 
 // save state new participation
-const PARTICIPATION_STEPS = {
-  'JOIN': 'JOIN',
-  'CONFIRMATION': 'CONFIRMATION',
-  'VALIDATION': 'VALIDATION',
-  'PAYMENT': 'PAYMENT',
-}
+const PAYMENT_STEPS = [
+  'VIEWING',
+  'JOIN',
+  'CONFIRMATION',
+  'VALIDATION',
+  'PAYMENT',
+]
 
-export const creatingParticitionReducer = (state={isLoading: false, step: -1, data: {}}, action) => {
+export const creatingPaymentReducer = (state={isLoading: false, step: 0, data: {}}, action) => {
   switch(action.type) {
-    case NEW_PARTICIPATION_REQUEST:
-      return _.merge({}, state, {
-        step: 0,
-        isLoading: true,
-        data: _.merge({}, state.data, {
-          eventId: action.payload.eventId
-        }),
-      })
-    case NEW_PARTICIPATION_SUCCESS:       
+    case NEW_PAYMENT_REQUEST:
       return _.merge({}, state, {
         step: 1,
+        isLoading: true,
+      })
+    case NEW_PAYMENT_SUCCESS:       
+      return _.merge({}, state, {
+        step: 2,
         isLoading: false,
         data: _.merge({}, state.data, {
           paymentId: action.payload.result,
         }),
       }) 
-    case NEW_PARTICIPATION_FAILURE:
+    case NEW_PAYMENT_FAILURE:
       return _.merge({}, state, {
         isLoading: false,
-        step: -1,
+        step: 0,
         errorMessage: action.error
       })
     default: return state
@@ -589,6 +588,41 @@ export const getUserData = (globalState) => {
   return {
     isFetching,
     isSaving: false, // TODO: save that state in editingUser reducer
+    errorMessage,
+    data
+  }
+}
+
+export const getPaymentStatus = (globalState) => {
+  const {creatingPaymentData} = globalState
+  const {isLoading, errorMessage, step} = creatingPaymentData
+  return {
+    isLoading,
+    errorMessage,
+    step,
+    status: PAYMENT_STEPS[step],
+  }
+}
+
+export const getCreatingPaymentData = (globalState) => {
+  const {entities} = globalState
+  const {payments} = entities
+  const {paymentItems} = entities
+
+  const {creatingPaymentData} = globalState
+  const {isLoading, errorMessage, step} = creatingPaymentData
+  let {data} = creatingPaymentData;
+
+  data = (step != -1 && data && data.paymentId && payments.length > 0) ? payments[data.paymentId]: null
+  if (data) {
+    data = _.merge({}, data, {
+      paymentItems: _.map(data.paymentItems, (itemId)=> paymentItems[itemId])
+    })
+  }
+
+  return {
+    isLoading,
+    step,
     errorMessage,
     data
   }

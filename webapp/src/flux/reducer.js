@@ -34,6 +34,8 @@ import {
     loadedUserDetailsReducer,
     viewingUserDetailReducer,
 
+    creatingPaymentReducer,
+
 } from './modules/resource';
 
 import {loadingReducer} from './modules/loading'
@@ -67,6 +69,7 @@ const rootReducer = combineReducers({
   loadedEventDetails: loadedEventDetailsReducer,
   viewingEventDetail: viewingEventDetailReducer,
   creatingEventData: creatingEventReducer,
+  creatingPaymentData: creatingPaymentReducer,
   
   // // 
 

@@ -29,9 +29,20 @@ const parseJSON = (response) => {
 	return json
 }
 
+const authHeaders = () => {
+  const client = localStorage.getItem('client');
+  const uid = localStorage.getItem('uid');
+  const token = localStorage.getItem('access-token');
+  
+  return {
+    client,
+    uid,
+    'access-token': token
+  }
+}
+
 function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 
-	let token = localStorage.getItem('id_token') || null
 	let config = {}
 
 	const {authenticated, method, query, pagging} = params
@@ -43,14 +54,7 @@ function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 
 	// apply token if authentication is required API
 	if (authenticated) {
-		if (token) {
-			headers = Object.assign({}, headers, {
-				'Authorization': `Bearer ${token}`
-			})
-		}
-		else {
-			throw "No token saved!"
-		}
+		headers = Object.assign({}, headers, authHeaders())
 	}
 
 	// build query params
@@ -67,20 +71,20 @@ function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 	// if request method is GET, add query param to query url
 	// else add query param as request body
 	const requestMethod = method || 'GET'
-	let fetchOptions = { 'headers': headers }
+	let fetchOptions = Object.assign({}, { 'headers': headers }, httpOptions);
 
 
 	if (requestMethod === 'POST') {
-		fetchOptions = Object.assign({}, {
+		fetchOptions = Object.assign({}, fetchOptions, {
 			method: 'POST',
 			body: JSON.stringify(query)
-		}, httpOptions)
+		})
 		console.log("fetchOptions: ", fetchOptions);
 	}
 	else if (requestMethod === 'GET') {
-		fetchOptions = Object.assign({}, {
+		fetchOptions = Object.assign({}, fetchOptions, {
 			method: 'GET',
-		}, httpOptions)
+		})
 		if (query) {
 			queryParams = Object.assign({}, queryParams, query)
 		}
@@ -90,6 +94,7 @@ function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 	const stringified = queryString.stringify(queryParams)
 	const API_CALL_URL = `${BASE_URL}${endpoint}?${stringified}`
 	console.log('API_CALL_URL', API_CALL_URL)
+	console.log('CALL_API_OPTIONS', fetchOptions);
 
 	return fetch(API_CALL_URL, fetchOptions)
 		.then(checkHeaders)
@@ -109,7 +114,6 @@ function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 			}
 			const rest = Object.assign({}, normalize(json, schema), {})
 			console.log('** NORMALIZED JSON**: ', rest);
-			console.log(JSON.stringify(rest["entities"]["events"]["1"]));
 			return rest
 		})
 		.catch(err => {
