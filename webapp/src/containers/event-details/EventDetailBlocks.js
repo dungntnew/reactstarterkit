@@ -82,7 +82,7 @@ class EventDetailBlocks extends Component {
         <div className='block-header'>参加者 <span>{memberCount}</span></div>
         <div className='ui horizontal list list-member'>
            {content}
-           {memberMenu}
+           {memberCount > 1 && memberMenu}
         </div>
       </div>
     )
@@ -178,7 +178,7 @@ const mapStateToProps = (state, ownProps) => {
     isFetching: isFetching,
     tags: data.tags,
     target: data.target,
-    members: data.members,
+    members: data.participators,
     memberCount: data.joinersCount,
     address: formatAddress(data),
     addressLink: addressToGoogleMapsLink(data),

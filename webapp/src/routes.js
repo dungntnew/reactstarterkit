@@ -97,6 +97,11 @@ const routes = (
     <Route path='/events/:eventId'
            components={getComponents({main: DetailPage})} config={getConfig()}
           />
+    {/* event join */}
+    <Route path='/join/:userId/:eventId'
+           components={getComponents({main: JoinPage})} config={getConfig()}
+           onEnter={requireAuth}/>
+
     {/* event create */}
    <Route path='/create'
            components={getComponents({main: CreatePage})} config={getConfig()}

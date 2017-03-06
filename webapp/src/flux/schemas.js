@@ -14,7 +14,7 @@ eventSchema.define({
   owner: userSchema,
   target: targetSchema,
   genre: genreSchema,
-  members: arrayOf(userSchema),
+  participators: arrayOf(userSchema),
   // tags: arrayOf(tagSchema),
 })
 
@@ -34,6 +34,18 @@ const imageSchema = new Schema('images', {
   idAttribute: image => _.toString(image.id)
 })
 
+const paymentSchema = new Schema('payments', {
+  idAttribute: payment => _.toString(payment.id)
+})
+
+const paymentItemSchema = new Schema('paymentItems', {
+  idAttribute: item => _.toString(item.id)
+})
+
+paymentSchema.define({
+  paymentItems: arrayOf(paymentItemSchema),
+})
+
 const blogSchema = new Schema('blogs', {
   idAttribute: blog => _.toString(blog.id)
 })
@@ -44,6 +56,10 @@ const Schemas = {
   USER_ARRAY: arrayOf(userSchema),
   EVENT: eventSchema,
   EVENT_ARRAY: arrayOf(eventSchema),
+  PAYMENT: paymentSchema,
+  PAYMENT_ARRAY: arrayOf(paymentSchema),
+  PAYMENT_ITEM: paymentItemSchema,
+  PAYMENT_ITEM_ARRAY: arrayOf(paymentItemSchema),
   GENRE: genreSchema,
   GENRE_ARRAY: arrayOf(genreSchema),
   TARGET: targetSchema,

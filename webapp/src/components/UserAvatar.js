@@ -14,7 +14,7 @@ class UserAvatar extends Component {
     displayName: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     rank: PropTypes.number.isRequired,
-    createdEventCount: PropTypes.number.isRequired,
+    createdEventsCount: PropTypes.number.isRequired,
     editable: PropTypes.bool,
     onEdit: PropTypes.func,
   }
@@ -46,7 +46,7 @@ class UserAvatar extends Component {
       url,
       avatarUrl,
       displayName,
-      createdEventCount
+      createdEventsCount
     }
     = this.props
 
@@ -59,7 +59,7 @@ class UserAvatar extends Component {
         <div className='user-description'>
           <h3 className='avatar-name'>{displayName}</h3>
           <div className="ui star rating" ref="ratingRef"></div>
-          <div className='createdEventCount'>テーブル数 {createdEventCount}</div>
+          <div className='createdEventCount'>テーブル数 {createdEventsCount}</div>
         </div>
       </div>
     )

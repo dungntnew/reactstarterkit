@@ -178,18 +178,6 @@ export const fetchEvents = ({ caller={service:'list',
 }
 
 
-const _fixEventDetail = (event) => {
-  console.log("!!!!!!!!!!REMOVE ME!")
-  return Object.assign({}, event, {
-    members: event.members || [],
-    owner: Object.assign({}, event.owner, {
-      avatarUrl: event.owner.avatarUrl || null,
-      createdEventsCount: event.owner.createdEventsCount || 1,
-      rating: 4.5,
-      displayName: event.owner.displayName || "TEST"
-    })
-  })
-}
 
 export const fetchEventDetail = (id) => {
   return {
@@ -200,7 +188,7 @@ export const fetchEventDetail = (id) => {
       params: {
         method: 'GET',
       },
-      formatter: (json) => _fixEventDetail(json['event']),
+      formatter: (json) => json['event'],
     }
   }
 }
@@ -262,6 +250,27 @@ export const asyncCreateEvent = (userId, data) => {
     dispatch(saveNewEvent(userId, data, (response) => {
       dispatch(saveEventImage(userId, data));
     }))
+  }
+}
+
+export const NEW_PARTICIPATION_REQUEST = 'NEW_PARTICIPATION_REQUEST' 
+export const NEW_PARTICIPATION_SUCCESS = 'NEW_PARTICIPATION_SUCCESS'
+export const NEW_PARTICIPATION_FAILURE = 'NEW_PARTICIPATION_FAILURE'
+
+export const createParticipation = (eventId) => {
+  return {
+    [CALL_API]: {
+      endpoint: `participations`,
+      types: [NEW_PARTICIPATION_REQUEST, 
+              NEW_PARTICIPATION_SUCCESS, 
+              NEW_PARTICIPATION_FAILURE],
+      schema: Schemas.PAYMENT,
+      params: {
+        method: 'POST',
+        query: {event_id: eventId},
+      },
+      formatter: (json) => json['payment']
+    }
   }
 }
 
@@ -464,6 +473,41 @@ export const viewingUserDetailReducer = (state={isFetching: true, userId: null},
   }
 }
 
+// save state new participation
+const PARTICIPATION_STEPS = {
+  'JOIN': 'JOIN',
+  'CONFIRMATION': 'CONFIRMATION',
+  'VALIDATION': 'VALIDATION',
+  'PAYMENT': 'PAYMENT',
+}
+
+export const creatingParticitionReducer = (state={isLoading: false, step: -1, data: {}}, action) => {
+  switch(action.type) {
+    case NEW_PARTICIPATION_REQUEST:
+      return _.merge({}, state, {
+        step: 0,
+        isLoading: true,
+        data: _.merge({}, state.data, {
+          eventId: action.payload.eventId
+        }),
+      })
+    case NEW_PARTICIPATION_SUCCESS:       
+      return _.merge({}, state, {
+        step: 1,
+        isLoading: false,
+        data: _.merge({}, state.data, {
+          paymentId: action.payload.result,
+        }),
+      }) 
+    case NEW_PARTICIPATION_FAILURE:
+      return _.merge({}, state, {
+        isLoading: false,
+        step: -1,
+        errorMessage: action.error
+      })
+    default: return state
+  }
+}
 
 export const getTargetItems = (globalState) => {
   return globalState.entities.targets;
@@ -518,7 +562,7 @@ export const getEventData = (globalState) => {
   if (data) {
     data = _.merge({}, data, {
       owner: users[data.owner],
-      members: data.members.map(userId => users[userId])
+      participators: data.participators.map(userId => users[userId])
     })
   }
 

@@ -152,10 +152,8 @@ const mapStateToProps = (state, ownProps) => {
     const {eventImages, coverImageUrl} = data
     const {owner} = data
     const user = Object.assign({}, owner, {
-      avatarUrl: owner.avatarUrl || '/img/avatar.png',
       url: '/members/' + owner.id,
       rank: _.floor(owner.rating || 0),
-      createdEventCount: owner.createdEventsCount,
     })
 
     return {
