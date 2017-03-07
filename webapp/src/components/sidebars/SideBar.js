@@ -91,7 +91,10 @@ const ContextSideBar = (props) => {
            style={styles}
            /*className="ui secondary vertical pointing menu" */
            >
-           {renderMenuItems({items: filteredMenuLinks(false, authenticated)})}
+           {/*{renderMenuItems({items: filteredMenuLinks(false, authenticated)})}*/}
+          <div className="ui secondary vertical pointing menu">
+          {renderMenuItems({items: filteredMenuLinks(true, authenticated)})}
+          </div>
           </BurgerMenu>
         </BreakPoint>
         
@@ -128,6 +131,6 @@ export const SideBar = (props) => {
 
 export const MPSideBar = (props) => {
     return (
-        <ContextedSideBar isMP={true}/>
+        <ContextedSideBar isMP={false}/>
     )
 }

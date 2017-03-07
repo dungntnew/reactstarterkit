@@ -128,7 +128,7 @@ class CreditCard extends Component {
                   name='number'
                   />
             </div>
-            {this.renderSupportingCreditTypes()}
+            {/*{this.renderSupportingCreditTypes()}*/}
 
             <div className='list-card'>
             </div>

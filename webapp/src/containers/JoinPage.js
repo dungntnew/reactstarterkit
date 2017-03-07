@@ -17,6 +17,13 @@ import {fetchPaymentDetail, getPaymentDetailData, syncRequestCreditCardToken, ge
 
 import CreditCard from '../components/credit-card/CreditCard';
 
+const style = {
+  textAlign: 'center',
+  minHeight: '320px',
+  padding: '20px',
+  paddingTop: '100px',
+}
+
 class JoinPage extends Component {
 
     backToEventDetail() {
@@ -37,6 +44,7 @@ class JoinPage extends Component {
     }
 
     componentDidMount(){
+      this.processed = false;
       this.props.clearSession();
       this.props.fetchPayment();
     }
@@ -51,17 +59,22 @@ class JoinPage extends Component {
                    && !processingPayment 
                    && token 
                    && paymentStatus === 'UNPAID') {
-        
-           this.props.execPayment(token);
-        
+      
+           if (!this.processed) {
+             this.processed = true;
+             this.props.execPayment(token);
+           }
+           else {
+             console.log("WHAT FUCK ? ", this.props)
+           }
       }
     }
     
     renderPaymentFinish() {
         return (
           <div className='join-page'>
-              <div className='ui segment join-event-payment-finish'>
-                <div>決済完了しました！</div>
+              <div className='ui segment join-event-payment-finish' style={style}>
+                <h3>決済完了しました！</h3>
                 <Link to='/events/1' className='ui orange button'>当イベントへ戻る</Link>
               </div>
           </div>
@@ -70,8 +83,8 @@ class JoinPage extends Component {
 
     renderProcessPayment() {
         return (
-          <div className='join-page'>
-              <div className='ui segment join-event-payment-finish'>
+          <div className='join-page' style={style}>
+              <div className='ui segment join-event-payment-finish' style={style}>
                 <div>Your Payment Processing...</div>
               </div>
           </div>
@@ -83,7 +96,8 @@ class JoinPage extends Component {
     
       return (
          <div className='join-page'>
-            <div className='ui segment container join-event-payment'>
+            
+            <div className='ui segment container join-event-payment' >
                 <h3 className='title'>支払い手続き</h3>
 
                 <div className='ui items description'>
@@ -102,23 +116,6 @@ class JoinPage extends Component {
                 <table className='ui very basic unstackable table'>
                   <tbody>
                     
-                    <tr className='payment-info'>
-                          <td className='six wide center aligned text-des'>支払い方法:</td>
-                          <td className='three wide right aligned content-des'>
-                            {!processingPayment && 
-                            <CreditCard
-                                data={credit}
-                                processing={false}
-                                errorMessage={tokenErrorMessage}
-                                onSubmit={(data)=>{
-                                  this.pay(data)
-                                }}
-                              />
-                            }
-                          </td>
-                          <td className='three wide no-sp'></td>
-                    </tr>  
-                      
                     <tr className='price-info'>
                       <td className='six wide center aligned text-des'>支払い金額:</td>
                       <td className='three wide right aligned content-des'>
@@ -126,17 +123,20 @@ class JoinPage extends Component {
                       </td>
                       <td className='three wide no-sp'></td>
                     </tr>
-
-                    <tr className='btn-group'>
-                      <td className='six wide center aligned'>
-                        <button className='ui button' onClick={()=> this.cancel()}>戻る</button>
-                      </td>
-                      <td className='six wide right aligned mobile only'>
-                        <button className='ui orange button' onClick={()=> this.pay()}>支払う</button>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
+
+                {!processingPayment && 
+                      <CreditCard
+                          data={credit}
+                          processing={false}
+                          errorMessage={tokenErrorMessage}
+                          onSubmit={(data)=>{
+                            this.pay(data)
+                          }}
+                        />
+                  }
+
               </div>
          </div>
       )
@@ -145,7 +145,7 @@ class JoinPage extends Component {
     renderErrors(errorMessage) {
       return (
         <div className='join-page'>
-         <div className='ui segment join-event-payment-finish'>
+         <div className='ui segment join-event-payment-finish' style={style}>
               <div className='ui error visible message'>
                 {errorMessage}
               </div>
@@ -157,7 +157,7 @@ class JoinPage extends Component {
 
    renderLoading() {
       return (
-        <div className='join-page'>
+        <div className='join-page' style={style}>
           <div className=''>
             <h4>Loading..</h4>
           </div>

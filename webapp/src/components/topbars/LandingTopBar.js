@@ -30,7 +30,7 @@ const LandingTopBar = (props) => (
 
         <BreakPoint name='phone'>
             <div>
-                <ToogleButton toogle={()=> {}}/>
+                {/*<ToogleButton toogle={()=> {}}/>*/}
                 <Exploder location={props.location} params={props.params} />
             </div>
         </BreakPoint>

@@ -11,7 +11,7 @@ const NotFoundPage = (props) => (
 	   更新してもご覧いただけない場合は、
 	   <a href="mailto:info@revue.co.jp?subject=">「こちら」</a>よりお問い合わせください。
 	</p>
-	<Link to='/events/event-1'> 当イベントページ　へ
+	<Link to='/events/1'> 当イベントページ　へ
 		 <i className=""></i>
 	</Link>
   </div>

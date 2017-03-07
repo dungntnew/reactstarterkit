@@ -198,12 +198,14 @@ export const fetchEventDetail = (id) => {
 
 export const fetchEventDetailIfNeed = (id) => {
   return (dispatch, getState) => {
-    const {loadedEventDetails} = getState()
-    if (_.includes(loadedEventDetails, id)) {
-      return Promise.resolve()
-    } else {
-      return dispatch(fetchEventDetail(id))
-    }
+    return dispatch(fetchEventDetail(id))
+    
+    // const {loadedEventDetails} = getState()
+    // if (_.includes(loadedEventDetails, id)) {
+    //   return Promise.resolve()
+    // } else {
+    //   return dispatch(fetchEventDetail(id))
+    // }
   }
 }
 

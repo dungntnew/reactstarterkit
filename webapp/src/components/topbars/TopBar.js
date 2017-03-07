@@ -16,9 +16,14 @@ const TopBar = (props) => (
             <TopNav />
         </PageHeader>
     </BreakPoint>
+    
     <BreakPoint name='phone'>
-        <ToogleButton toogle={()=> {}}/>
-        <QuickSearchBar location={props.location} params={props.params} />
+        {/*<ToogleButton toogle={()=> {}}/>*/}
+        <PageHeader>
+            <Logo color={true} />
+            <QuickSearchBar location={props.location} params={props.params} />
+            {/*<TopNav />*/}
+        </PageHeader>
     </BreakPoint>
     </div>
 )

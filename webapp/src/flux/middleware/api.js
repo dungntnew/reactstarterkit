@@ -49,9 +49,7 @@ function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 	}
 
 	// apply token if authentication is required API
-	if (authenticated) {
-		headers = Object.assign({}, headers, authHeaders())
-	}
+    headers = Object.assign({}, headers, authHeaders())
 
 	// build query params
 	let queryParams = {}
