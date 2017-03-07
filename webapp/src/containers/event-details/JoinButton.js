@@ -22,10 +22,11 @@ class JoinButton extends Component {
 
   checkPaymentStatus() {
     const {paymentStatus} = this.props;
-    const {step} = paymentStatus
-    if (step >= 2) {
-      const {push, eventId} = this.props;
-      push(`/join/${eventId}`)
+    const {step, data} = paymentStatus
+    if (step >= 2 && data) {
+      const {paymentId} = data
+      const {push} = this.props;
+      push(`/payments/${paymentId}`)
     }
   }
 

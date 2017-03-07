@@ -38,7 +38,7 @@ const createAuthHeader = () => {
   const client = localStorage.getItem('client');
   const uid = localStorage.getItem('uid');
   const token = localStorage.getItem('access-token');
-  
+
   return {
     client,
     uid,
@@ -47,78 +47,105 @@ const createAuthHeader = () => {
 }
 
 export const getJson = (endpoint, query, options = {}) => {
-    const stringified = queryString.stringify(query)
-    const api = `${API_URL}${endpoint}?${stringified}`
-    const {authRequired} =  options
-    const authHeaders = authRequired ? createAuthHeader(): {}
+  const stringified = queryString.stringify(query)
+  const api = `${API_URL}${endpoint}?${stringified}`
+  const {authRequired} = options
+  const authHeaders = authRequired ? createAuthHeader() : {}
 
-    const fetchOptions = Object.assign({}, {
-      method: 'GET',
-      headers: Object.assign({}, authHeaders, {
-        'Content-Type': 'application/json'
-      })
-    }, options)
+  const fetchOptions = Object.assign({}, {
+    method: 'GET',
+    headers: Object.assign({}, authHeaders, {
+      'Content-Type': 'application/json'
+    })
+  }, options)
 
-    //console.log(api, fetchOptions)
+  //console.log(api, fetchOptions)
 
-    return fetch(api, fetchOptions)
-             .then(checkHeaders)
-             .then(checkStatus)
-             .then(parseJSON)
+  return fetch(api, fetchOptions)
+    .then(checkHeaders)
+    .then(checkStatus)
+    .then(parseJSON)
 }
 
 export const doAuth = (endpoint, params, options = {}) => {
-    const stringified = JSON.stringify(params)
-    const api = `${API_URL}${endpoint}`
-    console.log('POST: ', api)
-    console.log('POST PARAMS: ', stringified)
-    
-    const fetchOptions = Object.assign({}, {
-      method: 'POST',
-      headers:  {
-        'Content-Type': 'application/json'
-      },
-      body: stringified
-    }, options)
+  const stringified = JSON.stringify(params)
+  const api = `${API_URL}${endpoint}`
+  console.log('POST: ', api)
+  console.log('POST PARAMS: ', stringified)
 
-    //console.log(api, fetchOptions)
+  const fetchOptions = Object.assign({}, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: stringified
+  }, options)
 
-    return fetch(api, fetchOptions)
-             .then(checkHeaders)
-             .then(checkStatus)
-             .then(saveHeaders)
-             .then(parseJSON)
+  //console.log(api, fetchOptions)
+
+  return fetch(api, fetchOptions)
+    .then(checkHeaders)
+    .then(checkStatus)
+    .then(saveHeaders)
+    .then(parseJSON)
 }
 
 export const postJson = (endpoint, params, options = {}) => {
-    const stringified = JSON.stringify(params)
-    const api = `${API_URL}${endpoint}`
-    const {authRequired} =  options
-    const authHeaders = authRequired ? createAuthHeader(): {}
+  const stringified = JSON.stringify(params)
+  const api = `${API_URL}${endpoint}`
+  const {authRequired} = options
+  const authHeaders = authRequired ? createAuthHeader() : {}
 
-    console.log('POST: ', api)
-    console.log('POST PARAMS: ', stringified)
-    
-    const fetchOptions = Object.assign({}, {
-      method: 'POST',
-      headers: Object.assign({}, authHeaders, {
-        'Content-Type': 'application/json'
-      }),
-      body: stringified
-    }, options)
+  console.log('POST: ', api)
+  console.log('POST PARAMS: ', stringified)
 
-    //console.log(api, fetchOptions)
+  const fetchOptions = Object.assign({}, {
+    method: 'POST',
+    headers: Object.assign({}, authHeaders, {
+      'Content-Type': 'application/json'
+    }),
+    body: stringified
+  }, options)
 
-    return fetch(api, fetchOptions)
-             .then(checkHeaders)
-             .then(checkStatus)
-             .then(parseJSON)
+  //console.log(api, fetchOptions)
+
+  return fetch(api, fetchOptions)
+    .then(checkHeaders)
+    .then(checkStatus)
+    .then(parseJSON)
 }
+
+
+const VARITRANS_VTDIRECT_API = '/vtdirect/v2/tokens'
+const VARITRANS_VTDIRECT_KEY = '283ed8ec-b46d-4b50-b73e-0b3c89bf94ca'
+
+export const getCreditToken = (query) => {
+  
+  const queryData = Object.assign({}, query, {
+    client_key: VARITRANS_VTDIRECT_KEY,
+  })
+  const stringified = queryString.stringify(queryData)
+  const url = `${VARITRANS_VTDIRECT_API}?${stringified}`
+
+  return fetch(url, {
+        method: 'GET',
+        headers: {
+          'mode': 'no-cors',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        }
+      })
+      .then((response) => {
+        return response.json();
+      });
+}
+
 
 const ApiClient = {
   doAuth,
   getJson,
   postJson,
+  getCreditToken,
 }
 
 export default ApiClient

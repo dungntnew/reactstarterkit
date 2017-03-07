@@ -24,7 +24,9 @@ const JoinEventPayment = (props) => (
 
     <table className='ui very basic unstackable table'>
       <tbody>
-        <tr className='payment-info'>
+        
+         {props.credit &&
+          <tr className='payment-info'>
           <td className='six wide center aligned text-des'>支払い方法:</td>
           <td className='three wide right aligned content-des'>
             <div>{props.credit.method}</div>
@@ -32,8 +34,9 @@ const JoinEventPayment = (props) => (
             <div>有効期限  {props.credit.exprMonth}/{props.credit.exprYear}</div>
           </td>
           <td className='three wide no-sp'></td>
-        </tr>
-
+          </tr>
+          }
+          
         <tr className='price-info'>
           <td className='six wide center aligned text-des'>支払い金額:</td>
           <td className='three wide right aligned content-des'>
@@ -57,14 +60,9 @@ const JoinEventPayment = (props) => (
 )
 
 JoinEventPayment.propTypes = {
+  credit: PropTypes.object,
   imageUrl: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
-  credit: PropTypes.shape({
-    method: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-    exprYear: PropTypes.string.isRequired,
-    exprMonth: PropTypes.string.isRequired
-  }).isRequired,
   price: PropTypes.number.isRequired,
   cancel: PropTypes.func.isRequired,
   next: PropTypes.func.isRequired

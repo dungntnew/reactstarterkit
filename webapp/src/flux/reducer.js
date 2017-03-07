@@ -35,6 +35,8 @@ import {
     viewingUserDetailReducer,
 
     creatingPaymentReducer,
+    viewingPaymentDetailReducer,
+    creditCardReducer,
 
 } from './modules/resource';
 
@@ -70,6 +72,8 @@ const rootReducer = combineReducers({
   viewingEventDetail: viewingEventDetailReducer,
   creatingEventData: creatingEventReducer,
   creatingPaymentData: creatingPaymentReducer,
+  viewingPaymentDetail: viewingPaymentDetailReducer,
+  creditcard: creditCardReducer,
   
   // // 
 

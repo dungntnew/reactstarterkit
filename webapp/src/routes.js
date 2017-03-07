@@ -98,7 +98,7 @@ const routes = (
            components={getComponents({main: DetailPage})} config={getConfig()}
           />
     {/* event join */}
-    <Route path='/join/:eventId'
+    <Route path='/payments/:paymentId'
            components={getComponents({main: JoinPage})} config={getConfig()}
            />
 

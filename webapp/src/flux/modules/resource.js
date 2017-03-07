@@ -41,6 +41,9 @@ export const USER_REQUEST = 'USER_REQUEST'
 export const USER_SUCCESS = 'USER_SUCCESS'
 export const USER_FAILURE = 'USER_FAILURE'
 
+export const PAYMENT_REQUEST = 'PAYMENT_REQUEST'
+export const PAYMENT_SUCCESS = 'PAYMENT_SUCCESS'
+export const PAYMENT_FAILURE = 'PAYMENT_FAILURE'
 
 // Uses the API middlware to get a categories
 export const fetchCategories = () => {
@@ -275,6 +278,87 @@ export const createPayment = (eventId) => {
   }
 }
 
+export const fetchPaymentDetail = (id) => {
+  return {
+    [CALL_API]: {
+      endpoint: `payments/${id}`,
+      types: [PAYMENT_REQUEST, PAYMENT_SUCCESS, PAYMENT_FAILURE],
+      schema: Schemas.PAYMENT,
+      params: {
+        authenticated: true,
+        method: 'GET',
+      },
+      formatter: (json) => json['payment'],
+    }
+  }
+}
+
+export const updatePayment = (id, creditToken) => {
+  return {
+    [CALL_API]: {
+      endpoint: `payments/${id}`,
+      types: [PAYMENT_REQUEST, PAYMENT_SUCCESS, PAYMENT_FAILURE],
+      schema: Schemas.PAYMENT,
+      params: {
+        authenticated: true,
+        method: 'PUT',
+        query: {token_id: creditToken}
+      },
+      formatter: (json) => json['payment'],
+    }
+  }
+}
+
+// request varitrans creditcard token
+export const CREDIT_CARD_TOKEN_REQUEST = 'CREDIT_CARD_TOKEN_REQUEST'
+export const CREDIT_CARD_TOKEN_SUCCESS = 'CREDIT_CARD_TOKEN_SUCCESS'
+export const CREDIT_CARD_TOKEN_FAILURE = 'CREDIT_CARD_TOKEN_FAILURE'
+
+export const requestCreditCardToken = (data) => {
+	return {
+		type: CREDIT_CARD_TOKEN_REQUEST,
+		payload: data
+	}
+}
+
+export const creditCardTokenReceived = (data) => {
+	return {
+		type: CREDIT_CARD_TOKEN_SUCCESS,
+		payload: data
+	}
+}
+
+export const requestCreditCardTokenFailed = (error) => {
+	return {
+		type: CREDIT_CARD_TOKEN_FAILURE,
+		payload: {
+			errorMessage: error.message,
+		},
+		error: true
+	}
+}
+
+export const syncRequestCreditCardToken = (data) => {
+	return (dispatch, getState) => {
+		dispatch(requestCreditCardToken(data))
+
+		return ApiClient.getCreditToken(data)
+    .then(json => {
+      console.log("JSON: ", json)
+      
+      if (json && json.code === 'Q000') {
+        const creditToken = json.data.token_id;
+        dispatch(creditCardTokenReceived(creditToken));
+      }
+      else {
+        const errorMessage = json.message || (json.errors ? json.errors.join(','): 'Unknow Varitrans Error')
+        dispatch(requestCreditCardTokenFailed(new Error(errorMessage)))
+      }
+    })
+    .catch(error => dispatch(requestCreditCardTokenFailed(error)))
+	}
+}
+
 // listening all actions and if has entities in payload
 // merge to app's entities database
 export const entitiesReducer = (state=initEntities, action) => {
@@ -483,7 +567,7 @@ const PAYMENT_STEPS = [
   'PAYMENT',
 ]
 
-export const creatingPaymentReducer = (state={isLoading: false, step: 0, data: {}}, action) => {
+export const creatingPaymentReducer = (state={isLoading: false, step: 0, paymentId: null}, action) => {
   switch(action.type) {
     case NEW_PAYMENT_REQUEST:
       return _.merge({}, state, {
@@ -494,16 +578,72 @@ export const creatingPaymentReducer = (state={isLoading: false, step: 0, data: {
       return _.merge({}, state, {
         step: 2,
         isLoading: false,
-        data: _.merge({}, state.data, {
-          paymentId: action.payload.result,
-        }),
+        paymentId: action.payload.result,
       }) 
     case NEW_PAYMENT_FAILURE:
       return _.merge({}, state, {
         isLoading: false,
+        paymentId: null,
         step: 0,
         errorMessage: action.error
       })
+    default: return state
+  }
+}
+
+
+// user reducer will store current payment id.
+export const viewingPaymentDetailReducer = (state={isFetching: true, paymentId: null}, action) => {
+  switch(action.type) {
+    case PAYMENT_REQUEST:
+      return _.merge({}, state, {
+        isFetching: true
+      })
+    case PAYMENT_SUCCESS:
+      return _.merge({}, state, {
+        isFetching: false,
+        paymentId: action.payload.result
+      })
+    case PAYMENT_FAILURE:
+      return _.merge({}, state, {
+        isFetching: false,
+        paymentId: null,
+        errorMessage: action.error
+      })
+    default: return state
+  }
+}
+
+const cat = {
+        number: '4111111111111111',
+        exprMonth: '08',
+        exprYear: '2018',
+        securityCode: '123',
+        clientKey: '283ed8ec-b46d-4b50-b73e-0b3c89bf94ca',
+      }
+
+// creditcard reducer - save current creditcard data and token
+export const creditCardReducer = (state={isFetching: false, credit: cat, token: null, errorMessage: null}, action) => {
+  switch(action.type) {
+    case CREDIT_CARD_TOKEN_REQUEST:
+    return _.merge({}, state, {
+      isFetching: true,
+      token: null,
+      errorMessage: null,
+      credit: _.merge({}, state.credit, action.payload)
+    })
+    case CREDIT_CARD_TOKEN_SUCCESS:
+    return _.merge({}, state, {
+      isFetching: false,
+      errorMessage: null,
+      token: action.payload
+    })
+    case CREDIT_CARD_TOKEN_FAILURE:
+    return _.merge({}, state, {
+        isFetching: false,
+        token: null,
+        errorMessage: action.payload.errorMessage,
+    })
     default: return state
   }
 }
@@ -595,35 +735,61 @@ export const getUserData = (globalState) => {
 
 export const getPaymentStatus = (globalState) => {
   const {creatingPaymentData} = globalState
-  const {isLoading, errorMessage, step} = creatingPaymentData
+  const {isLoading, errorMessage, step, data} = creatingPaymentData
   return {
     isLoading,
     errorMessage,
     step,
+    data,
     status: PAYMENT_STEPS[step],
   }
 }
 
-export const getCreatingPaymentData = (globalState) => {
+export const getPaymentDetailData = (globalState, id) => {
   const {entities} = globalState
+  const {events} = entities
   const {payments} = entities
   const {paymentItems} = entities
+  const {viewingPaymentDetail} = globalState
 
-  const {creatingPaymentData} = globalState
-  const {isLoading, errorMessage, step} = creatingPaymentData
-  let {data} = creatingPaymentData;
+  const {isFetching, paymentId, errorMessage} = viewingPaymentDetail
 
-  data = (step != -1 && data && data.paymentId && payments.length > 0) ? payments[data.paymentId]: null
-  if (data) {
-    data = _.merge({}, data, {
-      paymentItems: _.map(data.paymentItems, (itemId)=> paymentItems[itemId])
-    })
+
+  if (!isFetching && errorMessage) {
+    return {
+      isFetching: false,
+      errorMessage,
+      payment: null
+    }
   }
 
-  return {
-    isLoading,
-    step,
-    errorMessage,
-    data
+  if (!isFetching
+      && paymentId 
+      && payments
+      && payments[paymentId] && 
+      id === paymentId) {
+    const payment = payments[paymentId]
+    //payment.event = "1";
+
+    return {
+      errorMessage: null,
+      isLoading: false,
+      payment: Object.assign({}, payment, {
+        paymentItems: _.map(payment.paymentItems, (id)=> paymentItems[id]),
+        //event: events[payment.event],
+      })
+    }
   }
+  else {
+    return {
+      isLoading: true,
+      payment: null,
+      errorMessage: null,
+    }
+  }
+}
+
+export const getCreditCardDetail = (globalState) => {
+  const {creditcard} = globalState
+  return creditcard
 }

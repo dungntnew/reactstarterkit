@@ -10,23 +10,19 @@ const BASE_URL = 'http://52.37.92.74/v1/'
 //const BASE_URL = 'http://localhost:3000/api/'
 const MAX_ITEM_PER_PAGE = 25
 
-const checkHeaders = (response) => {
-	return response
-}
-
 const checkStatus = (response) => {
 	if (response.status >= 200 && response.status < 300) {
 		return response
 	} else {
-		var error = new Error(response.statusText)
-		error.response = response
-		throw error
+		return response.json().then(data => {
+			if (data && data.errors) {
+				throw new Error(data.errors.full_messages.join(','));
+			}
+			else {
+				throw new Error(data);
+			}
+		});
 	}
-}
-
-const parseJSON = (response) => {
-	const json = response.json()
-	return json
 }
 
 const authHeaders = () => {
@@ -74,9 +70,9 @@ function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 	let fetchOptions = Object.assign({}, { 'headers': headers }, httpOptions);
 
 
-	if (requestMethod === 'POST') {
+	if (requestMethod === 'POST' || requestMethod === 'PUT' || requestMethod === 'DELETE') {
 		fetchOptions = Object.assign({}, fetchOptions, {
-			method: 'POST',
+			method: requestMethod,
 			body: JSON.stringify(query)
 		})
 		console.log("fetchOptions: ", fetchOptions);
@@ -93,13 +89,12 @@ function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 
 	const stringified = queryString.stringify(queryParams)
 	const API_CALL_URL = `${BASE_URL}${endpoint}?${stringified}`
-	console.log('API_CALL_URL', API_CALL_URL)
+	console.log(method, ' API_CALL_URL', API_CALL_URL)
 	console.log('CALL_API_OPTIONS', fetchOptions);
 
 	return fetch(API_CALL_URL, fetchOptions)
-		.then(checkHeaders)
 		.then(checkStatus)
-		.then(parseJSON)
+		.then((response) => response.json())
 		.then(json => {
 			console.log('**REST JSON**: ', json)
             if (formatter) {
