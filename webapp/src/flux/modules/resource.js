@@ -670,16 +670,16 @@ export const viewingPaymentDetailReducer = (state={isFetching: true,
   }
 }
 
-const cat = {
-        number: '4111111111111111',
-        exprMonth: '08',
-        exprYear: '2018',
-        securityCode: '123',
-        clientKey: '283ed8ec-b46d-4b50-b73e-0b3c89bf94ca',
-      }
+// const cat = {
+//         number: '4111111111111111',
+//         exprMonth: '08',
+//         exprYear: '2018',
+//         securityCode: '123',
+//         clientKey: '283ed8ec-b46d-4b50-b73e-0b3c89bf94ca',
+//       }
 
 // creditcard reducer - save current creditcard data and token
-export const creditCardReducer = (state={isFetching: false, credit: cat, token: null, errorMessage: null}, action) => {
+export const creditCardReducer = (state={isFetching: false, credit: null, token: null, errorMessage: null}, action) => {
   switch(action.type) {
     case CREDIT_CARD_TOKEN_REQUEST:
     return _.merge({}, state, {
