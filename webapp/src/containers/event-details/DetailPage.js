@@ -44,7 +44,7 @@ class DetailPage extends Component {
       return (
         <div className='detail-page'>
           <div className='blok-content'>
-            <EventDetailHeader router={this.props.router}/>
+            <EventDetailHeader router={this.props.router} params={this.props.params}/>
             <EventDetailCover/>
             <div className='ui grid detail-content'>
               

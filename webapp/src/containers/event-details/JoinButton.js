@@ -3,34 +3,51 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 
+import {Link} from 'react-router';
+
 import '../../css/JoinButton.css';
+
+import {commingSoon} from '../../helpers/';
 
 import {getEventData} from '../../flux/modules/resource'
 
 import {createPayment, getPaymentStatus, getCreatingPaymentData} from '../../flux/modules/resource';
 
 
+
+import auth from '../../helpers/auth'
+
+
+
 class JoinButton extends Component {
   
   componentDidMount() {
-    this.checkPaymentStatus()
+    const {authenticated} = this.props
+    if (authenticated) {
+      this.checkPaymentStatus()
+    }
   }
 
   componentDidUpdate() {
-    this.checkPaymentStatus()
+    const {authenticated} = this.props
+    if (authenticated) {
+      this.checkPaymentStatus()
+    }
   }
 
   checkPaymentStatus() {
     const {paymentStatus} = this.props;
-    const {step, data} = paymentStatus
-    if (step >= 2 && data) {
-      const {paymentId} = data
-      const {push} = this.props;
-      push(`/payments/${paymentId}`)
+    const {paymentId, 
+           isLoading} = paymentStatus
+    console.log("CHECKING>>>>>>: ", )
+    if (paymentId) {
+        const {push} = this.props;
+        push(`/payments/${paymentId}`)
     }
   }
 
   render() {
+
     const buttonTitle = this.props.isParticipator ? 'キャンセル': '参加'
       const buttonClasses = classNames({
         'ui button': true,
@@ -41,9 +58,26 @@ class JoinButton extends Component {
       })
 
       const onClickFunc = this.props.isParticipator ? this.props.onCancel: this.props.onJoin
-      return (this.props.authenticated &&
-         <button className={buttonClasses} onClick={onClickFunc}>{buttonTitle}</button>
-       )
+      if (this.props.authenticated) {
+        return (
+          <button className={buttonClasses} onClick={onClickFunc}>{buttonTitle}</button>
+        )
+      }
+      else {
+        return (
+          <button 
+             className={buttonClasses} 
+             onClick={()=>{
+                this.props.replace({
+                    pathname: '/login',
+                    query: {
+                        return_to: this.props.router.location.pathname,
+                    }
+                  })
+             }}
+            >{buttonTitle}</button>
+        )
+      }
   }
 };
 
@@ -57,59 +91,54 @@ JoinButton.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
 
-  const {isFetching, data} = getEventData(state)
-  const {auth} = state
-  const {authenticated, user} = auth
+  const authenticated = auth.loggedIn()
 
   if (!authenticated) {
-      console.error("pre-required authenticate")
+      return {
+        isFetching: false,
+        isParticipator: false,
+        authenticated: false,
+      }
   }
 
+
+  const {isFetching, data} = getEventData(state)
   const paymentStatus = getPaymentStatus(state);
 
-  console.log("PAYMENT DATA: ", paymentStatus);
-
-  setTimeout(()=>{
-    console.log("PAYMENT DATA LATER: ", getPaymentStatus(state));
-  }, 100);
-
-
-  if (!isFetching && authenticated && user) {
-    const {isParticipator, id} = data
-    const userId = user.id
+  if (data) {
+    const {isParticipator, id, currentUser} = data
 
     return {
-      authenticated: authenticated,
-      userId: userId,
-      user: user,
-      isParticipator: isParticipator,
-      eventId: id,
-      isFetching: false,
+      authenticated,
+      isParticipator: currentUser.isParticipator,
       paymentStatus: paymentStatus,
+      isFetching: false,
     }
   }
   else {
     return {
-      joining: false,
       isFetching: true,
-      authenticated: authenticated,
+      authenticated,
     }
   }
 }
+
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   dispatch: dispatch
 })
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const {dispatch} = dispatchProps
-  const {eventId, userId} = stateProps
+  const {eventId} = ownProps.params
   const {push} = ownProps
+
+  const {dispatch} = dispatchProps
 
   return Object.assign({}, ownProps,
     Object.assign({}, stateProps, {
+      eventId,
       onCancel: ()=> {
-        push(`/cancelJoin/${userId}/${eventId}`)
+        commingSoon();
       },
       onJoin: ()=> {
         dispatch(createPayment(eventId));

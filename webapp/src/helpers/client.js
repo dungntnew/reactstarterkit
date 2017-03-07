@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch'
 import queryString from 'query-string'
 
 export const API_URL = 'http://localhost:3000/'
+export const AUTH_API_URL = 'http://52.37.92.74/'
 
 const checkHeaders = (response) => {
   return response
@@ -48,7 +49,7 @@ const createAuthHeader = () => {
 
 export const getJson = (endpoint, query, options = {}) => {
   const stringified = queryString.stringify(query)
-  const api = `${API_URL}${endpoint}?${stringified}`
+  const api = `${AUTH_API_URL}${endpoint}?${stringified}`
   const {authRequired} = options
   const authHeaders = authRequired ? createAuthHeader() : {}
 
@@ -69,7 +70,7 @@ export const getJson = (endpoint, query, options = {}) => {
 
 export const doAuth = (endpoint, params, options = {}) => {
   const stringified = JSON.stringify(params)
-  const api = `${API_URL}${endpoint}`
+  const api = `${AUTH_API_URL}${endpoint}`
   console.log('POST: ', api)
   console.log('POST PARAMS: ', stringified)
 
@@ -92,7 +93,7 @@ export const doAuth = (endpoint, params, options = {}) => {
 
 export const postJson = (endpoint, params, options = {}) => {
   const stringified = JSON.stringify(params)
-  const api = `${API_URL}${endpoint}`
+  const api = `${AUTH_API_URL}${endpoint}`
   const {authRequired} = options
   const authHeaders = authRequired ? createAuthHeader() : {}
 

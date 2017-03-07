@@ -5,6 +5,7 @@ import React, {PropTypes, Component} from 'react';
 import 'semantic-ui-rating/rating.min.css'
 import '../css/UserAvatar.css';
 
+import {commingSoon} from '../helpers';
 
 $.fn.rating = require('semantic-ui-rating')
 
@@ -32,7 +33,7 @@ class UserAvatar extends Component {
 
   renderEditButton() {
     return (
-      <div className='edit'>
+      <div className='edit' onClick={(e)=> commingSoon(e)}>
         <a onClick={()=>{
           if (this.props.onEdit)
             this.props.onEdit()
@@ -52,7 +53,7 @@ class UserAvatar extends Component {
 
     return (
       <div className='user-avatar'>
-        <a className='image cover-img-avatar' href={url}>
+        <a className='image cover-img-avatar' href={url} onClick={(e)=> commingSoon(e)}>
           <img src={avatarUrl} className='circle-image' alt='img-avatar'/>
         </a>
         {this.props.editable&& this.renderEditButton()}

@@ -16,7 +16,7 @@ class LoginPage extends Component {
       const {authenticated} = this.props
       if (authenticated) {
           const {router, location} = this.props;
-          const return_to = location.query.return_to || '/';
+          const return_to = location.query.return_to || '/events/1';
           console.log("return to: ",return_to);
           router.push(return_to);
           return null;
@@ -27,7 +27,7 @@ class LoginPage extends Component {
       const {authenticated} = this.props
       if (authenticated) {
           const {router, location} = this.props;
-          const return_to = location.query.return_to || '/';
+          const return_to = location.query.return_to || '/events/1';
           console.log("return to: ",return_to);
           router.push(return_to);
           return null;

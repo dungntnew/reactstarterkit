@@ -40,7 +40,10 @@ const EventDetailHeader = (props) => (
         {/* colum 3*/}
         <div className='column group-likes'>
           <InviteButton />
-          <JoinButton push={props.router.push}/>
+          <JoinButton push={props.router.push} 
+                      replace={props.router.replace}
+                      router={props.router}
+                      params={props.params}/>
           <ShareButton />
           <LikeButton />
         </div>
@@ -59,6 +62,7 @@ EventDetailHeader.propTypes = {
   joinerCount: PropTypes.number,
   joinerLimit: PropTypes.number,
   router: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {

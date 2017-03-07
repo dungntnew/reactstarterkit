@@ -13,7 +13,7 @@ import {encryptFirstN} from '../helpers/payment'
 import JoinEventPayment from '../components/payment/JoinEventPayment';
 import JoinEventPaymentFinish from '../components/payment/JoinEventPaymentFinish';
 
-import {fetchPaymentDetail, getPaymentDetailData, syncRequestCreditCardToken, getCreditCardDetail, updatePayment} from '../flux/modules/resource';
+import {fetchPaymentDetail, getPaymentDetailData, syncRequestCreditCardToken, getCreditCardDetail, updatePayment, clearPaymentSession} from '../flux/modules/resource';
 
 import CreditCard from '../components/credit-card/CreditCard';
 
@@ -23,8 +23,8 @@ class JoinPage extends Component {
       this.props.router.go(-1)
       
     }
-    cancel() {
 
+    cancel() {
     }
 
     pay(data) {
@@ -36,25 +36,24 @@ class JoinPage extends Component {
         });
     }
 
-    constructor(props) {
-      super(props)
-      this.state = {
-        paid: false
-      }
-    }
-
     componentDidMount(){
-      this.try = false
+      this.props.clearSession();
       this.props.fetchPayment();
     }
 
     componentDidUpdate() {
       // process payment after token got
-      const {processingPayment, 
+      const {loadingPayment, 
+             processingPayment, 
              paymentStatus, 
              token} = this.props;
-      if (!processingPayment && token && paymentStatus !== 'PAID') {
-        this.props.execPayment(token);
+      if (!loadingPayment 
+                   && !processingPayment 
+                   && token 
+                   && paymentStatus === 'UNPAID') {
+        
+           this.props.execPayment(token);
+        
       }
     }
     
@@ -62,7 +61,7 @@ class JoinPage extends Component {
         return (
           <div className='join-page'>
               <div className='ui segment join-event-payment-finish'>
-                <div>Your Payment FInished!!!!!</div>
+                <div>決済完了しました！</div>
                 <Link to='/events/1' className='ui orange button'>当イベントへ戻る</Link>
               </div>
           </div>
@@ -167,9 +166,9 @@ class JoinPage extends Component {
     }
 
     render() {
-      // if (this.props.paymentStatus === 'PAID') {
-      //   return this.renderPaymentFinish();
-      // }
+      if (this.props.paymentStatus === 'PAID') {
+        return this.renderPaymentFinish();
+      }
 
       
       // loading payment data
@@ -214,11 +213,11 @@ const mapStateToProps = (state, ownProps) => {
   }
 
   // check payment status
-  // if (paymentDetail.payment && paymentDetail.payment.status === 'PAID') {
-  //   return {
-  //     paymentStatus: 'PAID'
-  //   }
-  // }
+  if (paymentDetail.payment && paymentDetail.payment.status === 'PAID') {
+    return {
+      paymentStatus: 'PAID'
+    }
+  }
 
   // check processing payment
   if (creditDetail.isFetching) {
@@ -237,7 +236,7 @@ const mapStateToProps = (state, ownProps) => {
   const paymentStatus = payment ? payment.status : 'UNKNOWN';
 
   return {
-    paymentStatus: 'NO',
+    paymentStatus: paymentStatus,
     credit: creditDetail.credit,
     token: creditDetail.token,
     tokenErrorMessage: creditDetail.errorMessage,
@@ -248,6 +247,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const {paymentId} = ownProps.params
   return {
+    clearSession: ()=> dispatch(clearPaymentSession()),
     fetchPayment: ()=> dispatch(fetchPaymentDetail(paymentId)),
     validateCreditCard: (data) => dispatch(syncRequestCreditCardToken(data)), 
     execPayment: (creditToken)=> {

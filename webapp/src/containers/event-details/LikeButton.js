@@ -39,9 +39,9 @@ const mapStateToProps = (state, ownProps) => {
  
   const {isFetching, data} = getEventData(state)
   if (!isFetching) {
-    const {isPreferencer} = data
+    const {currentUser} = data
     return {
-      isPreferencer: isPreferencer,
+      isPreferencer: currentUser.isPreferencer,
       isFetching: false
     }
   }

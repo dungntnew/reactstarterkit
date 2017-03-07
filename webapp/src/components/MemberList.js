@@ -17,11 +17,11 @@ const MemberList = (props) => {
       </div>
 
       <div className='right floated btn-remove'>
-         <div className='ui button'
+         {/*<div className='ui button'
               onClick={()=> onRemove(member.id)}
          >
          追放
-         </div>
+         </div>*/}
       </div>
     </div>
   ))

@@ -259,6 +259,20 @@ export const asyncCreateEvent = (userId, data) => {
 export const NEW_PAYMENT_REQUEST = 'NEW_PAYMENT_REQUEST' 
 export const NEW_PAYMENT_SUCCESS = 'NEW_PAYMENT_SUCCESS'
 export const NEW_PAYMENT_FAILURE = 'NEW_PAYMENT_FAILURE'
+export const NEW_PAYMENT_CLEAR = 'NEW_PAYMENT_CLEAR'
+export const NEW_PAYMENT_CANCEL = 'NEW_PAYMENT_CANCEL'
+
+export const cancelNewPayment = () => {
+  return {
+    type: NEW_PAYMENT_CANCEL
+  }
+}
+
+export const clearPaymentSession = () => {
+  return {
+    type: NEW_PAYMENT_CLEAR
+  }
+}
 
 export const createPayment = (eventId) => {
   return {
@@ -278,6 +292,27 @@ export const createPayment = (eventId) => {
   }
 }
 
+export const UPDATE_PAYMENT_REQUEST = 'UPDATE_PAYMENT_REQUEST' 
+export const UPDATE_PAYMENT_SUCCESS = 'UPDATE_PAYMENT_SUCCESS'
+export const UPDATE_PAYMENT_FAILURE = 'UPDATE_PAYMENT_FAILURE'
+
+export const updatePayment = (id, creditToken) => {
+  return {
+    [CALL_API]: {
+      endpoint: `payments/${id}`,
+      types: [UPDATE_PAYMENT_REQUEST, UPDATE_PAYMENT_SUCCESS, UPDATE_PAYMENT_FAILURE],
+      schema: Schemas.PAYMENT,
+      params: {
+        authenticated: true,
+        method: 'PUT',
+        query: {token_id: creditToken}
+      },
+      formatter: (json) => json['payment'],
+    }
+  }
+}
+
+
 export const fetchPaymentDetail = (id) => {
   return {
     [CALL_API]: {
@@ -287,22 +322,6 @@ export const fetchPaymentDetail = (id) => {
       params: {
         authenticated: true,
         method: 'GET',
-      },
-      formatter: (json) => json['payment'],
-    }
-  }
-}
-
-export const updatePayment = (id, creditToken) => {
-  return {
-    [CALL_API]: {
-      endpoint: `payments/${id}`,
-      types: [PAYMENT_REQUEST, PAYMENT_SUCCESS, PAYMENT_FAILURE],
-      schema: Schemas.PAYMENT,
-      params: {
-        authenticated: true,
-        method: 'PUT',
-        query: {token_id: creditToken}
       },
       formatter: (json) => json['payment'],
     }
@@ -558,34 +577,39 @@ export const viewingUserDetailReducer = (state={isFetching: true, userId: null},
   }
 }
 
-// save state new participation
-const PAYMENT_STEPS = [
-  'VIEWING',
-  'JOIN',
-  'CONFIRMATION',
-  'VALIDATION',
-  'PAYMENT',
-]
-
-export const creatingPaymentReducer = (state={isLoading: false, step: 0, paymentId: null}, action) => {
+export const creatingPaymentReducer = (state={isLoading: false,  
+                                              paymentId: null, 
+                                              errorMessage: null}, action) => {
   switch(action.type) {
     case NEW_PAYMENT_REQUEST:
       return _.merge({}, state, {
-        step: 1,
         isLoading: true,
+        errorMessage: null,
+        paymentId: null,
       })
     case NEW_PAYMENT_SUCCESS:       
       return _.merge({}, state, {
-        step: 2,
         isLoading: false,
+        errorMessage: null,
         paymentId: action.payload.result,
       }) 
     case NEW_PAYMENT_FAILURE:
       return _.merge({}, state, {
         isLoading: false,
         paymentId: null,
-        step: 0,
         errorMessage: action.error
+      })
+    case NEW_PAYMENT_CANCEL:
+      return _.merge({}, state, {
+        isLoading: false,
+        paymentId: null,
+        errorMessage: null,
+      })
+    case NEW_PAYMENT_CLEAR:       
+    return _.merge({}, state, {
+        isLoading: false,
+        paymentId: null,
+        errorMessage: null,
       })
     default: return state
   }
@@ -593,15 +617,23 @@ export const creatingPaymentReducer = (state={isLoading: false, step: 0, payment
 
 
 // user reducer will store current payment id.
-export const viewingPaymentDetailReducer = (state={isFetching: true, paymentId: null}, action) => {
+export const viewingPaymentDetailReducer = (state={isFetching: true, 
+                                                   paymentId: null, 
+                                                   processing: false,
+                                                   completed: false}, action) => {
   switch(action.type) {
     case PAYMENT_REQUEST:
       return _.merge({}, state, {
-        isFetching: true
+        processing: false,
+        completed: false,
+        isFetching: true,
+        paymentId: null,
+        errorMessage: null,
       })
     case PAYMENT_SUCCESS:
       return _.merge({}, state, {
         isFetching: false,
+        errorMessage: null,
         paymentId: action.payload.result
       })
     case PAYMENT_FAILURE:
@@ -610,6 +642,28 @@ export const viewingPaymentDetailReducer = (state={isFetching: true, paymentId: 
         paymentId: null,
         errorMessage: action.error
       })
+    case UPDATE_PAYMENT_REQUEST:
+      return _.merge({}, state, {
+        processing: true,
+        completed: false,
+      })
+    case UPDATE_PAYMENT_SUCCESS:
+      return _.merge({}, state, {
+        processing: false,
+        completed: true,
+      })
+    case UPDATE_PAYMENT_FAILURE:
+      return _.merge({}, state, {
+        processing: false,
+        completed: false,
+      })
+
+    case NEW_PAYMENT_CLEAR:
+    return _.merge({}, state, {
+      isFetching: true,
+      paymentId: null,
+      errorMessage: null,
+    })
     default: return state
   }
 }
@@ -643,6 +697,13 @@ export const creditCardReducer = (state={isFetching: false, credit: cat, token: 
         isFetching: false,
         token: null,
         errorMessage: action.payload.errorMessage,
+    })
+    case NEW_PAYMENT_CLEAR: 
+    return _.merge({}, state, {
+      isFetching: false,
+      token: null,
+      errorMessage: null,
+      credit: _.merge({}, state.credit, action.payload)
     })
     default: return state
   }
@@ -735,13 +796,15 @@ export const getUserData = (globalState) => {
 
 export const getPaymentStatus = (globalState) => {
   const {creatingPaymentData} = globalState
-  const {isLoading, errorMessage, step, data} = creatingPaymentData
+  
+  const {isLoading, 
+         errorMessage, 
+         paymentId} = creatingPaymentData
+
   return {
     isLoading,
     errorMessage,
-    step,
-    data,
-    status: PAYMENT_STEPS[step],
+    paymentId
   }
 }
 
