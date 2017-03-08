@@ -19,6 +19,8 @@ import {formatAddress,
 
 import {getEventData} from '../../flux/modules/resource';
 
+import {commingSoon} from '../../helpers/';
+
 $.fn.dimmer = require('semantic-ui-dimmer')
 $.fn.modal = require('semantic-ui-modal')
 
@@ -60,7 +62,7 @@ class EventDetailBlocks extends Component {
     const content = members.map((member, index)=>(
       <div className='item' key={index}>
         <div className='ui avatar tiny image'>
-        <Link to={member.url}>
+        <Link to={member.url} onClick={(e)=>commingSoon(e)}>
            <img src={member.avatarUrl} alt='avatar'/>
         </Link>
         </div>
@@ -178,7 +180,12 @@ const mapStateToProps = (state, ownProps) => {
     isFetching: isFetching,
     tags: data.tags,
     target: data.target,
-    members: data.participators,
+    members: _.map(data.participators, (u)=> Object.assign({}, u, {
+      id: `${u.id}`,
+      url: `/members/${u.id}`,
+      avatarUrl: u.avatarUrl || '/img/avatar.png',
+      displayName: u.displayName || u.email || `参加者[${u.id}]`,
+    })),
     memberCount: data.joinersCount,
     address: formatAddress(data),
     addressLink: addressToGoogleMapsLink(data),
