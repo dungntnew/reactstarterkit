@@ -8,7 +8,7 @@ import {commingSoon} from '../helpers/';
 import DropDownMenu from './DropDownMenu';
 
 const userMenuLinks = [
-  <Link to='/mypage' onClick={(e)=> commingSoon(e)}>マイーペジ </Link>,
+  <Link to='/mypage' onClick={(e)=> commingSoon(e)}>マイページ </Link>,
   <Link to='/mypage/hosted' onClick={(e)=> commingSoon(e)} >ホストページ </Link>,
   <Link to='/account/settings' onClick={(e)=> commingSoon(e)}>アカウント設定 </Link>,
   <Link to='/logout' onClick={(e)=> commingSoon(e)}>ログアウト </Link>
