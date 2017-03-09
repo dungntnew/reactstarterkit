@@ -5,16 +5,27 @@ import '../css/TestPage.css';
 
 import Exploder from '../containers/Exploder';
 
+import {FetchableEventList} from '../containers/event/FetchableEventList';
+import {eventListWithSearchParams} from '../helpers/query_builder';
+
 class SearchPage extends Component {
     render() {
-      return (
-        <div>
-           <p> This is Search Page, you can quick place your component to view</p>
+    const {params} = this.props
+		const {query, pagging} = eventListWithSearchParams(params)
+		const pathname = `/search`
 
-           <hr/>
-           <div className='test-page-wrapper'>
+      return (
+        <div className='search-page'>
             <Exploder location={this.props.location} params={this.props.params}/>
-           </div>
+            <FetchableEventList 
+              router={this.props.router}
+              location={this.props.location}
+              query={query}
+              pagging={pagging}
+              paginated={true}
+              pathname={pathname}
+              listClassName='ui link three stackable cards block-events-content'
+          />
         </div>
       )
     }

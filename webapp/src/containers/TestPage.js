@@ -2,8 +2,15 @@
 import React, {Component, PropTypes} from 'react';
 import '../css/TestPage.css';
 
-import InputRange from 'react-input-range';
 import 'react-input-range/dist/react-input-range.css';
+
+import {fetchCategories,
+        fetchCategoryDetail} from '../flux/modules/resource';
+
+import {connect} from 'react-redux';
+
+import {FetchableEventList} from '../containers/event/FetchableEventList';
+
 
 /* Put your component to here to view */
 class TestPage extends Component {
@@ -12,11 +19,11 @@ class TestPage extends Component {
 
   constructor() {
     super()
-    this.state = {value: 5}
   }
 
 
   render() {
+    const ok = this.props.router ? <h1>Ok</h1>: <h1>Not OK </h1>
 
     return (
       <div>
@@ -26,16 +33,17 @@ class TestPage extends Component {
          </pre>
          <hr/>
          <div className='test-page-wrapper'>
+        {ok}
 
-
-         <InputRange
-            maxValue={20}
-            minValue={0}
-            value={this.state.value}
-            onChange={(c, v)=>{
-              this.setState({value: v})
-            }}
-          />
+        <FetchableEventList 
+          router={this.props.router}
+          location={this.props.location}
+          query={{special: true}}
+          pagging={{limit: 3}}
+          paginated={true}
+          pathname={'/test'}
+          listClassName='ui link three stackable cards block-events-content'
+        />
 
          </div>
       </div>

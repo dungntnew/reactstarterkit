@@ -10,6 +10,8 @@ import '../css/TopNav.css';
 import UserMenu from '../components/UserMenu';
 import HelpMenu from '../components/HelpMenu';
 
+import {commingSoon} from '../helpers/';
+
 $.fn.sidebar = require('semantic-ui-sidebar')
 
 
@@ -32,16 +34,16 @@ class TopNav extends Component {
   renderMenuItems() {
     const links = this.props.authenticated ?
     [
-      <Link to='/search'>イベントをさがす</Link>,
-      <Link to='/create'>イベントをつくる</Link>,
-      <HelpMenu />,
+      <Link to='/search' onClick={(e)=> commingSoon(e)}>イベントをさがす</Link>,
+      <Link to='/create' onClick={(e)=> commingSoon(e)}>イベントをつくる</Link>,
+      <HelpMenu onClick={(e)=> commingSoon(e)} />,
       <UserMenu user={this.props.user}/>
     ]
     :
     [
       <HelpMenu />,
       <Link to='/login' className='ui button'>ログイン </Link>,
-      <Link to='/register' className='ui button'>新規登録</Link>
+      <Link to='/signup' className='ui button'>新規登録</Link>
     ]
 
     return links.map((link, index) => (

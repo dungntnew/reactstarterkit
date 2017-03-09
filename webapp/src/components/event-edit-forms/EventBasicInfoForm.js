@@ -43,7 +43,7 @@ class EventBasicInfoForm extends Component {
       detail: PropTypes.string,
 
     }).isRequired,
-    targetItems: PropTypes.arrayOf(PropTypes.object),
+    targetItems: PropTypes.object,
     btnTitle: PropTypes.string,
     onSubmit: PropTypes.func.isRequired,
   }
@@ -121,12 +121,13 @@ class EventBasicInfoForm extends Component {
     }
   }
 
-  renderSelector({selector, name, title, hint, multiple, addition, items=[]}) {
+  renderSelector({selector, name, title, hint, multiple, addition, items={}}) {
       const classes = classNames({
         'ui search selection dropdown': true,
         'multiple': multiple
       })
-
+      
+      const arrItems = _.map(_.keys(items), (k) => items[k])
       return (
         <div className="field field-input">
          <label>{title}<span className='required'>※必須</span></label>
@@ -136,8 +137,8 @@ class EventBasicInfoForm extends Component {
             <div className='default text'>{hint}</div>
             <div className='menu'>
             {
-              items.map(t => (
-                <div key={t.id} className="item" data-value={t.id}>{t.label}</div>
+              arrItems.map((item, i) => (
+                <div key={i} className="item" data-value={item.id}>{item.name}</div>
               ))
             }
             </div>

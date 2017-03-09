@@ -3,11 +3,14 @@ import {connect} from 'react-redux';
 
 import '../css/CreatePage.css';
 
-import Logo from '../components/PageLogo';
-import PageHeader from '../components/PageHeader';
-import TopNav from '../containers/TopNav';
-import QuickSearchBar from '../containers/QuickSearchBar';
 import EventEditForm from '../components/EventEditForm';
+import {asyncCreateEvent} from '../flux/modules/resource';
+
+import {
+  getCreatingEventData, 
+  startCreateEvent,
+  saveNewEvent,
+  changeNewEventData } from '../flux/modules/resource';
 
 class CreatePage extends Component {
     static propTypes = {
@@ -19,11 +22,6 @@ class CreatePage extends Component {
     render() {
       return (
         <div className='create-page'>
-        <PageHeader>
-          <Logo color={true}/>
-          <QuickSearchBar location={this.props.location} params={this.props.params}/>
-          <TopNav />
-        </PageHeader>
         <EventEditForm {...this.props}/>
         </div>
       )
@@ -31,19 +29,42 @@ class CreatePage extends Component {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  const {isChanged, isSaving, data} = getCreatingEventData(state)
+
+  const {auth} = state
+  const {user} = auth
+  const userId = user.id
+
   return {
-    event: state.newEvent.event
+    event: data,
+    isChanged,
+    isSaving,
+    userId,
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onSave: (data) => {
-    console.log('dispatch save event: ', data)
-  },
-  onChange: (data) => {
-    console.log('dispatch change data: ', data)
-  },
+  dispatch: dispatch
 })
 
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const {dispatch} = dispatchProps
+  const {userId} = stateProps
+  const {event} = stateProps
+
+  return Object.assign({}, stateProps,
+    Object.assign({}, ownProps, {
+      create: () => {
+        dispatch(startCreateEvent())
+      },
+      onSave: () => {
+        dispatch(asyncCreateEvent(userId, event))
+      },
+      onChange: (data) => {
+        dispatch(changeNewEventData(data))
+      }
+  }))
+}
+
 export default connect(mapStateToProps,
-                       mapDispatchToProps)(CreatePage)
+                       mapDispatchToProps, mergeProps)(CreatePage)

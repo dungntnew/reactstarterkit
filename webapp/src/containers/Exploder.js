@@ -8,6 +8,8 @@ import RangedDateSelector from '../components/RangedDateSelector';
 import KeywordInput from '../components/KeywordInput';
 import TargetSelector from '../containers/TargetSelector';
 
+import {getTargetItems} from '../flux/modules/resource'
+
 import * as helpers from '../helpers';
 
 class Exploder extends Component {
@@ -99,12 +101,10 @@ class Exploder extends Component {
     const {targetItems} = this.props
     const {target} = this.state
 
-    const targets =  _.filter(targetItems, item => _.includes([target], item.id)).map(t => t.label).join(',')
-    if (_.isEmpty(targets)) {
-      return 'ジャンル'
-    }else {
-      return targets
+    if (_.has(targetItems, target)) {
+      return targetItems[target].name
     }
+    return 'ジャンル'
   }
 
   activeOne(key=undefined) {
@@ -183,12 +183,9 @@ class Exploder extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {target} = state
-  const {fetching, items} = target;
-
   return {
-    fetching: fetching,
-    targetItems: items
+    fetching: false,
+    targetItems: getTargetItems(state)
   }
 }
 

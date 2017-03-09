@@ -10,6 +10,14 @@ import EventNoteTextForm from './event-edit-forms/EventNoteTextForm'
 import EventTermForm from './event-edit-forms/EventTermForm'
 import EventConfirmForm from './event-edit-forms/EventConfirmForm'
 
+import {getTargetItems, 
+       getGenreItems, 
+       getPlaceTypeItems, 
+       getDressCodeItems, 
+       getSupplementItems, 
+       getPrefectureItems} from '../flux/modules/resource'
+
+
 class EventEditForm extends Component {
   constructor(props) {
     super(props)
@@ -52,6 +60,7 @@ class EventEditForm extends Component {
     console.log('submit data: ', cleanedData, 'at step: ', step)
 
     if (step < EventEditForm.STEP_COUNT - 1) {
+      this.execSaveChange(cleanedData, step);
       this.setState({
         step: step + 1
       })
@@ -63,8 +72,12 @@ class EventEditForm extends Component {
     }
   }
 
-  execSubmit() {
-    this.props.onSave({})
+  execSaveChange(data, step) {
+    this.props.onChange(data);
+  }
+
+  execSubmit(data) {
+    this.props.onSave();
   }
 
   renderFormPerStep() {
@@ -137,20 +150,13 @@ class EventEditForm extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {target,
-         genre,
-         placeType,
-         dressCode,
-         supplement,
-         place} = state
-
   return {
-    targetItems: target.items,
-    genreItems: genre.items,
-    placeTypeItems: placeType.items,
-    dressCodeItems: dressCode.items,
-    supplementItems: supplement.items,
-    prefectures: place.prefectures
+    targetItems: getTargetItems(state),
+    genreItems: getGenreItems(state),
+    placeTypeItems: getGenreItems(state),
+    dressCodeItems: getDressCodeItems(state),
+    supplementItems: getSupplementItems(state),
+    prefectures: getPrefectureItems(state),
   }
 }
 

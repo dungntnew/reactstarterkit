@@ -10,7 +10,6 @@ class EventImageSlider extends Component {
     super(props)
 
     const {startIndex} = props
-    console.log('start index: ', startIndex)
 
     this.state = {
       activeIndex: startIndex
@@ -23,7 +22,7 @@ class EventImageSlider extends Component {
 
   static propTypes = {
     startIndex: PropTypes.number,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+    images: PropTypes.arrayOf(PropTypes.object).isRequired
   }
 
   onNext() {
@@ -58,9 +57,9 @@ class EventImageSlider extends Component {
     const {images } = this.props
     const {activeIndex} = this.state
 
-    const activeUrl = images[activeIndex]
+    const activeUrl = images[activeIndex].photoUrl
 
-    const thumbnails = images.map((url, index)=>(
+    const thumbnails = images.map((image, index)=> (
       <img key={index}
 
            className={
@@ -73,7 +72,7 @@ class EventImageSlider extends Component {
              this.setState({activeIndex: index})
            }}
 
-           src={url}
+           src={image.photoUrl}
            alt='thumbnails'
       />
     ))

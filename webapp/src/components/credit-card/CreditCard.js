@@ -15,7 +15,7 @@ $.fn.dropdown = require('semantic-ui-dropdown')
 
 class CreditCard extends Component {
   static propTypes = {
-    saving: PropTypes.bool.isRequired,
+    processing: PropTypes.bool.isRequired,
     errorMessage: PropTypes.string,
     data: PropTypes.shape({
       method: PropTypes.string,
@@ -67,11 +67,9 @@ class CreditCard extends Component {
     }
   }
 
-  renderSaving() {
+  renderProcessing() {
     return (
-      <div>
-      Saving..
-      </div>
+      <div>  Processing.. </div>
     )
   }
 
@@ -130,7 +128,7 @@ class CreditCard extends Component {
                   name='number'
                   />
             </div>
-            {this.renderSupportingCreditTypes()}
+            {/*{this.renderSupportingCreditTypes()}*/}
 
             <div className='list-card'>
             </div>
@@ -138,7 +136,7 @@ class CreditCard extends Component {
             <label>有効期限<span>※必須</span></label>
             <div className='two fields'>
               {this.renderTimeSelectorField(
-                'exprMoth',
+                'exprMonth',
                 'monthSelector',
                 1,
                 12,
@@ -171,8 +169,8 @@ class CreditCard extends Component {
 
   render() {
     let content
-    if (this.props.saving) {
-      content = this.renderSaving()
+    if (this.props.processing) {
+      content = this.renderProcessing()
     }
     else {
       content = this.renderInputFields()
@@ -189,7 +187,7 @@ class CreditCard extends Component {
                    this.handleSubmit()
                 }}>
            {this.props.errorMessage &&
-           <div className="ui error message">{this.props.errorMessage}</div>
+           <div className="ui error visible message">{this.props.errorMessage}</div>
            }
            {content}
            </form>

@@ -1,0 +1,9 @@
+.wrapper {
+    height: 100%;
+    position: relative;
+}
+.loading-icon {
+    margin: 0px auto;
+    margin-top: 100px;
+    width: 150px;
+}

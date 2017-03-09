@@ -89,59 +89,67 @@ function googleMapIFrameLink(data) {
 }
 
 function formatListValues(values) {
-  if (_.isNull(values)) {
+  if (_.isNull(values) || values.length === 0) {
     return '-'
   }
 
   return values.join(', ')
 }
 
+function formatListKeyValues(values) {
+  if (_.isNull(values) || values.length === 0) {
+    return '-'
+  }
+
+  return values.map(v => v.name).join(', ')
+}
+
 function formatKeyValuePairData(data) {
-  const {targetName} = data
-  const {genreName} = data
-  const {memberCount, joinerLimit} = data
+  const {target} = data
+  const {genre} = data
+  const {joinersCount, joinersLimit} = data
   const {tags} = data
 
-  const {registrationDateStart,
-         registrationDateEnd} = data
-  const {openDate, closeDate} = data
-  const {price} = data
+  const {startedRegistrationAt,
+         endedRegistrationAt} = data
+  const {openedAt, finishedAt} = data
+  const {entryFee} = data
   const {dressCode} = data
-  const {placeType} = data
-  const {supplements} = data
-  const {instarHashTag} = data
+  const {venueType} = data
+  const {utilitiesList} = data
+  const {twitterHashTags} = data
 
 
   const rowsData = [{
     key: '目的',
-    value: targetName
+    value: target.name
   },
   {
-    key: 'ジェンル',
-    value: genreName
+    key: 'ジャンル',
+    value: genre.name
   },
   {
     key: 'タグ',
-    value: formatListValues(tags)
+    value: formatListKeyValues(tags)
   },
   {
-    key: '申し込み期間',
-    value: formatDateAndTimeStr(registrationDateStart)
+    key: '申し込み開始日',
+    value: formatDateAndTimeStr(startedRegistrationAt)
            + '~' +
-           formatDateAndTimeStr(registrationDateEnd)
+           formatDateAndTimeStr(endedRegistrationAt)
   },{
-    key: '開始',
-    value: formatDateAndTimeStr(openDate)
+    key: '開催日時',
+    value: formatDateAndTimeStr(openedAt)
            + '~' +
-           formatDateAndTimeStr(closeDate)
+           formatDateAndTimeStr(finishedAt)
   },
   {
-    key: '金額',
-    value: formatPrice(price)
+    key: '参加費',
+    value: formatPrice(entryFee)
   },
   {
     key: '参加人数',
-    value: memberCount + ' / ' + joinerLimit
+    value: joinersCount + ' / ' + joinersLimit
   },
   {
     key: 'ドレスコード',
@@ -149,15 +157,15 @@ function formatKeyValuePairData(data) {
   },
   {
     key: '会場の種類',
-    value: placeType
+    value: venueType || '-'
   },
   {
     key: '補足',
-    value: formatListValues(supplements)
+    value: formatListValues(utilitiesList)
   },
   {
-    key: 'インスタグラ',
-    value: instarHashTag
+    key: 'インスタグラムのハッシュタグ',
+    value: formatListValues(twitterHashTags)
   }
   ]
   return rowsData
