@@ -125,7 +125,7 @@ function formatKeyValuePairData(data) {
     value: target.name
   },
   {
-    key: 'ジェンル',
+    key: 'ジャンル',
     value: genre.name
   },
   {

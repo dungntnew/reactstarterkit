@@ -130,7 +130,7 @@ class SignupForm extends Component {
             <button className="ui button btn-link btn-orange" type="submit">メールアドレスで登録</button>
 
             <div className='field'>
-              <p className='note-form center'>登録することをもって私は、Airbnbのサービス利用規約、決済サービス利用規約、個人情報保護ポリシー、ゲスト返金ポリシー、ホスト保証規約に同意します。</p>
+              <p className='note-form center'></p>
             </div>
 
           </div>
