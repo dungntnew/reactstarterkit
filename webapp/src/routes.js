@@ -83,17 +83,17 @@ const getConfig = (config) => {
 
 const routes = (
   <Route path='/' component={App}>
-    {/* <IndexRoute
+    <IndexRoute
             components={getComponents({main: TopLandingPage, topbar: LandingTopBar})}
             config={getConfig()}/>
-    */}
-    {/* <Route path='/about'
+
+    <Route path='/about'
             components={getComponents({main: AboutPage})} config={getConfig()}/>
-    */}
-    {/* <Route path='members/:userId/:filter'
+
+    <Route path='members/:userId/:filter'
             components={getComponents({main: ProfilePage})} config={getConfig()}
             />
-    */}
+
     <Route path='/events/:eventId'
            components={getComponents({main: DetailPage})} config={getConfig()}
           />

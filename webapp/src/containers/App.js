@@ -20,7 +20,7 @@ class App extends Component {
   getConfig() {
     const {route} = this.props
     const {childRoutes} = route
-    const {config} = (childRoutes 
+    const {config} = (childRoutes
                       && childRoutes.length > 0) ? childRoutes[0]: {config:{}}
     return config
   }
@@ -28,11 +28,11 @@ class App extends Component {
   render() {
     const config = this.getConfig()
     const {isLoading, main, sidebar, topbar, footer } = this.props
-    
+
     return (
       <div className='ui wrapper'>
           {isLoading && <Loading />}
-          {/*<DevNav />*/}
+          {<DevNav />}
           {config.has_topbar && topbar}
           {config.has_sidebar && sidebar}
           {main}
