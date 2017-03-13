@@ -6,8 +6,8 @@ import _ from 'lodash'
 import { normalize } from 'normalizr'
 import { camelizeKeys } from 'humps'
 
-const BASE_URL = 'http://52.37.92.74/v1/'
-//const BASE_URL = 'http://localhost:3000/api/'
+//const BASE_URL = 'http://52.37.92.74/v1/'
+const BASE_URL = 'http://localhost:8081/api/'
 const MAX_ITEM_PER_PAGE = 25
 
 const checkStatus = (response) => {
@@ -29,11 +29,11 @@ const authHeaders = () => {
   const client = localStorage.getItem('client');
   const uid = localStorage.getItem('uid');
   const token = localStorage.getItem('access-token');
-  
+
   return {
-    client,
-    uid,
-    'access-token': token
+	client,
+	uid,
+	'access-token': token
   }
 }
 
@@ -49,7 +49,7 @@ function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 	}
 
 	// apply token if authentication is required API
-    headers = Object.assign({}, headers, authHeaders())
+	headers = Object.assign({}, headers, authHeaders())
 
 	// build query params
 	let queryParams = {}
@@ -95,7 +95,7 @@ function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 		.then((response) => response.json())
 		.then(json => {
 			console.log('**REST JSON**: ', json)
-            if (formatter) {
+			if (formatter) {
 				json = formatter(json)
 				console.log('**FORMATED JSON**: ', json)
 			}
@@ -118,7 +118,7 @@ function callApi(endpoint, schema, params, httpOptions = {}, formatter) {
 export const CALL_API = Symbol('Call API')
 
 export default store => next => action => {
-  
+
 	const callAPI = action[CALL_API]
 
 	// So the middleware doesn't get applied to every single action

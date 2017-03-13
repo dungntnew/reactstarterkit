@@ -199,7 +199,7 @@ export const fetchEventDetail = (id) => {
 export const fetchEventDetailIfNeed = (id) => {
   return (dispatch, getState) => {
     return dispatch(fetchEventDetail(id))
-    
+
     // const {loadedEventDetails} = getState()
     // if (_.includes(loadedEventDetails, id)) {
     //   return Promise.resolve()
@@ -214,7 +214,7 @@ export const fetchEventDetailIfNeed = (id) => {
 export const startCreateEvent = () => {
   return {
     type: NEW_EVENT,
-    payload: {} 
+    payload: {}
   }
 }
 
@@ -223,7 +223,7 @@ export const changeNewEventData = (data) => {
     type: NEW_EVENT_DATA_CHANGE,
     payload: {
       data
-    } 
+    }
   }
 }
 
@@ -231,8 +231,8 @@ export const saveNewEvent = (userId, data, callback) => {
   return {
     [CALL_API]: {
       endpoint: `events`,
-      types: [NEW_EVENT_SAVE_REQUEST, 
-              NEW_EVENT_SAVE_SUCCESS, 
+      types: [NEW_EVENT_SAVE_REQUEST,
+              NEW_EVENT_SAVE_SUCCESS,
               NEW_EVENT_SAVE_FAILURE],
       schema: Schemas.EVENT,
       params: {
@@ -258,7 +258,7 @@ export const asyncCreateEvent = (userId, data) => {
   }
 }
 
-export const NEW_PAYMENT_REQUEST = 'NEW_PAYMENT_REQUEST' 
+export const NEW_PAYMENT_REQUEST = 'NEW_PAYMENT_REQUEST'
 export const NEW_PAYMENT_SUCCESS = 'NEW_PAYMENT_SUCCESS'
 export const NEW_PAYMENT_FAILURE = 'NEW_PAYMENT_FAILURE'
 export const NEW_PAYMENT_CLEAR = 'NEW_PAYMENT_CLEAR'
@@ -280,8 +280,8 @@ export const createPayment = (eventId) => {
   return {
     [CALL_API]: {
       endpoint: `participations`,
-      types: [NEW_PAYMENT_REQUEST, 
-              NEW_PAYMENT_SUCCESS, 
+      types: [NEW_PAYMENT_REQUEST,
+              NEW_PAYMENT_SUCCESS,
               NEW_PAYMENT_FAILURE],
       schema: Schemas.PAYMENT,
       params: {
@@ -294,7 +294,7 @@ export const createPayment = (eventId) => {
   }
 }
 
-export const UPDATE_PAYMENT_REQUEST = 'UPDATE_PAYMENT_REQUEST' 
+export const UPDATE_PAYMENT_REQUEST = 'UPDATE_PAYMENT_REQUEST'
 export const UPDATE_PAYMENT_SUCCESS = 'UPDATE_PAYMENT_SUCCESS'
 export const UPDATE_PAYMENT_FAILURE = 'UPDATE_PAYMENT_FAILURE'
 
@@ -336,37 +336,37 @@ export const CREDIT_CARD_TOKEN_SUCCESS = 'CREDIT_CARD_TOKEN_SUCCESS'
 export const CREDIT_CARD_TOKEN_FAILURE = 'CREDIT_CARD_TOKEN_FAILURE'
 
 export const requestCreditCardToken = (data) => {
-	return {
-		type: CREDIT_CARD_TOKEN_REQUEST,
-		payload: data
-	}
+  return {
+    type: CREDIT_CARD_TOKEN_REQUEST,
+    payload: data
+  }
 }
 
 export const creditCardTokenReceived = (data) => {
-	return {
-		type: CREDIT_CARD_TOKEN_SUCCESS,
-		payload: data
-	}
+  return {
+    type: CREDIT_CARD_TOKEN_SUCCESS,
+    payload: data
+  }
 }
 
 export const requestCreditCardTokenFailed = (error) => {
-	return {
-		type: CREDIT_CARD_TOKEN_FAILURE,
-		payload: {
-			errorMessage: error.message,
-		},
-		error: true
-	}
+  return {
+    type: CREDIT_CARD_TOKEN_FAILURE,
+    payload: {
+      errorMessage: error.message,
+    },
+    error: true
+  }
 }
 
 export const syncRequestCreditCardToken = (data) => {
-	return (dispatch, getState) => {
-		dispatch(requestCreditCardToken(data))
+  return (dispatch, getState) => {
+    dispatch(requestCreditCardToken(data))
 
-		return ApiClient.getCreditToken(data)
+    return ApiClient.getCreditToken(data)
     .then(json => {
       console.log("JSON: ", json)
-      
+
       if (json && json.code === 'Q000') {
         const creditToken = json.data.token_id;
         dispatch(creditCardTokenReceived(creditToken));
@@ -377,7 +377,7 @@ export const syncRequestCreditCardToken = (data) => {
       }
     })
     .catch(error => dispatch(requestCreditCardTokenFailed(error)))
-	}
+  }
 }
 
 // listening all actions and if has entities in payload
@@ -475,7 +475,7 @@ export const eventIdsByQueryReducer = (state={}, action) => {
       })
 
      return idsToFilteredDict(mergedPaggingQuery, action.payload.result, state)
-     
+
     default:
     return state;
   }
@@ -532,12 +532,12 @@ export const creatingEventReducer = (state={isChanged: false, isSaving: false, d
     case NEW_EVENT_SAVE_REQUEST:
       return _.merge({}, state, {
         isSaving: true,
-      }) 
-    case NEW_EVENT_SAVE_SUCCESS:       
+      })
+    case NEW_EVENT_SAVE_SUCCESS:
       return _.merge({}, state, {
         isSaving: false,
         isChanged: false
-      }) 
+      })
     case NEW_EVENT_SAVE_FAILURE:
       return _.merge({}, state, {
         isSaving: false,
@@ -579,8 +579,8 @@ export const viewingUserDetailReducer = (state={isFetching: true, userId: null},
   }
 }
 
-export const creatingPaymentReducer = (state={isLoading: false,  
-                                              paymentId: null, 
+export const creatingPaymentReducer = (state={isLoading: false,
+                                              paymentId: null,
                                               errorMessage: null}, action) => {
   switch(action.type) {
     case NEW_PAYMENT_REQUEST:
@@ -589,12 +589,12 @@ export const creatingPaymentReducer = (state={isLoading: false,
         errorMessage: null,
         paymentId: null,
       })
-    case NEW_PAYMENT_SUCCESS:       
+    case NEW_PAYMENT_SUCCESS:
       return _.merge({}, state, {
         isLoading: false,
         errorMessage: null,
         paymentId: action.payload.result,
-      }) 
+      })
     case NEW_PAYMENT_FAILURE:
       return _.merge({}, state, {
         isLoading: false,
@@ -607,7 +607,7 @@ export const creatingPaymentReducer = (state={isLoading: false,
         paymentId: null,
         errorMessage: null,
       })
-    case NEW_PAYMENT_CLEAR:       
+    case NEW_PAYMENT_CLEAR:
     return _.merge({}, state, {
         isLoading: false,
         paymentId: null,
@@ -619,8 +619,8 @@ export const creatingPaymentReducer = (state={isLoading: false,
 
 
 // user reducer will store current payment id.
-export const viewingPaymentDetailReducer = (state={isFetching: true, 
-                                                   paymentId: null, 
+export const viewingPaymentDetailReducer = (state={isFetching: true,
+                                                   paymentId: null,
                                                    processing: false,
                                                    completed: false}, action) => {
   switch(action.type) {
@@ -700,7 +700,7 @@ export const creditCardReducer = (state={isFetching: false, credit: null, token:
         token: null,
         errorMessage: action.payload.errorMessage,
     })
-    case NEW_PAYMENT_CLEAR: 
+    case NEW_PAYMENT_CLEAR:
     return _.merge({}, state, {
       isFetching: false,
       token: null,
@@ -798,9 +798,9 @@ export const getUserData = (globalState) => {
 
 export const getPaymentStatus = (globalState) => {
   const {creatingPaymentData} = globalState
-  
-  const {isLoading, 
-         errorMessage, 
+
+  const {isLoading,
+         errorMessage,
          paymentId} = creatingPaymentData
 
   return {
@@ -829,9 +829,9 @@ export const getPaymentDetailData = (globalState, id) => {
   }
 
   if (!isFetching
-      && paymentId 
+      && paymentId
       && payments
-      && payments[paymentId] && 
+      && payments[paymentId] &&
       id === paymentId) {
     const payment = payments[paymentId]
     //payment.event = "1";
