@@ -1,231 +1,260 @@
 import _ from 'lodash'
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 
 import '../css/JoinPage.css';
+import '../css/payment/JoinEventPayment.css';
 
-import Logo from '../components/PageLogo';
-import PageHeader from '../components/PageHeader';
-import TopNav from '../containers/TopNav';
-import QuickSearchBar from '../containers/QuickSearchBar';
-import PageFooter from '../components/PageFooter';
+import {formatPrice} from '../helpers/event'
+import {encryptFirstN} from '../helpers/payment'
 
-import CreditCardAddForm from '../containers/CreditCardAddForm';
-import CreditCardOk from '../components/credit-card/CreditCardOk';
+
 import JoinEventPayment from '../components/payment/JoinEventPayment';
 import JoinEventPaymentFinish from '../components/payment/JoinEventPaymentFinish';
 
-import {fetchEventDetailIfNeed} from '../flux/modules/selected_event';
-import {fetchCreditsIfNeed} from '../flux/modules/credit';
-import {changeJoinStep, execPayment} from '../flux/modules/joinEvent';
-import {JoinEventStep} from '../flux/modules/constant';
+import {fetchPaymentDetail, getPaymentDetailData, syncRequestCreditCardToken, getCreditCardDetail, updatePayment, clearPaymentSession} from '../flux/modules/resource';
+
+import CreditCard from '../components/credit-card/CreditCard';
+
+const style = {
+  textAlign: 'center',
+  minHeight: '320px',
+  padding: '20px',
+  paddingTop: '100px',
+}
 
 class JoinPage extends Component {
 
     backToEventDetail() {
-      this.props.setStep(JoinEventStep.BEGIN)
       this.props.router.go(-1)
+      
+    }
+
+    cancel() {
+    }
+
+    pay(data) {
+        this.props.validateCreditCard({
+          card_number: data.number,
+          card_exp_month: data.exprMonth,
+          card_exp_year: data.exprYear,
+          card_cvv: data.securityCode,
+        });
     }
 
     componentDidMount(){
-       const {userId, eventId} = this.props.params
-       const {router, isAuthenticated} = this.props
-       if (!isAuthenticated) {
-         router.push({
-           pathname: '/login',
-           query: {
-             next: `/join/${userId}/${eventId}`
+      this.processed = false;
+      this.props.clearSession();
+      this.props.fetchPayment();
+    }
+
+    componentDidUpdate() {
+      // process payment after token got
+      const {loadingPayment, 
+             processingPayment, 
+             paymentStatus, 
+             token} = this.props;
+      if (!loadingPayment 
+                   && !processingPayment 
+                   && token 
+                   && paymentStatus === 'UNPAID') {
+      
+           if (!this.processed) {
+             this.processed = true;
+             this.props.execPayment(token);
            }
-         })
-         return;
-       }
-       this.props.init()
-       this.props.fetchEvent(eventId)
-       this.props.fetchCredits(userId)
+           else {
+             console.log("WHAT FUCK ? ", this.props)
+           }
+      }
     }
-
-    refreshCreditCards() {
-       const {userId} = this.props.params
-       this.props.fetchCredits(userId)
-    }
-
-    renderPaymentInfo() {
-      const {credits} = this.props
-      const creditIds = _.keys(credits)
-      const credit = credits[_.first(creditIds)]
-
-      const {eventData} = this.props
-      const {title, price, coverImageUrl} = eventData
-
-      const {userId, eventId} = this.props.params
-
-      return (
-        <JoinEventPayment credit={credit}
-                          desc={title}
-                          price={price}
-                          imageUrl={coverImageUrl}
-                          cancel={()=> {this.backToEventDetail()}}
-                          next={()=> {this.props.doPayment(eventId, userId,credit)}}
-        />
-      )
-    }
-
-    renderAddCreditFinish() {
-      return (
-        <CreditCardOk onNext={()=> {
-          this.props.setStep(JoinEventStep.SELECT_PAYMENT)
-        }}/>
-      )
-    }
-
-    renderAddCredit() {
-      return (
-        <CreditCardAddForm next={()=> {}} />
-      )
-    }
-
+    
     renderPaymentFinish() {
+        return (
+          <div className='join-page'>
+              <div className='ui segment join-event-payment-finish' style={style}>
+                <h3>決済完了しました！</h3>
+                <Link to='/events/1' className='ui orange button'>当イベントへ戻る</Link>
+              </div>
+          </div>
+        )
+    }
+
+    renderProcessPayment() {
+        return (
+          <div className='join-page' style={style}>
+              <div className='ui segment join-event-payment-finish' style={style}>
+                <div>Your Payment Processing...</div>
+              </div>
+          </div>
+        )
+    }
+    
+    renderPaymentItems() {
+      const {credit, paymentItem, tokenErrorMessage, processingPayment} = this.props
+    
       return (
-        <JoinEventPaymentFinish />
+         <div className='join-page'>
+            
+            <div className='ui segment container join-event-payment' >
+                <h3 className='title'>支払い手続き</h3>
+
+                <div className='ui items description'>
+                  <div className='item'>
+                    <div className='image'>
+                      <img src={paymentItem.imageUrl} alt='item-thumbnail'/>
+                    </div>
+                    <div className='content'>
+                      <div className='desc'>
+                        <p>{paymentItem.title}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <table className='ui very basic unstackable table'>
+                  <tbody>
+                    
+                    <tr className='price-info'>
+                      <td className='six wide center aligned text-des'>支払い金額:</td>
+                      <td className='three wide right aligned content-des'>
+                        <div>{formatPrice(paymentItem.price)}</div>
+                      </td>
+                      <td className='three wide no-sp'></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                {!processingPayment && 
+                      <CreditCard
+                          data={credit}
+                          processing={false}
+                          errorMessage={tokenErrorMessage}
+                          onSubmit={(data)=>{
+                            this.pay(data)
+                          }}
+                        />
+                  }
+
+              </div>
+         </div>
       )
     }
 
-    renderContent() {
-      const {step} = this.props
-      let content
-
-      switch (step) {
-        case JoinEventStep.ADD_CREDIT:
-          content = this.renderAddCredit()
-          break;
-        case JoinEventStep.ADD_CREDIT_DONE:
-          content = this.renderAddCreditFinish()
-          break;
-        case JoinEventStep.SELECT_PAYMENT:
-          content = this.renderPaymentInfo()
-          break;
-        case JoinEventStep.DONE:
-          content = this.renderPaymentFinish()
-          break;
-        default:
-          content = (
-            <div> ERROR ? </div>
-          )
-      }
-      return content
+    renderErrors(errorMessage) {
+      return (
+        <div className='join-page'>
+         <div className='ui segment join-event-payment-finish' style={style}>
+              <div className='ui error visible message'>
+                {errorMessage}
+              </div>
+                <Link to='/events/1' className='ui orange button'>当イベントへ戻る</Link>
+              </div>
+        </div>
+      )
     }
 
-    componentWillReceiveProps(nextProps) {
-      const {step} = this.props
-      const {credits} = nextProps
-      const creditIds = _.keys(credits)
-      console.log("componentWillReceiveProps: creditIds", creditIds)
-      console.log("componentWillReceiveProps: step", step, "NEXT: ", nextProps.step)
-
-      if (step === JoinEventStep.DONE) {
-        return;
-      }
-
-      if ((step === JoinEventStep.BEGIN
-          || nextProps.step === JoinEventStep.BEGIN) && creditIds.length > 0){
-        this.props.setStep(JoinEventStep.SELECT_PAYMENT)
-      }else if (nextProps.step === JoinEventStep.BEGIN && creditIds.length === 0) {
-        this.props.setStep(JoinEventStep.ADD_CREDIT)
-      }
-      else if (step === JoinEventStep.ADD_CREDIT && creditIds.length > 0){
-        this.props.setStep(JoinEventStep.ADD_CREDIT_DONE)
-      }
-
+   renderLoading() {
+      return (
+        <div className='join-page' style={style}>
+          <div className=''>
+            <h4>Loading..</h4>
+          </div>
+        </div>
+      )
     }
 
     render() {
-      const {isFetching, errorMessage} = this.props
-      let content
-
-      if (isFetching) {
-        content = (
-          <div> Loading... </div>
-        )
-      }
-      else if (!isFetching && errorMessage) {
-        content = (
-          <div> System Error: {errorMessage} </div>
-        )
-      }
-      else {
-        content = this.renderContent()
+      if (this.props.paymentStatus === 'PAID') {
+        return this.renderPaymentFinish();
       }
 
-      return (
-        <div className='join-page'>
-          <PageHeader>
-            <Logo color={true}/>
-            <QuickSearchBar location={this.props.location} params={this.props.params}/>
-            <TopNav />
-          </PageHeader>
-          {content}
-          <div>
-          </div>
-          <PageFooter />
-        </div>
-      )
+      
+      // loading payment data
+      if (this.props.loadingPayment) {
+        return this.renderLoading();
+      }
+
+      // show any error if cannot load payment item
+      if (this.props.paymentItemErrorMessage) {
+        return this.renderErrors(this.props.paymentItemErrorMessage);
+      }
+
+
+      // processing payment with token id
+      if (this.props.processingPayment) {
+        return this.renderProcessPayment();
+      }
+      
+      // show payment content
+      return this.renderPaymentItems();
     }
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const {joinEvent} = state
-  const {step} = joinEvent
+  const {paymentId} = ownProps.params
+  const paymentDetail = getPaymentDetailData(state, paymentId)
+  const creditDetail = getCreditCardDetail(state)
 
-  const {auth} = state
-  const {authenticated, user} = auth
-
-  const {selectedEvent} = state
-  const {credit} = state
-
-  const isFetching = selectedEvent.isFetching || credit.isFetching
-  const errorMessage = selectedEvent.errorMessage || credit.errorMessage
-
-  if (!authenticated || !user) {
+  // loading payment item data
+  if (paymentDetail.isLoading) {
     return {
-      isFetching: false,
-      isAuthenticated: false
+      loadingPayment: true
+    } 
+  }
+
+  // any payment data load error
+  if (!paymentDetail.isLoading && paymentDetail.errorMessage) {
+    return {
+      loadingPayment: false,
+      paymentItemErrorMessage: paymentDetail.errorMessage,
     }
   }
-  if (isFetching) {
+
+  // check payment status
+  if (paymentDetail.payment && paymentDetail.payment.status === 'PAID') {
     return {
-      isFetching: true,
-      isAuthenticated: true
+      paymentStatus: 'PAID'
     }
   }
-  console.log('STEP: ', step)
+
+  // check processing payment
+  if (creditDetail.isFetching) {
+    return {
+      processingPayment: true
+    }
+  }
+
+  // return payment content data 
+  const {payment} = paymentDetail
+  const paymentItem = payment ? {
+    title: payment.event.name,
+    imageUrl: payment.event.coverImageUrl,
+    price: payment.amount,
+  }: null
+  const paymentStatus = payment ? payment.status : 'UNKNOWN';
 
   return {
-    step: step,
-    isFetching: false,
-    isAuthenticated: true,
-    errorMessage: errorMessage,
-    eventData: selectedEvent.data,
-    credits: credit.credits,
-    user: user
+    paymentStatus: paymentStatus,
+    credit: creditDetail.credit,
+    token: creditDetail.token,
+    tokenErrorMessage: creditDetail.errorMessage,
+    paymentItem: paymentItem,
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  init: () => {
-  },
-  setStep: (step) => {
-    dispatch(changeJoinStep(step));
-  },
-  fetchEvent: (eventId) => {
-    dispatch(fetchEventDetailIfNeed(eventId))
-  },
-  fetchCredits: (userId) => {
-    dispatch(fetchCreditsIfNeed(userId))
-  },
-  doPayment: (eventId, userId, credit) => {
-    dispatch(execPayment(eventId, userId, credit))
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const {paymentId} = ownProps.params
+  return {
+    clearSession: ()=> dispatch(clearPaymentSession()),
+    fetchPayment: ()=> dispatch(fetchPaymentDetail(paymentId)),
+    validateCreditCard: (data) => dispatch(syncRequestCreditCardToken(data)), 
+    execPayment: (creditToken)=> {
+      dispatch(updatePayment(paymentId, creditToken))
+    }
   }
-})
+}
 
 export default connect(mapStateToProps,
                        mapDispatchToProps)(JoinPage)

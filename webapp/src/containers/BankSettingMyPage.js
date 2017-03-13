@@ -17,49 +17,21 @@ class BankSettingMyPage extends Component {
       this.props.fetch()
     }
 
-    renderPageTitle() {
-      return (
-        <h3 className='bank-account-title'>
-           振込先口座の指定
-        </h3>
-      )
-    }
-
     render() {
-      const {isFetching, errorMessage} = this.props
-      let content
-
-      if (isFetching) {
-        content = (
-          <div> Loading... </div>
-        )
-      }
-      else if (!isFetching && errorMessage) {
-        content = (
-          <div> System Error: {errorMessage} </div>
-        )
-      }
-      else {
-        const {data, userId, isSaving, update} = this.props
-
-        content = <BankAccountForm
-                       data={data}
-                       isSaving={isSaving}
-                       userId={userId}
-                       onSubmit={update} />
-      }
+      const {data, userId, isSaving, update} = this.props
+      if (!data) return null;
 
       return (
         <div>
           <div className='bank-setting-mypage'>
-            {this.renderPageTitle()}
-            {content}
-          </div>
-          <div>
-            <button onClick={
-                ()=> {this.props.fetch()}}>
-                refresh
-            </button>
+            <h3 className='bank-account-title'>
+           　　　　振込先口座の指定
+       　　　 </h3>
+            <BankAccountForm
+                       data={data}
+                       isSaving={isSaving}
+                       userId={userId}
+                       onSubmit={update} />
           </div>
         </div>
       )

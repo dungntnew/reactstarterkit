@@ -10,6 +10,7 @@ $.fn.form = require('semantic-ui-form')
 
 class LoginForm extends Component {
   static propTypes = {
+    error: PropTypes.string,
     data: PropTypes.shape({
       email: PropTypes.string,
       password: PropTypes.string,
@@ -69,6 +70,9 @@ class LoginForm extends Component {
   }
 
   render() {
+    const {error} = this.props 
+    const errorMessages = error ? error.split(',') : [];
+
     return (
         <form className='ui large form login-form' ref='form'
               onSubmit={(e) => {
@@ -78,7 +82,11 @@ class LoginForm extends Component {
 
           <div className='ui segment'>
             <h2 className='tite-form center'>ログイン</h2>
-
+            {error && 
+                 errorMessages.map((e, index)=>
+                 <div key={index} className="ui error visible message">{e}</div>
+                 )
+            }
             <div className='field'>
               <a className='ui button btn-link link-face' onClick={(e)=>{
                 this.authFB(e)
@@ -111,11 +119,19 @@ class LoginForm extends Component {
 
           <div className="ui error message"></div>
           <button className="ui button btn-link btn-orange" type="submit">ログイン</button>
+  
+          <br/>
+          <Link className="ui button btn-link btn-orange" to="/signup"
+                style={{marginTop: '20px'}}
+          >新規登録</Link>
 
           <div className='field field-text'>
-            <Link to='/forgot-password' className='text-forget-pass center'>
+
+            <a href="mailto:info@revue.co.jp?subject=">パスワードをお忘れの方はこちら</a>
+            {/*<Link to='/forgot-password' className='text-forget-pass center'>
                パスワードをお忘れの方はこちら
             </Link>
+            */}
           </div>
         </div>
         </form>

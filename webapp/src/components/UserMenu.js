@@ -3,13 +3,15 @@ import {Link} from 'react-router';
 
 import '../css/UserMenu.css';
 
+import {commingSoon} from '../helpers/';
+
 import DropDownMenu from './DropDownMenu';
 
 const userMenuLinks = [
-  <Link to='/mypage'>マイーペジ </Link>,
-  <Link to='/mypage/hosted'>ホストページ </Link>,
-  <Link to='/account/settings'>アカウント設定 </Link>,
-  <Link to='/logout'>ログアウト </Link>
+  <Link to='/mypage' onClick={(e)=> commingSoon(e)}>マイページ </Link>,
+  <Link to='/mypage/hosted' onClick={(e)=> commingSoon(e)} >ホストページ </Link>,
+  <Link to='/account/settings' onClick={(e)=> commingSoon(e)}>アカウント設定 </Link>,
+  <Link to='/logout' onClick={(e)=> commingSoon(e)}>ログアウト </Link>
 ]
 
 const UserMenu = (props) => (
@@ -29,3 +31,5 @@ UserMenu.propTypes = {
 }
 
 export default UserMenu
+
+

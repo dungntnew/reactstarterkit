@@ -32,7 +32,7 @@ class FriendList extends Component {
         </div>
         <div className="content">
           {friend.displayNoti}
-          <p className='date'>{friend.updated}</p>
+          <p className='date'>{friend.updated} 分前</p>
         </div>
       </div>
 

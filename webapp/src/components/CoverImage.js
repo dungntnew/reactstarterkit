@@ -12,8 +12,6 @@ const CoverImage = (props) => {
   const style = {
     backgroundImage: `url("${props.backgroundUrl}")`
   }
-
-  console.log("style: ", style)
   return (
     <div className={classes} style={style}>
        {props.children}

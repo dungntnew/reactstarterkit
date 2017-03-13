@@ -48,7 +48,6 @@ export const execPayment = (eventId, userId, credit, next) => {
 }
 
 const joinEventReducer = (state = initialState, action) => {
-  console.log("CATCH ACTION: ", action)
   switch (action.type) {
     case JOIN_EVENT_CHANGE_STEP:
       return Object.assign({}, state, {

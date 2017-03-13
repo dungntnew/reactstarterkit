@@ -5,6 +5,7 @@ import React, {PropTypes, Component} from 'react';
 import 'semantic-ui-rating/rating.min.css'
 import '../css/UserAvatar.css';
 
+import {commingSoon} from '../helpers';
 
 $.fn.rating = require('semantic-ui-rating')
 
@@ -14,7 +15,7 @@ class UserAvatar extends Component {
     displayName: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     rank: PropTypes.number.isRequired,
-    createdEventCount: PropTypes.number.isRequired,
+    createdEventsCount: PropTypes.number.isRequired,
     editable: PropTypes.bool,
     onEdit: PropTypes.func,
   }
@@ -32,7 +33,7 @@ class UserAvatar extends Component {
 
   renderEditButton() {
     return (
-      <div className='edit'>
+      <div className='edit' onClick={(e)=> commingSoon(e)}>
         <a onClick={()=>{
           if (this.props.onEdit)
             this.props.onEdit()
@@ -46,20 +47,20 @@ class UserAvatar extends Component {
       url,
       avatarUrl,
       displayName,
-      createdEventCount
+      createdEventsCount
     }
     = this.props
 
     return (
       <div className='user-avatar'>
-        <a className='image cover-img-avatar' href={url}>
+        <a className='image cover-img-avatar' href={url} onClick={(e)=> commingSoon(e)}>
           <img src={avatarUrl} className='circle-image' alt='img-avatar'/>
         </a>
         {this.props.editable&& this.renderEditButton()}
         <div className='user-description'>
           <h3 className='avatar-name'>{displayName}</h3>
           <div className="ui star rating" ref="ratingRef"></div>
-          <div className='createdEventCount'>テーブル数 {createdEventCount}</div>
+          <div className='createdEventCount'>テーブル数 {createdEventsCount}</div>
         </div>
       </div>
     )

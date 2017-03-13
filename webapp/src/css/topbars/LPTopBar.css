@@ -1,0 +1,29 @@
+.topbar .lp-header .ui.secondary.menu.stackable.lp-header-nav {
+  margin-left: 0;
+  margin-right: 0;
+}
+.topbar.lp-header .lp-header-nav {
+  padding: 14px 27px 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.topbar .lp-header .title-introduce {
+  text-align: center;
+  color: #fff;
+  margin-top: 60px;
+}
+
+.topbar.lp-header .title-introduce h1 {
+  font-weight: 500px;
+}
+
+.topbar .lp-header .title-introduce p {
+  font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 480px) {
+  .topbar .lp-header .title-introduce {
+    margin-top: 0;
+  }
+}

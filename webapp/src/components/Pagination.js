@@ -1,81 +1,80 @@
 import _ from 'lodash'
-import React, {Component, PropTypes}from 'react'
+import React, { Component, PropTypes } from 'react'
 
 import '../css/Pagination.css';
 
-import {parsePaggingParams} from '../helpers/params'
+import { Link } from 'react-router'
 
 class Pagination extends Component {
 
   static propTypes = {
-    location: PropTypes.object.isRequired,
-    router: PropTypes.object.isRequired,
+    query: PropTypes.object.isRequired,
     pathname: PropTypes.string.isRequired,
-    total: PropTypes.number.isRequired,
-    current: PropTypes.number.isRequired,
+    totalPages: PropTypes.number.isRequired,
+    currentPage: PropTypes.number.isRequired,
     onChanged: PropTypes.func.isRequired,
   }
 
-  buildUrlToPage(pathname, mergedQuery, i) {
-    const url= {
-      pathname: pathname,
-      query:Object.assign({}, mergedQuery, {from: i})
-    }
-    this.props.router.push(url)
-    this.props.onChanged(i)
-  }
-
   render() {
-    const {total, current, pathname} = this.props
-    const hasNext = current < total
-    const hasPrev = current > 1
+    const {
+      totalPages,
+      currentPage,
+      pathname,
+      query, onChanged} = this.props
+
+    const hasNext = currentPage < totalPages
+    const hasPrev = currentPage > 1
     let skipBefore = false
     let skipAfter = false
 
-    const {location} = this.props
-    const {query} = location
-    const {from, limit} = parsePaggingParams(location, 25)
-
-    const mergedQuery = Object.assign({}, query, {from, limit})
+    const mergedQuery = Object.assign({}, query, {currentPage})
 
 
-    const indices = _.range(1, total).map(i => {
+    const indices = _.range(1, totalPages).map(i => {
 
       // active index
-      if (i === current) {
+      if (i === currentPage) {
         return (
           <a key={i} className='active item'>{i}</a>
         )
       }
       //
       else if (
-           // top first n items
-           (i <= 4)
-           // top last n items
-           || (i >= total - 4)
-           //3 items arround of active item
-           || (i > current - 2 && i < current + 2)
+        // top first n items
+        (i <= 4)
+        // top last n items
+        || (i >= totalPages - 4)
+        //3 items arround of active item
+        || (i > currentPage - 2 && i < currentPage + 2)
 
-         ) {
+      ) {
         return (
-          <a key={i} className='item' onClick={()=> {this.buildUrlToPage(pathname, mergedQuery, i)}}>{i}</a>
-        )
+          <Link className='item'
+            key={i}
+            to={{
+              pathname: pathname,
+              query: Object.assign({}, mergedQuery, { currentPage: i })
+            }}
+            onClick={()=> onChanged()}
+            >{i}
+            
+          </Link>)
       }
 
       // skip first active item
-      else if (!skipBefore && i > 1 && i < current) {
+      else if (!skipBefore && i > 1 && i < currentPage) {
         skipBefore = true
         return (
-          <a  key={i} className="disabled item before-skip">
+          <a key={i} className="disabled item before-skip">
             ...
           </a>
         )
       }
       // skip last active item
-      else if (!skipAfter && i < total  && i > current) {
+      else if (!skipAfter && i < totalPages && i > currentPage) {
         skipAfter = true
         return (
-          <a  key={i} className="disabled item after-skip">
+          <a key={i} className="disabled item after-skip">
             ...
           </a>
         )
@@ -91,19 +90,33 @@ class Pagination extends Component {
 
         <div className=" ui borderless menu">
           {hasPrev &&
-            <a className='pagination-icon'
-                  onClick={()=> this.buildUrlToPage(pathname, mergedQuery, current-1)}>
-                  <i className='chevron left icon'></i>
-            </a>
+            <Link className='pagination-icon'
+              to={
+                {
+                  pathname: pathname,
+                  query: Object.assign({}, mergedQuery, { currentPage: currentPage - 1 })
+                }
+              }
+              onClick={()=> onChanged()}
+              >
+              <i className='chevron left icon'></i>
+            </Link>
           }
 
           {indices}
 
           {hasNext &&
-            <a className='pagination-icon'
-                  to={()=> this.buildUrlToPage(pathname, mergedQuery, current+1)}>
-                  <i className='chevron right icon'></i>
-            </a>
+            <Link className='pagination-icon'
+              to={
+                {
+                  pathname: pathname,
+                  query: Object.assign({}, mergedQuery, { currentPage: currentPage + 1 })
+                }
+              }
+              onClick={()=> onChanged()}
+              >
+              <i className='chevron right icon'></i>
+            </Link>
           }
         </div>
       </div>

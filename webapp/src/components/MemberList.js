@@ -2,13 +2,15 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import '../css/MemberList.css';
 
+import {commingSoon} from '../helpers/';
+
 const MemberList = (props) => {
   const {members, onRemove} = props
 
   const items = members.map((member, index)=>(
     <div className='item' key={index}>
       <div className='ui avatar tiny image'>
-        <Link to={member.url}>
+        <Link to={member.url} onClick={(e)=>commingSoon(e)}>
            <img className='img-avatar' src={member.avatarUrl} alt='avatar'/>
         </Link>
       </div>
@@ -17,11 +19,11 @@ const MemberList = (props) => {
       </div>
 
       <div className='right floated btn-remove'>
-         <div className='ui button'
+         {/*<div className='ui button'
               onClick={()=> onRemove(member.id)}
          >
          追放
-         </div>
+         </div>*/}
       </div>
     </div>
   ))

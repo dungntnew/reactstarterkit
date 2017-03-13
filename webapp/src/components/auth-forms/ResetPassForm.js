@@ -20,8 +20,6 @@ class ResetPassForm extends Component {
     data: PropTypes.shape({
       //todo
     }).isRequired,
-    facebookUrl: PropTypes.string.isRequired,
-    googleUrl: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
   }
