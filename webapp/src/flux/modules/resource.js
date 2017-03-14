@@ -237,7 +237,7 @@ export const saveNewEvent = (userId, data, callback) => {
       schema: Schemas.EVENT,
       params: {
         method: 'POST',
-        query: {userId, data},
+        query: {userId, event: data},
         afterSuccess: (response) => {
           callback(response, userId, data);
         }
